@@ -90,14 +90,18 @@
 	
 	\section{Initial design}
 	
-	\begin{figure}[h]
+	\begin{figure}[t]
 		\centering
 			\includegraphics[width=0.8\textwidth]{design.eps}
-		\caption{Initial design}
+		\caption{Initial design draft.}
 		\label{fig:design}
 	\end{figure}
 	
-	The software will be
+	Our initial thoughts on software design is illustrated in figure \ref{fig:design} (\pagename{} \pageref{fig:design}). In order to let players play from different computers the software will be divided into two parts, a client and a server. The server is used by one or many clients. Several players may share the same client simultaneously. In order to make the design more generalized the client-server communication will be utilized even if only one client is used and the server is running on the same computer.
+
+	The server will keep track of all players, their scores and be responsible for rolling the dice. When the turn has come to a player that player will be given the dice throws and then respond with its decision. The server will then send a notification to all clients about the status of the game and let the player continues until the turn is given to another player.
+
+	Since the game exists in several variants it should be fairly easy to add or change rules. A plug-in architecture will be used to dynamically load rules. Adding a rule will therefore not me more difficult than adding a file. Computer controlled player types will also be handled in this way, making it easy to add more of them.
 	
 	\section{Work breakdown}
 	
