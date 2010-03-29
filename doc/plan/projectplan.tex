@@ -86,8 +86,10 @@
 	
 	\section{Description}
 	
-		The project aims to create a Greed Game. Greed is a simple turn-based dice game where a player throws a number of dice, receives points and perhaps eventually wins the game when a certain number of points have been accumulated.
-	
+	The project aims to implement a dice game called Greed. It is a turn-based game where a player throws a number of dice and has the ability to register scores depending on a set of rules.
+
+	A player has to reach a lower limit called the bust limit. If the first roll in a turn does not reach that limit the player is bust and the turn will be given to the next player. If the player does not go bust it will have the option to either stop and register the collected scores or roll again and try to collect more points. There must always be at least one die that scores in each roll. If no die scores the player goes bust and the score collected in that turn will be lost. When a die has scored it cannot be used again until all dice has scored.
+
 	\section{Initial design}
 	
 	\begin{figure}[t]
