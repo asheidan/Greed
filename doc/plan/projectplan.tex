@@ -114,14 +114,14 @@
 
 	The server will keep track of all players, their scores and be responsible for rolling the dice. When the turn has come to a player that player will be given the dice throws and then respond with its decision. The server will then send a notification to all clients about the status of the game and let the player continues until the turn is given to another player.
 
-	Since the game exists in several variants it should be fairly easy to add or change rules. A plug-in architecture will be used to dynamically load rules. Adding a rule will therefore not me more difficult than adding a file. Computer controlled player types will also be handled in this way, making it easy to add more of them.
+	Since the game exists in several variants it should be fairly easy to add or change rules. A plug-in architecture will be used to dynamically load rules. Adding a rule will therefore not be more difficult than adding a file. Computer controlled player types will also be handled in this way, making it easy to add more of them.
 	
 	\section{Work breakdown}
 	
 	\begin{table}[t]
 		\vspace{15mm}
 		\centering
-			\begin{tabular*}{0.8\textwidth}{@{\extracolsep{\fill}}l  c c}
+			\begin{tabular*}{0.8\textwidth}{@{\extracolsep{\fill}} l  c c}
 				\multicolumn{1}{c}{\begin{rotate}{45}\textbf{Milestone}\end{rotate}} & \begin{rotate}{45}\textbf{Deadline}\end{rotate} & \begin{rotate}{45}\textbf{Estimated} (hrs)\end{rotate}\\
 				\hline
 				\hline
@@ -131,9 +131,11 @@
 					& 2010-04-06 & 18 \\
 				Rules 
 					& 2010-04-07 & 6 \\
+				User Interface Designed
+					& 2010-04-07 & 10 \\
 				Server 
 					& 2010-04-09 & 20 \\
-				User Interface 
+				User Interface Implemented
 					& 2010-04-13 & 20 \\
 				Integration 
 					& 2010-04-14 & 6 \\
@@ -154,9 +156,16 @@
 		\label{tab:milestones}
 	\end{table}
 	
-		As can be seen in \tablename{} \ref{tab:milestones} (\pagename{} \pageref{tab:milestones}) the work is broken down into several milestones. The "Estimated time"-column is the time estimated to complete each individual milestone.
+		As can be seen in \tablename{} \ref{tab:milestones} (\pagename{} \pageref{tab:milestones}) the work is broken down into several milestones. The "Estimated time"-column represents the time estimated to complete each individual milestone. The milestones will not necessarily be completed one after the other but work will with all certainty be done in parallell on several parts of the project.
 
 		\subsection{Schedule}
+		
+			In accordance with \tablename{} \ref{tab:milestones} the first week will see the completion of the interfaces and implementation of the computer players.
+			
+			During the second week the server should be implemented, the user interface designed and the progress report written.
+			
+			Implementation of the user interface and integration testing will be done during week three as well as the writing of the final report.
+
 	\section{Quality assurance}
 		The primary ways that will be used to measure and assure the quality of the system is as follows. 
 			LOC - Lines of code the system consists of.
@@ -166,7 +175,7 @@
 			LCOM - Lack of cohesion of methods measures how well the modules(classes) are built. A high LCOM means the cohesion is low, and indicates that a class could need to be divided into two or several (sub)classes.
 	\section{Tools}
 
-		As Ruby has been chosen as the language for implementation some of the standard tools used in the previous projects aren't available. In the following sections the replacement tools will be described.
+		As Ruby has been chosen as the language for implementation some of the standard tools used in the previous projects aren't available. In the following sections the replacement tools will be described as well as some of the tools used previously.
 			
 		\subsection{Language}
 		
