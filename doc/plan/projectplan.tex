@@ -36,7 +36,7 @@
 		\thispagestyle{empty}
 		\begin{large}
 			\begin{tabular}{@{}p{\textwidth}@{}}
-				\textbf{Umeå University \hfill \today} \\
+				\textbf{UmeÃ¥ University \hfill \today} \\
 				\textbf{Department of \inst \hfill } \\
 				\textbf{\typeofdoc} \\
 			\end{tabular}
@@ -52,15 +52,12 @@
 				\begin{tabular}{ll}
 					\textbf{Name} & \namea \\
 					\textbf{Email} & \texttt{\emaila} \\
-					\textbf{Path} & \texttt{\fullpatha} \\
 					\\
 					\textbf{Name} & \nameb \\
 					\textbf{Email} & \texttt{\emailb} \\
-					\textbf{Path} & \texttt{\fullpathb} \\
 					\\
 					\textbf{Name} & \namec \\
 					\textbf{Email} & \texttt{\emailc} \\
-					\textbf{Path} & \texttt{\fullpathc} \\
 				\end{tabular}
 			\end{large}
 			\vfill
@@ -110,7 +107,7 @@
 		\label{fig:design}
 	\end{figure}
 	
-	Our initial thoughts on software design are illustrated in figure \ref{fig:design} (\pagename{} \pageref{fig:design}). In order to let players play from different computers the software will be divided into two parts, a client and a server. The server is used by one or many clients. Several players may share the same client simultaneously. In order to make the design more generalized the client-server communication will be utilized even if only one client is used and the server is running on the same computer.
+	Our initial thoughts on software design are illustrated in \figurename{} \ref{fig:design} (\pagename{} \pageref{fig:design}). In order to let players play from different computers the software will be divided into two parts, a client and a server. The server is used by one or many clients. Several players may share the same client simultaneously. In order to make the design more generalized the client-server communication will be utilized even if only one client is used and the server is running on the same computer.
 
 	The server will keep track of all players, their scores and be responsible for rolling the dice. When the turn has come to a player that player will be given the dice throws and then respond with its decision. The server will then send a notification to all clients about the status of the game and let the player continue until the turn is given to another player.
 
@@ -121,12 +118,12 @@
 	\begin{table}[t]
 		\vspace{15mm}
 		\centering
-			\begin{tabular*}{0.8\textwidth}{@{\extracolsep{\fill}} l  c c}
-				\multicolumn{1}{c}{\begin{rotate}{45}\textbf{Milestone}\end{rotate}} & \begin{rotate}{45}\textbf{Deadline}\end{rotate} & \begin{rotate}{45}\textbf{Estimated} (hrs)\end{rotate}\\
+			\begin{tabular*}{0.8\textwidth}{@{\extracolsep{\fill}} l  c r}
+				\multicolumn{1}{c}{\begin{rotate}{45}\textbf{Milestone}\end{rotate}} & \begin{rotate}{45}\textbf{Deadline}\end{rotate} & \multicolumn{1}{c}{\begin{rotate}{45}\textbf{Estimated} (hrs)\end{rotate}}\\
 				\hline
 				\hline
 				Interfaces \& Blackbox tests
-					& 2010-03-03 & 6 \\
+					& 2010-03-30 & 6 \\
 				Computer Players 
 					& 2010-04-06 & 18 \\
 				Rules 
