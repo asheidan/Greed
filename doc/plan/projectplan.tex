@@ -2,6 +2,7 @@
 \usepackage[T1]{fontenc}
 \usepackage[english]{babel}
 \usepackage{amssymb, graphicx, fancyheadings}
+\usepackage{rotating}
 \addtolength{\textheight}{20mm}
 \addtolength{\voffset}{-5mm}
 \renewcommand{\sectionmark}[1]{\markleft{#1}}
@@ -80,5 +81,51 @@
 	\newpage
 
 	\pagenumbering{arabic}
+	
+	\section{Description}
+	
+	\section{Initial design}
+	
+	The software will be
+	
+	\section{Work breakdown}
+	
+	\begin{table}[t]
+		\centering
+			\begin{tabular*}{0.8\textwidth}{@{\extracolsep{\fill}}l  c c}
+				\multicolumn{1}{c}{} & \multicolumn{1}{c}{\begin{turn}{45}\textbf{Deadline}\end{turn}} & \begin{turn}{45}\textbf{Estimated} (hrs)\end{turn}\\
+				\hline
+				\hline
+				Interfaces \& Blackbox tests
+					& 2010-03-03 & 6 \\
+				Computer Players 
+					& 2010-04-06 & 18 \\
+				Rules 
+					& 2010-04-07 & 6 \\
+				Server 
+					& 2010-04-09 & 20 \\
+				User Interface 
+					& 2010-04-13 & 20 \\
+				Integration 
+					& 2010-04-14 & 6 \\
+				\hline
+				Project Plan 
+					& 2010-03-29 & 20 \\
+				Progress Report 
+					& 2010-04-08 & 15 \\
+				Final Report 
+					& 2010-04-15 & 25 \\
+					\hline
+					\hline
+					\textbf{$\Sigma$} && 116 \\
+					\hline
+					\hline
+			\end{tabular*}
+		\caption{Milestones and time estimations}
+		\label{tab:milestones}
+	\end{table}
+		\subsection{Schedule}
+	\section{Quality assurance}
+	
 	
 \end{document}
