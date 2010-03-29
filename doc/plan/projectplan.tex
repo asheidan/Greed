@@ -86,7 +86,7 @@
 	
 	\section{Description}
 	
-	The project aims to implement a dice game called Greed. It is a turn-based game where a player throws a number of dice and has the ability to register scores depending on a set of rules.
+	The project aims to implement a dice game called Greed. It is a turn-based game where a player throws a number of dice and has the ability to receive scores depending on a set of rules.
 
 	A player has to reach a lower limit called the bust limit. If the first roll in a turn does not reach that limit the player is bust and the turn will be given to the next player. If the player does not go bust it will have the option to either stop and register the collected scores or roll again and try to collect more points. There must always be at least one die that scores in each roll. If no die scores the player goes bust and the score collected in that turn will be lost. When a die has scored it cannot be used again until all dice has scored.
 
@@ -110,9 +110,9 @@
 		\label{fig:design}
 	\end{figure}
 	
-	Our initial thoughts on software design is illustrated in figure \ref{fig:design} (\pagename{} \pageref{fig:design}). In order to let players play from different computers the software will be divided into two parts, a client and a server. The server is used by one or many clients. Several players may share the same client simultaneously. In order to make the design more generalized the client-server communication will be utilized even if only one client is used and the server is running on the same computer.
+	Our initial thoughts on software design are illustrated in figure \ref{fig:design} (\pagename{} \pageref{fig:design}). In order to let players play from different computers the software will be divided into two parts, a client and a server. The server is used by one or many clients. Several players may share the same client simultaneously. In order to make the design more generalized the client-server communication will be utilized even if only one client is used and the server is running on the same computer.
 
-	The server will keep track of all players, their scores and be responsible for rolling the dice. When the turn has come to a player that player will be given the dice throws and then respond with its decision. The server will then send a notification to all clients about the status of the game and let the player continues until the turn is given to another player.
+	The server will keep track of all players, their scores and be responsible for rolling the dice. When the turn has come to a player that player will be given the dice throws and then respond with its decision. The server will then send a notification to all clients about the status of the game and let the player continue until the turn is given to another player.
 
 	Since the game exists in several variants it should be fairly easy to add or change rules. A plug-in architecture will be used to dynamically load rules. Adding a rule will therefore not be more difficult than adding a file. Computer controlled player types will also be handled in this way, making it easy to add more of them.
 	
@@ -170,7 +170,7 @@
 	
 	%TODO: Describe how we will ensure that the project will succeed
 	
-	By ensuring that the team members time isn't wasted and keeping a close eye on the earned value it will be possible to early discover potential hazards in the project and re-prioritize and/or reorganize parts of the project.
+	By ensuring that the team members time isn't wasted and by keeping a close eye on the earned value it will be possible to early discover potential hazards in the project and re-prioritize and/or reorganize parts of the project.
 	
 		\subsection{Work and effort}
 		
@@ -186,7 +186,7 @@
 			\item Test Coverage - How big part of the code that is covered by tests. The goal is to have 100\% test coverage.
 			\item Cyclomatic Complexity - Complexity for every method in each class. The number indicates how complex a method is, so the aim is to have low numbers.
 			\item Coupling - How coupled the different classes are. Reasonably low coupling is to be wanted as it makes it easier to maintain the system.
-			\item LCOM - Lack of cohesion of methods measures how well the modules(classes) are built. A high LCOM means the cohesion is low, and indicates that a class could need to be divided into two or several (sub)classes.
+			\item LCOM - Lack of cohesion of methods measures how well the modules and classes are built. A high LCOM means the cohesion is low, and indicates that a class could need to be divided into two or more classes.
 		\end{itemize}
 
 	\section{Tools}
@@ -195,7 +195,7 @@
 		
 		\subsection{Language}
 		
-			As mentioned previously Ruby will be used for implementation. Ruby is an interpreted language created by Yukihiro ''matz'' Matsumoto by blending his favorite languages (Perl, Smalltalk, Eiffel, Ada, and Lisp). The result is a language that tries to balance functional programming with imperative programming.
+			As mentioned previously Ruby will be used for implementation. Ruby is an interpreted language created by Yukihiro ''matz'' Matsumoto by blending his favorite languages (Perl, Smalltalk, Eiffel, Ada and Lisp). The result is a language that tries to balance functional programming with imperative programming.
 			
 			More information on Ruby can be found on http://www.ruby-lang.org/.
 		
@@ -211,7 +211,7 @@
 
 	\section{Project goals}
 
-	The overall goal of the project is to implement the Greed game software that fulfills the specification. The specification will be used to measure how well the software conforms to the requirements that they list. Apart from fulfilling the specification a goal is that the software should be well working.
+	The overall goal of the project is to implement the Greed game software that fulfills the specification\footnote{http://www8.cs.umu.se/kurser/5DV087/Assignments/greed.html}. The specification will be used to measure how well the software conforms to the requirements that it list. Apart from fulfilling the specification a goal is that the software should be well working.
 
 	A set of documents is supposed to be written and delivered. Those will include a project plan and a progress report halfway into the project. The project will end with a final demonstration of the software and a final project report.
 
