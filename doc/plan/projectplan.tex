@@ -1,8 +1,10 @@
 \documentclass[10pt, titlepage, oneside, a4paper]{article}
 \usepackage[T1]{fontenc}
 \usepackage[english]{babel}
+\usepackage{ifpdf}
 \usepackage{amssymb, graphicx, fancyheadings}
 \usepackage{rotating}
+
 \addtolength{\textheight}{20mm}
 \addtolength{\voffset}{-5mm}
 \renewcommand{\sectionmark}[1]{\markleft{#1}}
@@ -84,6 +86,8 @@
 	
 	\section{Description}
 	
+		The project aims to create a Greed Game. Greed is a simple turn-based dice game where a player throws a number of dice, receives points and perhaps eventually wins the game when a certain number of points have been accumulated.
+	
 	\section{Initial design}
 	
 	The software will be
@@ -91,9 +95,10 @@
 	\section{Work breakdown}
 	
 	\begin{table}[t]
+		\vspace{15mm}
 		\centering
 			\begin{tabular*}{0.8\textwidth}{@{\extracolsep{\fill}}l  c c}
-				\multicolumn{1}{c}{} & \multicolumn{1}{c}{\begin{turn}{45}\textbf{Deadline}\end{turn}} & \begin{turn}{45}\textbf{Estimated} (hrs)\end{turn}\\
+				\multicolumn{1}{c}{\begin{rotate}{45}\textbf{Milestone}\end{rotate}} & \begin{rotate}{45}\textbf{Deadline}\end{rotate} & \begin{rotate}{45}\textbf{Estimated} (hrs)\end{rotate}\\
 				\hline
 				\hline
 				Interfaces \& Blackbox tests
@@ -117,15 +122,21 @@
 					& 2010-04-15 & 25 \\
 					\hline
 					\hline
-					\textbf{$\Sigma$} && 116 \\
+					\textbf{Total estimated time} && 116 \\
 					\hline
 					\hline
 			\end{tabular*}
 		\caption{Milestones and time estimations}
 		\label{tab:milestones}
 	\end{table}
+	
+		As can be seen in \tablename{} \ref{tab:milestones} (\pagename{} \pageref{tab:milestones}) the work is broken down into several milestones. The "Estimated time"-column is the time estimated to complete each individual milestone.
+
 		\subsection{Schedule}
 	\section{Quality assurance}
 	
+	\section{Tools}
+
+		Ruby has been chosen as the language for implementation. 
 	
 \end{document}
