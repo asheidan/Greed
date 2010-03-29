@@ -153,6 +153,22 @@
 			LCOM - Lack of cohesion of methods measures how well the modules(classes) are built. A high LCOM means the cohesion is low, and indicates that a class could need to be divided into two or several (sub)classes.
 	\section{Tools}
 
-		Ruby has been chosen as the language for implementation. 
+		As Ruby has been chosen as the language for implementation some of the standard tools used in the previous projects aren't available. In the following sections the replacement tools will be described.
+			
+		\subsection{Language}
+		
+			As mentioned previously Ruby will be used for implementation. Ruby is an interpreted language created by Yukihiro ''matz'' Matsumoto by blending his favorite languages (Perl, Smalltalk, Eiffel, Ada, and Lisp). The result is a language that tries to ballance functional programming with imperative programming.
+			
+			More information on Ruby can be found on http://www.ruby-lang.org/.
+		
+		\subsection{Unit testing}
+		
+			For unit testing the module Test::Unit, which is part of the Ruby core will be used.
+		
+		\subsection{Metrics}
+		
+			There exist a measurement suite for Ruby called {\tt metric\_fu}. Caliper is a web service which uses this suite to generate statistics.
+			
+			It is not yet decided wether the web service will be used or the measurement suite will be used as is.
 	
 \end{document}
