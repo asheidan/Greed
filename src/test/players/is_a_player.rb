@@ -1,5 +1,5 @@
 
-module TestPlayer
+module IsAPlayer
   def test_player_should_respond_to_updated_scoreboard
     @player.update_scoreboard( {} )
   end

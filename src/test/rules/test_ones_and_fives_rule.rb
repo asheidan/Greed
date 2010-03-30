@@ -1,6 +1,6 @@
 require "test/unit"
 
-require 'test_rule'
+require 'rules/is_a_rule'
 require 'rules/ones_and_fives_rule'
 
 class TestOnesAndFivesRule < Test::Unit::TestCase
@@ -8,7 +8,7 @@ class TestOnesAndFivesRule < Test::Unit::TestCase
     @rule = Rules::OnesAndFivesRule.new
   end
   
-  include TestRule
+  include IsARule
   
   def test_00_no_dice_should_return_zero_points
     points, dice = @rule.apply( [] )

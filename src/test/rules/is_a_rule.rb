@@ -1,5 +1,5 @@
 
-module TestRule
+module IsARule
   def test_rule_should_respond_to_apply
     points,dice = @rule.apply( [1,2,3,4,5,6] )
     assert_instance_of(Fixnum, points)

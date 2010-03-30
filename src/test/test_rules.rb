@@ -1,5 +1,6 @@
 require 'test/unit'
 
+$LOAD_PATH << 'lib' if !($:.include?("lib"))
 require 'rules'
 
 class TestRule < Test::Unit::TestCase
@@ -9,3 +10,4 @@ class TestRule < Test::Unit::TestCase
     assert_equal(0,points)
   end
 end
+

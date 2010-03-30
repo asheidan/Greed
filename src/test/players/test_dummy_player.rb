@@ -1,6 +1,6 @@
 require "test/unit"
 
-require 'test_player'
+require 'players/is_a_player'
 require 'players/dummy_player'
 
 class TestDummyPlayer < Test::Unit::TestCase
@@ -8,5 +8,5 @@ class TestDummyPlayer < Test::Unit::TestCase
     @player = Players::DummyPlayer.new
   end
   
-  include TestPlayer
+  include IsAPlayer
 end

@@ -1,7 +1,6 @@
 require "test/unit"
 
-require 'test_rule'
-
+require "rules/is_a_rule"
 require "rules/dummy_rule"
 
 class TestDummyRule < Test::Unit::TestCase
@@ -9,6 +8,6 @@ class TestDummyRule < Test::Unit::TestCase
     @rule = Rules::DummyRule.new
   end
   
-  include TestRule
+  include IsARule
   
 end
