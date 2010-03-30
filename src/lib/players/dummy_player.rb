@@ -17,5 +17,10 @@ module Players
     def roll(dice)
       dice
     end
+    
+    # Called when a joining a game. 
+    # Limits might look like this {:limit => 10000,:bust => 300}
+    def limits(limits)
+    end
   end
 end

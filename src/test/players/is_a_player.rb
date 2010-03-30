@@ -12,4 +12,8 @@ module IsAPlayer
   def test_player_should_respond_to_status_update
     @player.status_update("Nisse",[1,2,3,4,5,6],[])
   end
+
+  def test_player_should_respond_to_limits
+    @player.limits(:limit => 10000,:bust => 300)
+  end
 end
