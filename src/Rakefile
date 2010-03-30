@@ -1,14 +1,61 @@
+#require(File.join('vendor', 'gems', 'devver-metric_fu-1.3.3', 'lib', 'metric_fu'))
+require 'metric_fu'
+# require 'code_statistics'
+
+trash_dirs = ['tmp']
+metrics_dirs = ['lib']
+
+MetricFu::Configuration.run do |config|
+	# Possible metrics:
+	# :churn, :saikuro, :stats, :flog, :flay, :reek, :roodi, :rcov
+	config.metrics = [:churn,:flog,:flay,:reek,:roodi,:saikuro,:rcov]
+	
+	# Possible graphs:
+	# :flog, :flay, :reek, :roodi, :rcov
+	config.graphs = [:reek,:roodi]
+	
+	config.flay = { :dirs_to_flay => metrics_dirs }
+	config.flog = { :dirs_to_flog => metrics_dirs }
+	config.reek = { :dirs_to_reek => metrics_dirs }
+	config.roodi = { :dirs_to_roodi  => metrics_dirs }
+	
+	config.rcov = {
+		:environment => 'test',
+		:test_files => [
+			'**/test_*.rb'
+		],
+		:rcov_opts => [
+			"--include lib:test",
+			"--exclude /Library/",
+			"--text-coverage",
+#			"--profile",
+			"--no-html","--no-color"
+		]
+	}
+	
+	config.graph_engine = :bluff
+end
+
 task :default => :test
+task :metrics => "metrics:all"
+
+task :stats do
+end
 
 task :test => "test:all"
 namespace :test do
-  desc "Run all tests"
-  task :all do
-    puts "Running all tests"
-    $LOAD_PATH << 'lib' if !($:.include?("lib"))
-    $LOAD_PATH << 'test' if !($:.include?("test"))
-    Dir.glob("test/**/test_*.rb").each do |f|
-      require f
-    end
-  end
+	desc "Run all tests"
+	task :all do
+		puts "Running all tests"
+		$LOAD_PATH << 'lib' if !($:.include?("lib"))
+		$LOAD_PATH << 'test' if !($:.include?("test"))
+		Dir.glob("test/**/test_*.rb").each do |f|
+			require f
+		end
+	end
+end
+
+desc "Remove putput files"
+task :clean do
+	FileUtils.rm_r(trash_dirs, :secure => true, :force => true)
 end
