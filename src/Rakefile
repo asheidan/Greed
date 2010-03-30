@@ -1,0 +1,14 @@
+task :default => :test
+
+task :test => "test:all"
+namespace :test do
+  desc "Run all tests"
+  task :all do
+    puts "Running all tests"
+    $LOAD_PATH << 'lib' if !($:.include?("lib"))
+    $LOAD_PATH << 'test' if !($:.include?("test"))
+    Dir.glob("test/**/test_*.rb").each do |f|
+      require f
+    end
+  end
+end
