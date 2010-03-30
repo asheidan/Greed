@@ -1,9 +1,9 @@
 require 'rules/dummy_rule'
 
-@rules = [DummyRule.new]
 
 module Rules
-  def apply_rules(dice)
+  @rules = [DummyRule.new]
+  def self.apply_rules(dice)
     @rules.collect do |rule|
       points, dice = rule.apply(dice)
       if dice.empty?
