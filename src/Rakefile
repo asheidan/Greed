@@ -12,7 +12,7 @@ MetricFu::Configuration.run do |config|
 	
 	# Possible graphs:
 	# :flog, :flay, :reek, :roodi, :rcov
-	config.graphs = [:reek,:roodi]
+	config.graphs = [:flog,:flay,:reek,:roodi,:rcov]
 	
 	config.flay = { :dirs_to_flay => metrics_dirs }
 	config.flog = { :dirs_to_flog => metrics_dirs }
