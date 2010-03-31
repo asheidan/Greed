@@ -14,6 +14,6 @@ module IsAPlayer
   end
 
   def test_player_should_respond_to_limits
-    @player.limits(:limit => 10000,:bust => 300)
+    @player.limits(10000,300)
   end
 end

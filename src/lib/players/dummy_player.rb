@@ -19,8 +19,7 @@ module Players
     end
     
     # Called when a joining a game. 
-    # Limits might look like this {:limit => 10000,:bust => 300}
-    def limits(limits)
+    def limits(limit,bust)
     end
   end
 end
