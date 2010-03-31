@@ -3,11 +3,11 @@ module Rules
   def self.apply_rules(dice)
     rules.collect do |rule|
       # TODO: Object creation in Ruby isn't great, possible optimization here
-      points, dice = rule.new.apply(dice)
-      if dice.empty?
+      points, rethrow = rule.new.apply(dice)
+      if rethrow.empty? || points == 0
         points
       else
-        points + apply_rules(dice)
+        (points + apply_rules(rethrow))
       end
     end.max
   end
