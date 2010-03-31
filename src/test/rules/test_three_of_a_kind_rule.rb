@@ -1,0 +1,30 @@
+require "test/unit"
+
+require "rules/is_a_rule"
+require "rules/three_of_a_kind_rule"
+
+class TestThreeOfAKindRule < Test::Unit::TestCase
+  def setup
+    @rule = Rules::ThreeOfAKindRule.new
+  end
+  
+  include IsARule
+  
+  def test_00_1000_points_for_three_ones
+    points, dice = @rule.apply( [1,1,1] )
+    assert_equal(1000, points)
+    assert_equal([], dice)
+  end
+  
+  def test_01_200_points_for_three_twos
+    points, dice = @rule.apply( [2,2,2] )
+    assert_equal(200, points)
+    assert_equal([], dice)
+  end
+  
+  def test_02_300_points_for_three_threes
+    points, dice = @rule.apply( [3,3,3] )
+    assert_equal(300, points)
+    assert_equal([], dice)
+  end
+end
