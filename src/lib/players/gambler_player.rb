@@ -1,25 +1,5 @@
 require 'players/dummy_player'
-
-class Array
-  def remove_three!(n)
-    remove!(n,3)
-  end
-  
-  def remove!(element,number)
-    reject! do |e|
-      if e == element then
-        if number <= 0 then
-          false
-        else
-          number -= 1
-          true
-        end
-      else
-        false
-      end
-    end
-  end
-end
+require 'rules/three_of_a_kind_rule'
 
 module Players
   
@@ -31,12 +11,7 @@ module Players
       if dice.sort == [1,2,3,4,5,6] # Street
         dice = []
       elsif dice.count >= 3
-        freq = {
-          1 => 0, 2 => 0, 3 => 0,
-          4 => 0, 5 => 0, 6 => 0
-        }
-        dice.each{|n| freq[n] += 1 }
-        freq.to_a.collect do |k,v|
+        dice.freq.to_a.collect do |k,v|
           if v == 6 then
             [k,k]
           elsif v >= 3 then

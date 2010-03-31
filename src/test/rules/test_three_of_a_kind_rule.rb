@@ -27,4 +27,17 @@ class TestThreeOfAKindRule < Test::Unit::TestCase
     assert_equal(300, points)
     assert_equal([], dice)
   end
+
+  def test_03_400_points_for_three_fours
+    points, dice = @rule.apply( [4,4,4] )
+    assert_equal(400, points)
+    assert_equal([], dice)
+  end
+
+  def test_04_500_points_for_three_fives
+    points, dice = @rule.apply( [5,5,5,2] )
+    assert_equal(500, points)
+    assert_equal([2], dice)
+  end
+
 end
