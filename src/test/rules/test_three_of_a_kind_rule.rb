@@ -40,4 +40,10 @@ class TestThreeOfAKindRule < Test::Unit::TestCase
     assert_equal([2], dice)
   end
 
+  def test_05_600_points_for_three_sixes
+    points, dice = @rule.apply( [3,4,6,6,2,6] )
+    assert_equal(600, points)
+    assert_equal([3,4,2], dice)
+  end
+
 end
