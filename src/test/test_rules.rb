@@ -15,7 +15,7 @@ class TestRule < Test::Unit::TestCase
   def test_should_find_all_rules
     found_rules = Rules::rules
     real_rules = $rule_files.collect do |f|
-      # turns "apa_bepa" into "ApaBepa", can be done in a better way
+      # turns "apa_bepa" into "ApaBepa", can probably be done in a better way
       camelcased = File.basename(f,'.rb').split('_').collect{|s| s.capitalize}.join
       Rules.const_get( camelcased )
     end
