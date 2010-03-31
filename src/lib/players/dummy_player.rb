@@ -3,6 +3,11 @@ module Players
   # Inherit this class and override the methods you want/need/like
   class DummyPlayer
     
+    def initialize
+      @limit = 10000
+      @bust = 300
+    end
+    
     # Called by server with information about all players scores
     def update_scoreboard(scores = {})
     end
@@ -20,6 +25,8 @@ module Players
     
     # Called when a joining a game. 
     def limits(limit,bust)
+      @limit = limit
+      @bust = bust
     end
   end
 end
