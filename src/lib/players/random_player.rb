@@ -6,7 +6,7 @@ module Players
   # what they would do and acts according to that.
   class RandomPlayer < DummyPlayer
     def roll(dice)
-      player_types = [Players::GamblerPlayer, Players::DummyPlayer]
+      player_types = [GamblerPlayer, DummyPlayer]
       player_types[rand(player_types.length)].new.roll(dice)
     end
   end
