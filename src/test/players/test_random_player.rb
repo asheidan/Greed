@@ -10,4 +10,5 @@ class TestRandomPlayer < Test::Unit::TestCase
   
   include IsAPlayer
   
+  # How do you test something that is supposed to work randomly?
 end
