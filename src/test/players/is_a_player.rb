@@ -5,15 +5,21 @@ module IsAPlayer
   end
   
   def test_player_should_respond_correctly_to_roll
-    dice = @player.roll( [] )
-    assert_instance_of(Array, dice)
+    assert_nothing_thrown(NoMethodError) {
+      dice = @player.roll( [] )
+      assert_instance_of(Array, dice)
+    }
   end
   
   def test_player_should_respond_to_status_update
-    @player.status_update("Nisse",[1,2,3,4,5,6],[])
+    assert_nothing_thrown(NoMethodError) {
+      @player.status_update("Nisse",[1,2,3,4,5,6],[])
+    }
   end
 
   def test_player_should_respond_to_limits
-    @player.limits(10000,300)
+    assert_nothing_thrown(NoMethodError) {
+      @player.limits(10000,300)
+    }
   end
 end
