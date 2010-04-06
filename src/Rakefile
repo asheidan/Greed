@@ -14,7 +14,10 @@ MetricFu::Configuration.run do |config|
 	# :flog, :flay, :reek, :roodi, :rcov
 	config.graphs = [:flog,:flay,:reek,:roodi,:rcov]
 	
-	config.flay = { :dirs_to_flay => metrics_dirs }
+	config.flay = {
+	  :dirs_to_flay => metrics_dirs,
+	  :minimum_score => 25
+	}
 	config.flog = { :dirs_to_flog => metrics_dirs }
 	config.reek = { :dirs_to_reek => metrics_dirs }
 	config.roodi = { :dirs_to_roodi  => metrics_dirs }
@@ -39,7 +42,64 @@ end
 task :default => :test
 task :metrics => "metrics:all"
 
+desc "Lists some stats"
 task :stats do
+  require 'yaml'
+  def spacer(title = nil)
+    length = 79 - 3 - (title.to_s.length + 2)
+    print "---"
+    print " #{title} " unless title.nil?
+    puts "-"*length
+  end
+  stats = {}
+  totals = {}
+  dates = []
+  Dir.glob(File.join('tmp','metric_fu','_data','*.yml')).each do |f|
+    date =  File.basename(f,'.yml')
+    dates << date
+    YAML.load_file(f)[:saikuro][:files].each do |h|
+      stats[h[:filename]] = {} if stats[h[:filename]].nil?
+      sum = h[:classes].collect{ |c| c[:lines] }.sum
+      stats[h[:filename]][date] = sum
+      totals[date] = totals[date].to_i + sum 
+    end
+    
+  end
+  longest_filename = stats.keys.collect{|f| f.length }.max
+  
+  file_template = "%-#{longest_filename+1}s"
+  number_template = " %3d "
+  
+  # Output table
+  spacer("LoC")
+  rotated_dates = dates.collect{|e|e.chars.to_a}.transpose
+  rotated_dates[0..-2].each do |l|
+    printf(file_template, nil)
+    l.each do |n|
+      printf(number_template,n.to_i)
+    end
+    puts
+  end
+  printf( file_template,"Filename" )
+  rotated_dates.last.each do |e|
+    printf(number_template, e.to_i)
+  end
+  puts
+  spacer
+  stats.keys.sort.each do |k|
+    printf( file_template, k )
+    dates.sort.each do |d|
+      printf( number_template,stats[k][d])
+    end
+    puts
+  end
+  spacer
+  printf( file_template, ["Totals"])
+  dates.sort.each do |d|
+    printf( number_template,totals[d])
+  end
+  puts
+  spacer
 end
 
 task :test => "test:all"
