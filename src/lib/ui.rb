@@ -17,13 +17,17 @@ def create_game_window
         pack
       end
       TkFrame.new(self) do
-        6.times do
+        buttons = []
+        6.times do |num|
           TkFrame.new(self) do
             TkLabel.new(self) do
               text '#'
+              bind '1' do
+                buttons[num].toggle
+              end
               pack
             end
-            TkCheckButton.new(self) do
+            buttons << TkCheckButton.new(self) do
               pack
             end
             pack :side => :left
