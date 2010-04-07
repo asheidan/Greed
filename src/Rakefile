@@ -1,4 +1,5 @@
 # require 'code_statistics'
+require 'lib/monkeys/array_helper'
 
 trash_dirs = ['tmp']
 metrics_dirs = ['lib']
