@@ -9,17 +9,27 @@ def create_game_window
   TkFrame.new(top) do
     TkLabelFrame.new(self) do
       TkLabel.new(self) do
-        text 'Score for this turn: #  Roll: #'
+        text 'Currently playing: name'
+        pack
+      end
+      TkLabel.new(self) do
+        text 'Score for this turn: #'
         pack
       end
       TkFrame.new(self) do
         6.times do
-          TkCheckButton.new(self) do
-            text '#' # Die value
+          TkFrame.new(self) do
+            TkLabel.new(self) do
+              text '#'
+              pack
+            end
+            TkCheckButton.new(self) do
+              pack
+            end
             pack :side => :left
           end
         end
-        pack :fill => :x
+        pack
       end
       TkFrame.new(self) do
         TkButton.new(self) do
@@ -40,10 +50,6 @@ def create_game_window
       TkLabelFrame.new(self) do
         TkScrollbox.new(self) do
           pack :fill => :x
-        end
-        TkLabel.new(self) do
-          text 'Currently playing: name'
-          pack
         end
         TkLabel.new(self) do
           text 'Win limit: #  Bust limit: #'
