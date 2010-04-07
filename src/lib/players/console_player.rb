@@ -1,5 +1,6 @@
 require 'logger'
 require 'players/dummy_player'
+require 'players/random_player'
 require 'rules'
 
 $log = Logger.new(STDERR)
@@ -7,7 +8,10 @@ module Players
   class ConsolePlayer < DummyPlayer
     
     def update_scoreboard(scores)
-      $log.debug('scores'){scores}
+      scores.keys.sort.each do |k|
+        puts "#{sprintf("%5d",scores[k])} #{k}"
+      end
+      # $log.debug('scores'){scores}
     end
     
     def status_update(*args)
@@ -43,7 +47,8 @@ if __FILE__ == $0
   player = Players::ConsolePlayer.new
 
   server = Server.new
-  server.connect(Players::GamblerPlayer.new)
+  15.times{ server.connect(Players::GamblerPlayer.new) }
+  server.connect(Players::RandomPlayer.new)
   server.connect(player)
   
   server.start_game

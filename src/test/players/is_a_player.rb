@@ -32,4 +32,10 @@ module IsAPlayer
   def test_player_should_have_a_name
     assert_kind_of(String, @player.name)
   end
+  
+  def test_player_should_not_change_argument
+    initial_dice = [1,2,3,3,3,4,6]
+    @player.roll(initial_dice)
+    assert_equal([1,2,3,3,3,4,6], initial_dice)
+  end
 end

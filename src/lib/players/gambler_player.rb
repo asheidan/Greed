@@ -8,6 +8,7 @@ module Players
   # reroll everything if it gets a street or points on all af the dice
   class GamblerPlayer < DummyPlayer
     def roll(dice)
+      dice = dice.clone
       if dice.sort == [1,2,3,4,5,6] # Street
         dice = []
       elsif dice.count >= 3
