@@ -50,6 +50,9 @@ end
 task :default => :test
 task :metrics => "metrics:all"
 
+<<<<<<< HEAD
+>>>>>>> Now we have a task that list lines of code (requires metrics)
+=======
 >>>>>>> Now we have a task that list lines of code (requires metrics)
 desc "Lists some stats"
 task :stats do
