@@ -88,30 +88,71 @@ def create_new_game_window
     title 'New Game'
   end
   
-  TkLabelFrame.new(top) do
-    TkLabel.new(self) do
-      text 'Win limit:'
-      grid :row => 0, :column => 0, :sticky => :e
+  TkFrame.new(top) do
+    TkLabelFrame.new(self) do
+      TkLabel.new(self) do
+        text 'Win limit:'
+        grid :row => 0, :column => 0, :sticky => :e
+      end
+      TkEntry.new(self) do
+        grid :row => 0, :column => 1
+      end
+      TkLabel.new(self) do
+        text 'Bust limit:'
+        grid :row => 1, :column => 0, :sticky => :e
+      end
+      TkEntry.new(self) do
+        grid :row => 1, :column => 1
+      end
+      TkLabel.new(self) do
+        text 'Service:'
+        grid :row => 2, :column => 0, :sticky => :e
+      end
+      TkEntry.new(self) do
+        grid :row => 2, :column => 1
+      end
+    
+      text 'Game Details'
+      pady 2
+      padx 2
+      pack
     end
-    TkEntry.new(self) do
-      grid :row => 0, :column => 1
-    end
-    TkLabel.new(self) do
-      text 'Bust limit:'
-      grid :row => 1, :column => 0, :sticky => :e
-    end
-    TkEntry.new(self) do
-      grid :row => 1, :column => 1
-    end
-    TkLabel.new(self) do
-      text 'Service:'
-      grid :row => 2, :column => 0, :sticky => :e
-    end
-    TkEntry.new(self) do
-      grid :row => 2, :column => 1
+  
+    TkLabelFrame.new(self) do
+      TkLabel.new(self) do
+        text 'Type:'
+        grid :row => 0, :column => 0, :sticky => :e
+      end
+      TkFrame.new(self) do
+        type_choice = TkVariable.new
+        player_types = ['Manual', 'Clever', 'Coward', 'Gambler', 'Random']
+        player_types.each do |type|
+          TkRadioButton.new(self) do
+            text type
+            justify :left
+            value type
+            variable type_choice
+            select if type.eql? 'Manual'
+            pack :expand => true, :fill => :x
+          end
+        end
+        grid :row => 0, :column => 1, :sticky => :w
+      end
+      TkLabel.new(self) do
+        text 'Name:'
+        grid :row => 1, :column => 0, :sticky => :e
+    
+      end
+      TkEntry.new(self) do
+        grid :row => 1, :column => 1, :sticky => :w
+      end
+  
+      text 'Player Details'
+      pady 2
+      padx 2
+      pack :fill => :x
     end
     
-    text 'Game Details'
     pady 2
     padx 2
     pack
@@ -147,58 +188,99 @@ def create_existing_game_window
     title 'Existing Game'
   end
   
-  # Has to declare them here or configure won't find them
-  host_entry = service_entry = nil
+  TkFrame.new(top) do
+    # Has to declare them here or configure won't find them
+    host_entry = service_entry = nil
   
-  TkLabelFrame.new(top) do
-    TkFrame.new(self) do
-      choice = TkVariable.new
-      TkRadioButton.new(self) do
-        text 'Localhost'
-        value :localhost
-        variable choice
-        select
-        command do
-          host_entry.configure :state, :disabled
-          service_entry.configure :state, :disabled
+    TkLabelFrame.new(self) do
+      TkFrame.new(self) do
+        choice = TkVariable.new
+        TkRadioButton.new(self) do
+          text 'Localhost'
+          value :localhost
+          variable choice
+          select
+          command do
+            host_entry.configure :state, :disabled
+            service_entry.configure :state, :disabled
+          end
+          pack :side => :left
         end
-        pack :side => :left
-      end
-      TkRadioButton.new(self) do
-        text 'Remote'
-        value :remote
-        variable choice
-        deselect
-        command do
-          host_entry.configure :state, :normal
-          service_entry.configure :state, :normal
+        TkRadioButton.new(self) do
+          text 'Remote'
+          value :remote
+          variable choice
+          deselect
+          command do
+            host_entry.configure :state, :normal
+            service_entry.configure :state, :normal
+          end
+          pack :side => :left
         end
-        pack :side => :left
+        pack
       end
+    
+      TkFrame.new(self) do
+        TkLabel.new(self) do
+          text 'Host:'
+          grid :row => 0, :column => 0, :sticky => :e
+        end
+        host_entry = TkEntry.new(self) do
+          state :disabled
+          grid :row => 0, :column => 1
+        end
+        TkLabel.new(self) do
+          text 'Service:'
+          grid :row => 1, :column => 0, :sticky => :e
+        end
+        service_entry = TkEntry.new(self) do
+          state :disabled
+          grid :row => 1, :column => 1
+        end
+        pack
+      end
+    
+      text 'Game Details'
+      pady 2
+      padx 2
       pack
     end
-    
-    TkFrame.new(self) do
+  
+    TkLabelFrame.new(self) do
       TkLabel.new(self) do
-        text 'Host:'
+        text 'Type:'
         grid :row => 0, :column => 0, :sticky => :e
       end
-      host_entry = TkEntry.new(self) do
-        state :disabled
-        grid :row => 0, :column => 1
+      TkFrame.new(self) do
+        type_choice = TkVariable.new
+        player_types = ['Manual', 'Clever', 'Coward', 'Gambler', 'Random']
+        player_types.each do |type|
+          TkRadioButton.new(self) do
+            text type
+            justify :left
+            value type
+            variable type_choice
+            select if type.eql? 'Manual'
+            pack :expand => true, :fill => :x
+          end
+        end
+        grid :row => 0, :column => 1, :sticky => :w
       end
       TkLabel.new(self) do
-        text 'Service:'
+        text 'Name:'
         grid :row => 1, :column => 0, :sticky => :e
+      
       end
-      service_entry = TkEntry.new(self) do
-        state :disabled
-        grid :row => 1, :column => 1
+      TkEntry.new(self) do
+        grid :row => 1, :column => 1, :sticky => :w
       end
-      pack
-    end
     
-    text 'Game Details'
+      text 'Player Details'
+      pady 2
+      padx 2
+      pack :fill => :x
+    end
+  
     pady 2
     padx 2
     pack
@@ -237,20 +319,6 @@ def create_main_window
   
   TkLabel.new(root) do
     text 'Shall we play a game?'
-    pack
-  end
-  
-  TkFrame.new(root) do
-    TkLabel.new(self) do
-      text 'Name:'
-      pack :side => :left
-    end
-    TkEntry.new(self) do
-      pack :side => :left
-    end
-    
-    pady 2
-    padx 2
     pack
   end
     
