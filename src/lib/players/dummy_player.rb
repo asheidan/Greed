@@ -3,8 +3,6 @@ module Players
   # Inherit this class and override the methods you want/need/like
   class DummyPlayer
     
-    attr_reader :name
-    
     def initialize(name = '')
       @name = name
       @limit = 10000
@@ -34,7 +32,7 @@ module Players
     
     # Just a string representing your name, should be unique
     def name
-      to_s
+      @name.empty? ? to_s : @name
     end
   end
 end
