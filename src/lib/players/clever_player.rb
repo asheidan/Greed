@@ -1,10 +1,11 @@
 require 'players/dummy_player'
+require 'players/gambler_player'
 
 module Players
-  # CleverPlayer plays differently depending on 
+  # CleverPlayer plays differently depending on the current position.
   class CleverPlayer < DummyPlayer
     def roll(dice)
-      dice
+      GamblerPlayer.new.roll(dice)
     end
     
     # Calculates the position of the player normalized against the leading
