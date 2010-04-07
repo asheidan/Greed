@@ -8,7 +8,7 @@ $rule_files.each do |f|
   require "rules/"+File.basename(f)
 end
 
-Logger.new(STDERR).debug $rule_files
+# Logger.new(STDERR).debug $rule_files
 
 class TestRule < Test::Unit::TestCase
 

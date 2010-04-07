@@ -73,6 +73,7 @@ class TestServer < Test::Unit::TestCase
     
     @server.start_game
     dice = player.dice
+    $log.debug('test: dice'){dice}
     assert_kind_of(Array, dice)
     assert_equal(6, dice.length)
   end
@@ -100,6 +101,22 @@ class TestServer < Test::Unit::TestCase
     assert_equal(10000, player.limit)
     assert_equal(300, player.bust)
     assert_equal({player.name => 0}, player.scores)
+  end
+  
+  def test_05_score_board_should_contain_connected_players
+    MockPlayer.class_eval do
+      attr_reader :name
+      def initialize(name)
+        @name = name
+      end
+      def limits(*ignore);end
+    end
+    
+    player1 = MockPlayer.new("pelle")
+    @server.connect(player1)
+    player2 = MockPlayer.new("arne")
+    @server.connect(player2)
+    assert_equal([player1.name,player2.name].sort, @server.score_board.keys.sort)
   end
 end
 

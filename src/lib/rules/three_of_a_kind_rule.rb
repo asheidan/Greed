@@ -30,6 +30,7 @@ end
 module Rules
   class ThreeOfAKindRule
     def apply(dice)
+      dice = dice.clone
       points = 0
       dice.freq.to_a.collect{|k,v| k if v >= 3}.compact.each do |k|
         points += points_table(k)

@@ -46,4 +46,9 @@ class TestThreeOfAKindRule < Test::Unit::TestCase
     assert_equal([3,4,2], dice)
   end
 
+  def test_06_apply_should_not_change_argument
+    dice = [3,3,3,4,1,6]
+    @rule.apply(dice)
+    assert_equal([3,3,3,4,1,6], dice)
+  end
 end
