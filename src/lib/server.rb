@@ -95,7 +95,7 @@ class Server
             decision.each{ |d|
               throw_dice.remove!(d,1)
             }
-            # broadcast(:status_update, [c.name, throw_dice], [c])
+            broadcast(:status_update, [c.name, throw_dice, saved_dice], [c])
             # Calculate score for saved dice
             throw_score = Rules.max_points( throw_dice )
             if round_score == 0 then
