@@ -1,0 +1,113 @@
+require 'test/unit'
+
+require 'server'
+
+# Hide log-messages
+$log.level = Logger::WARN
+
+class TestServer < Test::Unit::TestCase
+  PORT = 8787
+
+  def setup
+    @server = Server.new( PORT )
+  end
+  
+  def test_00_should_have_local_url_with_correct_port
+    assert_equal("druby://localhost:#{PORT}", @server.uri)
+  end
+  
+  def test_01_connecting_client_should_receive_limits
+    # Adding used method to MockObject
+    MockPlayer.class_eval do
+      def limits(limit,bust)
+        raise LimitsSuccessException
+      end
+      def update_scoreboard(*ignore)
+      end
+      def roll(*ignore)
+        []
+      end
+    end
+      
+    client = MockPlayer.new
+    assert_raise(LimitsSuccessException) {
+      @server.connect(client)
+    }
+  end
+  
+  def test_02_connected_player_should_receive_scores_when_game_starts
+    MockPlayer.class_eval do
+      attr_reader :scores
+      def limits(*ignore)
+      end
+      def roll(*ignore)
+        []
+      end
+      def update_scoreboard(scores)
+        @scores = scores
+      end
+    end
+    
+    player = MockPlayer.new
+    @server.connect(player)
+    
+    @server.start_game
+    assert_kind_of(Hash, player.scores)
+  end
+  
+  def test_03_game_with_one_player_should_receive_roll_when_game_starts
+    MockPlayer.class_eval do
+      attr_reader :dice
+      def limits(*ignore)
+      end
+      def update_scoreboard(*ignore)
+      end
+      def roll(dice)
+        @dice = dice
+        []
+      end
+    end
+    
+    player = MockPlayer.new
+    @server.connect(player)
+    
+    @server.start_game
+    dice = player.dice
+    assert_kind_of(Array, dice)
+    assert_equal(6, dice.length)
+  end
+  
+  def test_04_one_player_one_round
+    MockPlayer.class_eval do
+      attr_reader :scores, :limit, :bust
+      def limits(limit, bust)
+        @limit = limit
+        @bust = bust
+      end
+      def update_scoreboard(scores)
+        @scores = scores
+      end
+      def roll(*ignore)
+        []
+      end
+    end
+    
+    player = MockPlayer.new
+    
+    @server.connect(player)
+    @server.start_game
+    
+    assert_equal(10000, player.limit)
+    assert_equal(300, player.bust)
+    assert_equal({player.name => 0}, player.scores)
+  end
+end
+
+class LimitsSuccessException < Exception; end
+
+class MockPlayer
+  def name
+    to_s
+  end
+end
+  

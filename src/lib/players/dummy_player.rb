@@ -23,10 +23,15 @@ module Players
       dice
     end
     
-    # Called when a joining a game. 
+    # Called by server when a joining a game.
     def limits(limit,bust)
       @limit = limit
       @bust = bust
+    end
+    
+    # Just a string representing your name, should be unique
+    def name
+      to_s
     end
   end
 end

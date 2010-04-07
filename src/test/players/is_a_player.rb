@@ -1,7 +1,13 @@
 
 module IsAPlayer
+  def test_player_should_not_be_nil
+    assert_not_nil(@player)
+  end
+  
   def test_player_should_respond_to_updated_scoreboard
-    @player.update_scoreboard( {} )
+    assert_nothing_thrown(NoMethodError) {
+      @player.update_scoreboard( {} )
+    }
   end
   
   def test_player_should_respond_correctly_to_roll
@@ -21,5 +27,9 @@ module IsAPlayer
     assert_nothing_thrown(NoMethodError) {
       @player.limits(10000,300)
     }
+  end
+
+  def test_player_should_have_a_name
+    assert_kind_of(String, @player.name)
   end
 end
