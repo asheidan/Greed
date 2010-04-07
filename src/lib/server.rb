@@ -51,7 +51,9 @@ class Server
   end
   
   def start_game
-    @clients.shuffle!
+    @mutex.synchronize{
+      @clients.shuffle!
+    }
     game
   end
   
@@ -95,7 +97,7 @@ class Server
             }
             # broadcast(:status_update, [c.name, throw_dice], [c])
             # Calculate score for saved dice
-            throw_score = Rules.apply_rules( throw_dice )
+            throw_score = Rules.max_points( throw_dice )
             if round_score == 0 then
               if (throw_score >= @bust) then
                 round_score += throw_score
@@ -107,6 +109,9 @@ class Server
             elsif throw_score > 0 then
               saved_dice += throw_dice
               round_score += throw_score
+              if saved_dice.length == 6 then
+                saved_dice = []
+              end
             else
               $log.debug('game'){ "Player: #{c.name} got no points"}
               round_score = 0

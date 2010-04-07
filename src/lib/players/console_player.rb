@@ -1,6 +1,5 @@
 require 'logger'
 require 'players/dummy_player'
-require 'players/random_player'
 require 'rules'
 
 $log = Logger.new(STDERR)
@@ -19,7 +18,7 @@ module Players
     end
     
     def roll(dice)
-      puts "#{dice.inspect} -- #{Rules.apply_rules(dice)}"
+      puts "#{dice.inspect} -- #{Rules.max_points(dice)}"
       $stderr.print "# "
       response = nil
       while !response.is_a?(Array) do
@@ -34,7 +33,7 @@ module Players
       response
     end
     def name
-      "nisse"
+      "Console"
     end
   end
 end
@@ -43,11 +42,12 @@ if __FILE__ == $0
   # require 'drb/drb'
   require 'server'
   require 'players/gambler_player'
+  require 'players/random_player'
   # DRb.start_service
   player = Players::ConsolePlayer.new
 
   server = Server.new
-  15.times{ server.connect(Players::GamblerPlayer.new) }
+  5.times{ server.connect(Players::GamblerPlayer.new) }
   server.connect(Players::RandomPlayer.new)
   server.connect(player)
   

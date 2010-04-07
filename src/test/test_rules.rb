@@ -13,8 +13,8 @@ end
 class TestRule < Test::Unit::TestCase
 
   def test_00_all_rules_applied_to_no_dice_should_return_zero
-    points = Rules.apply_rules( [] )
-    assert_equal(0,points)
+    result = Rules.apply_rules( [] )
+    assert_equal([0,[]],result)
   end
   
   def test_01_should_find_all_rules
@@ -28,18 +28,32 @@ class TestRule < Test::Unit::TestCase
   end
   
   def test_02_should_compute_points_correctly_for_a_single_die
-    points = Rules.apply_rules([1])
-    assert_equal(100, points)
+    # puts Rules.rules.inspect
+    result = Rules.apply_rules([1])
+    assert_equal([100,[]], result)
   end
   
   def test_03_should_return_no_points_when_no_rules_apply
-    points = Rules.apply_rules( [2,3,4,2,3,4] )
-    assert_equal(0, points)
+    initial_dice = [2,3,4,2,3,4]
+    result = Rules.apply_rules( initial_dice )
+    assert_equal([0, initial_dice], result)
   end
   
   def test_04_should_return_correct_points_when_two_rules_apply
     points = Rules.apply_rules( [1,3,6,4,4,4] )
-    assert_equal(500, points)
+    assert_equal([500,[3,6]], points)
+  end
+  
+  def test_05_max_points_should_return_Fixnum
+    points = Rules.max_points([1,2,3,4,5,6])
+    assert_equal(1000, points)
+  end
+  
+  def test_temp
+    points = Rules.max_points([2, 3, 3, 3, 5, 6])
+    assert_equal(350, points)
+    points, unused = Rules.apply_rules([2, 3, 3, 3, 5, 6])
+    assert_equal(350, points)
   end
 end
 

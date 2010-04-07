@@ -1,15 +1,22 @@
 
 module Rules
   def self.apply_rules(dice)
-    rules.collect do |rule|
+    rules.collect { |rule|
       # TODO: Object creation in Ruby isn't great, possible optimization here
-      points, rethrow = rule.new.apply(dice)
-      if rethrow.empty? || points == 0
-        points
+      points, unused = rule.new.apply(dice)
+      if points == 0 then
+        [0,dice]
+      elsif unused.empty? then
+        [points, []]
       else
-        (points + apply_rules(rethrow))
+        other_points, unused = apply_rules(unused)
+        [(points+other_points), unused]
       end
-    end.max
+    }.max { |a,b| a.first <=> b.first }
+  end
+  
+  def self.max_points(dice)
+    apply_rules(dice).first
   end
   
   # Returns a sorted Array with all Classes in this module (no submodules)
