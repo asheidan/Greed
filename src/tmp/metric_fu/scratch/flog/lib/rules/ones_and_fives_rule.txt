@@ -1,0 +1,10 @@
+    10.8: flog total
+    10.8: flog/method average
+
+    10.8: OnesAndFivesRule#apply
+     6.3: assignment
+     3.6: branch
+     2.9: +
+     2.5: ==
+     1.6: lit_fixnum
+     1.1: select

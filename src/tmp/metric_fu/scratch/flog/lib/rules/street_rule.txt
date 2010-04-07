@@ -1,0 +1,8 @@
+     4.8: flog total
+     4.8: flog/method average
+
+     4.8: StreetRule#apply
+     2.2: lit_fixnum
+     1.3: sort
+     1.1: ==
+     1.1: branch

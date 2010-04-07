@@ -1,0 +1,22 @@
+    38.8: flog total
+    19.4: flog/method average
+
+    36.6: GamblerPlayer#roll
+    12.7: branch
+    11.6: assignment
+     6.1: ==
+     4.5: lit_fixnum
+     3.5: >=
+     2.4: freq
+     2.2: to_a
+     2.0: collect
+     1.8: compact
+     1.6: flatten
+     1.5: remove_three!
+     1.5: count
+     1.4: each
+     1.4: sort
+     1.2: reject
+     1.2: clone
+     2.2: main#none
+     2.2: require

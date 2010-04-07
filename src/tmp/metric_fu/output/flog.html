@@ -1,0 +1,2777 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang='en' xml:lang='en' xmlns='http://www.w3.org/1999/xhtml'>
+  <head>
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+    <meta content='en' http-equiv='Content-Language' />
+    <title>metrics</title>
+    <style>
+    /*
+Copyright (c) 2008, Yahoo! Inc. All rights reserved.
+Code licensed under the BSD License:
+http://developer.yahoo.net/yui/license.txt
+version: 2.5.2
+*/
+html{color:#000;background:#FFF;}body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td{margin:0;padding:0;}table{border-collapse:collapse;border-spacing:0;}fieldset,img{border:0;}address,caption,cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal;}li{list-style:none;}caption,th{text-align:left;}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal;}q:before,q:after{content:'';}abbr,acronym {border:0;font-variant:normal;}sup {vertical-align:text-top;}sub {vertical-align:text-bottom;}input,textarea,select{font-family:inherit;font-size:inherit;font-weight:inherit;}input,textarea,select{*font-size:100%;}legend{color:#000;}
+
+    /* --------------------------------------------------------------
+
+   buttons.css
+   * Gives you some great CSS-only buttons.
+
+   Created by Kevin Hale [particletree.com]
+   * particletree.com/features/rediscovering-the-button-element
+
+   See Readme.txt in this folder for instructions.
+
+-------------------------------------------------------------- */
+
+button {
+  display:block;
+  float:left;
+  margin:0 0.583em 0.667em 0;
+  padding:5px 10px 5px 7px;   /* Links */
+
+  border:1px solid #dedede;
+  border-top:1px solid #eee;
+  border-left:1px solid #eee;
+
+  background-color:#f5f5f5;
+  font-family:"Lucida Grande", Tahoma, Arial, Verdana, sans-serif;
+  font-size:100%;
+  line-height:130%;
+  text-decoration:none;
+  font-weight:bold;
+  color:#565656;
+  cursor:pointer;
+}
+button {
+  width:auto;
+  overflow:visible;
+  padding:4px 10px 3px 7px;   /* IE6 */
+}
+button[type] {
+  padding:4px 10px 4px 7px;   /* Firefox */
+  line-height:17px;           /* Safari */
+}
+*:first-child+html button[type] {
+  padding:4px 10px 3px 7px;   /* IE7 */
+}
+button img {
+  margin:0 3px -3px 0 !important;
+  padding:0;
+  border:none;
+  width:16px;
+  height:16px;
+  float:none;
+}
+
+
+/* Button colors
+-------------------------------------------------------------- */
+
+/* Standard */
+button:hover {
+  background-color:#dff4ff;
+  border:1px solid #c2e1ef;
+  color:#336699;
+}
+
+/* Positive */
+body .positive {
+  color:#529214;
+}
+button.positive:hover {
+  background-color:#E6EFC2;
+  border:1px solid #C6D880;
+  color:#529214;
+}
+
+/* Negative */
+body .negative {
+  color:#d12f19;
+}
+button.negative:hover {
+  background:#fbe3e4;
+  border:1px solid #fbc2c4;
+  color:#d12f19;
+}
+
+    html {
+  background-color: #e0e0e0; }
+
+body {
+  font-size: 100%;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  color: #333333; }
+
+a {
+  color: #ed1556;
+  text-decoration: none; }
+  a:hover {
+    color: #ffffff;
+    background-color: #ed1556; }
+
+#header, #content, #footer {
+  margin: 0 auto;
+  background: #eeeeee;
+  padding: 0 2em;
+  z-index: 0;
+  position: relative;
+  font-size: 1em; }
+
+#header {
+  background: #ffffff; }
+  #header h1 {
+    font-weight: bold;
+    font-size: 1.5em; }
+  #header address.watermark {
+    position: absolute;
+    font-weight: bold;
+    right: 3em;
+    top: 0;
+    font-size: .75em;
+    color: #cccccc; }
+    #header address.watermark a {
+      color: #cccccc;
+      font-weight: bold;
+      font-size: 2em; }
+      #header address.watermark a:hover {
+        background: transparent;
+        color: #aaaaaa; }
+
+#content {
+  padding-top: 1em;
+  padding-bottom: 2em; }
+  #content strong {
+    font-weight: bold; }
+  #content em {
+    font-style: italic; }
+  #content h1, #content h2, #content h3, #content h4, #content h5, #content h6 {
+    color: #4e4e4e; }
+  #content h1 {
+    font-size: 2em;
+    font-weight: bold;
+    margin-bottom: .75em;
+    padding: .25em 0;
+    line-height: 1.2;
+    border-bottom: 1px solid #c0c0c0; }
+  #content h2 {
+    font-weight: bold;
+    font-size: 1.5em;
+    margin: 1em 0 .2em; }
+  #content h3 {
+    font-weight: bold;
+    font-size: 1.25em;
+    margin: .25em 0; }
+  #content h4, #content h5, #content h6 {
+    font-weight: bold;
+    margin-top: .5em; }
+  #content code, #content pre, #content textarea, #content input {
+    font-family: Monaco, Deja Vu Sans Mono, Inconsolata, Consolas, monospace; }
+  #content form p {
+    margin-top: 1em;
+    position: relative; }
+    #content form p.checkbox label {
+      margin-top: 0 !important; }
+  #content form input.text, #content form textarea {
+    width: 30em;
+    padding: .2em .4em;
+    color: #4e4e4e; }
+  #content form input.text {
+    height: 1.4em; }
+  #content form label {
+    float: left;
+    display: block;
+    margin-top: .5em;
+    width: 8em;
+    margin-right: .75em; }
+  #content form .with_errors label {
+    background: red;
+    color: white;
+    position: relative;
+    top: -.7em; }
+  #content form .with_errors.required label {
+    position: static;
+    margin-right: .25em;
+    padding: 0 .2em; }
+  #content form .with_errors input, #content form .with_errors textarea {
+    border: 2px solid #f22;
+    background: #fee;
+    color: #222222; }
+  #content form .required label {
+    float: none;
+    display: block;
+    width: auto;
+    position: relative;
+    font-weight: bold;
+    margin-top: 1em;
+    text-indent: -.65em; }
+    #content form .required label:before {
+      content: "* ";
+      color: #ed1556; }
+  #content form .required input.text {
+    width: 25.6em;
+    font-size: 24px;
+    font-weight: bold; }
+  #content form .normal {
+    margin-top: 2em; }
+  #content form h2.notifier label {
+    float: none;
+    width: auto;
+    margin-right: 0; }
+    #content form h2.notifier label .warning {
+      font-size: .5em;
+      font-weight: normal;
+      color: #999999; }
+  #content form fieldset {
+    padding-bottom: 1em;
+    margin-left: 1.35em;
+    border-bottom: 1px solid #c0c0c0;
+    margin-bottom: 1em; }
+    #content form fieldset h3 {
+      margin-top: 1em;
+      margin-bottom: 0; }
+    #content form fieldset p.normal {
+      margin-top: 1em; }
+    #content form fieldset p label {
+      width: 6.7em; }
+  #content form p.submit {
+    margin-top: 2em; }
+    #content form p.submit:after {
+      display: block;
+      clear: both;
+      float: none;
+      content: ".";
+      text-indent: -9999em;
+      text-align: left; }
+    #content form p.submit.destroy button,     #content form p.submit.manual-build button {
+      float: none;
+      display: inline; }
+    #content form p.submit.manual-build button {
+      margin-right: 0; }
+  #content #build form, #content #last_build form {
+    font-size: .75em; }
+    #content #build form p.submit,     #content #last_build form p.submit {
+      margin: 0;
+      padding: 0;
+      position: absolute;
+      right: .5em;
+      top: 1.25em; }
+  #content .blank_slate p,   #content .error p {
+    position: relative;
+    top: .3em; }
+  #content .blank_slate h1,   #content .error h1 {
+    border-width: 0;
+    margin: 0;
+    padding: 0; }
+    #content .blank_slate h1 button,     #content .error h1 button {
+      float: none;
+      border: 0 none;
+      background: transparent;
+      display: inline;
+      color: #ed1556;
+      padding: 0.25em 0;
+      margin: 0; }
+      #content .blank_slate h1 button:hover,       #content .error h1 button:hover {
+        background: #ed1556;
+        color: #ffffff; }
+  #content .error dt {
+    margin-top: 1.4em;
+    margin-bottom: .3em;
+    font-size: 1.75em;
+    font-family: Georgia, Times New Roman, serif; }
+  #content .error dd {
+    line-height: 1.4; }
+  #content .error .backtrace {
+    margin: 1em 0;
+    overflow: scroll;
+    height: 30em;
+    border: 1px solid #c0c0c0;
+    line-height: 1.6; }
+  #content #projects {
+    margin: 1em 0 2em;
+    border-top: 1px solid #c0c0c0; }
+    #content #projects li {
+      position: relative;
+      border-bottom: 1px solid #c0c0c0; }
+      #content #projects li.odd {
+        background: #e6e6e6; }
+      #content #projects li.building {
+        background: transparent url(/spinner.gif) no-repeat scroll right; }
+      #content #projects li a {
+        font-size: 2em;
+        padding: .25em;
+        line-height: 1.2;
+        font-weight: bold;
+        display: block; }
+        #content #projects li a.success {
+          color: #337022; }
+        #content #projects li a.failed {
+          color: #ff1100; }
+      #content #projects li .meta {
+        position: absolute;
+        right: .6em;
+        top: 1.5em;
+        font-size: 0.8em;
+        color: #999999;
+        text-align: right; }
+      #content #projects li.building .meta {
+        right: 1.6em; }
+      #content #projects li.success .meta {
+        color: #337022; }
+      #content #projects li.failed .meta {
+        color: #ff1100; }
+  #content #previous_builds li a {
+    display: block;
+    padding: .25em;
+    margin-bottom: .25em;
+    border-width: 1px;
+    border-style: solid; }
+    #content #previous_builds li a strong {
+      font-size: 1.3em; }
+    #content #previous_builds li a .attribution {
+      font-size: .9em; }
+  #content #projects li.success a,   #content #previous_builds li.success a {
+    background-color: #bbf8aa;
+    border-color: #99d688;
+    color: #337022; }
+    #content #projects li.success a .attribution,     #content #previous_builds li.success a .attribution {
+      color: #77b466; }
+    #content #projects li.success a:hover,     #content #previous_builds li.success a:hover {
+      background-color: #ddffcc; }
+  #content #projects li.failed a,   #content #previous_builds li.failed a {
+    background-color: #ffbbaa;
+    border-color: #dd9988;
+    color: #ff1100; }
+    #content #projects li.failed a .attribution,     #content #previous_builds li.failed a .attribution {
+      color: #bb7766; }
+    #content #projects li.failed a:hover,     #content #previous_builds li.failed a:hover {
+      background-color: #ffddcc; }
+  #content #build, #content #last_build {
+    position: relative; }
+    #content #build h1, #content #build blockquote,     #content #last_build h1, #content #last_build blockquote {
+      border-width: 0 1px;
+      border-style: solid; }
+    #content #build h1,     #content #last_build h1 {
+      border-top-width: 1px; }
+    #content #build blockquote,     #content #last_build blockquote {
+      bottom-bottom-width: 1px;
+      line-height: 1.4; }
+    #content #build.success h1, #content #build.success blockquote,     #content #last_build.success h1, #content #last_build.success blockquote {
+      background-color: #bbf8aa;
+      border-color: #99d688 #ccffbb #ccffbb #99d688; }
+    #content #build.success h1,     #content #last_build.success h1 {
+      color: #337022; }
+    #content #build.success .meta,     #content #last_build.success .meta {
+      color: #77b466; }
+    #content #build.failed h1, #content #build.failed blockquote,     #content #last_build.failed h1, #content #last_build.failed blockquote {
+      background-color: #ffbbaa;
+      border-color: #dd9988 #ffccbb #ffccbb #dd9988; }
+    #content #build.failed h1,     #content #last_build.failed h1 {
+      color: #ff1100; }
+    #content #build.failed .meta,     #content #last_build.failed .meta {
+      color: #bb7766; }
+    #content #build h1,     #content #last_build h1 {
+      margin-top: .5em;
+      margin-bottom: 0;
+      padding: .25em;
+      color: #337022; }
+    #content #build blockquote,     #content #last_build blockquote {
+      padding: .75em;
+      margin-bottom: 2em; }
+      #content #build blockquote .meta,       #content #last_build blockquote .meta {
+        margin-top: 1em;
+        display: block;
+        font-size: .9em; }
+    #content #build pre.output,     #content #last_build pre.output {
+      background: #111;
+      color: #fff;
+      padding: .5em;
+      overflow: auto;
+      max-height: 50em;
+      font-size: .825em; }
+      #content #build pre.output .color30,       #content #last_build pre.output .color30 {
+        color: #333; }
+      #content #build pre.output .color31,       #content #last_build pre.output .color31 {
+        color: #e33; }
+      #content #build pre.output .color32,       #content #last_build pre.output .color32 {
+        color: #3e3; }
+      #content #build pre.output .color33,       #content #last_build pre.output .color33 {
+        color: #ee3; }
+      #content #build pre.output .color34,       #content #last_build pre.output .color34 {
+        color: #33e; }
+      #content #build pre.output .color35,       #content #last_build pre.output .color35 {
+        color: #e3e; }
+      #content #build pre.output .color36,       #content #last_build pre.output .color36 {
+        color: #3ee; }
+      #content #build pre.output .color37,       #content #last_build pre.output .color37 {
+        color: #fff; }
+  #content #push_path {
+    display: block;
+    margin-top: 1em;
+    margin-left: 2em; }
+
+a.success {
+  color: #bbf8aa; }
+  a.success:hover {
+    background-color: #bbf8aa;
+    color: white; }
+a.failed {
+  color: #ffbbaa; }
+  a.failed:hover {
+    background-color: #ffbbaa;
+    color: white; }
+
+#footer {
+  padding: 1.5em 2.5em;
+  border-top: 1px solid #ccc;
+  font-size: .8em;
+  color: #666;
+  text-align: right; }
+  #footer strong {
+    font-weight: bold; }
+    
+    table {
+  margin-top: 20px;
+  border-collapse: collapse;
+  border: 1px solid #666;
+  background: #fff;
+  margin-bottom: 20px;
+}
+
+table tr.light {
+   background: #fff;
+}
+
+table tr.dark {
+  background: #f9f9f9;
+}
+
+table tr:hover {
+  background: #FFFFC0;
+}
+
+table td, table th {
+  padding: 4px;
+  font-size: 11px;
+}
+table th {
+  text-align: center;
+  color: #337022;
+  background: #DDFFCC;
+  font-weight: bold;
+  border: #99D688 1px solid;
+}
+
+table td {
+  border: #d0d0d0 1px solid;
+}
+
+table td.score {
+  text-align: right;
+}
+
+.warning {
+  background: yellow;
+}
+.rcov_code td {
+  border-bottom: 1px solid #ddd ;
+  padding: 0;
+  margin: 0;
+}
+.rcov_code tr {
+  border: 0px;
+  padding:0px;
+  margin: 0px;
+}
+.rcov_code pre {
+  border: 0px;
+  padding: 0px;
+  margin: 0px;
+}
+.rcov_run {}
+.rcov_not_run {
+  background-color: #d88;
+}
+.rcov_run a, .rcov_not_run a {
+  text-decoration: none;
+}
+.rcov_run a {
+  color: #333;
+}
+.rcov_not_run a {
+  color: #000;
+}
+.rcov_overflow {
+  overflow: auto;
+  font-size: 50%;
+}
+
+.bluff-tooltip {
+	background: #fff;
+	border: 1px solid #d1edf5;
+	padding: 8px 8px 6px;
+}
+.bluff-tooltip .color {
+	display: block;
+	height: 4px;
+	width: 30px;
+	margin: 0 0 4px;
+	overflow: hidden;
+}
+.bluff-tooltip .data {
+	font-weight: bold;
+}
+
+    </style>
+    <link REL="SHORTCUT ICON" HREF="/favicon.ico">
+    <script language="javascript" src="js-class.js" type="text/javascript"></script>
+    <script language="javascript" src="bluff-min.js" type="text/javascript"></script>
+    <script language="javascript" src="excanvas.js" type="text/javascript"></script>
+  </head>
+  <body>
+    <div id='header'>
+      <h1><a href="/">metrics</a> | <a href="index.html">src</a></h1>
+      <address class='watermark'>
+        built with
+        <a href='http://metric-fu.rubyforge.org/'>metric-fu</a>
+      </address>
+    </div>
+    <div id='content'>
+      <h3>Flog Results</h3>
+<p><a href='http://ruby.sadi.st/Flog.html'>Flog</a> measures code complexity.</p>
+
+
+
+<canvas id="graph"></canvas>
+<script language="javascript" src="flog.js?1270654848" type="text/javascript"></script>
+
+
+<h2>Total Flog score for all methods: 903.8</h2>
+<h2>Average Flog score for all methods: 18.4</h2>
+
+<table>
+  <tr>
+    <th>File</th>
+    <th>Total score</th>
+    <th>Methods</th>
+    <th>Average score</th>
+    <th>Highest score</th>
+  </tr>
+    
+    <tr>
+      <td><a href="#_lib_ui_rb">/lib/ui.rb</a></td>
+      <td>445</td>
+      <td>5</td>
+      <td>89</td>
+      <td>168</td>
+    </tr>
+  
+    <tr>
+      <td><a href="#_lib_server_rb">/lib/server.rb</a></td>
+      <td>178</td>
+      <td>9</td>
+      <td>20</td>
+      <td>109</td>
+    </tr>
+  
+    <tr>
+      <td><a href="#_lib_players_gambler_player_rb">/lib/players/gambler_player.rb</a></td>
+      <td>39</td>
+      <td>2</td>
+      <td>19</td>
+      <td>37</td>
+    </tr>
+  
+    <tr>
+      <td><a href="#_lib_players_console_player_rb">/lib/players/console_player.rb</a></td>
+      <td>62</td>
+      <td>4</td>
+      <td>16</td>
+      <td>31</td>
+    </tr>
+  
+    <tr>
+      <td><a href="#_lib_rules_rb">/lib/rules.rb</a></td>
+      <td>36</td>
+      <td>3</td>
+      <td>12</td>
+      <td>26</td>
+    </tr>
+  
+    <tr>
+      <td><a href="#_lib_players_clever_player_rb">/lib/players/clever_player.rb</a></td>
+      <td>32</td>
+      <td>4</td>
+      <td>8</td>
+      <td>21</td>
+    </tr>
+  
+    <tr>
+      <td><a href="#_lib_rules_three_of_a_kind_rule_rb">/lib/rules/three_of_a_kind_rule.rb</a></td>
+      <td>27</td>
+      <td>4</td>
+      <td>7</td>
+      <td>21</td>
+    </tr>
+  
+    <tr>
+      <td><a href="#_lib_client_rb">/lib/client.rb</a></td>
+      <td>26</td>
+      <td>5</td>
+      <td>5</td>
+      <td>17</td>
+    </tr>
+  
+    <tr>
+      <td><a href="#_lib_rules_ones_and_fives_rule_rb">/lib/rules/ones_and_fives_rule.rb</a></td>
+      <td>11</td>
+      <td>1</td>
+      <td>11</td>
+      <td>11</td>
+    </tr>
+  
+    <tr>
+      <td><a href="#_lib_players_random_player_rb">/lib/players/random_player.rb</a></td>
+      <td>10</td>
+      <td>2</td>
+      <td>5</td>
+      <td>8</td>
+    </tr>
+  
+    <tr>
+      <td><a href="#_lib_monkeys_array_helper_rb">/lib/monkeys/array_helper.rb</a></td>
+      <td>21</td>
+      <td>4</td>
+      <td>5</td>
+      <td>8</td>
+    </tr>
+  
+    <tr>
+      <td><a href="#_lib_rules_street_rule_rb">/lib/rules/street_rule.rb</a></td>
+      <td>5</td>
+      <td>1</td>
+      <td>5</td>
+      <td>5</td>
+    </tr>
+  
+    <tr>
+      <td><a href="#_lib_players_dummy_player_rb">/lib/players/dummy_player.rb</a></td>
+      <td>12</td>
+      <td>5</td>
+      <td>3</td>
+      <td>5</td>
+    </tr>
+  
+</table>
+
+
+  <h2 id="_lib_ui_rb"><a href='txmt://open/?url=file:///Users/emil/Documents/Education/PVT/P3/repo/src/lib/ui.rb'>/lib/ui.rb</a></h2>
+    
+      <p>main#create_existing_game_window</p>
+      <p>Total Score: 167.8</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>42.6</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>35.1</td>
+            <td>new</td>
+          </tr>
+        
+          <tr>
+            <td>20.1</td>
+            <td>text</td>
+          </tr>
+        
+          <tr>
+            <td>18.3</td>
+            <td>grid</td>
+          </tr>
+        
+          <tr>
+            <td>15.7</td>
+            <td>pack</td>
+          </tr>
+        
+          <tr>
+            <td>14.9</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>8.8</td>
+            <td>configure</td>
+          </tr>
+        
+          <tr>
+            <td>8.0</td>
+            <td>lit_fixnum</td>
+          </tr>
+        
+          <tr>
+            <td>7.2</td>
+            <td>command</td>
+          </tr>
+        
+          <tr>
+            <td>6.1</td>
+            <td>value</td>
+          </tr>
+        
+          <tr>
+            <td>6.1</td>
+            <td>variable</td>
+          </tr>
+        
+          <tr>
+            <td>6.0</td>
+            <td>pady</td>
+          </tr>
+        
+          <tr>
+            <td>6.0</td>
+            <td>padx</td>
+          </tr>
+        
+          <tr>
+            <td>4.2</td>
+            <td>select</td>
+          </tr>
+        
+          <tr>
+            <td>4.0</td>
+            <td>state</td>
+          </tr>
+        
+          <tr>
+            <td>3.5</td>
+            <td>destroy</td>
+          </tr>
+        
+          <tr>
+            <td>2.1</td>
+            <td>eql?</td>
+          </tr>
+        
+          <tr>
+            <td>2.1</td>
+            <td>justify</td>
+          </tr>
+        
+          <tr>
+            <td>2.0</td>
+            <td>deselect</td>
+          </tr>
+        
+          <tr>
+            <td>1.8</td>
+            <td>create_game_window</td>
+          </tr>
+        
+          <tr>
+            <td>1.8</td>
+            <td>each</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>root</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>title</td>
+          </tr>
+        
+      </table>
+    
+      <p>main#create_new_game_window</p>
+      <p>Total Score: 125.0</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>34.2</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>28.9</td>
+            <td>new</td>
+          </tr>
+        
+          <tr>
+            <td>20.8</td>
+            <td>grid</td>
+          </tr>
+        
+          <tr>
+            <td>17.5</td>
+            <td>text</td>
+          </tr>
+        
+          <tr>
+            <td>9.2</td>
+            <td>lit_fixnum</td>
+          </tr>
+        
+          <tr>
+            <td>8.1</td>
+            <td>pack</td>
+          </tr>
+        
+          <tr>
+            <td>6.7</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>6.0</td>
+            <td>padx</td>
+          </tr>
+        
+          <tr>
+            <td>6.0</td>
+            <td>pady</td>
+          </tr>
+        
+          <tr>
+            <td>3.5</td>
+            <td>destroy</td>
+          </tr>
+        
+          <tr>
+            <td>3.2</td>
+            <td>command</td>
+          </tr>
+        
+          <tr>
+            <td>2.2</td>
+            <td>select</td>
+          </tr>
+        
+          <tr>
+            <td>2.1</td>
+            <td>eql?</td>
+          </tr>
+        
+          <tr>
+            <td>2.1</td>
+            <td>value</td>
+          </tr>
+        
+          <tr>
+            <td>2.1</td>
+            <td>variable</td>
+          </tr>
+        
+          <tr>
+            <td>2.1</td>
+            <td>justify</td>
+          </tr>
+        
+          <tr>
+            <td>1.8</td>
+            <td>create_game_window</td>
+          </tr>
+        
+          <tr>
+            <td>1.8</td>
+            <td>each</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>root</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>title</td>
+          </tr>
+        
+      </table>
+    
+      <p>main#create_game_window</p>
+      <p>Total Score: 106.4</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>35.6</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>31.7</td>
+            <td>pack</td>
+          </tr>
+        
+          <tr>
+            <td>29.7</td>
+            <td>new</td>
+          </tr>
+        
+          <tr>
+            <td>17.1</td>
+            <td>text</td>
+          </tr>
+        
+          <tr>
+            <td>4.9</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>2.6</td>
+            <td>[]</td>
+          </tr>
+        
+          <tr>
+            <td>2.4</td>
+            <td>toggle</td>
+          </tr>
+        
+          <tr>
+            <td>2.3</td>
+            <td>bind</td>
+          </tr>
+        
+          <tr>
+            <td>2.1</td>
+            <td><<</td>
+          </tr>
+        
+          <tr>
+            <td>1.9</td>
+            <td>destroy</td>
+          </tr>
+        
+          <tr>
+            <td>1.8</td>
+            <td>command</td>
+          </tr>
+        
+          <tr>
+            <td>1.8</td>
+            <td>times</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>pady</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>padx</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>root</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>lit_fixnum</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>title</td>
+          </tr>
+        
+      </table>
+    
+      <p>main#create_main_window</p>
+      <p>Total Score: 42.5</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>12.6</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>7.8</td>
+            <td>new</td>
+          </tr>
+        
+          <tr>
+            <td>6.2</td>
+            <td>text</td>
+          </tr>
+        
+          <tr>
+            <td>4.8</td>
+            <td>command</td>
+          </tr>
+        
+          <tr>
+            <td>4.8</td>
+            <td>grid</td>
+          </tr>
+        
+          <tr>
+            <td>3.1</td>
+            <td>lit_fixnum</td>
+          </tr>
+        
+          <tr>
+            <td>2.8</td>
+            <td>pack</td>
+          </tr>
+        
+          <tr>
+            <td>1.9</td>
+            <td>root</td>
+          </tr>
+        
+          <tr>
+            <td>1.7</td>
+            <td>destroy</td>
+          </tr>
+        
+          <tr>
+            <td>1.7</td>
+            <td>create_existing_game_window</td>
+          </tr>
+        
+          <tr>
+            <td>1.7</td>
+            <td>create_new_game_window</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>pady</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>padx</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>title</td>
+          </tr>
+        
+          <tr>
+            <td>1.2</td>
+            <td>assignment</td>
+          </tr>
+        
+      </table>
+    
+      <p>main#none</p>
+      <p>Total Score: 3.3</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.1</td>
+            <td>create_main_window</td>
+          </tr>
+        
+          <tr>
+            <td>1.1</td>
+            <td>mainloop</td>
+          </tr>
+        
+          <tr>
+            <td>1.1</td>
+            <td>require</td>
+          </tr>
+        
+      </table>
+    
+
+  <h2 id="_lib_server_rb"><a href='txmt://open/?url=file:///Users/emil/Documents/Education/PVT/P3/repo/src/lib/server.rb'>/lib/server.rb</a></h2>
+    
+      <p>Server#game</p>
+      <p>Total Score: 108.5</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>40.0</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>31.0</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>15.3</td>
+            <td>name</td>
+          </tr>
+        
+          <tr>
+            <td>11.7</td>
+            <td>+</td>
+          </tr>
+        
+          <tr>
+            <td>8.6</td>
+            <td>debug</td>
+          </tr>
+        
+          <tr>
+            <td>6.2</td>
+            <td>==</td>
+          </tr>
+        
+          <tr>
+            <td>5.8</td>
+            <td>broadcast</td>
+          </tr>
+        
+          <tr>
+            <td>4.7</td>
+            <td>lit_fixnum</td>
+          </tr>
+        
+          <tr>
+            <td>4.7</td>
+            <td>length</td>
+          </tr>
+        
+          <tr>
+            <td>4.2</td>
+            <td>-</td>
+          </tr>
+        
+          <tr>
+            <td>4.0</td>
+            <td>[]</td>
+          </tr>
+        
+          <tr>
+            <td>3.9</td>
+            <td>>=</td>
+          </tr>
+        
+          <tr>
+            <td>3.6</td>
+            <td>each</td>
+          </tr>
+        
+          <tr>
+            <td>2.7</td>
+            <td>rand</td>
+          </tr>
+        
+          <tr>
+            <td>2.4</td>
+            <td>collect</td>
+          </tr>
+        
+          <tr>
+            <td>2.2</td>
+            <td>sort</td>
+          </tr>
+        
+          <tr>
+            <td>2.1</td>
+            <td>remove!</td>
+          </tr>
+        
+          <tr>
+            <td>2.1</td>
+            <td>></td>
+          </tr>
+        
+          <tr>
+            <td>2.0</td>
+            <td>max_points</td>
+          </tr>
+        
+          <tr>
+            <td>2.0</td>
+            <td>roll</td>
+          </tr>
+        
+          <tr>
+            <td>1.8</td>
+            <td>*</td>
+          </tr>
+        
+          <tr>
+            <td>1.7</td>
+            <td>sleep</td>
+          </tr>
+        
+          <tr>
+            <td>1.6</td>
+            <td>empty?</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>synchronize</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>loop</td>
+          </tr>
+        
+      </table>
+    
+      <p>main#none</p>
+      <p>Total Score: 19.1</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>6.6</td>
+            <td>require</td>
+          </tr>
+        
+          <tr>
+            <td>3.7</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>2.6</td>
+            <td>info</td>
+          </tr>
+        
+          <tr>
+            <td>2.4</td>
+            <td>new</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>uri</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>thread</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>start_service</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>join</td>
+          </tr>
+        
+          <tr>
+            <td>1.1</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>1.1</td>
+            <td>==</td>
+          </tr>
+        
+          <tr>
+            <td>0.4</td>
+            <td>lit_fixnum</td>
+          </tr>
+        
+      </table>
+    
+      <p>Server#broadcast</p>
+      <p>Total Score: 16.2</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>5.9</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>4.8</td>
+            <td>send</td>
+          </tr>
+        
+          <tr>
+            <td>4.3</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>1.8</td>
+            <td>inspect</td>
+          </tr>
+        
+          <tr>
+            <td>1.8</td>
+            <td>message</td>
+          </tr>
+        
+          <tr>
+            <td>1.7</td>
+            <td>delete</td>
+          </tr>
+        
+          <tr>
+            <td>1.7</td>
+            <td>error</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>include?</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>each</td>
+          </tr>
+        
+      </table>
+    
+      <p>Server#initialize</p>
+      <p>Total Score: 10.5</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>9.1</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>2.6</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>debug</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>nil?</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>new</td>
+          </tr>
+        
+          <tr>
+            <td>0.7</td>
+            <td>lit_fixnum</td>
+          </tr>
+        
+      </table>
+    
+      <p>Server#connect</p>
+      <p>Total Score: 8.8</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>2.6</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td><<</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>name</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>inspect</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>synchronize</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>debug</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>limits</td>
+          </tr>
+        
+      </table>
+    
+      <p>Server#none</p>
+      <p>Total Score: 6.0</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>2.4</td>
+            <td>include</td>
+          </tr>
+        
+          <tr>
+            <td>2.4</td>
+            <td>private</td>
+          </tr>
+        
+          <tr>
+            <td>1.2</td>
+            <td>attr_reader</td>
+          </tr>
+        
+      </table>
+    
+      <p>Server#start_game</p>
+      <p>Total Score: 4.2</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>shuffle!</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>synchronize</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>game</td>
+          </tr>
+        
+      </table>
+    
+      <p>Server#start_service</p>
+      <p>Total Score: 2.8</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>uri</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>start_service</td>
+          </tr>
+        
+      </table>
+    
+      <p>Server#stop_service</p>
+      <p>Total Score: 1.3</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>stop_service</td>
+          </tr>
+        
+      </table>
+    
+
+  <h2 id="_lib_players_gambler_player_rb"><a href='txmt://open/?url=file:///Users/emil/Documents/Education/PVT/P3/repo/src/lib/players/gambler_player.rb'>/lib/players/gambler_player.rb</a></h2>
+    
+      <p>GamblerPlayer#roll</p>
+      <p>Total Score: 36.6</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>12.7</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>11.6</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>6.1</td>
+            <td>==</td>
+          </tr>
+        
+          <tr>
+            <td>4.5</td>
+            <td>lit_fixnum</td>
+          </tr>
+        
+          <tr>
+            <td>3.5</td>
+            <td>>=</td>
+          </tr>
+        
+          <tr>
+            <td>2.4</td>
+            <td>freq</td>
+          </tr>
+        
+          <tr>
+            <td>2.2</td>
+            <td>to_a</td>
+          </tr>
+        
+          <tr>
+            <td>2.0</td>
+            <td>collect</td>
+          </tr>
+        
+          <tr>
+            <td>1.8</td>
+            <td>compact</td>
+          </tr>
+        
+          <tr>
+            <td>1.6</td>
+            <td>flatten</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>remove_three!</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>count</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>each</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>sort</td>
+          </tr>
+        
+          <tr>
+            <td>1.2</td>
+            <td>reject</td>
+          </tr>
+        
+          <tr>
+            <td>1.2</td>
+            <td>clone</td>
+          </tr>
+        
+      </table>
+    
+      <p>main#none</p>
+      <p>Total Score: 2.2</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>2.2</td>
+            <td>require</td>
+          </tr>
+        
+      </table>
+    
+
+  <h2 id="_lib_players_console_player_rb"><a href='txmt://open/?url=file:///Users/emil/Documents/Education/PVT/P3/repo/src/lib/players/console_player.rb'>/lib/players/console_player.rb</a></h2>
+    
+      <p>main#none</p>
+      <p>Total Score: 30.5</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>8.5</td>
+            <td>new</td>
+          </tr>
+        
+          <tr>
+            <td>8.5</td>
+            <td>require</td>
+          </tr>
+        
+          <tr>
+            <td>5.5</td>
+            <td>connect</td>
+          </tr>
+        
+          <tr>
+            <td>5.0</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>3.9</td>
+            <td>times</td>
+          </tr>
+        
+          <tr>
+            <td>2.6</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>start_game</td>
+          </tr>
+        
+          <tr>
+            <td>1.1</td>
+            <td>lit_fixnum</td>
+          </tr>
+        
+          <tr>
+            <td>1.1</td>
+            <td>==</td>
+          </tr>
+        
+      </table>
+    
+      <p>ConsolePlayer#roll</p>
+      <p>Total Score: 20.6</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>8.0</td>
+            <td>eval</td>
+          </tr>
+        
+          <tr>
+            <td>6.0</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>4.1</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>gets</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>nil?</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>inspect</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>max_points</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>is_a?</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>puts</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>debug</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>print</td>
+          </tr>
+        
+      </table>
+    
+      <p>ConsolePlayer#update_scoreboard</p>
+      <p>Total Score: 9.5</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.8</td>
+            <td>[]</td>
+          </tr>
+        
+          <tr>
+            <td>1.7</td>
+            <td>keys</td>
+          </tr>
+        
+          <tr>
+            <td>1.6</td>
+            <td>sprintf</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>sort</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>puts</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>each</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>branch</td>
+          </tr>
+        
+      </table>
+    
+      <p>ConsolePlayer#status_update</p>
+      <p>Total Score: 1.8</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>debug</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>branch</td>
+          </tr>
+        
+      </table>
+    
+
+  <h2 id="_lib_rules_rb"><a href='txmt://open/?url=file:///Users/emil/Documents/Education/PVT/P3/repo/src/lib/rules.rb'>/lib/rules.rb</a></h2>
+    
+      <p>Rules#apply_rules</p>
+      <p>Total Score: 25.5</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>15.9</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>5.9</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>3.0</td>
+            <td>first</td>
+          </tr>
+        
+          <tr>
+            <td>1.9</td>
+            <td>+</td>
+          </tr>
+        
+          <tr>
+            <td>1.9</td>
+            <td>apply_rules</td>
+          </tr>
+        
+          <tr>
+            <td>1.8</td>
+            <td>new</td>
+          </tr>
+        
+          <tr>
+            <td>1.7</td>
+            <td>empty?</td>
+          </tr>
+        
+          <tr>
+            <td>1.6</td>
+            <td>apply</td>
+          </tr>
+        
+          <tr>
+            <td>1.6</td>
+            <td>==</td>
+          </tr>
+        
+          <tr>
+            <td>1.6</td>
+            <td>rules</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>collect</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td><=></td>
+          </tr>
+        
+          <tr>
+            <td>1.2</td>
+            <td>max</td>
+          </tr>
+        
+      </table>
+    
+      <p>Rules#rules</p>
+      <p>Total Score: 7.9</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>2.7</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>2.6</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>1.6</td>
+            <td>constants</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>is_a?</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>const_get</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>sort</td>
+          </tr>
+        
+          <tr>
+            <td>1.2</td>
+            <td>collect</td>
+          </tr>
+        
+      </table>
+    
+      <p>Rules#max_points</p>
+      <p>Total Score: 2.6</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>apply_rules</td>
+          </tr>
+        
+          <tr>
+            <td>1.2</td>
+            <td>first</td>
+          </tr>
+        
+      </table>
+    
+
+  <h2 id="_lib_players_clever_player_rb"><a href='txmt://open/?url=file:///Users/emil/Documents/Education/PVT/P3/repo/src/lib/players/clever_player.rb'>/lib/players/clever_player.rb</a></h2>
+    
+      <p>CleverPlayer#position</p>
+      <p>Total Score: 20.8</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>6.0</td>
+            <td>values</td>
+          </tr>
+        
+          <tr>
+            <td>3.6</td>
+            <td>min</td>
+          </tr>
+        
+          <tr>
+            <td>3.2</td>
+            <td>-</td>
+          </tr>
+        
+          <tr>
+            <td>2.6</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>1.8</td>
+            <td>[]</td>
+          </tr>
+        
+          <tr>
+            <td>1.8</td>
+            <td>max</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>/</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>include?</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>nil?</td>
+          </tr>
+        
+      </table>
+    
+      <p>CleverPlayer#roll</p>
+      <p>Total Score: 5.9</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.6</td>
+            <td>new</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>position</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>roll</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td><</td>
+          </tr>
+        
+      </table>
+    
+      <p>CleverPlayer#update_scoreboard</p>
+      <p>Total Score: 2.6</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>2.6</td>
+            <td>assignment</td>
+          </tr>
+        
+      </table>
+    
+      <p>main#none</p>
+      <p>Total Score: 2.2</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>2.2</td>
+            <td>require</td>
+          </tr>
+        
+      </table>
+    
+
+  <h2 id="_lib_rules_three_of_a_kind_rule_rb"><a href='txmt://open/?url=file:///Users/emil/Documents/Education/PVT/P3/repo/src/lib/rules/three_of_a_kind_rule.rb'>/lib/rules/three_of_a_kind_rule.rb</a></h2>
+    
+      <p>ThreeOfAKindRule#apply</p>
+      <p>Total Score: 20.6</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>10.9</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>4.8</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>2.1</td>
+            <td>freq</td>
+          </tr>
+        
+          <tr>
+            <td>1.9</td>
+            <td>to_a</td>
+          </tr>
+        
+          <tr>
+            <td>1.8</td>
+            <td>>=</td>
+          </tr>
+        
+          <tr>
+            <td>1.7</td>
+            <td>points_table</td>
+          </tr>
+        
+          <tr>
+            <td>1.7</td>
+            <td>collect</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>+</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>remove_three!</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>compact</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>each</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>clone</td>
+          </tr>
+        
+          <tr>
+            <td>0.5</td>
+            <td>lit_fixnum</td>
+          </tr>
+        
+      </table>
+    
+      <p>ThreeOfAKindRule#points_table</p>
+      <p>Total Score: 4.0</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>*</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>==</td>
+          </tr>
+        
+          <tr>
+            <td>1.1</td>
+            <td>lit_fixnum</td>
+          </tr>
+        
+      </table>
+    
+      <p>ThreeOfAKindRule#none</p>
+      <p>Total Score: 1.2</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.2</td>
+            <td>private</td>
+          </tr>
+        
+      </table>
+    
+      <p>main#none</p>
+      <p>Total Score: 1.1</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.1</td>
+            <td>require</td>
+          </tr>
+        
+      </table>
+    
+
+  <h2 id="_lib_client_rb"><a href='txmt://open/?url=file:///Users/emil/Documents/Education/PVT/P3/repo/src/lib/client.rb'>/lib/client.rb</a></h2>
+    
+      <p>main#none</p>
+      <p>Total Score: 16.5</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>4.2</td>
+            <td>send</td>
+          </tr>
+        
+          <tr>
+            <td>2.4</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>thread</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>uri</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>gets</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>join</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>new</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>puts</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>start_service</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>1.1</td>
+            <td>==</td>
+          </tr>
+        
+          <tr>
+            <td>1.1</td>
+            <td>require</td>
+          </tr>
+        
+          <tr>
+            <td>0.3</td>
+            <td>lit_fixnum</td>
+          </tr>
+        
+      </table>
+    
+      <p>Client#initialize</p>
+      <p>Total Score: 4.7</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>3.9</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>connect</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>new</td>
+          </tr>
+        
+      </table>
+    
+      <p>Client#none</p>
+      <p>Total Score: 2.4</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>2.4</td>
+            <td>include</td>
+          </tr>
+        
+      </table>
+    
+      <p>Client#send</p>
+      <p>Total Score: 1.3</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>broadcast</td>
+          </tr>
+        
+      </table>
+    
+      <p>Client#receive</p>
+      <p>Total Score: 1.3</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>puts</td>
+          </tr>
+        
+      </table>
+    
+
+  <h2 id="_lib_rules_ones_and_fives_rule_rb"><a href='txmt://open/?url=file:///Users/emil/Documents/Education/PVT/P3/repo/src/lib/rules/ones_and_fives_rule.rb'>/lib/rules/ones_and_fives_rule.rb</a></h2>
+    
+      <p>OnesAndFivesRule#apply</p>
+      <p>Total Score: 10.8</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>6.3</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>3.6</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>2.9</td>
+            <td>+</td>
+          </tr>
+        
+          <tr>
+            <td>2.5</td>
+            <td>==</td>
+          </tr>
+        
+          <tr>
+            <td>1.6</td>
+            <td>lit_fixnum</td>
+          </tr>
+        
+          <tr>
+            <td>1.1</td>
+            <td>select</td>
+          </tr>
+        
+      </table>
+    
+
+  <h2 id="_lib_players_random_player_rb"><a href='txmt://open/?url=file:///Users/emil/Documents/Education/PVT/P3/repo/src/lib/players/random_player.rb'>/lib/players/random_player.rb</a></h2>
+    
+      <p>RandomPlayer#roll</p>
+      <p>Total Score: 8.1</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>2.0</td>
+            <td>length</td>
+          </tr>
+        
+          <tr>
+            <td>1.8</td>
+            <td>rand</td>
+          </tr>
+        
+          <tr>
+            <td>1.6</td>
+            <td>[]</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td>new</td>
+          </tr>
+        
+          <tr>
+            <td>1.2</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>1.2</td>
+            <td>roll</td>
+          </tr>
+        
+      </table>
+    
+      <p>main#none</p>
+      <p>Total Score: 2.2</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>2.2</td>
+            <td>require</td>
+          </tr>
+        
+      </table>
+    
+
+  <h2 id="_lib_monkeys_array_helper_rb"><a href='txmt://open/?url=file:///Users/emil/Documents/Education/PVT/P3/repo/src/lib/monkeys/array_helper.rb'>/lib/monkeys/array_helper.rb</a></h2>
+    
+      <p>Array#remove!</p>
+      <p>Total Score: 7.7</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>3.9</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>2.9</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>1.6</td>
+            <td>-</td>
+          </tr>
+        
+          <tr>
+            <td>1.4</td>
+            <td><=</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>==</td>
+          </tr>
+        
+          <tr>
+            <td>1.2</td>
+            <td>reject!</td>
+          </tr>
+        
+          <tr>
+            <td>0.5</td>
+            <td>lit_fixnum</td>
+          </tr>
+        
+      </table>
+    
+      <p>Array#freq</p>
+      <p>Total Score: 7.3</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>3.8</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>1.7</td>
+            <td>[]</td>
+          </tr>
+        
+          <tr>
+            <td>1.5</td>
+            <td>to_i</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>+</td>
+          </tr>
+        
+          <tr>
+            <td>1.2</td>
+            <td>each</td>
+          </tr>
+        
+          <tr>
+            <td>1.2</td>
+            <td>branch</td>
+          </tr>
+        
+          <tr>
+            <td>0.4</td>
+            <td>lit_fixnum</td>
+          </tr>
+        
+      </table>
+    
+      <p>Array#sum</p>
+      <p>Total Score: 4.7</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>3.8</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>+</td>
+          </tr>
+        
+          <tr>
+            <td>1.2</td>
+            <td>each</td>
+          </tr>
+        
+          <tr>
+            <td>1.2</td>
+            <td>branch</td>
+          </tr>
+        
+      </table>
+    
+      <p>Array#remove_three!</p>
+      <p>Total Score: 1.6</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.2</td>
+            <td>remove!</td>
+          </tr>
+        
+          <tr>
+            <td>0.4</td>
+            <td>lit_fixnum</td>
+          </tr>
+        
+      </table>
+    
+
+  <h2 id="_lib_rules_street_rule_rb"><a href='txmt://open/?url=file:///Users/emil/Documents/Education/PVT/P3/repo/src/lib/rules/street_rule.rb'>/lib/rules/street_rule.rb</a></h2>
+    
+      <p>StreetRule#apply</p>
+      <p>Total Score: 4.8</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>2.2</td>
+            <td>lit_fixnum</td>
+          </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>sort</td>
+          </tr>
+        
+          <tr>
+            <td>1.1</td>
+            <td>==</td>
+          </tr>
+        
+          <tr>
+            <td>1.1</td>
+            <td>branch</td>
+          </tr>
+        
+      </table>
+    
+
+  <h2 id="_lib_players_dummy_player_rb"><a href='txmt://open/?url=file:///Users/emil/Documents/Education/PVT/P3/repo/src/lib/players/dummy_player.rb'>/lib/players/dummy_player.rb</a></h2>
+    
+      <p>DummyPlayer#initialize</p>
+      <p>Total Score: 4.8</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>4.8</td>
+            <td>assignment</td>
+          </tr>
+        
+          <tr>
+            <td>0.6</td>
+            <td>lit_fixnum</td>
+          </tr>
+        
+      </table>
+    
+      <p>DummyPlayer#name</p>
+      <p>Total Score: 2.8</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.3</td>
+            <td>to_s</td>
+          </tr>
+        
+          <tr>
+            <td>1.2</td>
+            <td>empty?</td>
+          </tr>
+        
+          <tr>
+            <td>1.2</td>
+            <td>branch</td>
+          </tr>
+        
+      </table>
+    
+      <p>DummyPlayer#limits</p>
+      <p>Total Score: 2.4</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>2.4</td>
+            <td>assignment</td>
+          </tr>
+        
+      </table>
+    
+      <p>DummyPlayer#update_scoreboard</p>
+      <p>Total Score: 1.2</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.2</td>
+            <td>assignment</td>
+          </tr>
+        
+      </table>
+    
+      <p>DummyPlayer#status_update</p>
+      <p>Total Score: 1.2</p>
+      <table>
+        <tr>
+          <th>Score</th>
+          <th>Operator</th>
+        </tr>
+        
+          <tr>
+            <td>1.2</td>
+            <td>assignment</td>
+          </tr>
+        
+      </table>
+    
+
+<p>Generated on Wed Apr 07 17:40:48 +0200 2010</p>	
+
+    </div>
+  </body>
+</html>
