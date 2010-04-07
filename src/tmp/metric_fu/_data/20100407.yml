@@ -961,44 +961,144 @@
     :times_changed: 20
   - :file_path: src/Rakefile
     :times_changed: 9
-  - :file_path: src/test/players/is_a_player.rb
-    :times_changed: 8
   - :file_path: src/lib/players/dummy_player.rb
+    :times_changed: 8
+  - :file_path: src/test/players/is_a_player.rb
     :times_changed: 8
   - :file_path: src/test/test_rules.rb
     :times_changed: 7
   - :file_path: src/lib/rules.rb
     :times_changed: 5
-  - :file_path: src/lib/players/console_player.rb
-    :times_changed: 4
-  - :file_path: src/lib/ui.rb
-    :times_changed: 4
-  - :file_path: src/lib/server.rb
-    :times_changed: 4
   - :file_path: src/lib/players/clever_player.rb
     :times_changed: 4
-  - :file_path: src/lib/rules/three_of_a_kind_rule.rb
+  - :file_path: src/lib/players/console_player.rb
     :times_changed: 4
   - :file_path: src/test/rules/test_three_of_a_kind_rule.rb
     :times_changed: 4
-  - :file_path: src/lib/players/gambler_player.rb
+  - :file_path: src/lib/server.rb
+    :times_changed: 4
+  - :file_path: src/lib/rules/three_of_a_kind_rule.rb
+    :times_changed: 4
+  - :file_path: src/lib/ui.rb
+    :times_changed: 4
+  - :file_path: src/test/rules/test_ones_and_fives_rule.rb
     :times_changed: 3
-  - :file_path: src/test/players/test_clever_player.rb
+  - :file_path: src/lib/players/gambler_player.rb
     :times_changed: 3
   - :file_path: src/lib/players/random_player.rb
     :times_changed: 3
-  - :file_path: src/test/rules/test_ones_and_fives_rule.rb
-    :times_changed: 3
   - :file_path: src/test/test_server.rb
+    :times_changed: 3
+  - :file_path: src/test/players/test_clever_player.rb
     :times_changed: 3
   :changed_methods: []
 
   :class_churn: []
 
   :changed_files: 
-  - src/lib/rules/three_of_a_kind_rule.rb
-  - src/test/monkeys/test_array_helper.rb
-  - src/lib/monkeys/array_helper.rb
+  - START Players::RandomPlayer --
+  - END Players::CleverPlayer --
+  - src/tmp/324b3ae0833e7d8faf87af6c760a1e63baf6905b.json
+  - src/tmp/metric_fu/scratch/saikuro/lib/rules/three_of_a_kind_rule.rb_cyclo.html
+  - src/tmp/metric_fu/scratch/flog/lib/players/random_player.md5
+  - src/tmp/metric_fu/output/excanvas.js
+  - src/tmp/metric_fu/scratch/flog/lib/rules/three_of_a_kind_rule.md5
+  - src/tmp/metric_fu/scratch/rcov/rcov.txt
+  - END  --
+  - src/tmp/metric_fu/scratch/flog/lib/rules/ones_and_fives_rule.txt
+  - src/tmp/metric_fu/output/flay.js
+  - src/tmp/metric_fu/scratch/saikuro/lib/monkeys/array_helper.rb_cyclo.html
+  - src/tmp/metric_fu/scratch/saikuro/lib/players/clever_player.rb_cyclo.html
+  - src/tmp/metric_fu/scratch/flog/lib/players/gambler_player.txt
+  - src/tmp/metric_fu/scratch/flog/lib/rules/street_rule.txt
+  - src/tmp/metric_fu/scratch/flog/lib/players/clever_player.md5
+  - src/tmp/metric_fu/scratch/flog/lib/players/dummy_player.txt
+  - END Players --
+  - START Array --
+  - src/tmp/metric_fu/output/reek.js
+  - src/tmp/6aeed6aaccb2dd4616e5d217afc71c63b77525b7.json
+  - src/tmp/metric_fu/scratch/flog/lib/ui.md5
+  - END Client --
+  - START Rules::OnesAndFivesRule --
+  - END Rules::DummyRule --
+  - START Rules::DummyRule --
+  - src/tmp/b8646181eb961f755c5ed0bfe3c8650eb7b02952.json
+  - END Rules --
+  - src/tmp/metric_fu/scratch/saikuro/lib/client.rb_cyclo.html
+  - src/tmp/metric_fu/scratch/flog/lib/players/random_player.txt
+  - src/tmp/metric_fu/scratch/flog/lib/rules/three_of_a_kind_rule.txt
+  - END Server --
+  - START Server --
+  - END Rules::ThreeOfAKindRule --
+  - END Rules::OnesAndFivesRule --
+  - src/tmp/metric_fu/scratch/saikuro/lib/rules/ones_and_fives_rule.rb_cyclo.html
+  - /dev/null
+  - src/tmp/metric_fu/_data/20100330.yml
+  - src/tmp/metric_fu/output/bluff-min.js
+  - src/tmp/78081ba2352dd99ddcfcf9d0a706c215192b1ecb.json
+  - START Players::GamblerPlayer --
+  - src/tmp/metric_fu/output/saikuro.html
+  - src/tmp/metric_fu/scratch/flog/lib/players/clever_player.txt
+  - END Rules::StreetRule --
+  - END Players::RandomPlayer --
+  - END Players::ConsolePlayer --
+  - START Players::ConsolePlayer --
+  - src/tmp/metric_fu/scratch/flog/lib/ui.txt
+  - START  --
+  - src/tmp/metric_fu/scratch/flog/lib/rules/dummy_rule.md5
+  - src/tmp/metric_fu/scratch/saikuro/lib/ui.rb_cyclo.html
+  - src/tmp/metric_fu/scratch/saikuro/lib/server.rb_cyclo.html
+  - START Rules::ThreeOfAKindRule --
+  - START Rules::StreetRule --
+  - src/tmp/metric_fu/scratch/flog/lib/monkeys/array_helper.md5
+  - src/tmp/metric_fu/scratch/saikuro/lib/rules.rb_cyclo.html
+  - src/tmp/metric_fu/scratch/saikuro/lib/players/gambler_player.rb_cyclo.html
+  - END Players::DummyPlayer --
+  - src/tmp/metric_fu/scratch/saikuro/lib/players/dummy_player.rb_cyclo.html
+  - END Array --
+  - src/tmp/metric_fu/output/churn.html
+  - --------------------------------------------------------------- */
+  - src/tmp/metric_fu/scratch/flog/lib/rules.md5
+  - START Players::CleverPlayer --
+  - src/tmp/metric_fu/output/rcov.html
+  - src/tmp/metric_fu/scratch/flog/lib/server.md5
+  - src/tmp/metric_fu/output/flog.js
+  - src/tmp/metric_fu/scratch/flog/lib/players/console_player.md5
+  - src/tmp/metric_fu/scratch/flog/lib/rules/dummy_rule.txt
+  - src/tmp/2ed4767dfde838bbd4ef4f4817d18cc9910c68ee.json
+  - src/tmp/metric_fu/output/flog.html
+  - src/tmp/metric_fu/output/rcov.js
+  - src/tmp/metric_fu/scratch/saikuro/index_cyclo.html
+  - src/tmp/metric_fu/scratch/flog/lib/client.md5
+  - src/tmp/metric_fu/scratch/saikuro/lib/rules/street_rule.rb_cyclo.html
+  - START Players --
+  - src/tmp/metric_fu/output/reek.html
+  - src/tmp/metric_fu/_data/20100331.yml
+  - src/tmp/metric_fu/scratch/flog/lib/monkeys/array_helper.txt
+  - START Rules --
+  - src/tmp/metric_fu/scratch/saikuro/lib/players/random_player.rb_cyclo.html
+  - src/tmp/metric_fu/scratch/flog/lib/rules/ones_and_fives_rule.md5
+  - src/tmp/metric_fu/output/flay.html
+  - src/tmp/metric_fu/_data/20100407.yml
+  - src/tmp/metric_fu/report.yml
+  - src/tmp/metric_fu/scratch/flog/lib/rules.txt
+  - src/tmp/2e693ebe3c14d68e79ddb59b49d11e3a596308ba.json
+  - src/tmp/metric_fu/output/roodi.html
+  - src/tmp/metric_fu/output/roodi.js
+  - START Client --
+  - src/tmp/metric_fu/output/js-class.js
+  - src/tmp/metric_fu/scratch/flog/lib/server.txt
+  - "---- "
+  - src/tmp/metric_fu/scratch/saikuro/lib/rules/dummy_rule.rb_cyclo.html
+  - src/tmp/metric_fu/scratch/flog/lib/client.txt
+  - src/tmp/metric_fu/scratch/flog/lib/players/console_player.txt
+  - src/tmp/metric_fu/output/index.html
+  - src/tmp/metric_fu/scratch/flog/lib/players/dummy_player.md5
+  - src/tmp/metric_fu/scratch/flog/lib/players/gambler_player.md5
+  - src/tmp/metric_fu/scratch/flog/lib/rules/street_rule.md5
+  - END Players::GamblerPlayer --
+  - START Players::DummyPlayer --
+  - src/tmp/metric_fu/scratch/saikuro/lib/players/console_player.rb_cyclo.html
   :method_churn: []
 
   :changed_classes: []
