@@ -3,7 +3,10 @@ module Players
   # Inherit this class and override the methods you want/need/like
   class DummyPlayer
     
-    def initialize
+    attr_reader :name
+    
+    def initialize(name = '')
+      @name = name
       @limit = 10000
       @bust = 300
     end
