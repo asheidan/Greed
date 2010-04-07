@@ -108,4 +108,15 @@ class TestCleverlayer < Test::Unit::TestCase
     rethrow = @player.roll( [1,3,3,3,5,4])
     assert_equal([4], rethrow)
   end
+  
+  def test_09_clever_should_save_when_leading
+    scores = {
+      'Anna' => 5.0,
+      'Nisse' => 15.0,
+      'Sonja' => 10.0,
+    }
+    @player.update_scoreboard(scores)
+    rethrow = @player.roll( [3,3,3,2,4,6])
+    assert_equal([], rethrow)
+  end
 end
