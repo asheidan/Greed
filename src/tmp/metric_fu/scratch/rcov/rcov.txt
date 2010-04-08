@@ -1,7 +1,7 @@
 Loaded suite /usr/bin/rcov
 Started
 ...................................................................................
-Finished in 0.032825 seconds.
+Finished in 0.034483 seconds.
 
 83 tests, 104 assertions, 0 failures, 0 errors
 ================================================================================
