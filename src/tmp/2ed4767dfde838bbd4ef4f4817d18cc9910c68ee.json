@@ -1,1 +1,0 @@
-{"churn":{"changed_files":[],"changed_classes":[],"changes":[{"times_changed":20,"file_path":"doc/plan/projectplan.tex"},{"times_changed":3,"file_path":"src/test/rules/test_ones_and_fives_rule.rb"},{"times_changed":3,"file_path":"src/lib/players/dummy_player.rb"}],"changed_methods":[],"class_churn":[],"method_churn":[]}}

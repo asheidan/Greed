@@ -1,0 +1,1080 @@
+--- 
+:rcov: 
+  lib/players/dummy_player.rb: 
+    :lines: 
+    - :was_run: true
+      :content: "   module Players"
+    - :was_run: true
+      :content: "     # Inherit this class and override the methods you want/need/like"
+    - :was_run: true
+      :content: "     class DummyPlayer"
+    - :was_run: true
+      :content: "       def initialize"
+    - :was_run: true
+      :content: "         @limit = 10000"
+    - :was_run: true
+      :content: "         @bust = 300"
+    - :was_run: true
+      :content: "       end"
+    - :was_run: true
+      :content: "       # Called by server with information about all players scores"
+    - :was_run: true
+      :content: "       def update_scoreboard(scores = {})"
+    - :was_run: true
+      :content: "       end"
+    - :was_run: true
+      :content: "       # Called by server with information about current turn"
+    - :was_run: true
+      :content: "       def status_update(name, dice, saved=[])"
+    - :was_run: true
+      :content: "       end"
+    - :was_run: true
+      :content: "       # Called by server when it's this players turn."
+    - :was_run: true
+      :content: "       # The method returns an Array with the dice the player want's to throw"
+    - :was_run: true
+      :content: "       # again and an empty Array when it's time to save."
+    - :was_run: true
+      :content: "       def roll(dice)"
+    - :was_run: true
+      :content: "         dice"
+    - :was_run: true
+      :content: "       end"
+    - :was_run: true
+      :content: "       # Called when a joining a game. "
+    - :was_run: true
+      :content: "       def limits(limit,bust)"
+    - :was_run: true
+      :content: "         @limit = limit"
+    - :was_run: true
+      :content: "         @bust = bust"
+    - :was_run: true
+      :content: "       end"
+    - :was_run: true
+      :content: "     end"
+    - :was_run: true
+      :content: "   end"
+    :percent_run: 100
+  lib/rules/dummy_rule.rb: 
+    :lines: 
+    - :was_run: true
+      :content: "   module Rules"
+    - :was_run: true
+      :content: "     class DummyRule"
+    - :was_run: true
+      :content: "       # All Rule-classes implements this method. The argument is a set of dice"
+    - :was_run: true
+      :content: "       # and the return value should be a tuple where the first value is the"
+    - :was_run: true
+      :content: "       # maximum points for this rule and the given dice and the second value"
+    - :was_run: true
+      :content: "       # is an Array of the dice not used"
+    - :was_run: true
+      :content: "       def apply(dice)"
+    - :was_run: true
+      :content: "         return 0,[]"
+    - :was_run: true
+      :content: "       end"
+    - :was_run: true
+      :content: "     end"
+    - :was_run: true
+      :content: "   end"
+    :percent_run: 100
+  lib/rules/ones_and_fives_rule.rb: 
+    :lines: 
+    - :was_run: true
+      :content: "   module Rules"
+    - :was_run: true
+      :content: "     class OnesAndFivesRule"
+    - :was_run: true
+      :content: "       def apply(dice)"
+    - :was_run: true
+      :content: "         points = 0"
+    - :was_run: true
+      :content: "         rethrow = dice.select do |die|"
+    - :was_run: true
+      :content: "           if die == 1"
+    - :was_run: true
+      :content: "             points += 100"
+    - :was_run: true
+      :content: "             false"
+    - :was_run: true
+      :content: "           elsif die == 5"
+    - :was_run: true
+      :content: "             points += 50"
+    - :was_run: true
+      :content: "             false"
+    - :was_run: true
+      :content: "           else"
+    - :was_run: true
+      :content: "             true"
+    - :was_run: true
+      :content: "           end"
+    - :was_run: true
+      :content: "         end"
+    - :was_run: true
+      :content: "         return points,rethrow"
+    - :was_run: true
+      :content: "       end"
+    - :was_run: true
+      :content: "     end"
+    - :was_run: true
+      :content: "   end"
+    :percent_run: 100
+  lib/rules/street_rule.rb: 
+    :lines: 
+    - :was_run: true
+      :content: "   module Rules"
+    - :was_run: true
+      :content: "     class StreetRule"
+    - :was_run: true
+      :content: "       def apply(dice)"
+    - :was_run: true
+      :content: "         if dice.sort == [1,2,3,4,5,6]"
+    - :was_run: true
+      :content: "           return 1000,[]"
+    - :was_run: true
+      :content: "         else"
+    - :was_run: true
+      :content: "           return 0,dice"
+    - :was_run: true
+      :content: "         end"
+    - :was_run: true
+      :content: "       end"
+    - :was_run: true
+      :content: "     end"
+    - :was_run: true
+      :content: "   end"
+    :percent_run: 100
+  :global_percent_run: 98.8
+  lib/players/gambler_player.rb: 
+    :lines: 
+    - :was_run: true
+      :content: "   require 'players/dummy_player'"
+    - :was_run: true
+      :content: "   require 'rules/three_of_a_kind_rule'"
+    - :was_run: true
+      :content: "   module Players"
+    - :was_run: true
+      :content: "     # GamblerPlayer implements a foolheardy greed-player"
+    - :was_run: true
+      :content: "     # Gambler saves Street and 3 of a kind. Right now the player doesn't"
+    - :was_run: true
+      :content: "     # reroll everything if it gets a street or points on all af the dice"
+    - :was_run: true
+      :content: "     class GamblerPlayer < DummyPlayer"
+    - :was_run: true
+      :content: "       def roll(dice)"
+    - :was_run: true
+      :content: "         if dice.sort == [1,2,3,4,5,6] # Street"
+    - :was_run: true
+      :content: "           dice = []"
+    - :was_run: true
+      :content: "         elsif dice.count >= 3"
+    - :was_run: true
+      :content: "           dice.freq.to_a.collect do |k,v|"
+    - :was_run: true
+      :content: "             if v == 6 then"
+    - :was_run: true
+      :content: "               [k,k]"
+    - :was_run: true
+      :content: "             elsif v >= 3 then"
+    - :was_run: true
+      :content: "               k"
+    - :was_run: true
+      :content: "             end"
+    - :was_run: true
+      :content: "           end.compact.flatten.each{|k| dice.remove_three!(k) }"
+    - :was_run: true
+      :content: "         end"
+    - :was_run: true
+      :content: "         dice.reject{|die| die == 1 || die == 5 }"
+    - :was_run: true
+      :content: "       end"
+    - :was_run: true
+      :content: "     end"
+    - :was_run: true
+      :content: "   end"
+    :percent_run: 100
+  lib/players/random_player.rb: 
+    :lines: 
+    - :was_run: true
+      :content: "   require 'players/dummy_player'"
+    - :was_run: true
+      :content: "   require 'players/gambler_player'"
+    - :was_run: true
+      :content: "   module Players"
+    - :was_run: true
+      :content: "     # RandomPlayer randombly creates other players and asks them"
+    - :was_run: true
+      :content: "     # what they would do and acts according to that."
+    - :was_run: true
+      :content: "     class RandomPlayer < DummyPlayer"
+    - :was_run: true
+      :content: "       def roll(dice)"
+    - :was_run: true
+      :content: "         player_types = [GamblerPlayer, DummyPlayer]"
+    - :was_run: true
+      :content: "         player_types[rand(player_types.length)].new.roll(dice)"
+    - :was_run: true
+      :content: "       end"
+    - :was_run: true
+      :content: "     end"
+    - :was_run: true
+      :content: "   end"
+    :percent_run: 100
+  lib/rules/three_of_a_kind_rule.rb: 
+    :lines: 
+    - :was_run: true
+      :content: "   class Array"
+    - :was_run: true
+      :content: "     def freq"
+    - :was_run: true
+      :content: "       f = {}"
+    - :was_run: true
+      :content: "       each do |e|"
+    - :was_run: true
+      :content: "         f[e] = f[e].to_i + 1 "
+    - :was_run: true
+      :content: "       end"
+    - :was_run: true
+      :content: "       f"
+    - :was_run: true
+      :content: "     end"
+    - :was_run: true
+      :content: "     def remove_three!(n)"
+    - :was_run: true
+      :content: "       remove!(n,3)"
+    - :was_run: true
+      :content: "     end"
+    - :was_run: true
+      :content: "     def remove!(element,number)"
+    - :was_run: true
+      :content: "       reject! do |e|"
+    - :was_run: true
+      :content: "         if e == element then"
+    - :was_run: true
+      :content: "           if number <= 0 then"
+    - :was_run: true
+      :content: "             false"
+    - :was_run: true
+      :content: "           else"
+    - :was_run: true
+      :content: "             number -= 1"
+    - :was_run: true
+      :content: "             true"
+    - :was_run: true
+      :content: "           end"
+    - :was_run: true
+      :content: "         else"
+    - :was_run: true
+      :content: "           false"
+    - :was_run: true
+      :content: "         end"
+    - :was_run: true
+      :content: "       end"
+    - :was_run: true
+      :content: "     end"
+    - :was_run: true
+      :content: "   end"
+    - :was_run: true
+      :content: "   module Rules"
+    - :was_run: true
+      :content: "     class ThreeOfAKindRule"
+    - :was_run: true
+      :content: "       def apply(dice)"
+    - :was_run: true
+      :content: "         points = 0"
+    - :was_run: true
+      :content: "         dice.freq.to_a.collect{|k,v| k if v >= 3}.compact.each do |k|"
+    - :was_run: true
+      :content: "           points += points_table(k)"
+    - :was_run: true
+      :content: "           dice.remove_three!(k)"
+    - :was_run: true
+      :content: "         end"
+    - :was_run: true
+      :content: "         return points, dice"
+    - :was_run: true
+      :content: "       end"
+    - :was_run: true
+      :content: "       private"
+    - :was_run: true
+      :content: "       def points_table(n)"
+    - :was_run: true
+      :content: "         if n == 1 then"
+    - :was_run: true
+      :content: "           1000"
+    - :was_run: true
+      :content: "         else"
+    - :was_run: true
+      :content: "           n * 100"
+    - :was_run: true
+      :content: "         end"
+    - :was_run: true
+      :content: "       end"
+    - :was_run: true
+      :content: "     end"
+    - :was_run: true
+      :content: "   end"
+    :percent_run: 100
+  lib/rules.rb: 
+    :lines: 
+    - :was_run: true
+      :content: "   module Rules"
+    - :was_run: true
+      :content: "     def self.apply_rules(dice)"
+    - :was_run: true
+      :content: "       rules.collect do |rule|"
+    - :was_run: true
+      :content: "         # TODO: Object creation in Ruby isn't great, possible optimization here"
+    - :was_run: true
+      :content: "         points, rethrow = rule.new.apply(dice)"
+    - :was_run: true
+      :content: "         if rethrow.empty? || points == 0"
+    - :was_run: true
+      :content: "           points"
+    - :was_run: true
+      :content: "         else"
+    - :was_run: true
+      :content: "           (points + apply_rules(rethrow))"
+    - :was_run: true
+      :content: "         end"
+    - :was_run: false
+      :content: "       end.max"
+    - :was_run: false
+      :content: "     end"
+    - :was_run: true
+      :content: "     # Returns a sorted Array with all Classes in this module (no submodules)"
+    - :was_run: true
+      :content: "     def self.rules"
+    - :was_run: true
+      :content: "       self.constants.sort.collect do |const_name|"
+    - :was_run: true
+      :content: "         c = self.const_get( const_name )"
+    - :was_run: true
+      :content: "         c if c.is_a? Class"
+    - :was_run: true
+      :content: "       end"
+    - :was_run: true
+      :content: "     end"
+    - :was_run: true
+      :content: "   end"
+    :percent_run: 90
+:flog: 
+  :average: 7.6
+  :total: 136.8
+  :pages: 
+  - :path: /lib/players/gambler_player.rb
+    :highest_score: 35.1
+    :scanned_methods: 
+    - :operators: 
+      - :score: 12.7
+        :operator: branch
+      - :score: 10.4
+        :operator: assignment
+      - :score: 6.1
+        :operator: ==
+      - :score: 4.5
+        :operator: lit_fixnum
+      - :score: 3.5
+        :operator: ">="
+      - :score: 2.4
+        :operator: freq
+      - :score: 2.2
+        :operator: to_a
+      - :score: 2.0
+        :operator: collect
+      - :score: 1.8
+        :operator: compact
+      - :score: 1.6
+        :operator: flatten
+      - :score: 1.5
+        :operator: remove_three!
+      - :score: 1.5
+        :operator: count
+      - :score: 1.4
+        :operator: each
+      - :score: 1.4
+        :operator: sort
+      - :score: 1.2
+        :operator: reject
+      :name: GamblerPlayer#roll
+      :score: 35.1
+    - :operators: 
+      - :score: 2.2
+        :operator: require
+      :name: main#none
+      :score: 2.2
+    :score: 37.3
+    :average_score: 18.7
+  - :path: /lib/rules/three_of_a_kind_rule.rb
+    :highest_score: 18.9
+    :scanned_methods: 
+    - :operators: 
+      - :score: 9.6
+        :operator: assignment
+      - :score: 4.8
+        :operator: branch
+      - :score: 2.1
+        :operator: freq
+      - :score: 1.9
+        :operator: to_a
+      - :score: 1.8
+        :operator: ">="
+      - :score: 1.7
+        :operator: points_table
+      - :score: 1.7
+        :operator: collect
+      - :score: 1.5
+        :operator: +
+      - :score: 1.5
+        :operator: remove_three!
+      - :score: 1.5
+        :operator: compact
+      - :score: 1.3
+        :operator: each
+      - :score: 0.5
+        :operator: lit_fixnum
+      :name: ThreeOfAKindRule#apply
+      :score: 18.9
+    - :operators: 
+      - :score: 4.2
+        :operator: branch
+      - :score: 3.1
+        :operator: assignment
+      - :score: 1.7
+        :operator: "-"
+      - :score: 1.5
+        :operator: <=
+      - :score: 1.4
+        :operator: ==
+      - :score: 1.3
+        :operator: reject!
+      - :score: 0.5
+        :operator: lit_fixnum
+      :name: Array#remove!
+      :score: 8.2
+    - :operators: 
+      - :score: 4.1
+        :operator: assignment
+      - :score: 1.8
+        :operator: "[]"
+      - :score: 1.6
+        :operator: to_i
+      - :score: 1.4
+        :operator: +
+      - :score: 1.3
+        :operator: each
+      - :score: 1.3
+        :operator: branch
+      - :score: 0.4
+        :operator: lit_fixnum
+      :name: Array#freq
+      :score: 7.8
+    - :operators: 
+      - :score: 1.4
+        :operator: "*"
+      - :score: 1.3
+        :operator: branch
+      - :score: 1.3
+        :operator: ==
+      - :score: 1.1
+        :operator: lit_fixnum
+      :name: ThreeOfAKindRule#points_table
+      :score: 4.0
+    - :operators: 
+      - :score: 1.3
+        :operator: remove!
+      - :score: 0.4
+        :operator: lit_fixnum
+      :name: Array#remove_three!
+      :score: 1.7
+    - :operators: 
+      - :score: 1.2
+        :operator: private
+      :name: ThreeOfAKindRule#none
+      :score: 1.2
+    :score: 41.8
+    :average_score: 7.0
+  - :path: /lib/rules.rb
+    :highest_score: 16.6
+    :scanned_methods: 
+    - :operators: 
+      - :score: 6.3
+        :operator: assignment
+      - :score: 4.6
+        :operator: branch
+      - :score: 1.9
+        :operator: apply_rules
+      - :score: 1.8
+        :operator: new
+      - :score: 1.7
+        :operator: +
+      - :score: 1.7
+        :operator: empty?
+      - :score: 1.7
+        :operator: ==
+      - :score: 1.6
+        :operator: apply
+      - :score: 1.6
+        :operator: rules
+      - :score: 1.4
+        :operator: collect
+      - :score: 1.2
+        :operator: max
+      :name: Rules#apply_rules
+      :score: 16.6
+    - :operators: 
+      - :score: 2.7
+        :operator: assignment
+      - :score: 2.6
+        :operator: branch
+      - :score: 1.6
+        :operator: constants
+      - :score: 1.4
+        :operator: is_a?
+      - :score: 1.4
+        :operator: const_get
+      - :score: 1.4
+        :operator: sort
+      - :score: 1.2
+        :operator: collect
+      :name: Rules#rules
+      :score: 7.9
+    :score: 24.5
+    :average_score: 12.2
+  - :path: /lib/rules/ones_and_fives_rule.rb
+    :highest_score: 10.8
+    :scanned_methods: 
+    - :operators: 
+      - :score: 6.3
+        :operator: assignment
+      - :score: 3.6
+        :operator: branch
+      - :score: 2.9
+        :operator: +
+      - :score: 2.5
+        :operator: ==
+      - :score: 1.6
+        :operator: lit_fixnum
+      - :score: 1.1
+        :operator: select
+      :name: OnesAndFivesRule#apply
+      :score: 10.8
+    :score: 10.8
+    :average_score: 10.8
+  - :path: /lib/players/random_player.rb
+    :highest_score: 8.1
+    :scanned_methods: 
+    - :operators: 
+      - :score: 2.0
+        :operator: length
+      - :score: 1.8
+        :operator: rand
+      - :score: 1.6
+        :operator: "[]"
+      - :score: 1.4
+        :operator: new
+      - :score: 1.2
+        :operator: assignment
+      - :score: 1.2
+        :operator: roll
+      :name: RandomPlayer#roll
+      :score: 8.1
+    - :operators: 
+      - :score: 2.2
+        :operator: require
+      :name: main#none
+      :score: 2.2
+    :score: 10.3
+    :average_score: 5.1
+  - :path: /lib/rules/street_rule.rb
+    :highest_score: 4.8
+    :scanned_methods: 
+    - :operators: 
+      - :score: 2.2
+        :operator: lit_fixnum
+      - :score: 1.3
+        :operator: sort
+      - :score: 1.1
+        :operator: ==
+      - :score: 1.1
+        :operator: branch
+      :name: StreetRule#apply
+      :score: 4.8
+    :score: 4.8
+    :average_score: 4.8
+  - :path: /lib/players/dummy_player.rb
+    :highest_score: 2.5
+    :scanned_methods: 
+    - :operators: 
+      - :score: 2.4
+        :operator: assignment
+      - :score: 0.6
+        :operator: lit_fixnum
+      :name: DummyPlayer#initialize
+      :score: 2.5
+    - :operators: 
+      - :score: 2.4
+        :operator: assignment
+      :name: DummyPlayer#limits
+      :score: 2.4
+    - :operators: 
+      - :score: 1.2
+        :operator: assignment
+      :name: DummyPlayer#update_scoreboard
+      :score: 1.2
+    - :operators: 
+      - :score: 1.2
+        :operator: assignment
+      :name: DummyPlayer#status_update
+      :score: 1.2
+    :score: 7.3
+    :average_score: 1.8
+:flay: 
+  :matches: []
+
+  :total_score: "0"
+:reek: 
+  :matches: 
+  - :code_smells: []
+
+    :file_path: lib/players/dummy_player.rb
+  - :code_smells: 
+    - :type: LowCohesion
+      :message: doesn't depend on instance state
+      :method: Players::GamblerPlayer#roll
+    - :type: UncommunicativeName
+      :message: has the variable name 'k'
+      :method: Players::GamblerPlayer#roll
+    - :type: UncommunicativeName
+      :message: has the variable name 'v'
+      :method: Players::GamblerPlayer#roll
+    - :type: LowCohesion
+      :message: refers to dice more than self
+      :method: Players::GamblerPlayer#roll
+    :file_path: lib/players/gambler_player.rb
+  - :code_smells: 
+    - :type: LowCohesion
+      :message: refers to player_types more than self
+      :method: Players::RandomPlayer#roll
+    :file_path: lib/players/random_player.rb
+  - :code_smells: 
+    - :type: UncommunicativeName
+      :message: has the variable name 'c'
+      :method: Rules#self.rules
+    :file_path: lib/rules.rb
+  - :code_smells: 
+    - :type: IrresponsibleModule
+      :message: has no descriptive comment
+      :method: Rules::DummyRule
+    :file_path: lib/rules/dummy_rule.rb
+  - :code_smells: 
+    - :type: IrresponsibleModule
+      :message: has no descriptive comment
+      :method: Rules::OnesAndFivesRule
+    - :type: LowCohesion
+      :message: doesn't depend on instance state
+      :method: Rules::OnesAndFivesRule#apply
+    - :type: LongMethod
+      :message: has approx 7 statements
+      :method: Rules::OnesAndFivesRule#apply
+    - :type: LowCohesion
+      :message: refers to die more than self
+      :method: Rules::OnesAndFivesRule#apply
+    - :type: LowCohesion
+      :message: refers to points more than self
+      :method: Rules::OnesAndFivesRule#apply
+    :file_path: lib/rules/ones_and_fives_rule.rb
+  - :code_smells: 
+    - :type: IrresponsibleModule
+      :message: has no descriptive comment
+      :method: Rules::StreetRule
+    - :type: LowCohesion
+      :message: doesn't depend on instance state
+      :method: Rules::StreetRule#apply
+    - :type: LowCohesion
+      :message: refers to dice more than self
+      :method: Rules::StreetRule#apply
+    :file_path: lib/rules/street_rule.rb
+  - :code_smells: 
+    - :type: IrresponsibleModule
+      :message: has no descriptive comment
+      :method: Array
+    - :type: UncommunicativeName
+      :message: has the variable name 'e'
+      :method: Array#freq
+    - :type: UncommunicativeName
+      :message: has the variable name 'f'
+      :method: Array#freq
+    - :type: LowCohesion
+      :message: refers to f more than self
+      :method: Array#freq
+    - :type: UncommunicativeName
+      :message: has the variable name 'e'
+      :method: Array#remove!
+    - :type: LowCohesion
+      :message: refers to number more than self
+      :method: Array#remove!
+    - :type: UncommunicativeName
+      :message: has the parameter name 'n'
+      :method: Array#remove_three!
+    - :type: IrresponsibleModule
+      :message: has no descriptive comment
+      :method: Rules::ThreeOfAKindRule
+    - :type: UncommunicativeName
+      :message: has the variable name 'k'
+      :method: Rules::ThreeOfAKindRule#apply
+    - :type: UncommunicativeName
+      :message: has the variable name 'v'
+      :method: Rules::ThreeOfAKindRule#apply
+    - :type: LowCohesion
+      :message: refers to dice more than self
+      :method: Rules::ThreeOfAKindRule#apply
+    - :type: LowCohesion
+      :message: doesn't depend on instance state
+      :method: Rules::ThreeOfAKindRule#points_table
+    - :type: UncommunicativeName
+      :message: has the parameter name 'n'
+      :method: Rules::ThreeOfAKindRule#points_table
+    - :type: LowCohesion
+      :message: refers to n more than self
+      :method: Rules::ThreeOfAKindRule#points_table
+    :file_path: lib/rules/three_of_a_kind_rule.rb
+:roodi: 
+  :total: 
+  - Found 0 errors.
+  :problems: []
+
+:saikuro: 
+  :methods: 
+  - :lines: 13
+    :complexity: 8
+    :name: Players::GamblerPlayer#roll
+  - :lines: 13
+    :complexity: 4
+    :name: Array#remove!
+  - :lines: 7
+    :complexity: 4
+    :name: Rules::ThreeOfAKindRule#apply
+  - :lines: 14
+    :complexity: 4
+    :name: Rules::OnesAndFivesRule#apply
+  - :lines: 5
+    :complexity: 3
+    :name: Rules#self.rules
+  - :lines: 10
+    :complexity: 3
+    :name: Rules#self.apply_rules
+  - :lines: 6
+    :complexity: 2
+    :name: Rules::ThreeOfAKindRule#points_table
+  - :lines: 6
+    :complexity: 2
+    :name: Array#freq
+  - :lines: 6
+    :complexity: 2
+    :name: Rules::StreetRule#apply
+  - :lines: 3
+    :complexity: 1
+    :name: Players::DummyPlayer#initialize
+  - :lines: 1
+    :complexity: 1
+    :name: Players::DummyPlayer#update_scoreboard
+  - :lines: 1
+    :complexity: 1
+    :name: Players::DummyPlayer#status_update
+  - :lines: 2
+    :complexity: 1
+    :name: Players::DummyPlayer#roll
+  - :lines: 3
+    :complexity: 1
+    :name: Players::DummyPlayer#limits
+  - :lines: 2
+    :complexity: 1
+    :name: Array#remove_three!
+  - :lines: 3
+    :complexity: 1
+    :name: Players::RandomPlayer#roll
+  - :lines: 2
+    :complexity: 1
+    :name: Rules::DummyRule#apply
+  :files: 
+  - :classes: 
+    - :methods: []
+
+      :class_name: Players
+      :lines: 6
+      :complexity: 0
+    - :methods: 
+      - :lines: 13
+        :complexity: 8
+        :name: Players::GamblerPlayer#roll
+      :class_name: Players::GamblerPlayer
+      :lines: 15
+      :complexity: 8
+    :filename: gambler_player.rb
+  - :classes: 
+    - :methods: 
+      - :lines: 13
+        :complexity: 4
+        :name: Array#remove!
+      - :lines: 6
+        :complexity: 2
+        :name: Array#freq
+      - :lines: 2
+        :complexity: 1
+        :name: Array#remove_three!
+      :class_name: Array
+      :lines: 27
+      :complexity: 7
+    - :methods: []
+
+      :class_name: Rules
+      :lines: 2
+      :complexity: 0
+    - :methods: 
+      - :lines: 7
+        :complexity: 4
+        :name: Rules::ThreeOfAKindRule#apply
+      - :lines: 6
+        :complexity: 2
+        :name: Rules::ThreeOfAKindRule#points_table
+      :class_name: Rules::ThreeOfAKindRule
+      :lines: 18
+      :complexity: 6
+    :filename: three_of_a_kind_rule.rb
+  - :classes: 
+    - :methods: 
+      - :lines: 5
+        :complexity: 3
+        :name: Rules#self.rules
+      - :lines: 10
+        :complexity: 3
+        :name: Rules#self.apply_rules
+      :class_name: Rules
+      :lines: 20
+      :complexity: 6
+    :filename: rules.rb
+  - :classes: 
+    - :methods: []
+
+      :class_name: Players
+      :lines: 4
+      :complexity: 0
+    - :methods: 
+      - :lines: 3
+        :complexity: 1
+        :name: Players::DummyPlayer#limits
+      - :lines: 2
+        :complexity: 1
+        :name: Players::DummyPlayer#roll
+      - :lines: 1
+        :complexity: 1
+        :name: Players::DummyPlayer#status_update
+      - :lines: 1
+        :complexity: 1
+        :name: Players::DummyPlayer#update_scoreboard
+      - :lines: 3
+        :complexity: 1
+        :name: Players::DummyPlayer#initialize
+      :class_name: Players::DummyPlayer
+      :lines: 27
+      :complexity: 5
+    :filename: dummy_player.rb
+  - :classes: 
+    - :methods: []
+
+      :class_name: Rules
+      :lines: 2
+      :complexity: 0
+    - :methods: 
+      - :lines: 14
+        :complexity: 4
+        :name: Rules::OnesAndFivesRule#apply
+      :class_name: Rules::OnesAndFivesRule
+      :lines: 16
+      :complexity: 4
+    :filename: ones_and_fives_rule.rb
+  - :classes: 
+    - :methods: []
+
+      :class_name: Rules
+      :lines: 2
+      :complexity: 0
+    - :methods: 
+      - :lines: 6
+        :complexity: 2
+        :name: Rules::StreetRule#apply
+      :class_name: Rules::StreetRule
+      :lines: 9
+      :complexity: 2
+    :filename: street_rule.rb
+  - :classes: 
+    - :methods: []
+
+      :class_name: Players
+      :lines: 4
+      :complexity: 0
+    - :methods: 
+      - :lines: 3
+        :complexity: 1
+        :name: Players::RandomPlayer#roll
+      :class_name: Players::RandomPlayer
+      :lines: 5
+      :complexity: 1
+    :filename: random_player.rb
+  - :classes: 
+    - :methods: []
+
+      :class_name: Rules
+      :lines: 2
+      :complexity: 0
+    - :methods: 
+      - :lines: 2
+        :complexity: 1
+        :name: Rules::DummyRule#apply
+      :class_name: Rules::DummyRule
+      :lines: 9
+      :complexity: 1
+    :filename: dummy_rule.rb
+  :classes: 
+  - :defs: 
+    - :lines: 13
+      :complexity: 8
+      :name: Players::GamblerPlayer#roll
+    :lines: 15
+    :complexity: 8
+    :name: Players::GamblerPlayer
+  - :defs: 
+    - :lines: 6
+      :complexity: 2
+      :name: Array#freq
+    - :lines: 2
+      :complexity: 1
+      :name: Array#remove_three!
+    - :lines: 13
+      :complexity: 4
+      :name: Array#remove!
+    :lines: 27
+    :complexity: 7
+    :name: Array
+  - :defs: 
+    - :lines: 7
+      :complexity: 4
+      :name: Rules::ThreeOfAKindRule#apply
+    - :lines: 6
+      :complexity: 2
+      :name: Rules::ThreeOfAKindRule#points_table
+    :lines: 18
+    :complexity: 6
+    :name: Rules::ThreeOfAKindRule
+  - :defs: 
+    - :lines: 10
+      :complexity: 3
+      :name: Rules#self.apply_rules
+    - :lines: 5
+      :complexity: 3
+      :name: Rules#self.rules
+    :lines: 20
+    :complexity: 6
+    :name: Rules
+  - :defs: 
+    - :lines: 3
+      :complexity: 1
+      :name: Players::DummyPlayer#initialize
+    - :lines: 1
+      :complexity: 1
+      :name: Players::DummyPlayer#update_scoreboard
+    - :lines: 1
+      :complexity: 1
+      :name: Players::DummyPlayer#status_update
+    - :lines: 2
+      :complexity: 1
+      :name: Players::DummyPlayer#roll
+    - :lines: 3
+      :complexity: 1
+      :name: Players::DummyPlayer#limits
+    :lines: 27
+    :complexity: 5
+    :name: Players::DummyPlayer
+  - :defs: 
+    - :lines: 14
+      :complexity: 4
+      :name: Rules::OnesAndFivesRule#apply
+    :lines: 16
+    :complexity: 4
+    :name: Rules::OnesAndFivesRule
+  - :defs: 
+    - :lines: 6
+      :complexity: 2
+      :name: Rules::StreetRule#apply
+    :lines: 9
+    :complexity: 2
+    :name: Rules::StreetRule
+  - :defs: 
+    - :lines: 3
+      :complexity: 1
+      :name: Players::RandomPlayer#roll
+    :lines: 5
+    :complexity: 1
+    :name: Players::RandomPlayer
+  - :defs: 
+    - :lines: 2
+      :complexity: 1
+      :name: Rules::DummyRule#apply
+    :lines: 9
+    :complexity: 1
+    :name: Rules::DummyRule
+  - :lines: 2
+    :complexity: 0
+    :name: Rules
+  - :lines: 4
+    :complexity: 0
+    :name: Players
+  - :lines: 2
+    :complexity: 0
+    :name: Rules
+  - :lines: 2
+    :complexity: 0
+    :name: Rules
+  - :lines: 4
+    :complexity: 0
+    :name: Players
+  - :lines: 2
+    :complexity: 0
+    :name: Rules
+  - :lines: 6
+    :complexity: 0
+    :name: Players
+:churn: 
+  :changed_methods: []
+
+  :class_churn: []
+
+  :changed_files: 
+  - src/Rakefile
+  :method_churn: []
+
+  :changed_classes: []
+
+  :changes: 
+  - :times_changed: 20
+    :file_path: doc/plan/projectplan.tex
+  - :times_changed: 5
+    :file_path: src/lib/players/dummy_player.rb
+  - :times_changed: 5
+    :file_path: src/test/test_rules.rb
+  - :times_changed: 5
+    :file_path: src/Rakefile
+  - :times_changed: 4
+    :file_path: src/lib/rules.rb
+  - :times_changed: 4
+    :file_path: src/test/players/is_a_player.rb
+  - :times_changed: 3
+    :file_path: src/test/rules/test_three_of_a_kind_rule.rb
+  - :times_changed: 3
+    :file_path: src/lib/players/random_player.rb
+  - :times_changed: 3
+    :file_path: src/test/rules/test_ones_and_fives_rule.rb
