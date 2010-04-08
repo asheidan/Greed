@@ -1,7 +1,7 @@
 Loaded suite /usr/bin/rcov
 Started
 ...........................................................................................
-Finished in 0.037238 seconds.
+Finished in 0.033658 seconds.
 
 91 tests, 112 assertions, 0 failures, 0 errors
 ================================================================================
@@ -136,7 +136,7 @@ lib/players/dummy_player.rb
 lib/players/gambler_player.rb
 ================================================================================
    require 'players/dummy_player'
-   require 'rules/three_of_a_kind_rule'
+   require 'monkeys/array_helper'
    
    module Players
      
@@ -166,13 +166,14 @@ lib/players/random_player.rb
 ================================================================================
    require 'players/dummy_player'
    require 'players/gambler_player'
+   require 'players/coward_player'
    
    module Players
      # RandomPlayer randombly creates other players and asks them
      # what they would do and acts according to that.
      class RandomPlayer < DummyPlayer
        def roll(dice)
-         player_types = [GamblerPlayer, DummyPlayer]
+         player_types = [GamblerPlayer, DummyPlayer, CowardPlayer]
          player_types[rand(player_types.length)].new.roll(dice)
        end
      end

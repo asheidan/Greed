@@ -1,5 +1,5 @@
-    10.3: flog total
-     5.1: flog/method average
+    11.4: flog total
+     5.7: flog/method average
 
      8.1: RandomPlayer#roll
      2.0: length
@@ -8,5 +8,5 @@
      1.4: new
      1.2: assignment
      1.2: roll
-     2.2: main#none
-     2.2: require
+     3.3: main#none
+     3.3: require

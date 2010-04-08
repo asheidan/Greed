@@ -246,7 +246,7 @@
     - :was_run: true
       :content: "   require 'players/dummy_player'"
     - :was_run: true
-      :content: "   require 'rules/three_of_a_kind_rule'"
+      :content: "   require 'monkeys/array_helper'"
     - :was_run: true
       :content: "   module Players"
     - :was_run: true
@@ -368,6 +368,8 @@
     - :was_run: true
       :content: "   require 'players/gambler_player'"
     - :was_run: true
+      :content: "   require 'players/coward_player'"
+    - :was_run: true
       :content: "   module Players"
     - :was_run: true
       :content: "     # RandomPlayer randombly creates other players and asks them"
@@ -378,7 +380,7 @@
     - :was_run: true
       :content: "       def roll(dice)"
     - :was_run: true
-      :content: "         player_types = [GamblerPlayer, DummyPlayer]"
+      :content: "         player_types = [GamblerPlayer, DummyPlayer, CowardPlayer]"
     - :was_run: true
       :content: "         player_types[rand(player_types.length)].new.roll(dice)"
     - :was_run: true
@@ -748,7 +750,7 @@
       :content: "   end"
     :percent_run: 74
 :flog: 
-  :total: 908.9
+  :total: 883.8
   :pages: 
   - :path: /lib/ui.rb
     :highest_score: 167.8
@@ -1380,64 +1382,6 @@
       :name: main#none
     :score: 26.9
     :average_score: 6.7
-  - :path: /lib/client.rb
-    :highest_score: 16.5
-    :scanned_methods: 
-    - :operators: 
-      - :score: 4.2
-        :operator: send
-      - :score: 2.4
-        :operator: branch
-      - :score: 1.5
-        :operator: thread
-      - :score: 1.5
-        :operator: uri
-      - :score: 1.4
-        :operator: gets
-      - :score: 1.3
-        :operator: join
-      - :score: 1.3
-        :operator: new
-      - :score: 1.3
-        :operator: puts
-      - :score: 1.3
-        :operator: start_service
-      - :score: 1.3
-        :operator: assignment
-      - :score: 1.1
-        :operator: ==
-      - :score: 1.1
-        :operator: require
-      - :score: 0.3
-        :operator: lit_fixnum
-      :score: 16.5
-      :name: main#none
-    - :operators: 
-      - :score: 3.9
-        :operator: assignment
-      - :score: 1.3
-        :operator: connect
-      - :score: 1.3
-        :operator: new
-      :score: 4.7
-      :name: Client#initialize
-    - :operators: 
-      - :score: 2.4
-        :operator: include
-      :score: 2.4
-      :name: Client#none
-    - :operators: 
-      - :score: 1.3
-        :operator: broadcast
-      :score: 1.3
-      :name: Client#send
-    - :operators: 
-      - :score: 1.3
-        :operator: puts
-      :score: 1.3
-      :name: Client#receive
-    :score: 26.2
-    :average_score: 5.2
   - :path: /lib/rules/ones_and_fives_rule.rb
     :highest_score: 10.8
     :scanned_methods: 
@@ -1477,12 +1421,12 @@
       :score: 8.1
       :name: RandomPlayer#roll
     - :operators: 
-      - :score: 2.2
+      - :score: 3.3
         :operator: require
-      :score: 2.2
+      :score: 3.3
       :name: main#none
-    :score: 10.3
-    :average_score: 5.1
+    :score: 11.4
+    :average_score: 5.7
   - :path: /lib/monkeys/array_helper.rb
     :highest_score: 7.7
     :scanned_methods: 
@@ -1602,7 +1546,7 @@
       :name: main#none
     :score: 1.1
     :average_score: 1.1
-  :average: 18.2
+  :average: 19.6
 :flay: 
   :matches: 
   - :reason: 1) IDENTICAL code found in :iter (mass*2 = 532)
@@ -1626,11 +1570,6 @@
   :total_score: "726"
 :reek: 
   :matches: 
-  - :file_path: lib/client.rb
-    :code_smells: 
-    - :type: IrresponsibleModule
-      :message: has no descriptive comment
-      :method: Client
   - :file_path: lib/monkeys/array_helper.rb
     :code_smells: 
     - :type: IrresponsibleModule
@@ -2597,11 +2536,12 @@
   - END Players::CleverPlayer --
   - src/tmp/324b3ae0833e7d8faf87af6c760a1e63baf6905b.json
   - src/tmp/metric_fu/scratch/saikuro/lib/rules/three_of_a_kind_rule.rb_cyclo.html
+  - START Players::CowardPlayer --
+  - END  --
   - src/tmp/metric_fu/scratch/flog/lib/players/random_player.md5
   - src/tmp/metric_fu/output/excanvas.js
   - src/tmp/metric_fu/scratch/flog/lib/rules/three_of_a_kind_rule.md5
   - src/tmp/metric_fu/scratch/rcov/rcov.txt
-  - END  --
   - src/tmp/metric_fu/scratch/flog/lib/rules/ones_and_fives_rule.txt
   - src/tmp/metric_fu/scratch/saikuro/lib/monkeys/array_helper.rb_cyclo.html
   - src/tmp/metric_fu/output/flay.js
@@ -2623,6 +2563,7 @@
   - src/tmp/b8646181eb961f755c5ed0bfe3c8650eb7b02952.json
   - END Rules --
   - src/tmp/metric_fu/scratch/saikuro/lib/client.rb_cyclo.html
+  - src/tmp/metric_fu/scratch/flog/lib/players/coward_player.md5
   - src/tmp/metric_fu/scratch/flog/lib/players/random_player.txt
   - src/tmp/metric_fu/scratch/flog/lib/rules/three_of_a_kind_rule.txt
   - END Server --
@@ -2640,6 +2581,7 @@
   - src/tmp/67a0a7664792636fbf63e1467ccb6fbcccf80ffc.json
   - END Rules::StreetRule --
   - END Players::RandomPlayer --
+  - src/tmp/metric_fu/scratch/saikuro/lib/players/coward_player.rb_cyclo.html
   - END Players::ConsolePlayer --
   - START Players::ConsolePlayer --
   - src/tmp/541a5331f9264a1e8f4daaa9a942b4533568cc95.json
@@ -2650,6 +2592,7 @@
   - src/tmp/metric_fu/scratch/saikuro/lib/server.rb_cyclo.html
   - START Rules::ThreeOfAKindRule --
   - START Rules::StreetRule --
+  - END Players::CowardPlayer --
   - src/tmp/metric_fu/scratch/flog/lib/monkeys/array_helper.md5
   - src/tmp/metric_fu/scratch/saikuro/lib/rules.rb_cyclo.html
   - src/tmp/metric_fu/scratch/saikuro/lib/players/gambler_player.rb_cyclo.html
@@ -2658,6 +2601,7 @@
   - END Array --
   - src/tmp/metric_fu/output/churn.html
   - --------------------------------------------------------------- */
+  - src/tmp/metric_fu/scratch/flog/lib/players/coward_player.txt
   - src/tmp/metric_fu/scratch/flog/lib/rules.md5
   - START Players::CleverPlayer --
   - src/tmp/metric_fu/output/rcov.html
@@ -2679,13 +2623,13 @@
   - src/tmp/metric_fu/scratch/saikuro/lib/players/random_player.rb_cyclo.html
   - src/tmp/metric_fu/scratch/flog/lib/rules/ones_and_fives_rule.md5
   - src/tmp/metric_fu/output/flay.html
+  - START Client --
   - src/tmp/metric_fu/_data/20100407.yml
   - src/tmp/metric_fu/report.yml
   - src/tmp/metric_fu/scratch/flog/lib/rules.txt
   - src/tmp/2e693ebe3c14d68e79ddb59b49d11e3a596308ba.json
   - src/tmp/metric_fu/output/roodi.html
   - src/tmp/metric_fu/output/roodi.js
-  - START Client --
   - src/tmp/metric_fu/output/js-class.js
   - src/tmp/metric_fu/scratch/flog/lib/server.txt
   - "---- "
@@ -2708,9 +2652,11 @@
     :times_changed: 20
   - :file_path: src/Rakefile
     :times_changed: 10
+  - :file_path: src/test/players/is_a_player.rb
+    :times_changed: 8
   - :file_path: src/lib/players/dummy_player.rb
     :times_changed: 8
-  - :file_path: src/test/players/is_a_player.rb
+  - :file_path: doc/progress/progress.tex
     :times_changed: 8
   - :file_path: src/test/test_rules.rb
     :times_changed: 7
@@ -2718,47 +2664,51 @@
     :times_changed: 5
   - :file_path: src/lib/players/console_player.rb
     :times_changed: 5
-  - :file_path: src/lib/players/clever_player.rb
+  - :file_path: src/lib/players/random_player.rb
     :times_changed: 4
   - :file_path: src/test/rules/test_three_of_a_kind_rule.rb
     :times_changed: 4
-  - :file_path: src/lib/rules/three_of_a_kind_rule.rb
+  - :file_path: src/tmp/metric_fu/output/index.html
     :times_changed: 4
-  - :file_path: src/lib/server.rb
+  - :file_path: src/tmp/metric_fu/report.yml
+    :times_changed: 4
+  - :file_path: src/tmp/metric_fu/output/churn.html
     :times_changed: 4
   - :file_path: src/lib/ui.rb
     :times_changed: 4
-  - :file_path: doc/progress/progress.tex
+  - :file_path: src/tmp/metric_fu/output/flay.html
+    :times_changed: 4
+  - :file_path: src/tmp/metric_fu/output/saikuro.html
+    :times_changed: 4
+  - :file_path: src/tmp/metric_fu/output/flog.html
+    :times_changed: 4
+  - :file_path: src/lib/players/gambler_player.rb
+    :times_changed: 4
+  - :file_path: src/tmp/metric_fu/output/roodi.html
+    :times_changed: 4
+  - :file_path: src/lib/server.rb
+    :times_changed: 4
+  - :file_path: src/lib/players/clever_player.rb
+    :times_changed: 4
+  - :file_path: src/lib/rules/three_of_a_kind_rule.rb
+    :times_changed: 4
+  - :file_path: src/tmp/metric_fu/scratch/rcov/rcov.txt
     :times_changed: 4
   - :file_path: src/tmp/metric_fu/output/rcov.html
-    :times_changed: 3
-  - :file_path: src/tmp/metric_fu/scratch/rcov/rcov.txt
-    :times_changed: 3
-  - :file_path: src/tmp/metric_fu/output/flog.html
-    :times_changed: 3
-  - :file_path: src/lib/players/gambler_player.rb
-    :times_changed: 3
-  - :file_path: src/test/rules/test_ones_and_fives_rule.rb
-    :times_changed: 3
-  - :file_path: src/lib/players/random_player.rb
-    :times_changed: 3
+    :times_changed: 4
   - :file_path: src/tmp/metric_fu/output/reek.html
+    :times_changed: 4
+  - :file_path: src/tmp/metric_fu/output/rcov.js
     :times_changed: 3
-  - :file_path: src/tmp/metric_fu/output/churn.html
+  - :file_path: src/tmp/metric_fu/output/reek.js
     :times_changed: 3
-  - :file_path: src/tmp/metric_fu/output/saikuro.html
+  - :file_path: src/tmp/metric_fu/output/flog.js
     :times_changed: 3
-  - :file_path: src/tmp/metric_fu/output/flay.html
+  - :file_path: src/test/players/test_clever_player.rb
     :times_changed: 3
   - :file_path: src/test/test_server.rb
     :times_changed: 3
-  - :file_path: src/tmp/metric_fu/output/roodi.html
-    :times_changed: 3
-  - :file_path: src/tmp/metric_fu/report.yml
-    :times_changed: 3
-  - :file_path: src/tmp/metric_fu/output/index.html
-    :times_changed: 3
-  - :file_path: src/test/players/test_clever_player.rb
+  - :file_path: src/test/rules/test_ones_and_fives_rule.rb
     :times_changed: 3
   :changed_methods: []
 

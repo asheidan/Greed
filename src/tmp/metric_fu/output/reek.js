@@ -7,7 +7,7 @@
 
         g.title = 'Reek: code smells';
         g.data('Duplication', [,,32,32])
-g.data('IrresponsibleModule', [2,5,7,8])
+g.data('IrresponsibleModule', [2,5,7,7])
 g.data('LongMethod', [1,1,9,9])
 g.data('LowCohesion', [3,12,13,13])
 g.data('NestedIterators', [,,12,12])

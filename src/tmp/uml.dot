@@ -1,0 +1,23 @@
+digraph class_diagram {
+  graph [labeljust = "l", labelloc = "t"];
+  node [shape = "record"];
+  _DRb_DRbUndumped [label = "{DRb::DRbUndumped}"];
+  _Client [label = "{Client}"];
+  _Players_GamblerPlayer [label = "{Players::GamblerPlayer}"];
+  _Players_ConsolePlayer [label = "{Players::ConsolePlayer}"];
+  _Rules_StreetRule [label = "{Rules::StreetRule}"];
+  _Rules_ThreeOfAKindRule [label = "{Rules::ThreeOfAKindRule}"];
+  _Players_RandomPlayer [label = "{Players::RandomPlayer}"];
+  _Players_CleverPlayer [label = "{Players::CleverPlayer}"];
+  _Server [label = "{Server}"];
+  _Dir [label = "{Dir}"];
+  _Rules_DummyRule [label = "{Rules::DummyRule}"];
+  _Players_DummyPlayer [label = "{Players::DummyPlayer}"];
+  _Rules_OnesAndFivesRule [label = "{Rules::OnesAndFivesRule}"];
+  _Server -> _DRb_DRbUndumped [arrowhead = "onormal"];
+  _Players_RandomPlayer -> _Players_DummyPlayer [arrowhead = "onormal"];
+  _Client -> _DRb_DRbUndumped [arrowhead = "onormal"];
+  _Players_GamblerPlayer -> _Players_DummyPlayer [arrowhead = "onormal"];
+  _Players_ConsolePlayer -> _Players_DummyPlayer [arrowhead = "onormal"];
+  _Players_CleverPlayer -> _Players_DummyPlayer [arrowhead = "onormal"];
+}

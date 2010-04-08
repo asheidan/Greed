@@ -545,7 +545,7 @@ table td.score {
 
 
 <canvas id="graph"></canvas>
-<script language="javascript" src="rcov.js?1270731660" type="text/javascript"></script>
+<script language="javascript" src="rcov.js?1270756643" type="text/javascript"></script>
 
 
 <p>Total Coverage: 90.7% </p>
@@ -1284,7 +1284,7 @@ table td.score {
     
       <tr>
         
-        <td class="rcov_run"><a href='txmt://open/?url=file:///Users/emil/Documents/Education/PVT/P3/repo/src/lib/players/gambler_player.rb&line=2'><pre>   require 'rules/three_of_a_kind_rule'</pre></a></td>
+        <td class="rcov_run"><a href='txmt://open/?url=file:///Users/emil/Documents/Education/PVT/P3/repo/src/lib/players/gambler_player.rb&line=2'><pre>   require 'monkeys/array_helper'</pre></a></td>
       </tr>
     
       <tr>
@@ -2013,52 +2013,57 @@ table td.score {
     
       <tr>
         
-        <td class="rcov_run"><a href='txmt://open/?url=file:///Users/emil/Documents/Education/PVT/P3/repo/src/lib/players/random_player.rb&line=3'><pre>   module Players</pre></a></td>
+        <td class="rcov_run"><a href='txmt://open/?url=file:///Users/emil/Documents/Education/PVT/P3/repo/src/lib/players/random_player.rb&line=3'><pre>   require 'players/coward_player'</pre></a></td>
       </tr>
     
       <tr>
         
-        <td class="rcov_run"><a href='txmt://open/?url=file:///Users/emil/Documents/Education/PVT/P3/repo/src/lib/players/random_player.rb&line=4'><pre>     # RandomPlayer randombly creates other players and asks them</pre></a></td>
+        <td class="rcov_run"><a href='txmt://open/?url=file:///Users/emil/Documents/Education/PVT/P3/repo/src/lib/players/random_player.rb&line=4'><pre>   module Players</pre></a></td>
       </tr>
     
       <tr>
         
-        <td class="rcov_run"><a href='txmt://open/?url=file:///Users/emil/Documents/Education/PVT/P3/repo/src/lib/players/random_player.rb&line=5'><pre>     # what they would do and acts according to that.</pre></a></td>
+        <td class="rcov_run"><a href='txmt://open/?url=file:///Users/emil/Documents/Education/PVT/P3/repo/src/lib/players/random_player.rb&line=5'><pre>     # RandomPlayer randombly creates other players and asks them</pre></a></td>
       </tr>
     
       <tr>
         
-        <td class="rcov_run"><a href='txmt://open/?url=file:///Users/emil/Documents/Education/PVT/P3/repo/src/lib/players/random_player.rb&line=6'><pre>     class RandomPlayer < DummyPlayer</pre></a></td>
+        <td class="rcov_run"><a href='txmt://open/?url=file:///Users/emil/Documents/Education/PVT/P3/repo/src/lib/players/random_player.rb&line=6'><pre>     # what they would do and acts according to that.</pre></a></td>
       </tr>
     
       <tr>
         
-        <td class="rcov_run"><a href='txmt://open/?url=file:///Users/emil/Documents/Education/PVT/P3/repo/src/lib/players/random_player.rb&line=7'><pre>       def roll(dice)</pre></a></td>
+        <td class="rcov_run"><a href='txmt://open/?url=file:///Users/emil/Documents/Education/PVT/P3/repo/src/lib/players/random_player.rb&line=7'><pre>     class RandomPlayer < DummyPlayer</pre></a></td>
       </tr>
     
       <tr>
         
-        <td class="rcov_run"><a href='txmt://open/?url=file:///Users/emil/Documents/Education/PVT/P3/repo/src/lib/players/random_player.rb&line=8'><pre>         player_types = [GamblerPlayer, DummyPlayer]</pre></a></td>
+        <td class="rcov_run"><a href='txmt://open/?url=file:///Users/emil/Documents/Education/PVT/P3/repo/src/lib/players/random_player.rb&line=8'><pre>       def roll(dice)</pre></a></td>
       </tr>
     
       <tr>
         
-        <td class="rcov_run"><a href='txmt://open/?url=file:///Users/emil/Documents/Education/PVT/P3/repo/src/lib/players/random_player.rb&line=9'><pre>         player_types[rand(player_types.length)].new.roll(dice)</pre></a></td>
+        <td class="rcov_run"><a href='txmt://open/?url=file:///Users/emil/Documents/Education/PVT/P3/repo/src/lib/players/random_player.rb&line=9'><pre>         player_types = [GamblerPlayer, DummyPlayer, CowardPlayer]</pre></a></td>
       </tr>
     
       <tr>
         
-        <td class="rcov_run"><a href='txmt://open/?url=file:///Users/emil/Documents/Education/PVT/P3/repo/src/lib/players/random_player.rb&line=10'><pre>       end</pre></a></td>
+        <td class="rcov_run"><a href='txmt://open/?url=file:///Users/emil/Documents/Education/PVT/P3/repo/src/lib/players/random_player.rb&line=10'><pre>         player_types[rand(player_types.length)].new.roll(dice)</pre></a></td>
       </tr>
     
       <tr>
         
-        <td class="rcov_run"><a href='txmt://open/?url=file:///Users/emil/Documents/Education/PVT/P3/repo/src/lib/players/random_player.rb&line=11'><pre>     end</pre></a></td>
+        <td class="rcov_run"><a href='txmt://open/?url=file:///Users/emil/Documents/Education/PVT/P3/repo/src/lib/players/random_player.rb&line=11'><pre>       end</pre></a></td>
       </tr>
     
       <tr>
         
-        <td class="rcov_run"><a href='txmt://open/?url=file:///Users/emil/Documents/Education/PVT/P3/repo/src/lib/players/random_player.rb&line=12'><pre>   end</pre></a></td>
+        <td class="rcov_run"><a href='txmt://open/?url=file:///Users/emil/Documents/Education/PVT/P3/repo/src/lib/players/random_player.rb&line=12'><pre>     end</pre></a></td>
+      </tr>
+    
+      <tr>
+        
+        <td class="rcov_run"><a href='txmt://open/?url=file:///Users/emil/Documents/Education/PVT/P3/repo/src/lib/players/random_player.rb&line=13'><pre>   end</pre></a></td>
       </tr>
     
     </table>
@@ -2480,7 +2485,7 @@ table td.score {
     </table>
   </div>
 
-<p>Generated on Thu Apr 08 15:01:00 +0200 2010</p>	
+<p>Generated on Thu Apr 08 21:57:23 +0200 2010</p>	
 
     </div>
   </body>
