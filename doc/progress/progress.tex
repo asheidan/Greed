@@ -1,0 +1,211 @@
+\documentclass[10pt, titlepage, oneside, a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{ifpdf}
+\usepackage{amssymb, graphicx, fancyheadings}
+\usepackage{rotating}
+
+\addtolength{\textheight}{20mm}
+\addtolength{\voffset}{-5mm}
+\renewcommand{\sectionmark}[1]{\markleft{#1}}
+
+\def\inst{Computing Science}
+\def\typeofdoc{Progress Report}
+\def\course{Software Engineering, Spring 2010, 15 hp}
+\def\pretitle{Project 3}
+\def\title{The Greed Game}
+\def\namea{Fredrik Dahlberg}
+\def\nameb{Marcus Karlsson}
+\def\namec{Emil Eriksson}
+\def\usernamea{c07fdg}
+\def\usernameb{marcusk}
+\def\usernamec{c07een}
+\def\emaila{\usernamea{}@cs.umu.se}
+\def\emailb{\usernameb{}@cs.umu.se}
+\def\emailc{\usernamec{}@cs.umu.se}
+\def\path{edu/pvt/lab3}
+\def\graders{Tor Sterner Johansson}
+
+\def\fullpatha{\raisebox{1pt}{$\scriptstyle \sim$}\usernamea/\path}
+\def\fullpathb{\raisebox{1pt}{$\scriptstyle \sim$}\usernameb/\path}
+\def\fullpathc{\raisebox{1pt}{$\scriptstyle \sim$}\usernamec/\path}
+
+\begin{document}
+
+	\begin{titlepage}
+		\thispagestyle{empty}
+		\begin{large}
+			\begin{tabular}{@{}p{\textwidth}@{}}
+				\textbf{Umeå University \hfill \today} \\
+				\textbf{Department of \inst \hfill } \\
+				\textbf{\typeofdoc} \\
+			\end{tabular}
+		\end{large}
+		\vspace{10mm}
+		\begin{center}
+			\LARGE{\pretitle} \\
+			\huge{\textbf{\course}}\\
+			\vspace{10mm}
+			\LARGE{\title} \\
+			\vspace{5mm}
+			\begin{large}
+				\begin{tabular}{ll}
+					\textbf{Name} & \namea \\
+					\textbf{Email} & \texttt{\emaila} \\
+					\\
+					\textbf{Name} & \nameb \\
+					\textbf{Email} & \texttt{\emailb} \\
+					\\
+					\textbf{Name} & \namec \\
+					\textbf{Email} & \texttt{\emailc} \\
+				\end{tabular}
+			\end{large}
+			\vfill
+			\large{\textbf{Grader}}\\
+			\mbox{\large{\graders}}
+		\end{center}
+	\end{titlepage}
+
+	\lfoot{\footnotesize{\usernamea, \usernameb, \usernamec}}
+	\rfoot{\footnotesize{\today}}
+	\lhead{\sc\footnotesize\title}
+	\rhead{\nouppercase{\sc\footnotesize\leftmark}}
+	\pagestyle{fancy}
+	\renewcommand{\headrulewidth}{0.2pt}
+	\renewcommand{\footrulewidth}{0.2pt}
+
+	\pagenumbering{roman}
+	\tableofcontents
+	
+	\newpage
+
+	\pagenumbering{arabic}
+	
+	\section{Description}
+	
+	The project aims to implement a dice game called Greed. It is a turn-based game where a player throws a number of dice and has the ability to receive scores depending on a set of rules.
+
+	A player has to reach a lower limit called the bust limit. If the first roll in a turn does not reach that limit the player is bust and the turn will be given to the next player. If the player does not go bust it will have the option to either stop and register the collected scores or roll again and try to collect more points. There must always be at least one die that scores in each roll. If no die scores the player goes bust and the score collected in that turn will be lost. When a die has scored it cannot be used again until all dice has scored.
+
+	This project will implement a GUI-based version of the Greed game. Any number of players may enter or leave the game at any time and they should be able to play from different computers.
+
+	Computer controlled players should also be supported. At least the following four types should be implemented.
+
+	\begin{itemize}
+	\item \emph{Coward}, will play safe and not take any risks.
+	\item \emph{Random}, will play randomly.
+	\item \emph{Clever}, will play cleverly and make tactical decisions, i.e. based on the scores of the other players.
+	\item \emph{Gambler}, will play to win as fast as possible by taking very high risks.
+	\end{itemize}
+	
+	\section{Software Design}
+	% GUI design / UML / Description
+	
+	\section{Metrics}
+	
+
+	\section{Earned Value}
+	\vspace{20mm}	
+	\begin{tabular}{*{9}{l}}
+	    \begin{rotate}{45}\textbf{Milestone}\end{rotate} &
+		 \begin{rotate}{45}\textbf{BCW}\end{rotate} & 
+		 \begin{rotate}{45}\textbf{ACWP}\end{rotate} &
+		 \begin{rotate}{45}\textbf{Planned Completion Date}\end{rotate} &
+		 \begin{rotate}{45}\textbf{Actual Completion Date}\end{rotate}  &
+		 \begin{rotate}{45}\textbf{BCWP (2010-04-09)}\end{rotate} &
+		 \begin{rotate}{45}\textbf{BCWS (2010-04-09)}\end{rotate} \\
+	    \hline
+	    \textbf{Interfaces \& Tests}		 & 06:00  			 & 04:30	 	 
+											 & 2010-03-30		 & 2010-03-30
+											 & 06:00			 & 06:00  \\
+	    \textbf{Computer Players}            & 18:00 	  		 & 06:20		 
+											 & 2010-04-06		 & 2010-04-07
+  											 & 18:00 			 & 18:00 \\
+	    \textbf{Rules}       				 & 06:00   			 & 06:20		 
+											 & 2010-04-07		 & 2010-03-31
+											 & 06:00 			 & 06:00 \\
+		\textbf{UI Designed} 	 			 & 10:00  			 & 09:05
+											 & 2010-04-07		 & 2010-04-06
+											 & 10:00 			 & 10:00 \\
+%Will the server be done before the meeting on friday?
+		\textbf{Server} 					 & 20:00  			 & -		 
+											 & 2010-04-08		 & -			
+											 & -			     & 20:00 \\
+%Will the UI be done before the meeting on friday?
+	    \textbf{UI Implemented}  			 & 20:00  			 & -
+											 & 2010-04-13 		 & -
+			 								 & -				 & - \\
+	    \textbf{Integration} 				 & 06:00  			 & -
+						 					 & 2010-04-14		 & -
+			 								 & -				 & - \\
+		\hline
+	    \textbf{Project plan}           	 & 20:00  			 & 20:05
+											 & 2010-03-29		 & 2010-03-29
+											 & 20:00 			 & 20:00 \\
+		\textbf{Progress Report} 			 & 15:00  			 & Insert
+											 & 2010-04-08		 & 2010-04-08
+								 			 & 15:00   			 & 15:00  \\
+	    \textbf{Final Report}                & 25:00  			 & -
+											 & 2010-04-15		 & -
+			 								 & -				 & - \\
+		\hline
+		\hline
+	    \textbf{Total}                		 & 146:00  		 & Insert			 
+											 & -			 & -				 
+											 & 75:00	  	 & 95:00  \\
+	    \hline
+		\hline
+	\end{tabular}
+	\\ 
+	\\
+	\begin{tabular}{*{9}{l}}
+	    EV  & = & BCWP/BAW  & = & 75/146  & = & 0.514 & $\Rightarrow$ & 51\% complete as of 2010-04-09 \\
+	    SPI & = & BCWP/BCWS & = & 75/95   & = & 0.789 & $\Rightarrow$ & 21\% behind  schedule \\
+	    CPI & = & BCWP/ACWP & = & 69/~50  & = & 1.380 & $\Rightarrow$ & Expected total effort = 84h \\
+	\end{tabular}{}
+	
+	
+	\section{Individual Effort}
+	\begin{tabular}{*{9}{l}}
+		\hline
+		\textbf{Milestone}		
+			& \textbf{Emil} 	& \textbf{Fredrik} 	& \textbf{Marcus} \\
+		\hline
+		\textbf{Interfaces \& Blackbox tests}
+			& 02:15 & - & 02:15 \\
+		\textbf{Computer Players}   
+			& 03:10 & 01:00 & 02:10 \\
+		\textbf{Rules}  
+			& 06:20 & - & - \\
+		\textbf{UI Designed}  
+			& 00:20 & 00:20 & 08:25 \\
+		\textbf{Server}   
+			& 12:15 & - & 03:10 \\
+		\textbf{UI Implemented}   
+			& - & - & 02:35 \\
+		\hline   
+		\textbf{Project plan}   
+			& 07:35 & 05:00 & 07:30 \\
+		\textbf{Progress Report}   
+			& Insert & Insert & Insert \\
+		\hline
+		\textbf{Other (Metrics, Tracking etc.)}
+			& 01:30 & 04:00 & - \\
+		\hline
+		\hline
+		\textbf{Total}   
+			& 34:35 & 10:20 & 26:05 \\
+		\hline
+		\hline
+	\end{tabular}	
+
+
+	\section{Problems Encountered}
+	One of the problems we have had was related to Ruby/Tk. Although a relatively competent framework for creating graphical user interfaces we ran into a few problems when combining it with Distributed Ruby. The biggest issue so far has been related to updating the user interface on callbacks from the server.   
+
+	Another problem was caused our choice of language. Almost all time spent on programming for Fredrik has gone into learning Ruby and understanding the code written by the other team members. That has forced the other members to be the main programmers in this project.
+	
+	\section{Conclusions}
+	
+	
+\end{document}

@@ -44,6 +44,7 @@ if __FILE__ == $0
   require 'players/gambler_player'
   require 'players/clever_player'
   require 'players/random_player'
+  require 'players/coward_player'
   # DRb.start_service
   player = Players::ConsolePlayer.new
 
@@ -51,6 +52,7 @@ if __FILE__ == $0
   2.times{ server.connect(Players::CleverPlayer.new) }
   2.times{ server.connect(Players::GamblerPlayer.new) }
   2.times{ server.connect(Players::RandomPlayer.new) }
+  server.connect(Players::CowardPlayer.new)
   server.connect(player)
   
   server.start_game
