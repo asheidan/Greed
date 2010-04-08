@@ -1,5 +1,6 @@
 require 'test/unit'
 require 'players/coward_player'
+
 class TestCowardPlayer < Test::Unit::TestCase
 	def setup
 		@player = Players::CowardPlayer.new
