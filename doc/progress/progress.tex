@@ -4,6 +4,8 @@
 \usepackage{ifpdf}
 \usepackage{amssymb, graphicx, fancyheadings}
 \usepackage{rotating}
+\usepackage{nomencl}
+\makeglossary
 %\usepackage{hyperref}
 
 \addtolength{\textheight}{20mm}
@@ -99,9 +101,26 @@
 	\item \emph{Gambler}, will play to win as fast as possible by taking very high risks.
 	\end{itemize}
 	
-	\section{Software Design}
+	These players will be discussed more in depth in Section \ref{sec:design}.
+	
+	\section{Design}
+	\label{sec:design}
 	% GUI design / UML / Description
 	
+		\subsection{User Interface}
+	
+		\begin{figure}[h!]
+			\centering
+				\ifpdf
+					\includegraphics[width=0.7\textwidth]{prototype4.png}
+				\fi
+			\caption{A view of the graphical user interface}
+			\label{fig:gui}
+		\end{figure}
+	
+		The user interface (seen in \figurename{} \ref{fig:gui} on \pagename{} \pageref{fig:gui}) is implemented in Ruby/Tk.
+		
+		\subsection{Software}
 		\begin{figure}[t]
 			\centering
 				\ifpdf
@@ -113,12 +132,10 @@
 			\label{fig:uml}
 		\end{figure}
 
-		A class diagram of the software can be seen in \figurename{} \ref{fig:uml} on \pagename{} \pageref{fig:uml}.
-		
-		The software is split into three main parts.
+		The software uses a structure similar to the client/server paradigm. A class diagram of the software can be seen in \figurename{} \ref{fig:uml} on \pagename{} \pageref{fig:uml}.
 		\begin{itemize}
-			\item A {\tt Server} which, with the help of dRuby, communicates with local and remote clients.
-			\item Several different players which implements more or less intelligent computer players.
+			\item A {\tt Server} which, with the help of dRuby\footnote{dRuby is a part of ruby which works similar to JavaRMI. It allows for invocation of methods on objects which might ''live'' in other processes on other hosts.}, communicates with local and remote clients.
+			\item Several different players which implements more or less intelligent computer players and acts as remote clients when they are created in a different process than the server.
 				\begin{itemize}
 					\item {\tt DummyPlayer} a really dumb player which always rethrows all dice.
 					\item {\tt CowardPlayer} always saves the score.
@@ -126,7 +143,7 @@
 					\item {\tt RandomPlayer} randomly asks another implementation what it should do. Currently uses {\tt DummyPlayer}, {\tt CowardPlayer} and {\tt GamblerPlayer}.
 					\item {\tt CleverPlayer} adapts playing style according to where it is on the scoreboard. If it's in the lead it plays very safe and when another player is in the lead it takes higher risks in order to get more points.
 				\end{itemize}
-			\item A \emph{special} player (called {\tt UIPlayer} in \figurename{} \ref{fig:uml}) which displays a user interface and lets the user interact with the game.
+			\item A \emph{special} player (called {\tt UIPlayer} in \figurename{} \ref{fig:uml}) which displays a user interface and lets the user interact with the game. This player can also communicate with a remote server.
 		\end{itemize}
 		
 		The server (and the UI) uses several dynamically loaded rules to determine the score for each throw. This makes it very easy to implement a new rule which change the scoring. The current rules have access only to the dice thrown but extending the functionality to let the rules also take the players score into account is possible but not currently implemented (nor planned).
@@ -135,7 +152,28 @@
 	
 	\section{Metrics}
 	
-
+	\begin{figure}[h!]
+		\centering
+			\ifpdf
+				\includegraphics[width=\textwidth]{rcov.png}
+			\fi
+		\caption{Test coverage \% reported by Rcov in the main branch over time.}
+		\label{fig:rcov}
+	\end{figure}
+	
+	As of this writing there are 444 Lines of Code in the master branch (trunk) in the repository. These lines are 90.7\% covered by 112 assertions in 91 tests. A diagram of test coverage is available in \figurename{} \ref{fig:rcov} on \pagename{} \pageref{fig:rcov}.
+	
+	% \begin{figure}[h!]
+	% 		\centering
+	% 			\ifpdf
+	% 				\includegraphics[width=\textwidth]{reek.png}
+	% 			\fi
+	% 		\caption{Potential problems detected by Reek}
+	% 		\label{fig:reek}
+	% 	\end{figure}
+	% 
+	% 	There are also a few points where
+	
 	\section{Earned Value}
 	\vspace{30mm}	
 	\begin{tabular}{*{9}{l}}
@@ -188,10 +226,13 @@
 	    \hline
 		\hline
 	\end{tabular}
-	\footnotetext[1]{Budgeted Cost of Work, estimated(planned) effort of the tasks.}
-	\footnotetext[2]{Actual Cost of Work Performed, actual effort of the tasks that have been completed by a specific time}
-	\footnotetext[3]{Budgeted Cost of Work Performed, estimated effort of the tasks that have been completed by a specific time}
-	\footnotetext[4]{Budgeted Cost of Work Scheduled, estimated effort of the tasks that were scheduled to be completed by a specific time}
+	\nomenclature{BCW, Budgeted Cost of Work}{Estimated(planned) effort of the tasks.}
+	\nomenclature{ACWP, Actual Cost of Work Performed}{Actual effort of the tasks that have been completed by a specific time.}
+	\nomenclature{BCWP, Budgeted Cost of Work Performed}{Estimated effort of the tasks that have been completed by a specific time.}
+	\nomenclature{BCWS, Budgeted Cost of Work Scheduled}{Estimated effort of the tasks that were scheduled to be completed by a specific time.}
+	\nomenclature{EV}{}
+	\nomenclature{SPI}{}
+	\nomenclature{CPI}{}
 	\vspace{2mm}
 
 	\begin{tabular}{*{9}{l}}
@@ -244,5 +285,8 @@
 	\section{Conclusions}
 	Judging by our EV it indicates that we are somewhat behind schedule. This is however not the case as the server is very close to being complete and the same goes for the UI implementation. It is probably not very far off to guess that both the server, the UI implementation and the integration might be done the 12th. That means we'd be about two days early with the software, giving us some extra time to work on the final report and possibly add some extra features to the software.
 
+\clearpage
+\appendix
+\printglossary
 	
 \end{document}
