@@ -85,7 +85,7 @@ view: $(TARGET)
 	dvips -o $@ -t a4 $<
 
 clean:
-	rm -f *.aux *.bbl *.blg *.glo *.gls *.idx *.ilg *.ind *.lof *.log *.lot *.out *.toc table.tex
+	rm -f *.aux *.bbl *.blg *.glo *.gls *.idx *.ilg *.ind *.lof *.log *.lot *.out *.toc
 
 clean_all: clean
 	rm -f *.pdf *.dvi
