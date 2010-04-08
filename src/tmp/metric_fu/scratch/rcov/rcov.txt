@@ -1,9 +1,9 @@
 Loaded suite /usr/bin/rcov
 Started
-...................................................................................
-Finished in 0.034483 seconds.
+...........................................................................................
+Finished in 0.037238 seconds.
 
-83 tests, 104 assertions, 0 failures, 0 errors
+91 tests, 112 assertions, 0 failures, 0 errors
 ================================================================================
 lib/monkeys/array_helper.rb
 ================================================================================
@@ -78,6 +78,18 @@ lib/players/clever_player.rb
          @scores = scores
        end
      end
+   end
+================================================================================
+lib/players/coward_player.rb
+================================================================================
+   require 'players/dummy_player'
+   
+   module Players
+   	class CowardPlayer < DummyPlayer
+   		def roll(dice)
+   			[]
+   		end	
+   	end
    end
 ================================================================================
 lib/players/dummy_player.rb
