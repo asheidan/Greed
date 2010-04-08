@@ -1,5 +1,5 @@
 require 'players/dummy_player'
-require 'rules/three_of_a_kind_rule'
+require 'monkeys/array_helper'
 
 module Players
   
