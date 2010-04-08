@@ -1,0 +1,22 @@
+# http://yuml.me/diagram/scruffy/class/draw
+[DummyPlayer]^[CowardPlayer]
+
+[DummyPlayer]^[CleverPlayer]
+[CleverPlayer]uses-.->[GamblerPlayer]
+
+[DummyPlayer]^[GamblerPlayer]
+
+[DummyPlayer]^[RandomPlayer]
+[RandomPlayer]uses-.->[GamblerPlayer]
+[RandomPlayer]uses-.->[DummyPlayer]
+[RandomPlayer]uses-.->[CowardPlayer]
+
+[Server]->[DummyPlayer]
+[Server]uses-.->[OnesAndFivesRule]
+[Server]uses-.->[StreetRule]
+[Server]uses-.->[ThreeOfAKindRule]
+
+[DummyPlayer]^[UIPlayer]
+[OnesAndFivesRule]<-.-uses[UIPlayer]
+[StreetRule]<-.-uses[UIPlayer]
+[ThreeOfAKindRule]<-.-uses[UIPlayer]
