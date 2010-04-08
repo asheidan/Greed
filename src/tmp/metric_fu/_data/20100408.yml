@@ -1923,24 +1923,30 @@
   - :lines: 13
     :complexity: 4
     :name: Array#remove!
+  - :lines: 8
+    :complexity: 4
+    :name: Rules::ThreeOfAKindRule#apply
   - :lines: 14
     :complexity: 4
     :name: Rules::OnesAndFivesRule#apply
   - :lines: 14
     :complexity: 4
     :name: Players::ConsolePlayer#roll
-  - :lines: 8
-    :complexity: 4
-    :name: Rules::ThreeOfAKindRule#apply
+  - :lines: 5
+    :complexity: 3
+    :name: Rules#self.rules
   - :lines: 10
     :complexity: 3
     :name: Server#connect
   - :lines: 9
     :complexity: 3
     :name: Server#initialize
-  - :lines: 5
-    :complexity: 3
-    :name: Rules#self.rules
+  - :lines: 6
+    :complexity: 2
+    :name: Array#freq
+  - :lines: 2
+    :complexity: 2
+    :name: Players::DummyPlayer#name
   - :lines: 5
     :complexity: 2
     :name: Server#start_game
@@ -1949,31 +1955,25 @@
     :name: Rules::StreetRule#apply
   - :lines: 6
     :complexity: 2
+    :name: Players::CleverPlayer#position
+  - :lines: 6
+    :complexity: 2
     :name: Array#sum
   - :lines: 6
     :complexity: 2
-    :name: Array#freq
-  - :lines: 6
-    :complexity: 2
-    :name: Players::CleverPlayer#position
-  - :lines: 2
-    :complexity: 2
-    :name: Players::DummyPlayer#name
-  - :lines: 5
-    :complexity: 2
-    :name: Players::ConsolePlayer#update_scoreboard
+    :name: Players::CleverPlayer#roll
   - :lines: 6
     :complexity: 2
     :name: Rules::ThreeOfAKindRule#points_table
   - :lines: 2
     :complexity: 2
     :name: Players::ConsolePlayer#status_update
-  - :lines: 6
+  - :lines: 5
     :complexity: 2
-    :name: Players::CleverPlayer#roll
-  - :lines: 2
+    :name: Players::ConsolePlayer#update_scoreboard
+  - :lines: 1
     :complexity: 1
-    :name: Array#remove_three!
+    :name: Players::DummyPlayer#update_scoreboard
   - :lines: 2
     :complexity: 1
     :name: Rules#self.max_points
@@ -1982,34 +1982,25 @@
     :name: Players::DummyPlayer#limits
   - :lines: 2
     :complexity: 1
+    :name: Players::DummyPlayer#roll
+  - :lines: 2
+    :complexity: 1
     :name: Players::ConsolePlayer#name
   - :lines: 4
     :complexity: 1
     :name: Players::DummyPlayer#initialize
-  - :lines: 1
-    :complexity: 1
-    :name: Players::DummyPlayer#update_scoreboard
   - :lines: 2
     :complexity: 1
     :name: Players::CleverPlayer#update_scoreboard
-  - :lines: 3
-    :complexity: 1
-    :name: Client#initialize
-  - :lines: 3
-    :complexity: 1
-    :name: Client#send
   - :lines: 2
     :complexity: 1
-    :name: Client#receive
+    :name: Array#remove_three!
+  - :lines: 3
+    :complexity: 1
+    :name: Players::RandomPlayer#roll
   - :lines: 1
     :complexity: 1
     :name: Players::DummyPlayer#status_update
-  - :lines: 2
-    :complexity: 1
-    :name: Rules::DummyRule#apply
-  - :lines: 2
-    :complexity: 1
-    :name: Players::DummyPlayer#roll
   - :lines: 2
     :complexity: 1
     :name: Players::CowardPlayer#roll
@@ -2019,9 +2010,9 @@
   - :lines: 2
     :complexity: 1
     :name: Server#start_service
-  - :lines: 3
+  - :lines: 2
     :complexity: 1
-    :name: Players::RandomPlayer#roll
+    :name: Rules::DummyRule#apply
   :files: 
   - :classes: 
     - :class_name: ""
@@ -2074,23 +2065,20 @@
       :complexity: 10
     :filename: ui.rb
   - :classes: 
-    - :class_name: Array
+    - :class_name: Rules
       :methods: 
       - :lines: 13
-        :complexity: 4
-        :name: Array#remove!
-      - :lines: 6
-        :complexity: 2
-        :name: Array#freq
-      - :lines: 6
-        :complexity: 2
-        :name: Array#sum
+        :complexity: 5
+        :name: Rules#self.apply_rules
+      - :lines: 5
+        :complexity: 3
+        :name: Rules#self.rules
       - :lines: 2
         :complexity: 1
-        :name: Array#remove_three!
-      :lines: 36
+        :name: Rules#self.max_points
+      :lines: 27
       :complexity: 9
-    :filename: array_helper.rb
+    :filename: rules.rb
   - :classes: 
     - :class_name: ""
       :methods: []
@@ -2120,20 +2108,23 @@
       :complexity: 9
     :filename: console_player.rb
   - :classes: 
-    - :class_name: Rules
+    - :class_name: Array
       :methods: 
       - :lines: 13
-        :complexity: 5
-        :name: Rules#self.apply_rules
-      - :lines: 5
-        :complexity: 3
-        :name: Rules#self.rules
+        :complexity: 4
+        :name: Array#remove!
+      - :lines: 6
+        :complexity: 2
+        :name: Array#freq
+      - :lines: 6
+        :complexity: 2
+        :name: Array#sum
       - :lines: 2
         :complexity: 1
-        :name: Rules#self.max_points
-      :lines: 27
+        :name: Array#remove_three!
+      :lines: 36
       :complexity: 9
-    :filename: rules.rb
+    :filename: array_helper.rb
   - :classes: 
     - :class_name: Players
       :methods: []
@@ -2229,26 +2220,6 @@
       :complexity: 4
     :filename: ones_and_fives_rule.rb
   - :classes: 
-    - :class_name: ""
-      :methods: []
-
-      :lines: 9
-      :complexity: 2
-    - :class_name: Client
-      :methods: 
-      - :lines: 2
-        :complexity: 1
-        :name: Client#receive
-      - :lines: 3
-        :complexity: 1
-        :name: Client#send
-      - :lines: 3
-        :complexity: 1
-        :name: Client#initialize
-      :lines: 15
-      :complexity: 3
-    :filename: client.rb
-  - :classes: 
     - :class_name: Rules
       :methods: []
 
@@ -2263,19 +2234,19 @@
       :complexity: 2
     :filename: street_rule.rb
   - :classes: 
-    - :class_name: Rules
+    - :class_name: Players
       :methods: []
 
-      :lines: 2
+      :lines: 4
       :complexity: 0
-    - :class_name: Rules::DummyRule
+    - :class_name: Players::RandomPlayer
       :methods: 
-      - :lines: 2
+      - :lines: 3
         :complexity: 1
-        :name: Rules::DummyRule#apply
-      :lines: 9
+        :name: Players::RandomPlayer#roll
+      :lines: 5
       :complexity: 1
-    :filename: dummy_rule.rb
+    :filename: random_player.rb
   - :classes: 
     - :class_name: Players
       :methods: []
@@ -2291,19 +2262,19 @@
       :complexity: 1
     :filename: coward_player.rb
   - :classes: 
-    - :class_name: Players
+    - :class_name: Rules
       :methods: []
 
-      :lines: 4
+      :lines: 2
       :complexity: 0
-    - :class_name: Players::RandomPlayer
+    - :class_name: Rules::DummyRule
       :methods: 
-      - :lines: 3
+      - :lines: 2
         :complexity: 1
-        :name: Players::RandomPlayer#roll
-      :lines: 5
+        :name: Rules::DummyRule#apply
+      :lines: 9
       :complexity: 1
-    :filename: random_player.rb
+    :filename: dummy_rule.rb
   :classes: 
   - :lines: 120
     :complexity: 32
@@ -2362,6 +2333,19 @@
       :complexity: 1
       :name: Players::ConsolePlayer#name
     :name: Players::ConsolePlayer
+  - :lines: 27
+    :complexity: 9
+    :defs: 
+    - :lines: 13
+      :complexity: 5
+      :name: Rules#self.apply_rules
+    - :lines: 2
+      :complexity: 1
+      :name: Rules#self.max_points
+    - :lines: 5
+      :complexity: 3
+      :name: Rules#self.rules
+    :name: Rules
   - :lines: 36
     :complexity: 9
     :defs: 
@@ -2378,19 +2362,6 @@
       :complexity: 4
       :name: Array#remove!
     :name: Array
-  - :lines: 27
-    :complexity: 9
-    :defs: 
-    - :lines: 13
-      :complexity: 5
-      :name: Rules#self.apply_rules
-    - :lines: 2
-      :complexity: 1
-      :name: Rules#self.max_points
-    - :lines: 5
-      :complexity: 3
-      :name: Rules#self.rules
-    :name: Rules
   - :lines: 16
     :complexity: 8
     :defs: 
@@ -2453,22 +2424,6 @@
       :complexity: 4
       :name: Rules::OnesAndFivesRule#apply
     :name: Rules::OnesAndFivesRule
-  - :lines: 15
-    :complexity: 3
-    :defs: 
-    - :lines: 3
-      :complexity: 1
-      :name: Client#initialize
-    - :lines: 3
-      :complexity: 1
-      :name: Client#send
-    - :lines: 2
-      :complexity: 1
-      :name: Client#receive
-    :name: Client
-  - :lines: 9
-    :complexity: 2
-    :name: ""
   - :lines: 9
     :complexity: 2
     :defs: 
@@ -2483,6 +2438,9 @@
       :complexity: 1
       :name: Rules::DummyRule#apply
     :name: Rules::DummyRule
+  - :lines: 8
+    :complexity: 1
+    :name: ""
   - :lines: 4
     :complexity: 1
     :defs: 
@@ -2497,9 +2455,6 @@
       :complexity: 1
       :name: Players::RandomPlayer#roll
     :name: Players::RandomPlayer
-  - :lines: 8
-    :complexity: 1
-    :name: ""
   - :lines: 4
     :complexity: 0
     :name: Players
@@ -2515,43 +2470,103 @@
   - :lines: 2
     :complexity: 0
     :name: Players
-  - :lines: 2
-    :complexity: 0
-    :name: Rules
-  - :lines: 2
-    :complexity: 0
-    :name: Rules
-  - :lines: 2
+  - :lines: 4
     :complexity: 0
     :name: Players
-  - :lines: 4
+  - :lines: 2
     :complexity: 0
     :name: Players
   - :lines: 6
     :complexity: 0
     :name: Players
+  - :lines: 2
+    :complexity: 0
+    :name: Rules
+  - :lines: 2
+    :complexity: 0
+    :name: Rules
 :churn: 
   :changed_files: 
-  - src/tmp/fa2e6dbdf999acc7ea8876b1d4cd4e85316defae.json
-  - src/tmp/uml.dot
-  - src/tmp/metric_fu/scratch/saikuro/index_cyclo.html
-  - src/tmp/metric_fu/output/index.html
-  - src/tmp/metric_fu/output/flay.html
-  - src/tmp/metric_fu/output/reek.js
-  - src/tmp/metric_fu/output/flog.js
-  - src/tmp/metric_fu/_data/20100408.yml
-  - src/tmp/metric_fu/output/flog.html
-  - src/tmp/966ee44b12a597589d7f0fa698e2dcc74febe989.json
-  - src/tmp/fc404f7be3301ddbb2e14206fb4a2d0d0a1db8d6.json
-  - src/tmp/metric_fu/scratch/flog/lib/players/random_player.txt
+  - src/tmp/324b3ae0833e7d8faf87af6c760a1e63baf6905b.json
+  - src/tmp/metric_fu/scratch/saikuro/lib/rules/three_of_a_kind_rule.rb_cyclo.html
+  - src/tmp/metric_fu/scratch/flog/lib/players/random_player.md5
+  - src/tmp/metric_fu/output/excanvas.js
+  - src/tmp/metric_fu/scratch/flog/lib/rules/three_of_a_kind_rule.md5
   - src/tmp/metric_fu/scratch/rcov/rcov.txt
-  - src/tmp/metric_fu/output/saikuro.html
-  - src/tmp/metric_fu/output/roodi.html
-  - src/tmp/metric_fu/output/reek.html
-  - src/tmp/metric_fu/report.yml
-  - src/tmp/metric_fu/output/rcov.html
-  - src/tmp/metric_fu/output/churn.html
+  - src/tmp/fc404f7be3301ddbb2e14206fb4a2d0d0a1db8d6.json
+  - src/tmp/metric_fu/scratch/flog/lib/rules/ones_and_fives_rule.txt
+  - src/tmp/metric_fu/scratch/saikuro/lib/monkeys/array_helper.rb_cyclo.html
+  - src/tmp/metric_fu/output/flay.js
+  - src/tmp/metric_fu/_data/20100408.yml
+  - src/tmp/metric_fu/scratch/saikuro/lib/players/clever_player.rb_cyclo.html
+  - src/tmp/metric_fu/scratch/flog/lib/players/gambler_player.txt
+  - src/tmp/metric_fu/scratch/flog/lib/rules/street_rule.txt
+  - src/tmp/metric_fu/scratch/flog/lib/players/clever_player.md5
+  - src/tmp/metric_fu/scratch/flog/lib/players/dummy_player.txt
+  - src/tmp/metric_fu/output/reek.js
+  - src/tmp/6aeed6aaccb2dd4616e5d217afc71c63b77525b7.json
+  - src/tmp/metric_fu/scratch/flog/lib/ui.md5
+  - src/tmp/b8646181eb961f755c5ed0bfe3c8650eb7b02952.json
+  - src/tmp/metric_fu/_data/20100401.yml
+  - src/tmp/metric_fu/scratch/saikuro/lib/client.rb_cyclo.html
+  - src/tmp/metric_fu/scratch/flog/lib/players/coward_player.md5
+  - src/tmp/metric_fu/scratch/flog/lib/players/random_player.txt
+  - src/tmp/966ee44b12a597589d7f0fa698e2dcc74febe989.json
+  - src/tmp/metric_fu/scratch/flog/lib/rules/three_of_a_kind_rule.txt
+  - src/tmp/metric_fu/scratch/saikuro/lib/rules/ones_and_fives_rule.rb_cyclo.html
   - /dev/null
+  - src/tmp/metric_fu/output/bluff-min.js
+  - src/tmp/78081ba2352dd99ddcfcf9d0a706c215192b1ecb.json
+  - src/tmp/metric_fu/output/saikuro.html
+  - src/tmp/metric_fu/scratch/flog/lib/players/clever_player.txt
+  - src/tmp/67a0a7664792636fbf63e1467ccb6fbcccf80ffc.json
+  - src/tmp/metric_fu/scratch/saikuro/lib/players/coward_player.rb_cyclo.html
+  - src/tmp/541a5331f9264a1e8f4daaa9a942b4533568cc95.json
+  - src/tmp/metric_fu/scratch/flog/lib/ui.txt
+  - src/tmp/metric_fu/scratch/flog/lib/rules/dummy_rule.md5
+  - src/tmp/metric_fu/scratch/saikuro/lib/ui.rb_cyclo.html
+  - src/tmp/metric_fu/scratch/saikuro/lib/server.rb_cyclo.html
+  - src/tmp/metric_fu/scratch/flog/lib/monkeys/array_helper.md5
+  - src/tmp/metric_fu/scratch/saikuro/lib/rules.rb_cyclo.html
+  - src/tmp/metric_fu/scratch/saikuro/lib/players/gambler_player.rb_cyclo.html
+  - src/tmp/metric_fu/scratch/saikuro/lib/players/dummy_player.rb_cyclo.html
+  - src/tmp/metric_fu/output/churn.html
+  - src/tmp/metric_fu/scratch/flog/lib/players/coward_player.txt
+  - src/tmp/metric_fu/scratch/flog/lib/rules.md5
+  - src/tmp/metric_fu/output/rcov.html
+  - src/tmp/metric_fu/scratch/flog/lib/server.md5
+  - src/tmp/metric_fu/output/flog.js
+  - src/tmp/metric_fu/scratch/flog/lib/players/console_player.md5
+  - src/tmp/metric_fu/scratch/flog/lib/rules/dummy_rule.txt
+  - src/tmp/2ed4767dfde838bbd4ef4f4817d18cc9910c68ee.json
+  - src/tmp/metric_fu/output/flog.html
+  - src/tmp/metric_fu/output/rcov.js
+  - src/tmp/metric_fu/scratch/saikuro/index_cyclo.html
+  - src/tmp/metric_fu/scratch/flog/lib/client.md5
+  - src/tmp/metric_fu/scratch/saikuro/lib/rules/street_rule.rb_cyclo.html
+  - src/tmp/metric_fu/output/reek.html
+  - src/tmp/metric_fu/scratch/flog/lib/monkeys/array_helper.txt
+  - src/tmp/metric_fu/scratch/saikuro/lib/players/random_player.rb_cyclo.html
+  - src/tmp/metric_fu/scratch/flog/lib/rules/ones_and_fives_rule.md5
+  - src/tmp/metric_fu/output/flay.html
+  - src/tmp/metric_fu/_data/20100406.yml
+  - src/tmp/metric_fu/report.yml
+  - src/tmp/metric_fu/scratch/flog/lib/rules.txt
+  - src/tmp/2e693ebe3c14d68e79ddb59b49d11e3a596308ba.json
+  - src/tmp/metric_fu/output/roodi.html
+  - src/tmp/metric_fu/output/roodi.js
+  - src/tmp/metric_fu/output/js-class.js
+  - src/tmp/metric_fu/scratch/flog/lib/server.txt
+  - src/tmp/fa2e6dbdf999acc7ea8876b1d4cd4e85316defae.json
+  - "---- "
+  - src/tmp/metric_fu/scratch/saikuro/lib/rules/dummy_rule.rb_cyclo.html
+  - src/tmp/metric_fu/scratch/flog/lib/client.txt
+  - src/tmp/metric_fu/scratch/flog/lib/players/console_player.txt
+  - src/tmp/metric_fu/output/index.html
+  - src/tmp/metric_fu/scratch/flog/lib/players/dummy_player.md5
+  - src/tmp/metric_fu/scratch/flog/lib/players/gambler_player.md5
+  - src/tmp/metric_fu/scratch/flog/lib/rules/street_rule.md5
+  - src/tmp/metric_fu/scratch/saikuro/lib/players/console_player.rb_cyclo.html
   :method_churn: []
 
   :changed_classes: []
@@ -2561,67 +2576,77 @@
     :times_changed: 20
   - :file_path: src/Rakefile
     :times_changed: 10
+  - :file_path: doc/progress/progress.tex
+    :times_changed: 8
   - :file_path: src/test/players/is_a_player.rb
     :times_changed: 8
   - :file_path: src/lib/players/dummy_player.rb
     :times_changed: 8
-  - :file_path: doc/progress/progress.tex
-    :times_changed: 8
   - :file_path: src/test/test_rules.rb
     :times_changed: 7
+  - :file_path: src/tmp/metric_fu/output/rcov.html
+    :times_changed: 6
+  - :file_path: src/tmp/metric_fu/output/index.html
+    :times_changed: 6
+  - :file_path: src/tmp/metric_fu/output/churn.html
+    :times_changed: 6
+  - :file_path: src/tmp/metric_fu/scratch/rcov/rcov.txt
+    :times_changed: 6
+  - :file_path: src/tmp/metric_fu/output/reek.html
+    :times_changed: 6
+  - :file_path: src/tmp/metric_fu/report.yml
+    :times_changed: 6
+  - :file_path: src/tmp/metric_fu/output/roodi.html
+    :times_changed: 6
   - :file_path: src/tmp/metric_fu/output/saikuro.html
+    :times_changed: 6
+  - :file_path: src/tmp/metric_fu/output/flog.html
+    :times_changed: 6
+  - :file_path: src/tmp/metric_fu/output/flay.html
+    :times_changed: 6
+  - :file_path: src/lib/rules.rb
+    :times_changed: 5
+  - :file_path: src/tmp/metric_fu/output/flog.js
+    :times_changed: 5
+  - :file_path: src/tmp/metric_fu/output/reek.js
     :times_changed: 5
   - :file_path: src/lib/players/console_player.rb
     :times_changed: 5
-  - :file_path: src/tmp/metric_fu/output/churn.html
-    :times_changed: 5
-  - :file_path: src/tmp/metric_fu/output/reek.html
-    :times_changed: 5
-  - :file_path: src/tmp/metric_fu/output/rcov.html
-    :times_changed: 5
-  - :file_path: src/tmp/metric_fu/report.yml
-    :times_changed: 5
-  - :file_path: src/tmp/metric_fu/scratch/rcov/rcov.txt
-    :times_changed: 5
-  - :file_path: src/tmp/metric_fu/output/index.html
-    :times_changed: 5
-  - :file_path: src/lib/rules.rb
-    :times_changed: 5
-  - :file_path: src/tmp/metric_fu/output/flay.html
-    :times_changed: 5
-  - :file_path: src/tmp/metric_fu/output/roodi.html
-    :times_changed: 5
-  - :file_path: src/tmp/metric_fu/output/flog.html
-    :times_changed: 5
-  - :file_path: src/lib/players/gambler_player.rb
-    :times_changed: 4
-  - :file_path: src/tmp/metric_fu/output/flog.js
-    :times_changed: 4
-  - :file_path: src/lib/rules/three_of_a_kind_rule.rb
-    :times_changed: 4
-  - :file_path: src/lib/players/clever_player.rb
-    :times_changed: 4
-  - :file_path: src/lib/ui.rb
-    :times_changed: 4
   - :file_path: src/lib/players/random_player.rb
-    :times_changed: 4
-  - :file_path: src/tmp/metric_fu/output/reek.js
-    :times_changed: 4
-  - :file_path: src/lib/server.rb
     :times_changed: 4
   - :file_path: src/test/rules/test_three_of_a_kind_rule.rb
     :times_changed: 4
-  - :file_path: src/tmp/metric_fu/output/rcov.js
-    :times_changed: 3
+  - :file_path: src/lib/players/clever_player.rb
+    :times_changed: 4
+  - :file_path: src/tmp/metric_fu/scratch/saikuro/index_cyclo.html
+    :times_changed: 4
+  - :file_path: src/lib/server.rb
+    :times_changed: 4
+  - :file_path: src/lib/players/gambler_player.rb
+    :times_changed: 4
+  - :file_path: src/lib/ui.rb
+    :times_changed: 4
   - :file_path: src/tmp/metric_fu/_data/20100408.yml
+    :times_changed: 4
+  - :file_path: src/lib/rules/three_of_a_kind_rule.rb
+    :times_changed: 4
+  - :file_path: src/tmp/metric_fu/output/rcov.js
+    :times_changed: 4
+  - :file_path: src/tmp/metric_fu/scratch/flog/lib/players/random_player.txt
+    :times_changed: 3
+  - :file_path: src/tmp/metric_fu/scratch/flog/lib/players/console_player.txt
     :times_changed: 3
   - :file_path: src/test/players/test_clever_player.rb
     :times_changed: 3
-  - :file_path: src/tmp/metric_fu/scratch/saikuro/index_cyclo.html
+  - :file_path: src/tmp/metric_fu/output/flay.js
+    :times_changed: 3
+  - :file_path: src/tmp/metric_fu/scratch/saikuro/lib/players/console_player.rb_cyclo.html
     :times_changed: 3
   - :file_path: src/test/test_server.rb
     :times_changed: 3
   - :file_path: src/test/rules/test_ones_and_fives_rule.rb
+    :times_changed: 3
+  - :file_path: src/tmp/metric_fu/output/roodi.js
     :times_changed: 3
   :changed_methods: []
 
