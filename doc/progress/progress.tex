@@ -4,6 +4,7 @@
 \usepackage{ifpdf}
 \usepackage{amssymb, graphicx, fancyheadings}
 \usepackage{rotating}
+%\usepackage{hyperref}
 
 \addtolength{\textheight}{20mm}
 \addtolength{\voffset}{-5mm}
@@ -101,8 +102,6 @@
 	\section{Software Design}
 	% GUI design / UML / Description
 	
-		Whooooo!
-		
 		\begin{figure}[t]
 			\centering
 				\ifpdf
@@ -110,22 +109,43 @@
 				\else
 					\includegraphics[angle=90,width=\textwidth]{uml.eps}
 				\fi
-			\caption{Class diagram of project}
+			\caption{Class diagram over the software}
 			\label{fig:uml}
 		\end{figure}
+
+		A class diagram of the software can be seen in \figurename{} \ref{fig:uml} on \pagename{} \pageref{fig:uml}.
+		
+		The software is split into three main parts.
+		\begin{itemize}
+			\item A {\tt Server} which, with the help of dRuby, communicates with local and remote clients.
+			\item Several different players which implements more or less intelligent computer players.
+				\begin{itemize}
+					\item {\tt DummyPlayer} a really dumb player which always rethrows all dice.
+					\item {\tt CowardPlayer} always saves the score.
+					\item {\tt GamblerPlayer} tries to maximize the score for each round taking large risks.
+					\item {\tt RandomPlayer} randomly asks another implementation what it should do. Currently uses {\tt DummyPlayer}, {\tt CowardPlayer} and {\tt GamblerPlayer}.
+					\item {\tt CleverPlayer} adapts playing style according to where it is on the scoreboard. If it's in the lead it plays very safe and when another player is in the lead it takes higher risks in order to get more points.
+				\end{itemize}
+			\item A \emph{special} player (called {\tt UIPlayer} in \figurename{} \ref{fig:uml}) which displays a user interface and lets the user interact with the game.
+		\end{itemize}
+		
+		The server (and the UI) uses several dynamically loaded rules to determine the score for each throw. This makes it very easy to implement a new rule which change the scoring. The current rules have access only to the dice thrown but extending the functionality to let the rules also take the players score into account is possible but not currently implemented (nor planned).
+		
+		If time permits the remaining smart players should also use the dynamic rules instead of using hardcoded logic.
+	
 	\section{Metrics}
 	
 
 	\section{Earned Value}
 	\vspace{30mm}	
 	\begin{tabular}{*{9}{l}}
-	    \begin{rotate}{45}\textbf{Milestone}\end{rotate} &
-		 \begin{rotate}{45}\textbf{BCW\footnotemark}\end{rotate} & 
-		 \begin{rotate}{45}\textbf{ACWP\footnotemark}\end{rotate} &
-		 \begin{rotate}{45}\textbf{Planned Completion Date}\end{rotate} &
-		 \begin{rotate}{45}\textbf{Actual Completion Date}\end{rotate}  &
-		 \begin{rotate}{45}\textbf{BCWP\footnotemark (2010-04-09)}\end{rotate} &
-		 \begin{rotate}{45}\textbf{BCWS\footnotemark (2010-04-09)}\end{rotate} \\
+	    \multicolumn{1}{c}{\begin{rotate}{45}\textbf{Milestone}\end{rotate}} &
+		 \multicolumn{1}{c}{\begin{rotate}{45}\textbf{BCW}\end{rotate}} & 
+		 \multicolumn{1}{c}{\begin{rotate}{45}\textbf{ACWP}\end{rotate}} &
+		 \multicolumn{1}{c}{\begin{rotate}{45}\textbf{Planned Completion Date}\end{rotate}} &
+		 \multicolumn{1}{c}{\begin{rotate}{45}\textbf{Actual Completion Date}\end{rotate}}  &
+		 \multicolumn{1}{c}{\begin{rotate}{45}\textbf{BCWP (2010-04-09)}\end{rotate}} &
+		 \multicolumn{1}{c}{\begin{rotate}{45}\textbf{BCWS (2010-04-09)}\end{rotate}} \\
 	    \hline
 	    \textbf{Interfaces \& Tests}		 & 06:00  			 & 04:30	 	 
 											 & 2010-03-30		 & 2010-03-30

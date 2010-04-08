@@ -1,3 +1,4 @@
+# http://yuml.me/diagram/scruffy/class/draw
 [DummyPlayer]^[CowardPlayer]
 
 [DummyPlayer]^[CleverPlayer]
