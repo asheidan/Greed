@@ -1,7 +1,10 @@
+# Add ./lib/ to require's path
+$: << File.expand_path(File.dirname(__FILE__) + "/lib")
 # require 'code_statistics'
-require 'lib/monkeys/array_helper'
+require 'monkeys/array_helper'
 
 trash_dirs = ['tmp']
+trash_files = ['uml.dot','uml.png']
 metrics_dirs = ['lib']
 
 task :default => :test
@@ -119,7 +122,56 @@ namespace :test do
 	end
 end
 
+directory 'tmp/'
+
+desc "Create UML from source"
+task :uml => 'tmp/uml.png'
+file "tmp/uml.dot"  => 'tmp/' do
+  require 'uml/class_diagram'
+  class_diagram = UML::ClassDiagram.new(
+    :show_public_methods => false,
+    :exclude => [
+        /UML.*/, /Rake.*/, Hash, IO, /File.*/, String, Array,
+        Class, Module, Enumerable, Fixnum, Symbol, Regexp,
+        Object, Kernel,/Logger.*/,/Monitor.*/,NilClass,Comparable
+      ]
+  )
+  Dir.glob("lib/**/*.rb").collect{|f|
+    if File.basename(f) != "ui.rb" then
+      require f
+      mod = Kernel
+      klass = nil
+      output = `grep '^[  ]*\\(class\\|module\\)' '#{f}' | sed 's/ *<.*//'`.strip
+      # puts output.split("\n").inspect
+      output.split("\n").each{|l|
+        # puts "-- #{l.inspect}"
+        if l =~ /^[  ]*module (.*)/ then
+          mod = Kernel.const_get Regexp.last_match(1)
+        elsif l =~ /^[  ]*class (.*)/ then
+          klass = Regexp.last_match(1)
+        end
+      }
+      if !klass.nil? then
+        klass = mod.const_get klass
+        # puts klass.inspect
+        class_diagram.include(klass) unless klass.nil?
+      end
+    end
+  }
+  # (Rules.rules + [Players::DummyPlayer,Players::ConsolePlayer,Server]).each{|c|
+  #   class_diagram.include(c)
+  # }
+  # # Rake::Task[:test].execute
+  File.open("tmp/uml.dot",'w') do |file|
+    file.write class_diagram.to_dot
+  end
+end
+
+file "tmp/uml.png" => ["tmp/uml.dot",'tmp/'] do
+  sh "dot -Tpng -otmp/uml.png tmp/uml.dot"
+end
+
 desc "Remove putput files"
 task :clean do
-	FileUtils.rm_r(trash_dirs, :secure => true, :force => true)
+	FileUtils.rm_r(trash_dirs + trash_files, :secure => true, :force => true)
 end
