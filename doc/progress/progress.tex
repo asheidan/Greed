@@ -105,7 +105,8 @@
 	
 	\section{Design}
 	\label{sec:design}
-	% GUI design / UML / Description
+	
+	The design is finished and the only remaining unit subject to large changes is the user interface which might not change a lot visually during the implementation but quite a lot under the hood.
 	
 		\subsection{User Interface}
 		
@@ -118,7 +119,7 @@
 			\label{fig:gui}
 		\end{figure}
 	
-		The user interface (seen in \figurename{} \ref{fig:gui} on \pagename{} \pageref{fig:gui}) is implemented in Ruby/Tk. It is a prototype and may change in the final release. 
+		The prototype for the user interface (seen in \figurename{} \ref{fig:gui} on \pagename{} \pageref{fig:gui}) is implemented in Ruby/Tk. As it is a prototype it may, as mentioned previously, change slightly in the final release. 
 		
 		The concept is that each player will have their own window from where they can follow the game and respond when it is their turn. The window has two major components. An upper frame where information is presented about the current turn like the name of the current player and the dice throws. This is also were the player can decide to roll or stop and register collected points. If the player wants to roll again he or she can select one or more dice to save using the checkboxes. 
 		
@@ -206,11 +207,11 @@
 		\textbf{UI Designed} 	 			 & 10:00  			 & 09:05
 											 & 2010-04-07		 & 2010-04-06
 											 & 10:00 			 & 10:00 \\
-%Will the server be done before the meeting on friday?
+%Will the server be done before the meeting on friday? No!
 		\textbf{Server} 					 & 20:00  			 & -		 
 											 & 2010-04-08		 & -			
 											 & -			     & 20:00 \\
-%Will the UI be done before the meeting on friday?
+%Will the UI be done before the meeting on friday? No!
 	    \textbf{UI Implemented}  			 & 20:00  			 & -
 											 & 2010-04-13 		 & -
 			 								 & -				 & - \\
@@ -244,8 +245,14 @@
 	\nomenclature{BCWS, Budgeted Cost of Work Scheduled}{Estimated effort of the tasks that were scheduled to be completed by a specific time.}
 	\nomenclature{EV}{}
 	\nomenclature{SPI}{}
+<<<<<<< HEAD
 	\nomenclature{CPI}{}
 	
+=======
+	\nomenclature{CPI, Cost Performance Index}{}
+	\vspace{2mm}
+
+>>>>>>> Boooh!
 	\begin{tabular}{*{9}{l}}
 	    EV  & = & BCWP/BAW  & = & 75/146  & = & 0.514 & $\Rightarrow$ & 51\% complete as of 2010-04-09 \\
 	    SPI & = & BCWP/BCWS & = & 75/95   & = & 0.789 & $\Rightarrow$ & 21\% behind schedule \\
@@ -256,7 +263,9 @@
 	
 	\section{Individual Effort}
 
-	\begin{tabular}{*{9}{l}}
+	\begin{table}
+		\centering
+	\begin{tabular}{l ccc}
 		\textbf{Milestone}		
 			& \textbf{Emil} 	& \textbf{Fredrik} 	& \textbf{Marcus} \\
 		\hline
@@ -265,8 +274,8 @@
 		\textbf{Computer Players}   
 			& 03:10 & 01:00 & 02:10 \\
 		\textbf{Rules}  
-			& 06:20 & - & - \\
-		\textbf{UI Designed}  
+			& 07:30 & - & - \\
+		\textbf{UI Design}  
 			& 00:20 & 00:20 & 08:25 \\
 		\textbf{Server}   
 			& 12:15 & - & 03:10 \\
@@ -276,18 +285,22 @@
 		\textbf{Project plan}   
 			& 07:35 & 05:00 & 07:30 \\
 		\textbf{Progress Report}   
-			& Insert & Insert & Insert \\
+			& 10:55 & 11:43 & 03:30 \\
 		\hline
 		\textbf{Other (Metrics, Tracking etc.)}
 			& 01:30 & 04:00 & - \\
 		\hline
 		\hline
 		\textbf{Total}   
-			& 34:35 & 10:20 & 34:24 \\
+			& 45:30 & 22:03 & 38:24 \\
 		\hline
 		\hline
-	\end{tabular}	
-	
+	\end{tabular}
+		\caption{A table of the individual effort spent by the team members}
+		\label{tab:effort}
+	\end{table}
+
+	A table over the individual effort is avaliable in \tablename{} \ref{tab:effort} on \pagename{} \pageref{tab:effort}. Right now there is a quite large difference between time spent by the different team members. This is largely due to 
 
 	\section{Problems Encountered}
 	One of the problems we have had was related to Ruby/Tk. Although a relatively competent framework for creating graphical user interfaces we ran into a few problems when combining it with Distributed Ruby. The biggest issue so far has been related to updating the user interface on callbacks from the server.
