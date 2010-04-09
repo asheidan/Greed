@@ -165,18 +165,21 @@
 		\label{fig:rcov}
 	\end{figure}
 	
-	As of this writing there are 444 Lines of Code in the master branch (trunk) in the repository. These lines are 90.7\% covered by 112 assertions in 91 tests. A diagram of test coverage is available in \figurename{} \ref{fig:rcov} on \pagename{} \pageref{fig:rcov}.
+	As of this writing there are 444 Lines of Code in the master branch (trunk) in the repository. These lines are 90.7\% covered by 112 assertions in 91 tests.
+	As can be seen in the diagram over test coverage (available in \figurename{} \ref{fig:rcov} on \pagename{} \pageref{fig:rcov}) the test coverage has decreased during the second week. This is mainly due to a few lines in the server handling remote players  lacks proper tests.
 	
-	% \begin{figure}[h!]
-	% 		\centering
-	% 			\ifpdf
-	% 				\includegraphics[width=\textwidth]{reek.png}
-	% 			\fi
-	% 		\caption{Potential problems detected by Reek}
-	% 		\label{fig:reek}
-	% 	\end{figure}
-	% 
-	% 	There are also a few points where
+		\begin{figure}[h!]
+			\centering
+				\ifpdf
+					\includegraphics[width=\textwidth]{reek.png}
+				\fi
+			\caption{Potential problems detected by Reek}
+			\label{fig:reek}
+		\end{figure}
+	
+		There are also a few classes with a possible need for refactorization. A diagram over problems reported by Reek\footnote{Reek, the code smell detector for Ruby. http://wiki.github.com/kevinrutherford/reek/} is available in \figurename{} \ref{fig:reek} on \pagename{} \pageref{fig:reek}.
+		
+		Most of the problems with regards to the server will be removed during refactorization after the functionality of the server is completed. Many of the remaining problems are in the code for the prototype of the GUI which will also be rewritten.
 	
 	\section{Earned Value}
 	\vspace{30mm}	
