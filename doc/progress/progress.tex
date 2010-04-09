@@ -108,7 +108,7 @@
 	% GUI design / UML / Description
 	
 		\subsection{User Interface}
-	
+		
 		\begin{figure}[h!]
 			\centering
 				\ifpdf
@@ -118,7 +118,11 @@
 			\label{fig:gui}
 		\end{figure}
 	
-		The user interface (seen in \figurename{} \ref{fig:gui} on \pagename{} \pageref{fig:gui}) is implemented in Ruby/Tk.
+		The user interface (seen in \figurename{} \ref{fig:gui} on \pagename{} \pageref{fig:gui}) is implemented in Ruby/Tk. It is a prototype and may change in the final release. 
+		
+		The concept is that each player will have their own window from where they can follow the game and respond when it is their turn. The window has two major components. An upper frame where information is presented about the current turn like the name of the current player and the dice throws. This is also were the player can decide to roll or stop and register collected points. If the player wants to roll again he or she can select one or more dice to save using the checkboxes. 
+		
+		The lower frame contains overall information about the current game. This includes a list of scores, the limit for winning as well as the limit required for not being bust. The player can leave the game by pushing the button lowest down in the window.
 		
 		\subsection{Software}
 		\begin{figure}[t]
