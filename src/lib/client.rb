@@ -11,8 +11,8 @@ class Client
   
   # The client object is responsible for setting up a communication channel
   # to the server. Once the channel has been established however the control
-  # is delegated to a player object responsible for answering on calls from
-  # the server.
+  # is delegated to a player object which is responsible for answering to 
+  # calls from the server.
   
   attr_accessor :host, :port, :type, :name
   
