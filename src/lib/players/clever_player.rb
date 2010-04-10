@@ -19,7 +19,13 @@ module Players
     # and the lest player.
     def position
       if !@scores.nil? and @scores.include? @name
-        (@scores[@name] - @scores.values.min) / (@scores.values.max - @scores.values.min)
+        begin
+          (@scores[@name] - @scores.values.min) / (@scores.values.max - @scores.values.min)
+        rescue ZeroDivisionError
+          # For cases when max is equal to min, which can happen any time or always
+          # when only one player is playing.
+          1.0
+        end
       else
         1.0
       end
