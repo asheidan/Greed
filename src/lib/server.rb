@@ -51,6 +51,13 @@ class Server
     }
   end
   
+  def disconnect(client)
+    $log.debug('disconnect'){ "Client disconnected: #{client.inspect}" }
+    @mutex.synchronize {
+      @clients.delete client
+    }
+  end
+  
   def start_game
     @mutex.synchronize{
       @clients.shuffle!
