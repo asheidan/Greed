@@ -1,7 +1,11 @@
+require 'drb/drb'
+
 module Players
   
   # Inherit this class and override the methods you want/need/like
   class DummyPlayer
+    
+    include DRbUndumped
     
     def initialize(name = '')
       @name = name

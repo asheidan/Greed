@@ -1,9 +1,11 @@
 require 'drb/drb'
 require 'logger'
+require 'tk'
 require 'rules'
 require 'rules/ones_and_fives_rule'
 require 'rules/three_of_a_kind_rule'
 require 'rules/street_rule'
+require 'ui/server_window'
 
 # $SAFE = 1
 
@@ -15,16 +17,17 @@ class Server
   include DRbUndumped
   
   attr_reader :uri, :score_board
+  attr_accessor :bust, :limit
   
-  def initialize(port=nil)
+  def initialize(port=nil, limit=10000, bust=300)
     $log.debug('initialize') { "port: #{port}" }
     @mutex = Mutex.new
     @clients = []
     @score_board = {}
     @uri = port.nil? ? nil : "druby://localhost:#{port}"
     
-    @bust = 300
-    @limit = 10000
+    @bust = bust
+    @limit = limit
   end
   
   def start_service
@@ -48,6 +51,13 @@ class Server
     @mutex.synchronize {
       @clients << client
       @score_board[client.name] = 0
+    }
+  end
+  
+  def disconnect(client)
+    $log.debug('disconnect'){ "Client disconnected: #{client.inspect}" }
+    @mutex.synchronize {
+      @clients.delete client
     }
   end
   
@@ -130,16 +140,28 @@ class Server
       }
     end
   end
+  
+  def self.launch_server(port, limit, bust)
+    @@server = Server.new(port, limit, bust)
+    DRb::DRbServer.verbose = true
+    @@server.start_service
+    Thread.new do
+      DRb.thread.join
+    end
+    @@server
+  end
+  
+  def self.start_game
+    Thread.new do
+      @@server.start_game
+    end
+  end
+  
   private :game
 end
 
 # This section is true when running ruby "this file"
 if __FILE__ == $0
-  server = Server.new(8787)
-  DRb::DRbServer.verbose = true
-  server.start_service
-
-  $log.info "Service started"
-  $log.info server.uri
-  DRb.thread.join
+  UI::ServerWindow.new
+  Tk.mainloop
 end
