@@ -34,5 +34,7 @@ module Players
     def name
       @name.empty? ? to_s : @name
     end
+    
+    # TODO: Players should be notified when somebody wins
   end
 end

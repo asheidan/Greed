@@ -43,11 +43,12 @@ class Server
     
     # Maybe this should run in another thread so this returns
     # and player receives limits when it's added.
+    client.limits(@limit,@bust)
+    client.update_scoreboard(@score_board)
     @mutex.synchronize {
       @clients << client
       @score_board[client.name] = 0
     }
-    client.limits(@limit,@bust)
   end
   
   def start_game

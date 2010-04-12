@@ -1,5 +1,6 @@
 require 'test/unit'
 require 'players/coward_player'
+require 'players/is_a_player'
 
 class TestCowardPlayer < Test::Unit::TestCase
 	def setup
