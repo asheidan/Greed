@@ -38,4 +38,10 @@ module IsAPlayer
     @player.roll(initial_dice)
     assert_equal([1,2,3,3,3,4,6], initial_dice)
   end
+  
+  def test_player_should_be_undumped
+    assert_raise(TypeError) {
+      @player._dump nil
+    }
+  end
 end

@@ -40,5 +40,6 @@ module Players
     end
     
     # TODO: Players should be notified when somebody wins
+    # TODO: Player should start DRb service when connecting to remote host
   end
 end
