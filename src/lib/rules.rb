@@ -1,5 +1,7 @@
 
 module Rules
+  
+  # Makes a "brute force"-search of how many points the given dice can give
   def self.apply_rules(dice)
     rules.collect { |rule|
       # TODO: Object creation in Ruby isn't great, possible optimization here

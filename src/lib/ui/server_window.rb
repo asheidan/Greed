@@ -1,5 +1,8 @@
 require 'tk'
 
+# TODO: Should display which port it's listening on
+
+
 module UI
   class ServerWindow
     def initialize
