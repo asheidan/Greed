@@ -38,4 +38,16 @@ module IsAPlayer
     @player.roll(initial_dice)
     assert_equal([1,2,3,3,3,4,6], initial_dice)
   end
+  
+  def test_player_should_be_undumped
+    assert_raise(TypeError) {
+      @player._dump nil
+    }
+  end
+  
+  def test_player_should_respond_to_game_over
+    assert_nothing_thrown(NoMethodError) {
+      @player.game_over("Nisse")
+    }
+  end
 end

@@ -2,6 +2,8 @@ require 'test/unit'
 
 require 'server'
 
+require 'players/dummy_player'
+
 # Hide log-messages
 $log.level = Logger::WARN
 
@@ -118,11 +120,40 @@ class TestServer < Test::Unit::TestCase
     @server.connect(player2)
     assert_equal([player1.name,player2.name].sort, @server.score_board.keys.sort)
   end
+  
+  def test_06_starting_a_game_when_a_game_is_in_progress_shouldnt_do_anything
+    t = Thread.new do
+      @server.start_game
+    end
+    assert_nil(@server.start_game)
+    t.kill
+  end
+  
+  def test_07_players_should_be_told_who_won
+    require 'players/coward_player'
+    MockPlayer.class_eval do
+      attr_reader :winner
+      def game_over(name)
+        @winner = name
+      end
+      
+      def roll(ignore)
+        []
+      end
+    end
+    
+    name = "Nisse"
+    dummy = MockPlayer.new(name)
+    @server.connect dummy
+    @server.start_game
+    
+    assert_equal(name, dummy.winner)
+  end
 end
 
 class LimitsSuccessException < Exception; end
 
-class MockPlayer
+class MockPlayer < Players::DummyPlayer
   def name
     to_s
   end

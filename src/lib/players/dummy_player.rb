@@ -18,7 +18,7 @@ module Players
     end
     
     # Called by server with information about current turn
-    def status_update(name, dice, saved=[])
+    def status_update(name, dice, saved=nil)
     end
     
     # Called by server when it's this players turn.
@@ -34,11 +34,15 @@ module Players
       @bust = bust
     end
     
+    # Called by the server with the winning player's name when the game is over
+    def game_over(name)
+    end
+    
     # Just a string representing your name, should be unique
     def name
       @name.empty? ? to_s : @name
     end
     
-    # TODO: Players should be notified when somebody wins
+    # TODO: Player should start DRb service when connecting to remote host
   end
 end
