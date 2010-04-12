@@ -4,6 +4,7 @@ require 'rules'
 require 'rules/ones_and_fives_rule'
 require 'rules/three_of_a_kind_rule'
 require 'rules/street_rule'
+require 'monkeys/mutex_helper'
 
 # $SAFE = 1
 
@@ -23,6 +24,8 @@ class Server
     @clients = []
     @score_board = {}
     @uri = port.nil? ? nil : "druby://localhost:#{port}"
+    
+    @game_started = false
     
     @bust = bust
     @limit = limit
@@ -68,34 +71,41 @@ class Server
   end
   
   def start_game
-    $log.info('start_game'){ "Game is commencing" }
-    # TODO: If a game is already in progress clients shouldn't be able to start_game
-    @mutex.synchronize{
-      @clients.shuffle!
-    }
-    $log.debug('start_game'){ @clients }
-    game
+    if !@game_started then
+      @game_started = true
+      $log.info('start_game'){ "Game is commencing" }
+      @mutex.synchronize{
+        @clients.shuffle!
+      }
+      $log.debug('start_game'){ @clients }
+      winner = game
+      broadcast(:game_over, [winner])
+    end
   end
   
   # Calls the specified method in all clients except those in except
   # with the given parameters.
   def broadcast(method, parameters, except=[])
-    @clients.each do |c|
-      if( !except.include? c ) then
-        begin
-          # $log.debug parameters
-          c.__send__(method,*parameters)
-        rescue DRb::DRbError => e
-          $log.error('broadcast') { "Removing #{c.inspect} #{e.message}" }
-          @clients.delete c
+    @mutex.try_synchronize {
+      @clients.each do |c|
+        if( !except.include? c ) then
+          begin
+            # $log.debug parameters
+            c.__send__(method,*parameters)
+          rescue DRb::DRbError => e
+            $log.error('broadcast') { "Removing #{c.inspect} #{e.message}" }
+            @clients.delete c
+          end
         end
       end
-    end
+    }
   end
   private :broadcast
   
   # Sketch for game round. @clients should be shuffle!d before each game.
+  # Returns the name of the winner
   def game
+    # TODO: In dire need of refactorization
     loop do
       $log.debug('game'){ "--- New round ---"}
       @mutex.synchronize {
@@ -141,8 +151,8 @@ class Server
             end
             @score_board[c.name] += round_score
             if @score_board[c.name] >= @limit then
-              $log.debug('game'){ "#{c.name} won!"}
-              return c
+              $log.info('game'){ "#{c.name} won!"}
+              return c.name
             end
           rescue DRb::DRbConnError
             $log.warn('game') { "Client not responding" }

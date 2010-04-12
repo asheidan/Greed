@@ -83,6 +83,7 @@ module UI
     end
     
     def status_update(name, dice, saved=[])
+      # TODO: Found a bug http://github.com/asheidan/Greed/issues/#issue/1
       puts saved
       set_current_player(name)
       set_dice(dice)

@@ -44,4 +44,10 @@ module IsAPlayer
       @player._dump nil
     }
   end
+  
+  def test_player_should_respond_to_game_over
+    assert_nothing_thrown(NoMethodError) {
+      @player.game_over("Nisse")
+    }
+  end
 end
