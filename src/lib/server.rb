@@ -126,7 +126,14 @@ class Server
                 throw_dice.remove!(d,1)
               }
               # Calculate score for saved dice
-              throw_score = Rules.max_points( throw_dice )
+              throw_score,saved_unscoring_dice = Rules.apply_rules( throw_dice )
+              # This would remove a saved die that doesn't score but would
+              # potentially leave player with less than 6 dice
+              # saved_unscoring_dice.each{ |d|
+              #   throw_dice.remove!(d,1)
+              # }
+              $log.debug('game'){ "decision: #{decision.inspect}" }
+              $log.debug('game'){ "saved: #{saved_unscoring_dice.inspect}" }
               if round_score == 0 then
                 if (throw_score >= @bust) then
                   round_score += throw_score
@@ -139,6 +146,7 @@ class Server
                 saved_dice += throw_dice
                 round_score += throw_score
                 if saved_dice.length == 6 then
+                  # All dice scored, reroll is allowed
                   saved_dice = []
                 end
               else
@@ -146,7 +154,6 @@ class Server
                 round_score = 0
                 decision = []
               end
-              $log.debug('game'){ "decision: #{decision.inspect}"}
             end
             @score_board[c.name] += round_score
             if @score_board[c.name] >= @limit then
