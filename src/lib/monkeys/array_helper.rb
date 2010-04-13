@@ -32,6 +32,7 @@ class Array
         false
       end
     end
+    self
   end
   
 end

@@ -12,4 +12,11 @@ class TestArrayHelper < Test::Unit::TestCase
     a = [1,1,1,2,4,4,9]
     assert_equal({1 => 3,2 => 1,4 => 2,9 => 1}, a.freq)
   end
+  
+  def test_02_removing_unexisting_element_shouldnt_affect_array
+    a = [1,3,6,3,8,3,4]
+    b = a.clone
+    b.remove!(9,1)
+    assert_equal(a, b)
+  end
 end
