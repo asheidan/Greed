@@ -16,23 +16,14 @@ class Array
   end
   
   def remove_three!(n)
-    remove!(n,3)
+    3.times { remove!(n) }
   end
-  
-  def remove!(element,number)
-    reject! do |e|
-      if e == element then
-        if number <= 0 then
-          false
-        else
-          number -= 1
-          true
-        end
-      else
-        false
-      end
+    
+  def remove!(element)
+    i = index(element)
+    unless i.nil? then
+      delete_at i
     end
-    self
   end
   
 end
