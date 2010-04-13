@@ -123,6 +123,7 @@ class Server
               $log.debug('game: dice') {throw_dice}
               broadcast(:status_update, [c.name, throw_dice, saved_dice], [c])
               decision = c.roll(throw_dice)
+              $log.debug('game'){ "decision: #{decision.inspect}" }
               decision.each{ |d|
                 throw_dice.remove!(d,1)
               }
@@ -130,11 +131,13 @@ class Server
               throw_score,saved_unscoring_dice = Rules.apply_rules( throw_dice )
               # This would remove a saved die that doesn't score but would
               # potentially leave player with less than 6 dice
-              # saved_unscoring_dice.each{ |d|
-              #   throw_dice.remove!(d,1)
-              # }
+              saved_unscoring_dice.each{ |d|
+                # throw_dice.remove!(d,1)
+                decision.remove!(d,1)
+              }
+              $log.debug('game'){ "saved: #{saved_dice.inspect}" }
+              $log.debug('game'){ "unscored: #{saved_unscoring_dice.inspect}" }
               $log.debug('game'){ "decision: #{decision.inspect}" }
-              $log.debug('game'){ "saved: #{saved_unscoring_dice.inspect}" }
               if round_score == 0 then
                 if (throw_score >= @bust) then
                   round_score += throw_score
