@@ -41,10 +41,20 @@ module UI
             end
             pack
           end
-          TkButton.new(self) do
-            text 'Submit'
-            command do
-              $state = :done if $state == :wait
+          TkFrame.new(self) do
+            TkButton.new(self) do
+              text 'Roll'
+              command do
+                $state = :roll if $state == :wait
+              end
+              pack :side => :left
+            end
+            TkButton.new(self) do
+              text 'Stay'
+              command do
+                $state = :stay if $state == :wait
+              end
+              pack :side => :left
             end
             pack
           end
@@ -84,7 +94,6 @@ module UI
     
     def status_update(name, dice, saved=[])
       # TODO: Found a bug http://github.com/asheidan/Greed/issues/#issue/1
-      puts saved
       set_current_player(name)
       set_dice(dice)
       set_saved(saved)
@@ -103,6 +112,10 @@ module UI
           $state = :done
           return []
         end
+      end
+      if $state == :stay then
+        $state = :sleep
+        return []
       end
       $state = :sleep
       
@@ -150,7 +163,7 @@ module UI
       result = []
       6.times do |i|
         if @@die_vars[5-i][DIE_BUTTON].value.eql? bval
-          result << @@die_vars[5-i][DIE_VALUE].value
+          result << @@die_vars[5-i][DIE_VALUE].to_i
         end
       end
       result
