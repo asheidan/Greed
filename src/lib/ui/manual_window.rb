@@ -149,7 +149,7 @@ module UI
       result = []
       6.times do |i|
         if @@die_vars[5-i][DIE_BUTTON].value.eql? bval
-          result << @@die_vars[5-i][DIE_VALUE].value
+          result << @@die_vars[5-i][DIE_VALUE].to_i
         end
       end
       result
