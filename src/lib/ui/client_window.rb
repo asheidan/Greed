@@ -104,6 +104,12 @@ module UI
             client.port = port_var.value
             client.type = type_var.value
             client.name = name_var.value
+            
+            if client.name.length == 0 then
+              TkWarning.new("You have to enter a name")
+              return
+            end
+            
             client.create_player
             
             root.title = client.name
