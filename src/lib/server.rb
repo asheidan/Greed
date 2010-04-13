@@ -5,6 +5,7 @@ require 'rules/ones_and_fives_rule'
 require 'rules/three_of_a_kind_rule'
 require 'rules/street_rule'
 require 'monkeys/mutex_helper'
+require 'monkeys/array_helper'
 
 # $SAFE = 1
 
