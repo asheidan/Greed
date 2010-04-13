@@ -127,20 +127,23 @@ class Server
               reroll_dice = c.roll(cup.rolled)
               $log.debug('game'){ "reroll: #{reroll_dice.inspect}" }
               reroll_dice.each{ |d|
-                saved_dice.remove!(d,1)
+                saved_dice.remove!(d)
               }
+              $log.debug('game'){ "saved: #{saved_dice.inspect}" }
               # Calculate score for saved dice
               throw_score,saved_unscoring_dice = Rules.apply_rules( saved_dice )
               # This would remove a saved die that doesn't score but would
               # potentially leave player with less than 6 dice
               saved_unscoring_dice.each{ |d|
-                saved_dice.remove!(d,1)
+                saved_dice.remove!(d)
                 # decision.remove!(d,1)
               }
+              $log.debug('game'){ "saved: #{saved_dice.inspect}" }
               saved_dice.each{|d|
+                # puts d.inspect
                 cup.save d
               }
-              $log.debug('game'){ "saved: #{cup.saved.inspect}" }
+              $log.debug('cup '){ "saved: #{cup.saved.inspect}" }
               $log.debug('game'){ "unscored: #{saved_unscoring_dice.inspect}" }
               $log.debug('game'){ "reroll: #{reroll_dice.inspect}" }
               if round_score == 0 then

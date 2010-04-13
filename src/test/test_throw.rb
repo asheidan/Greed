@@ -92,4 +92,15 @@ class TestThrow < Test::Unit::TestCase
     assert_equal([1,1], @throw.saved)
     assert_equal([1,1,1,1], @throw.rolled)
   end
+  
+  def test_13_setting_roll_should_update_saved
+    Throw.class_eval do
+      attr_writer :rolled
+    end
+    
+    @throw.rolled = [1,2,3,4,5,6]
+    @throw.roll = [1,2,3]
+    assert_equal([1,2,3], @throw.rolled)
+    assert_equal([4,5,6], @throw.saved)
+  end
 end

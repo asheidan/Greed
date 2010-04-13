@@ -21,7 +21,7 @@ class Throw
   def save(element)
     $log.debug('save'){ "saving: #{element.inspect}" } unless $log.nil?
     @saved << element if @rolled.include? element
-    @rolled.remove!(element,1)
+    @rolled.remove!(element)
   end
 
   def clear_saved
@@ -34,6 +34,17 @@ class Throw
       @rolled << rand(6)+1
     end
     @rolled.sort!
+  end
+  
+  def roll=(dice)
+    dice = dice.clone
+    @rolled.clone.map do |die|
+      if dice.include? die then
+        dice.remove! die
+      else
+        save die
+      end
+    end
   end
 
   def to_s
