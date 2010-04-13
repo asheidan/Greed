@@ -1,6 +1,7 @@
 --- 
 :rcov: 
   lib/players/dummy_player.rb: 
+    :percent_run: 100
     :lines: 
     - :was_run: true
       :content: "   require 'drb/drb'"
@@ -76,8 +77,8 @@
       :content: "     end"
     - :was_run: true
       :content: "   end"
-    :percent_run: 100
   lib/rules/dummy_rule.rb: 
+    :percent_run: 100
     :lines: 
     - :was_run: true
       :content: "   module Rules"
@@ -101,8 +102,8 @@
       :content: "     end"
     - :was_run: true
       :content: "   end"
-    :percent_run: 100
   lib/players/clever_player.rb: 
+    :percent_run: 86
     :lines: 
     - :was_run: true
       :content: "   require 'players/dummy_player'"
@@ -174,8 +175,104 @@
       :content: "     end"
     - :was_run: true
       :content: "   end"
-    :percent_run: 86
+  :global_percent_run: 85.5
+  lib/throw.rb: 
+    :percent_run: 100
+    :lines: 
+    - :was_run: true
+      :content: "   require 'monkeys/array_helper'"
+    - :was_run: true
+      :content: "   # Represents a cup of dice and should be renamed"
+    - :was_run: true
+      :content: "   class Throw"
+    - :was_run: true
+      :content: "     attr_reader :saved, :rolled"
+    - :was_run: true
+      :content: "     def initialize(size = 6)"
+    - :was_run: true
+      :content: "       @rolled = ([nil]*size).collect{ rand(6)+1 }.sort"
+    - :was_run: true
+      :content: "       @saved = []"
+    - :was_run: true
+      :content: "     end"
+    - :was_run: true
+      :content: "     def size"
+    - :was_run: true
+      :content: "       @rolled.size + @saved.size"
+    - :was_run: true
+      :content: "     end"
+    - :was_run: true
+      :content: "     def dice"
+    - :was_run: true
+      :content: "       @rolled + @saved"
+    - :was_run: true
+      :content: "     end"
+    - :was_run: true
+      :content: "     def save(element)"
+    - :was_run: true
+      :content: "       $log.debug('save'){ \"saving: #{element.inspect}\" } unless $log.nil?"
+    - :was_run: true
+      :content: "       @saved << element if @rolled.include? element"
+    - :was_run: true
+      :content: "       @rolled.remove!(element)"
+    - :was_run: true
+      :content: "     end"
+    - :was_run: true
+      :content: "     def clear_saved"
+    - :was_run: true
+      :content: "       @saved = []"
+    - :was_run: true
+      :content: "     end"
+    - :was_run: true
+      :content: "     def reroll!"
+    - :was_run: true
+      :content: "       @rolled = @rolled.collect{ rand(6)+1 }"
+    - :was_run: true
+      :content: "       while( size < 6 ) do"
+    - :was_run: true
+      :content: "         @rolled << rand(6)+1"
+    - :was_run: true
+      :content: "       end"
+    - :was_run: true
+      :content: "       @rolled.sort!"
+    - :was_run: true
+      :content: "     end"
+    - :was_run: true
+      :content: "     def roll=(dice)"
+    - :was_run: true
+      :content: "       dice = dice.clone"
+    - :was_run: true
+      :content: "       @rolled.clone.map do |die|"
+    - :was_run: true
+      :content: "         if dice.include? die then"
+    - :was_run: true
+      :content: "           dice.remove! die"
+    - :was_run: true
+      :content: "         else"
+    - :was_run: true
+      :content: "           save die"
+    - :was_run: true
+      :content: "         end"
+    - :was_run: true
+      :content: "       end"
+    - :was_run: true
+      :content: "     end"
+    - :was_run: true
+      :content: "     def to_s"
+    - :was_run: true
+      :content: "       @rolled.inspect + \",\" + @saved.inspect"
+    - :was_run: true
+      :content: "     end"
+    - :was_run: true
+      :content: "     def to_a"
+    - :was_run: true
+      :content: "       dice"
+    - :was_run: true
+      :content: "     end"
+    - :was_run: true
+      :content: "   end"
   lib/monkeys/mutex_helper.rb: 
+    :percent_run: 100
     :lines: 
     - :was_run: true
       :content: "   class Mutex"
@@ -199,8 +296,8 @@
       :content: "     end"
     - :was_run: true
       :content: "   end"
-    :percent_run: 100
   lib/rules/ones_and_fives_rule.rb: 
+    :percent_run: 100
     :lines: 
     - :was_run: true
       :content: "   module Rules"
@@ -240,8 +337,8 @@
       :content: "     end"
     - :was_run: true
       :content: "   end"
-    :percent_run: 100
   lib/rules/street_rule.rb: 
+    :percent_run: 100
     :lines: 
     - :was_run: true
       :content: "   module Rules"
@@ -265,9 +362,8 @@
       :content: "     end"
     - :was_run: true
       :content: "   end"
-    :percent_run: 100
-  :global_percent_run: 84.1
   lib/players/coward_player.rb: 
+    :percent_run: 100
     :lines: 
     - :was_run: true
       :content: "   require 'players/dummy_player'"
@@ -289,8 +385,8 @@
       :content: "   \tend"
     - :was_run: true
       :content: "   end"
-    :percent_run: 100
   lib/players/gambler_player.rb: 
+    :percent_run: 100
     :lines: 
     - :was_run: true
       :content: "   require 'players/dummy_player'"
@@ -340,8 +436,8 @@
       :content: "     end"
     - :was_run: true
       :content: "   end"
-    :percent_run: 100
   lib/monkeys/array_helper.rb: 
+    :percent_run: 100
     :lines: 
     - :was_run: true
       :content: "   class Array"
@@ -376,41 +472,25 @@
     - :was_run: true
       :content: "     def remove_three!(n)"
     - :was_run: true
-      :content: "       remove!(n,3)"
+      :content: "       3.times { remove!(n) }"
     - :was_run: true
       :content: "     end"
     - :was_run: true
-      :content: "     def remove!(element,number)"
+      :content: "     def remove!(element)"
     - :was_run: true
-      :content: "       reject! do |e|"
+      :content: "       i = index(element)"
     - :was_run: true
-      :content: "         if e == element then"
+      :content: "       unless i.nil? then"
     - :was_run: true
-      :content: "           if number <= 0 then"
-    - :was_run: true
-      :content: "             false"
-    - :was_run: true
-      :content: "           else"
-    - :was_run: true
-      :content: "             number -= 1"
-    - :was_run: true
-      :content: "             true"
-    - :was_run: true
-      :content: "           end"
-    - :was_run: true
-      :content: "         else"
-    - :was_run: true
-      :content: "           false"
-    - :was_run: true
-      :content: "         end"
+      :content: "         delete_at i"
     - :was_run: true
       :content: "       end"
     - :was_run: true
       :content: "     end"
     - :was_run: true
       :content: "   end"
-    :percent_run: 100
   lib/players/random_player.rb: 
+    :percent_run: 100
     :lines: 
     - :was_run: true
       :content: "   require 'players/dummy_player'"
@@ -438,8 +518,8 @@
       :content: "     end"
     - :was_run: true
       :content: "   end"
-    :percent_run: 100
   lib/rules/three_of_a_kind_rule.rb: 
+    :percent_run: 100
     :lines: 
     - :was_run: true
       :content: "   require 'monkeys/array_helper'"
@@ -485,8 +565,8 @@
       :content: "     end"
     - :was_run: true
       :content: "   end"
-    :percent_run: 100
   lib/rules.rb: 
+    :percent_run: 100
     :lines: 
     - :was_run: true
       :content: "   module Rules"
@@ -542,8 +622,8 @@
       :content: "     end"
     - :was_run: true
       :content: "   end"
-    :percent_run: 100
   lib/server.rb: 
+    :percent_run: 67
     :lines: 
     - :was_run: true
       :content: "   require 'drb/drb'"
@@ -559,6 +639,10 @@
       :content: "   require 'rules/street_rule'"
     - :was_run: true
       :content: "   require 'monkeys/mutex_helper'"
+    - :was_run: true
+      :content: "   require 'monkeys/array_helper'"
+    - :was_run: true
+      :content: "   require 'throw'"
     - :was_run: true
       :content: "   # $SAFE = 1"
     - :was_run: true
@@ -746,33 +830,65 @@
     - :was_run: true
       :content: "               round_score = 0"
     - :was_run: true
-      :content: "               saved_dice = throw_dice = []"
+      :content: "               cup = Throw.new"
     - :was_run: true
-      :content: "               decision = [nil] * 6"
+      :content: "               reroll_dice = [nil] * 6"
     - :was_run: true
-      :content: "               while decision != [] do"
+      :content: "               while reroll_dice != [] do"
     - :was_run: true
-      :content: "                 rethrow_count = 6 - saved_dice.length"
+      :content: "                 # rethrow_count = 6 - saved_dice.length"
     - :was_run: true
-      :content: "                 throw_dice = decision.collect{|d| rand(6)+1 }.sort[0..(rethrow_count-1)]"
+      :content: "                 # throw_dice = decision.collect{|d| rand(6)+1 }.sort[0..(rethrow_count-1)]"
     - :was_run: true
-      :content: "                 $log.debug('game: dice') {throw_dice}"
+      :content: "                 saved_dice = cup.rolled"
     - :was_run: true
-      :content: "                 broadcast(:status_update, [c.name, throw_dice], [c])"
+      :content: "                 $log.debug('game: dice') {cup}"
     - :was_run: true
-      :content: "                 decision = c.roll(throw_dice)"
+      :content: "                 broadcast(:status_update, [c.name, cup.rolled, cup.saved], [c])"
     - :was_run: true
-      :content: "                 decision.each{ |d|"
+      :content: "                 reroll_dice = c.roll(cup.rolled)"
+    - :was_run: true
+      :content: "                 $log.debug('game'){ \"reroll: #{reroll_dice.inspect}\" }"
+    - :was_run: true
+      :content: "                 reroll_dice.each{ |d|"
     - :was_run: false
-      :content: "                   throw_dice.remove!(d,1)"
+      :content: "                   saved_dice.remove!(d)"
     - :was_run: false
       :content: "                 }"
     - :was_run: true
-      :content: "                 broadcast(:status_update, [c.name, throw_dice, saved_dice], [c])"
+      :content: "                 $log.debug('game'){ \"saved: #{saved_dice.inspect}\" }"
     - :was_run: true
       :content: "                 # Calculate score for saved dice"
     - :was_run: true
-      :content: "                 throw_score = Rules.max_points( throw_dice )"
+      :content: "                 throw_score,saved_unscoring_dice = Rules.apply_rules( saved_dice )"
+    - :was_run: true
+      :content: "                 # This would remove a saved die that doesn't score but would"
+    - :was_run: true
+      :content: "                 # potentially leave player with less than 6 dice"
+    - :was_run: true
+      :content: "                 saved_unscoring_dice.each{ |d|"
+    - :was_run: true
+      :content: "                   saved_dice.remove!(d)"
+    - :was_run: true
+      :content: "                   # decision.remove!(d,1)"
+    - :was_run: true
+      :content: "                 }"
+    - :was_run: true
+      :content: "                 $log.debug('game'){ \"saved: #{saved_dice.inspect}\" }"
+    - :was_run: true
+      :content: "                 saved_dice.each{|d|"
+    - :was_run: true
+      :content: "                   # puts d.inspect"
+    - :was_run: true
+      :content: "                   cup.save d"
+    - :was_run: true
+      :content: "                 }"
+    - :was_run: true
+      :content: "                 $log.debug('cup '){ \"saved: #{cup.saved.inspect}\" }"
+    - :was_run: true
+      :content: "                 $log.debug('game'){ \"unscored: #{saved_unscoring_dice.inspect}\" }"
+    - :was_run: true
+      :content: "                 $log.debug('game'){ \"reroll: #{reroll_dice.inspect}\" }"
     - :was_run: true
       :content: "                 if round_score == 0 then"
     - :was_run: true
@@ -780,25 +896,27 @@
     - :was_run: true
       :content: "                     round_score += throw_score"
     - :was_run: true
-      :content: "                     saved_dice += throw_dice"
+      :content: "                     # saved_dice += throw_dice"
     - :was_run: true
       :content: "                   else"
     - :was_run: true
       :content: "                     $log.debug('game'){ \"Player: #{c.name} busted\" }"
     - :was_run: true
-      :content: "                     decision = []"
+      :content: "                     reroll_dice = []"
     - :was_run: true
       :content: "                   end"
     - :was_run: false
       :content: "                 elsif throw_score > 0 then"
     - :was_run: false
-      :content: "                   saved_dice += throw_dice"
+      :content: "                   # saved_dice += throw_dice"
     - :was_run: false
       :content: "                   round_score += throw_score"
     - :was_run: false
-      :content: "                   if saved_dice.length == 6 then"
+      :content: "                   if cup.saved.length == 6 then"
     - :was_run: false
-      :content: "                     saved_dice = []"
+      :content: "                     # All dice scored, reroll is allowed"
+    - :was_run: false
+      :content: "                     cup.clear_saved"
     - :was_run: false
       :content: "                   end"
     - :was_run: false
@@ -808,12 +926,10 @@
     - :was_run: false
       :content: "                   round_score = 0"
     - :was_run: false
-      :content: "                   decision = []"
+      :content: "                   reroll_dice = []"
     - :was_run: false
       :content: "                 end"
-    - :was_run: true
-      :content: "                 $log.debug('game'){ \"decision: #{decision.inspect}\"}"
-    - :was_run: true
+    - :was_run: false
       :content: "               end"
     - :was_run: true
       :content: "               @score_board[c.name] += round_score"
@@ -899,17 +1015,18 @@
       :content: "     end"
     - :was_run: false
       :content: "   end"
-    :percent_run: 64
 :flog: 
-  :total: 1066.7
+  :total: 1171.1
   :pages: 
   - :path: /lib/ui/client_window.rb
-    :highest_score: 147.0
+    :highest_score: 155.1
     :scanned_methods: 
-    - :operators: 
-      - :score: 34.9
+    - :score: 155.1
+      :name: ClientWindow#initialize
+      :operators: 
+      - :score: 36.7
         :operator: branch
-      - :score: 32.9
+      - :score: 34.9
         :operator: new
       - :score: 27.2
         :operator: assignment
@@ -929,109 +1046,113 @@
         :operator: pady
       - :score: 5.8
         :operator: textvariable
+      - :score: 4.0
+        :operator: name
+      - :score: 3.7
+        :operator: ==
       - :score: 3.2
         :operator: command
       - :score: 2.1
-        :operator: justify
-      - :score: 2.1
         :operator: variable
+      - :score: 2.1
+        :operator: justify
+      - :score: 2.0
+        :operator: length
       - :score: 1.9
         :operator: connect
-      - :score: 1.9
-        :operator: ==
-      - :score: 1.8
-        :operator: each
       - :score: 1.8
         :operator: state
       - :score: 1.8
-        :operator: name
-      - :score: 1.8
-        :operator: ungrid
-      - :score: 1.8
-        :operator: destroy
+        :operator: disconnect
       - :score: 1.8
         :operator: sleep
       - :score: 1.8
+        :operator: destroy
+      - :score: 1.8
         :operator: create_player
       - :score: 1.8
-        :operator: disconnect
+        :operator: ungrid
+      - :score: 1.8
+        :operator: each
       - :score: 1.3
         :operator: title
-      :score: 147.0
-      :name: ClientWindow#initialize
-    - :operators: 
+    - :score: 1.1
+      :name: main#none
+      :operators: 
       - :score: 1.1
         :operator: require
-      :score: 1.1
-      :name: main#none
-    :score: 148.1
-    :average_score: 74.1
+    :score: 156.2
+    :average_score: 78.1
   - :path: /lib/server.rb
-    :highest_score: 129.7
+    :highest_score: 147.7
     :scanned_methods: 
-    - :operators: 
-      - :score: 41.8
-        :operator: assignment
-      - :score: 41.3
+    - :score: 147.7
+      :name: Server#game
+      :operators: 
+      - :score: 53.5
         :operator: branch
-      - :score: 20.1
-        :operator: name
-      - :score: 12.4
+      - :score: 36.4
+        :operator: assignment
+      - :score: 22.9
         :operator: debug
-      - :score: 12.2
-        :operator: +
+      - :score: 17.8
+        :operator: name
+      - :score: 13.2
+        :operator: inspect
+      - :score: 7.9
+        :operator: each
+      - :score: 7.5
+        :operator: saved
+      - :score: 6.7
+        :operator: rolled
       - :score: 6.5
         :operator: ==
-      - :score: 6.1
-        :operator: broadcast
-      - :score: 4.9
-        :operator: length
-      - :score: 4.9
-        :operator: lit_fixnum
+      - :score: 4.7
+        :operator: +
       - :score: 4.4
-        :operator: "-"
-      - :score: 4.2
-        :operator: "[]"
+        :operator: remove!
       - :score: 4.1
         :operator: ">="
-      - :score: 3.7
-        :operator: each
-      - :score: 2.8
-        :operator: rand
+      - :score: 4.0
+        :operator: broadcast
+      - :score: 2.6
+        :operator: length
       - :score: 2.5
-        :operator: collect
-      - :score: 2.3
-        :operator: sort
-      - :score: 2.2
-        :operator: inspect
-      - :score: 2.2
-        :operator: remove!
+        :operator: clear_saved
       - :score: 2.2
         :operator: ">"
+      - :score: 2.2
+        :operator: save
       - :score: 2.1
         :operator: info
       - :score: 2.1
-        :operator: max_points
+        :operator: "[]"
+      - :score: 2.1
+        :operator: apply_rules
       - :score: 2.1
         :operator: roll
+      - :score: 1.9
+        :operator: warn
       - :score: 1.9
         :operator: "*"
       - :score: 1.9
         :operator: delete
       - :score: 1.9
-        :operator: warn
+        :operator: new
+      - :score: 1.6
+        :operator: lit_fixnum
       - :score: 1.6
         :operator: sleep
       - :score: 1.5
-        :operator: empty?
-      - :score: 1.5
         :operator: synchronize
+      - :score: 1.5
+        :operator: empty?
       - :score: 1.3
         :operator: loop
-      :score: 129.7
-      :name: Server#game
-    - :operators: 
-      - :score: 10.3
+    - :score: 22.6
+      :name: main#none
+      :operators: 
+      - :score: 12.5
         :operator: require
       - :score: 4.1
         :operator: assignment
@@ -1049,9 +1170,9 @@
         :operator: ==
       - :score: 0.4
         :operator: lit_fixnum
-      :score: 20.4
-      :name: main#none
-    - :operators: 
+    - :score: 20.0
+      :name: Server#connect
+      :operators: 
       - :score: 5.5
         :operator: branch
       - :score: 3.8
@@ -1076,9 +1197,9 @@
         :operator: warn
       - :score: 1.3
         :operator: debug
-      :score: 20.0
-      :name: Server#connect
-    - :operators: 
+    - :score: 16.0
+      :name: Server#broadcast
+      :operators: 
       - :score: 7.6
         :operator: branch
       - :score: 4.5
@@ -1099,9 +1220,9 @@
         :operator: each
       - :score: 1.3
         :operator: try_synchronize
-      :score: 16.0
-      :name: Server#broadcast
-    - :operators: 
+    - :score: 14.1
+      :name: Server#start_game
+      :operators: 
       - :score: 7.1
         :operator: branch
       - :score: 3.0
@@ -1122,9 +1243,9 @@
         :operator: start_game
       - :score: 1.3
         :operator: new
-      :score: 14.1
-      :name: Server#start_game
-    - :operators: 
+    - :score: 14.0
+      :name: Server#initialize
+      :operators: 
       - :score: 13.0
         :operator: assignment
       - :score: 2.6
@@ -1137,9 +1258,9 @@
         :operator: new
       - :score: 0.7
         :operator: lit_fixnum
-      :score: 14.0
-      :name: Server#initialize
-    - :operators: 
+    - :score: 7.2
+      :name: Server#none
+      :operators: 
       - :score: 2.4
         :operator: private
       - :score: 2.4
@@ -1148,9 +1269,9 @@
         :operator: attr_reader
       - :score: 1.2
         :operator: attr_accessor
-      :score: 7.2
-      :name: Server#none
-    - :operators: 
+    - :score: 6.0
+      :name: Server#disconnect
+      :operators: 
       - :score: 2.6
         :operator: branch
       - :score: 1.4
@@ -1161,35 +1282,35 @@
         :operator: debug
       - :score: 1.3
         :operator: synchronize
-      :score: 6.0
-      :name: Server#disconnect
-    - :operators: 
+    - :score: 2.9
+      :name: Server#launch_server
+      :operators: 
       - :score: 1.3
         :operator: start_service
       - :score: 1.3
         :operator: assignment
       - :score: 1.3
         :operator: new
-      :score: 2.9
-      :name: Server#launch_server
-    - :operators: 
+    - :score: 2.8
+      :name: Server#start_service
+      :operators: 
       - :score: 1.5
         :operator: uri
       - :score: 1.3
         :operator: start_service
-      :score: 2.8
-      :name: Server#start_service
-    - :operators: 
+    - :score: 1.3
+      :name: Server#stop_service
+      :operators: 
       - :score: 1.3
         :operator: stop_service
-      :score: 1.3
-      :name: Server#stop_service
-    :score: 234.4
-    :average_score: 21.3
+    :score: 254.6
+    :average_score: 23.1
   - :path: /lib/ui/server_window.rb
     :highest_score: 112.3
     :scanned_methods: 
-    - :operators: 
+    - :score: 112.3
+      :name: ServerWindow#initialize
+      :operators: 
       - :score: 26.4
         :operator: branch
       - :score: 25.2
@@ -1228,66 +1349,68 @@
         :operator: state
       - :score: 1.3
         :operator: title
-      :score: 112.3
-      :name: ServerWindow#initialize
-    - :operators: 
+    - :score: 1.1
+      :name: main#none
+      :operators: 
       - :score: 1.1
         :operator: require
-      :score: 1.1
-      :name: main#none
     :score: 113.4
     :average_score: 56.7
   - :path: /lib/ui/manual_window.rb
-    :highest_score: 92.4
+    :highest_score: 109.3
     :scanned_methods: 
-    - :operators: 
-      - :score: 28.5
-        :operator: new
-      - :score: 26.3
+    - :score: 109.3
+      :name: ManualWindow#initialize
+      :operators: 
+      - :score: 34.8
         :operator: branch
-      - :score: 19.9
+      - :score: 32.3
+        :operator: new
+      - :score: 24.1
         :operator: pack
       - :score: 10.8
         :operator: "[]"
+      - :score: 7.6
+        :operator: text
       - :score: 6.2
         :operator: textvariable
-      - :score: 5.3
-        :operator: text
+      - :score: 4.4
+        :operator: ==
+      - :score: 4.2
+        :operator: command
       - :score: 2.4
         :operator: variable
       - :score: 2.0
         :operator: assignment
-      - :score: 2.0
-        :operator: ==
-      - :score: 1.9
-        :operator: listvariable
-      - :score: 1.9
-        :operator: command
       - :score: 1.9
         :operator: times
+      - :score: 1.9
+        :operator: listvariable
       - :score: 1.8
         :operator: lit_fixnum
+      - :score: 1.5
+        :operator: grid
       - :score: 1.5
         :operator: padx
       - :score: 1.5
         :operator: pady
       - :score: 1.5
-        :operator: grid
-      - :score: 1.5
         :operator: root
-      :score: 92.4
-      :name: ManualWindow#initialize
-    - :operators: 
+    - :score: 21.7
+      :name: ManualWindow#get_dies
+      :operators: 
       - :score: 7.8
         :operator: "[]"
       - :score: 4.5
         :operator: "-"
-      - :score: 3.3
-        :operator: value
       - :score: 2.7
         :operator: branch
       - :score: 2.7
         :operator: assignment
+      - :score: 1.7
+        :operator: to_i
+      - :score: 1.6
+        :operator: value
       - :score: 1.6
         :operator: lit_fixnum
       - :score: 1.5
@@ -1296,9 +1419,9 @@
         :operator: eql?
       - :score: 1.3
         :operator: times
-      :score: 21.7
-      :name: ManualWindow#get_dies
-    - :operators: 
+    - :score: 20.3
+      :name: ManualWindow#set_saved
+      :operators: 
       - :score: 7.9
         :operator: "[]"
       - :score: 7.1
@@ -1315,12 +1438,12 @@
         :operator: ">"
       - :score: 1.3
         :operator: times
-      :score: 20.3
-      :name: ManualWindow#set_saved
-    - :operators: 
-      - :score: 5.4
+    - :score: 18.1
+      :name: ManualWindow#roll
+      :operators: 
+      - :score: 6.7
         :operator: ==
-      - :score: 5.3
+      - :score: 6.6
         :operator: branch
       - :score: 3.0
         :operator: length
@@ -1331,14 +1454,14 @@
       - :score: 1.4
         :operator: set_saved
       - :score: 1.3
-        :operator: set_current_player
-      - :score: 1.3
         :operator: set_dice
+      - :score: 1.3
+        :operator: set_current_player
       - :score: 0.4
         :operator: lit_fixnum
-      :score: 16.5
-      :name: ManualWindow#roll
-    - :operators: 
+    - :score: 15.9
+      :name: ManualWindow#set_dice
+      :operators: 
       - :score: 7.9
         :operator: "[]"
       - :score: 7.1
@@ -1353,9 +1476,9 @@
         :operator: times
       - :score: 0.7
         :operator: lit_fixnum
-      :score: 15.9
-      :name: ManualWindow#set_dice
-    - :operators: 
+    - :score: 14.4
+      :name: ManualWindow#update_scoreboard
+      :operators: 
       - :score: 13.6
         :operator: assignment
       - :score: 2.6
@@ -1366,49 +1489,47 @@
         :operator: each
       - :score: 1.3
         :operator: sort_by
-      :score: 14.4
-      :name: ManualWindow#update_scoreboard
-    - :operators: 
-      - :score: 1.3
-        :operator: puts
-      - :score: 1.3
-        :operator: set_current_player
-      - :score: 1.3
-        :operator: assignment
+    - :score: 4.1
+      :name: ManualWindow#status_update
+      :operators: 
       - :score: 1.3
         :operator: set_dice
       - :score: 1.3
         :operator: set_saved
-      :score: 5.4
-      :name: ManualWindow#status_update
-    - :operators: 
+      - :score: 1.3
+        :operator: assignment
+      - :score: 1.3
+        :operator: set_current_player
+    - :score: 1.4
+      :name: main#none
+      :operators: 
       - :score: 1.1
         :operator: require
       - :score: 0.3
         :operator: lit_fixnum
-      :score: 1.4
-      :name: main#none
-    - :operators: 
-      - :score: 1.3
-        :operator: assignment
-      :score: 1.3
+    - :score: 1.3
       :name: ManualWindow#limits
-    - :operators: 
+      :operators: 
       - :score: 1.3
         :operator: assignment
-      :score: 1.3
+    - :score: 1.3
       :name: ManualWindow#set_current_player
-    - :operators: 
+      :operators: 
+      - :score: 1.3
+        :operator: assignment
+    - :score: 1.2
+      :name: ManualWindow#none
+      :operators: 
       - :score: 1.2
         :operator: private
-      :score: 1.2
-      :name: ManualWindow#none
-    :score: 191.8
-    :average_score: 17.4
+    :score: 209.1
+    :average_score: 19.0
   - :path: /lib/ui/greed_window.rb
     :highest_score: 40.9
     :scanned_methods: 
-    - :operators: 
+    - :score: 40.9
+      :name: GreedWindow#initialize
+      :operators: 
       - :score: 12.8
         :operator: branch
       - :score: 9.8
@@ -1437,19 +1558,19 @@
         :operator: assignment
       - :score: 0.8
         :operator: lit_fixnum
-      :score: 40.9
-      :name: GreedWindow#initialize
-    - :operators: 
+    - :score: 1.1
+      :name: main#none
+      :operators: 
       - :score: 1.1
         :operator: require
-      :score: 1.1
-      :name: main#none
     :score: 42.0
     :average_score: 21.0
   - :path: /lib/players/gambler_player.rb
     :highest_score: 36.6
     :scanned_methods: 
-    - :operators: 
+    - :score: 36.6
+      :name: GamblerPlayer#roll
+      :operators: 
       - :score: 12.7
         :operator: branch
       - :score: 11.6
@@ -1482,19 +1603,19 @@
         :operator: reject
       - :score: 1.2
         :operator: clone
-      :score: 36.6
-      :name: GamblerPlayer#roll
-    - :operators: 
+    - :score: 2.2
+      :name: main#none
+      :operators: 
       - :score: 2.2
         :operator: require
-      :score: 2.2
-      :name: main#none
     :score: 38.8
     :average_score: 19.4
   - :path: /lib/players/console_player.rb
     :highest_score: 34.5
     :scanned_methods: 
-    - :operators: 
+    - :score: 34.5
+      :name: main#none
+      :operators: 
       - :score: 10.0
         :operator: new
       - :score: 9.8
@@ -1513,9 +1634,9 @@
         :operator: lit_fixnum
       - :score: 1.1
         :operator: ==
-      :score: 34.5
-      :name: main#none
-    - :operators: 
+    - :score: 20.6
+      :name: ConsolePlayer#roll
+      :operators: 
       - :score: 8.0
         :operator: eval
       - :score: 6.0
@@ -1538,9 +1659,9 @@
         :operator: debug
       - :score: 1.3
         :operator: print
-      :score: 20.6
-      :name: ConsolePlayer#roll
-    - :operators: 
+    - :score: 9.5
+      :name: ConsolePlayer#update_scoreboard
+      :operators: 
       - :score: 1.8
         :operator: "[]"
       - :score: 1.7
@@ -1557,21 +1678,21 @@
         :operator: each
       - :score: 1.3
         :operator: branch
-      :score: 9.5
-      :name: ConsolePlayer#update_scoreboard
-    - :operators: 
+    - :score: 1.8
+      :name: ConsolePlayer#status_update
+      :operators: 
       - :score: 1.3
         :operator: debug
       - :score: 1.3
         :operator: branch
-      :score: 1.8
-      :name: ConsolePlayer#status_update
     :score: 66.4
     :average_score: 16.6
   - :path: /lib/rules.rb
     :highest_score: 25.5
     :scanned_methods: 
-    - :operators: 
+    - :score: 25.5
+      :name: Rules#apply_rules
+      :operators: 
       - :score: 15.9
         :operator: assignment
       - :score: 5.9
@@ -1598,9 +1719,9 @@
         :operator: <=>
       - :score: 1.2
         :operator: max
-      :score: 25.5
-      :name: Rules#apply_rules
-    - :operators: 
+    - :score: 7.9
+      :name: Rules#rules
+      :operators: 
       - :score: 2.7
         :operator: assignment
       - :score: 2.6
@@ -1615,21 +1736,21 @@
         :operator: sort
       - :score: 1.2
         :operator: collect
-      :score: 7.9
-      :name: Rules#rules
-    - :operators: 
+    - :score: 2.6
+      :name: Rules#max_points
+      :operators: 
       - :score: 1.4
         :operator: apply_rules
       - :score: 1.2
         :operator: first
-      :score: 2.6
-      :name: Rules#max_points
     :score: 36.0
     :average_score: 12.0
   - :path: /lib/players/clever_player.rb
     :highest_score: 22.0
     :scanned_methods: 
-    - :operators: 
+    - :score: 22.0
+      :name: CleverPlayer#position
+      :operators: 
       - :score: 6.3
         :operator: values
       - :score: 4.0
@@ -1648,9 +1769,9 @@
         :operator: include?
       - :score: 1.4
         :operator: nil?
-      :score: 22.0
-      :name: CleverPlayer#position
-    - :operators: 
+    - :score: 5.9
+      :name: CleverPlayer#roll
+      :operators: 
       - :score: 1.6
         :operator: new
       - :score: 1.5
@@ -1661,24 +1782,24 @@
         :operator: branch
       - :score: 1.3
         :operator: <
-      :score: 5.9
-      :name: CleverPlayer#roll
-    - :operators: 
+    - :score: 2.6
+      :name: CleverPlayer#update_scoreboard
+      :operators: 
       - :score: 2.6
         :operator: assignment
-      :score: 2.6
-      :name: CleverPlayer#update_scoreboard
-    - :operators: 
+    - :score: 2.2
+      :name: main#none
+      :operators: 
       - :score: 2.2
         :operator: require
-      :score: 2.2
-      :name: main#none
     :score: 32.7
     :average_score: 8.2
   - :path: /lib/rules/three_of_a_kind_rule.rb
     :highest_score: 20.6
     :scanned_methods: 
-    - :operators: 
+    - :score: 20.6
+      :name: ThreeOfAKindRule#apply
+      :operators: 
       - :score: 10.9
         :operator: assignment
       - :score: 4.8
@@ -1705,9 +1826,9 @@
         :operator: clone
       - :score: 0.5
         :operator: lit_fixnum
-      :score: 20.6
-      :name: ThreeOfAKindRule#apply
-    - :operators: 
+    - :score: 4.0
+      :name: ThreeOfAKindRule#points_table
+      :operators: 
       - :score: 1.4
         :operator: "*"
       - :score: 1.3
@@ -1716,24 +1837,144 @@
         :operator: ==
       - :score: 1.1
         :operator: lit_fixnum
-      :score: 4.0
-      :name: ThreeOfAKindRule#points_table
-    - :operators: 
+    - :score: 1.2
+      :name: ThreeOfAKindRule#none
+      :operators: 
       - :score: 1.2
         :operator: private
-      :score: 1.2
-      :name: ThreeOfAKindRule#none
-    - :operators: 
+    - :score: 1.1
+      :name: main#none
+      :operators: 
       - :score: 1.1
         :operator: require
-      :score: 1.1
-      :name: main#none
     :score: 26.9
     :average_score: 6.7
+  - :path: /lib/throw.rb
+    :highest_score: 15.9
+    :scanned_methods: 
+    - :score: 15.9
+      :name: Throw#reroll!
+      :operators: 
+      - :score: 3.4
+        :operator: rand
+      - :score: 3.0
+        :operator: +
+      - :score: 2.6
+        :operator: branch
+      - :score: 2.2
+        :operator: lit_fixnum
+      - :score: 1.6
+        :operator: size
+      - :score: 1.4
+        :operator: "<<"
+      - :score: 1.4
+        :operator: <
+      - :score: 1.3
+        :operator: assignment
+      - :score: 1.3
+        :operator: collect
+      - :score: 1.3
+        :operator: sort!
+    - :score: 10.1
+      :name: Throw#initialize
+      :operators: 
+      - :score: 3.9
+        :operator: assignment
+      - :score: 1.8
+        :operator: rand
+      - :score: 1.7
+        :operator: "*"
+      - :score: 1.6
+        :operator: +
+      - :score: 1.5
+        :operator: collect
+      - :score: 1.5
+        :operator: branch
+      - :score: 1.3
+        :operator: sort
+      - :score: 1.3
+        :operator: lit_fixnum
+    - :score: 9.3
+      :name: Throw#roll=
+      :operators: 
+      - :score: 2.8
+        :operator: clone
+      - :score: 2.7
+        :operator: branch
+      - :score: 2.7
+        :operator: assignment
+      - :score: 1.5
+        :operator: remove!
+      - :score: 1.5
+        :operator: save
+      - :score: 1.4
+        :operator: include?
+      - :score: 1.3
+        :operator: map
+    - :score: 9.1
+      :name: Throw#save
+      :operators: 
+      - :score: 4.0
+        :operator: branch
+      - :score: 1.5
+        :operator: inspect
+      - :score: 1.4
+        :operator: "<<"
+      - :score: 1.4
+        :operator: debug
+      - :score: 1.3
+        :operator: remove!
+      - :score: 1.3
+        :operator: include?
+      - :score: 1.3
+        :operator: nil?
+    - :score: 6.0
+      :name: Throw#to_s
+      :operators: 
+      - :score: 3.2
+        :operator: inspect
+      - :score: 2.8
+        :operator: +
+    - :score: 4.3
+      :name: Throw#size
+      :operators: 
+      - :score: 3.0
+        :operator: size
+      - :score: 1.3
+        :operator: +
+    - :score: 1.3
+      :name: Throw#to_a
+      :operators: 
+      - :score: 1.3
+        :operator: dice
+    - :score: 1.3
+      :name: Throw#clear_saved
+      :operators: 
+      - :score: 1.3
+        :operator: assignment
+    - :score: 1.3
+      :name: Throw#dice
+      :operators: 
+      - :score: 1.3
+        :operator: +
+    - :score: 1.2
+      :name: Throw#none
+      :operators: 
+      - :score: 1.2
+        :operator: attr_reader
+    - :score: 1.1
+      :name: main#none
+      :operators: 
+      - :score: 1.1
+        :operator: require
+    :score: 60.9
+    :average_score: 5.5
   - :path: /lib/client.rb
     :highest_score: 13.9
     :scanned_methods: 
-    - :operators: 
+    - :score: 13.9
+      :name: main#none
+      :operators: 
       - :score: 8.8
         :operator: require
       - :score: 2.6
@@ -1746,18 +1987,18 @@
         :operator: branch
       - :score: 1.1
         :operator: ==
-      :score: 13.9
-      :name: main#none
-    - :operators: 
+    - :score: 13.5
+      :name: Client#create_player
+      :operators: 
       - :score: 8.3
         :operator: branch
       - :score: 7.5
         :operator: assignment
       - :score: 7.5
         :operator: new
-      :score: 13.5
-      :name: Client#create_player
-    - :operators: 
+    - :score: 4.2
+      :name: Client#disconnect
+      :operators: 
       - :score: 1.4
         :operator: disconnect
       - :score: 1.3
@@ -1766,9 +2007,9 @@
         :operator: stop_service
       - :score: 1.3
         :operator: nil?
-      :score: 4.2
-      :name: Client#disconnect
-    - :operators: 
+    - :score: 4.1
+      :name: Client#connect
+      :operators: 
       - :score: 1.3
         :operator: new_with_uri
       - :score: 1.3
@@ -1777,19 +2018,19 @@
         :operator: assignment
       - :score: 1.3
         :operator: start_service
-      :score: 4.1
-      :name: Client#connect
-    - :operators: 
+    - :score: 1.2
+      :name: Client#none
+      :operators: 
       - :score: 1.2
         :operator: attr_accessor
-      :score: 1.2
-      :name: Client#none
     :score: 36.9
     :average_score: 7.4
   - :path: /lib/rules/ones_and_fives_rule.rb
     :highest_score: 10.8
     :scanned_methods: 
-    - :operators: 
+    - :score: 10.8
+      :name: OnesAndFivesRule#apply
+      :operators: 
       - :score: 6.3
         :operator: assignment
       - :score: 3.6
@@ -1802,14 +2043,14 @@
         :operator: lit_fixnum
       - :score: 1.1
         :operator: select
-      :score: 10.8
-      :name: OnesAndFivesRule#apply
     :score: 10.8
     :average_score: 10.8
   - :path: /lib/players/random_player.rb
     :highest_score: 8.1
     :scanned_methods: 
-    - :operators: 
+    - :score: 8.1
+      :name: RandomPlayer#roll
+      :operators: 
       - :score: 2.0
         :operator: length
       - :score: 1.8
@@ -1822,36 +2063,57 @@
         :operator: assignment
       - :score: 1.2
         :operator: roll
-      :score: 8.1
-      :name: RandomPlayer#roll
-    - :operators: 
+    - :score: 3.3
+      :name: main#none
+      :operators: 
       - :score: 3.3
         :operator: require
-      :score: 3.3
-      :name: main#none
     :score: 11.4
     :average_score: 5.7
-  - :path: /lib/monkeys/array_helper.rb
-    :highest_score: 7.7
+  - :path: /lib/greed.rb
+    :highest_score: 7.4
     :scanned_methods: 
-    - :operators: 
-      - :score: 3.9
-        :operator: branch
-      - :score: 2.9
-        :operator: assignment
-      - :score: 1.6
-        :operator: "-"
-      - :score: 1.4
-        :operator: <=
+    - :score: 7.4
+      :name: main#none
+      :operators: 
+      - :score: 2.6
+        :operator: new
+      - :score: 2.2
+        :operator: require
       - :score: 1.3
+        :operator: mainloop
+      - :score: 1.3
+        :operator: assignment
+      - :score: 1.1
+        :operator: branch
+      - :score: 1.1
         :operator: ==
-      - :score: 1.2
-        :operator: reject!
-      - :score: 0.5
-        :operator: lit_fixnum
-      :score: 7.7
-      :name: Array#remove!
-    - :operators: 
+    - :score: 3.0
+      :name: Greed#spawn_client
+      :operators: 
+      - :score: 1.4
+        :operator: exec
+      - :score: 1.3
+        :operator: branch
+      - :score: 1.3
+        :operator: fork
+    - :score: 3.0
+      :name: Greed#spawn_server
+      :operators: 
+      - :score: 1.4
+        :operator: exec
+      - :score: 1.3
+        :operator: branch
+      - :score: 1.3
+        :operator: fork
+    :score: 13.4
+    :average_score: 4.5
+  - :path: /lib/monkeys/array_helper.rb
+    :highest_score: 7.3
+    :scanned_methods: 
+    - :score: 7.3
+      :name: Array#freq
+      :operators: 
       - :score: 3.8
         :operator: assignment
       - :score: 1.7
@@ -1866,9 +2128,9 @@
         :operator: branch
       - :score: 0.4
         :operator: lit_fixnum
-      :score: 7.3
-      :name: Array#freq
-    - :operators: 
+    - :score: 4.7
+      :name: Array#sum
+      :operators: 
       - :score: 3.8
         :operator: assignment
       - :score: 1.3
@@ -1877,59 +2139,38 @@
         :operator: each
       - :score: 1.2
         :operator: branch
-      :score: 4.7
-      :name: Array#sum
-    - :operators: 
+    - :score: 4.1
+      :name: Array#remove!
+      :operators: 
+      - :score: 1.3
+        :operator: delete_at
       - :score: 1.2
+        :operator: branch
+      - :score: 1.2
+        :operator: assignment
+      - :score: 1.2
+        :operator: index
+      - :score: 1.2
+        :operator: nil?
+    - :score: 3.1
+      :name: Array#remove_three!
+      :operators: 
+      - :score: 1.3
         :operator: remove!
+      - :score: 1.2
+        :operator: times
+      - :score: 1.2
+        :operator: branch
       - :score: 0.4
         :operator: lit_fixnum
-      :score: 1.6
-      :name: Array#remove_three!
-    :score: 21.2
-    :average_score: 5.3
-  - :path: /lib/greed.rb
-    :highest_score: 7.4
-    :scanned_methods: 
-    - :operators: 
-      - :score: 2.6
-        :operator: new
-      - :score: 2.2
-        :operator: require
-      - :score: 1.3
-        :operator: mainloop
-      - :score: 1.3
-        :operator: assignment
-      - :score: 1.1
-        :operator: branch
-      - :score: 1.1
-        :operator: ==
-      :score: 7.4
-      :name: main#none
-    - :operators: 
-      - :score: 1.4
-        :operator: exec
-      - :score: 1.3
-        :operator: branch
-      - :score: 1.3
-        :operator: fork
-      :score: 3.0
-      :name: Greed#spawn_client
-    - :operators: 
-      - :score: 1.4
-        :operator: exec
-      - :score: 1.3
-        :operator: branch
-      - :score: 1.3
-        :operator: fork
-      :score: 3.0
-      :name: Greed#spawn_server
-    :score: 13.4
-    :average_score: 4.5
+    :score: 19.1
+    :average_score: 4.8
   - :path: /lib/monkeys/mutex_helper.rb
     :highest_score: 6.2
     :scanned_methods: 
-    - :operators: 
+    - :score: 6.2
+      :name: Mutex#try_synchronize
+      :operators: 
       - :score: 3.5
         :operator: branch
       - :score: 1.3
@@ -1942,60 +2183,60 @@
         :operator: synchronize
       - :score: 1.2
         :operator: assignment
-      :score: 6.2
-      :name: Mutex#try_synchronize
     :score: 6.2
     :average_score: 6.2
   - :path: /lib/players/dummy_player.rb
     :highest_score: 5.2
     :scanned_methods: 
-    - :operators: 
+    - :score: 5.2
+      :name: DummyPlayer#initialize
+      :operators: 
       - :score: 5.2
         :operator: assignment
       - :score: 0.7
         :operator: lit_fixnum
-      :score: 5.2
-      :name: DummyPlayer#initialize
-    - :operators: 
+    - :score: 3.0
+      :name: DummyPlayer#name
+      :operators: 
       - :score: 1.4
         :operator: to_s
       - :score: 1.3
         :operator: empty?
       - :score: 1.3
         :operator: branch
-      :score: 3.0
-      :name: DummyPlayer#name
-    - :operators: 
+    - :score: 2.6
+      :name: DummyPlayer#limits
+      :operators: 
       - :score: 2.6
         :operator: assignment
-      :score: 2.6
-      :name: DummyPlayer#limits
-    - :operators: 
+    - :score: 2.4
+      :name: DummyPlayer#none
+      :operators: 
       - :score: 2.4
         :operator: include
-      :score: 2.4
-      :name: DummyPlayer#none
-    - :operators: 
-      - :score: 1.3
-        :operator: assignment
-      :score: 1.3
+    - :score: 1.3
       :name: DummyPlayer#status_update
-    - :operators: 
+      :operators: 
       - :score: 1.3
         :operator: assignment
-      :score: 1.3
+    - :score: 1.3
       :name: DummyPlayer#update_scoreboard
-    - :operators: 
+      :operators: 
+      - :score: 1.3
+        :operator: assignment
+    - :score: 1.1
+      :name: main#none
+      :operators: 
       - :score: 1.1
         :operator: require
-      :score: 1.1
-      :name: main#none
     :score: 16.9
     :average_score: 2.4
   - :path: /lib/rules/street_rule.rb
     :highest_score: 4.8
     :scanned_methods: 
-    - :operators: 
+    - :score: 4.8
+      :name: StreetRule#apply
+      :operators: 
       - :score: 2.2
         :operator: lit_fixnum
       - :score: 1.3
@@ -2004,66 +2245,64 @@
         :operator: ==
       - :score: 1.1
         :operator: branch
-      :score: 4.8
-      :name: StreetRule#apply
     :score: 4.8
     :average_score: 4.8
   - :path: /lib/players/manual_player.rb
     :highest_score: 3.7
     :scanned_methods: 
-    - :operators: 
+    - :score: 3.7
+      :name: ManualPlayer#initialize
+      :operators: 
       - :score: 2.6
         :operator: assignment
       - :score: 1.3
         :operator: super
       - :score: 1.3
         :operator: new
-      :score: 3.7
-      :name: ManualPlayer#initialize
-    - :operators: 
+    - :score: 2.6
+      :name: ManualPlayer#limits
+      :operators: 
       - :score: 1.3
         :operator: limits
       - :score: 1.3
         :operator: super
-      :score: 2.6
-      :name: ManualPlayer#limits
-    - :operators: 
+    - :score: 2.2
+      :name: main#none
+      :operators: 
       - :score: 2.2
         :operator: require
-      :score: 2.2
-      :name: main#none
-    - :operators: 
+    - :score: 1.8
+      :name: ManualPlayer#update_scoreboard
+      :operators: 
       - :score: 1.3
         :operator: update_scoreboard
       - :score: 1.3
         :operator: assignment
-      :score: 1.8
-      :name: ManualPlayer#update_scoreboard
-    - :operators: 
+    - :score: 1.8
+      :name: ManualPlayer#status_update
+      :operators: 
       - :score: 1.3
         :operator: assignment
       - :score: 1.3
         :operator: status_update
-      :score: 1.8
-      :name: ManualPlayer#status_update
-    - :operators: 
+    - :score: 1.3
+      :name: ManualPlayer#roll
+      :operators: 
       - :score: 1.3
         :operator: roll
-      :score: 1.3
-      :name: ManualPlayer#roll
     :score: 13.5
     :average_score: 2.2
   - :path: /lib/players/coward_player.rb
     :highest_score: 1.1
     :scanned_methods: 
-    - :operators: 
+    - :score: 1.1
+      :name: main#none
+      :operators: 
       - :score: 1.1
         :operator: require
-      :score: 1.1
-      :name: main#none
     :score: 1.1
     :average_score: 1.1
-  :average: 14.0
+  :average: 13.5
 :flay: 
   :matches: []
 
@@ -2095,10 +2334,7 @@
       :message: refers to f more than self
       :method: Array#freq
     - :type: UncommunicativeName
-      :message: has the variable name 'e'
-      :method: Array#remove!
-    - :type: LowCohesion
-      :message: refers to number more than self
+      :message: has the variable name 'i'
       :method: Array#remove!
     - :type: UncommunicativeName
       :message: has the parameter name 'n'
@@ -2260,19 +2496,28 @@
       :message: has approx 7 statements
       :method: Server#connect
     - :type: Duplication
-      :message: calls $log.debug("game") 5 times
+      :message: calls $log.debug("game") 9 times
       :method: Server#game
     - :type: Duplication
       :message: calls (round_score + throw_score) twice
       :method: Server#game
     - :type: Duplication
-      :message: calls (saved_dice + throw_dice) twice
+      :message: calls c.name 8 times
       :method: Server#game
     - :type: Duplication
-      :message: calls c.name 9 times
+      :message: calls cup.rolled 3 times
       :method: Server#game
     - :type: Duplication
-      :message: calls saved_dice.length twice
+      :message: calls cup.saved 3 times
+      :method: Server#game
+    - :type: Duplication
+      :message: calls reroll_dice.inspect twice
+      :method: Server#game
+    - :type: Duplication
+      :message: calls saved_dice.inspect twice
+      :method: Server#game
+    - :type: Duplication
+      :message: calls saved_dice.remove!(d) twice
       :method: Server#game
     - :type: NestedIterators
       :message: contains iterators nested 2 deep
@@ -2281,7 +2526,7 @@
       :message: contains iterators nested 4 deep
       :method: Server#game
     - :type: LongMethod
-      :message: has approx 32 statements
+      :message: has approx 35 statements
       :method: Server#game
     - :type: UncommunicativeName
       :message: has the variable name 'c'
@@ -2292,11 +2537,25 @@
     - :type: LongMethod
       :message: has approx 6 statements
       :method: Server#start_game
+  - :file_path: lib/throw.rb
+    :code_smells: 
+    - :type: Duplication
+      :message: calls (rand(6) + 1) twice
+      :method: Throw#reroll!
+    - :type: Duplication
+      :message: calls rand(6) twice
+      :method: Throw#reroll!
+    - :type: LowCohesion
+      :message: refers to dice more than self
+      :method: Throw#roll=
   - :file_path: lib/ui/client_window.rb
     :code_smells: 
     - :type: IrresponsibleModule
       :message: has no descriptive comment
       :method: UI::ClientWindow
+    - :type: Duplication
+      :message: calls client.name twice
+      :method: UI::ClientWindow#initialize
     - :type: Duplication
       :message: calls command twice
       :method: UI::ClientWindow#initialize
@@ -2389,7 +2648,13 @@
       :message: refers to result more than self
       :method: UI::ManualWindow#get_dies
     - :type: Duplication
+      :message: calls ($state == :wait) twice
+      :method: UI::ManualWindow#initialize
+    - :type: Duplication
       :message: calls @@die_vars[i] twice
+      :method: UI::ManualWindow#initialize
+    - :type: Duplication
+      :message: calls command twice
       :method: UI::ManualWindow#initialize
     - :type: Duplication
       :message: calls pack 7 times
@@ -2397,11 +2662,14 @@
     - :type: Duplication
       :message: calls pack(:fill => :x) twice
       :method: UI::ManualWindow#initialize
+    - :type: Duplication
+      :message: calls pack(:side => :left) 3 times
+      :method: UI::ManualWindow#initialize
     - :type: NestedIterators
       :message: contains iterators nested 3 deep
       :method: UI::ManualWindow#initialize
     - :type: NestedIterators
-      :message: contains iterators nested 4 deep
+      :message: contains iterators nested 5 deep
       :method: UI::ManualWindow#initialize
     - :type: NestedIterators
       :message: contains iterators nested 6 deep
@@ -2410,7 +2678,7 @@
       :message: has the variable name 'i'
       :method: UI::ManualWindow#initialize
     - :type: LongMethod
-      :message: has approx 13 statements
+      :message: has approx 15 statements
       :method: UI::ManualWindow#roll
     - :type: Duplication
       :message: calls @@die_vars[i] twice
@@ -2493,1027 +2761,1132 @@
   :total: 
   - Found 28 errors.
   :problems: 
-  - :problem: Method name "game" cyclomatic complexity is 9.  It should be 8 or less.
-    :file: lib/server.rb
-    :line: "107"
-  - :problem: Don't use class variables. You might want to try a different design.
-    :file: lib/server.rb
-    :line: "171"
-  - :problem: Don't use class variables. You might want to try a different design.
-    :file: lib/server.rb
-    :line: "176"
-  - :problem: Don't use class variables. You might want to try a different design.
-    :file: lib/server.rb
-    :line: "180"
-  - :problem: Don't use class variables. You might want to try a different design.
-    :file: lib/ui/manual_window.rb
-    :line: "26"
-  - :problem: Don't use class variables. You might want to try a different design.
-    :file: lib/ui/manual_window.rb
-    :line: "32"
-  - :problem: Don't use class variables. You might want to try a different design.
-    :file: lib/ui/manual_window.rb
-    :line: "36"
-  - :problem: Don't use class variables. You might want to try a different design.
-    :file: lib/ui/manual_window.rb
-    :line: "59"
-  - :problem: Don't use class variables. You might want to try a different design.
-    :file: lib/ui/manual_window.rb
-    :line: "63"
-  - :problem: Don't use class variables. You might want to try a different design.
-    :file: lib/ui/manual_window.rb
-    :line: "82"
-  - :problem: Don't use class variables. You might want to try a different design.
-    :file: lib/ui/manual_window.rb
-    :line: "97"
-  - :problem: Don't use class variables. You might want to try a different design.
-    :file: lib/ui/manual_window.rb
-    :line: "122"
-  - :problem: Don't use class variables. You might want to try a different design.
-    :file: lib/ui/manual_window.rb
-    :line: "128"
-  - :problem: Don't use class variables. You might want to try a different design.
-    :file: lib/ui/manual_window.rb
-    :line: "135"
-  - :problem: Don't use class variables. You might want to try a different design.
-    :file: lib/ui/manual_window.rb
-    :line: "136"
-  - :problem: Don't use class variables. You might want to try a different design.
-    :file: lib/ui/manual_window.rb
-    :line: "144"
-  - :problem: Don't use class variables. You might want to try a different design.
-    :file: lib/ui/manual_window.rb
-    :line: "145"
-  - :problem: Don't use class variables. You might want to try a different design.
-    :file: lib/ui/manual_window.rb
-    :line: "152"
-  - :problem: Don't use class variables. You might want to try a different design.
-    :file: lib/ui/manual_window.rb
-    :line: "153"
-  - :problem: Case statement is missing an else clause.
-    :file: lib/client.rb
-    :line: "21"
-  - :problem: Block cyclomatic complexity is 9.  It should be 4 or less.
-    :file: lib/server.rb
+  - :file: lib/server.rb
     :line: "109"
-  - :problem: Rescue block should not be empty.
-    :file: lib/players/clever_player.rb
+    :problem: Method name "game" cyclomatic complexity is 9.  It should be 8 or less.
+  - :file: lib/server.rb
+    :line: "189"
+    :problem: Don't use class variables. You might want to try a different design.
+  - :file: lib/server.rb
+    :line: "194"
+    :problem: Don't use class variables. You might want to try a different design.
+  - :file: lib/server.rb
+    :line: "198"
+    :problem: Don't use class variables. You might want to try a different design.
+  - :file: lib/ui/manual_window.rb
+    :line: "26"
+    :problem: Don't use class variables. You might want to try a different design.
+  - :file: lib/ui/manual_window.rb
+    :line: "32"
+    :problem: Don't use class variables. You might want to try a different design.
+  - :file: lib/ui/manual_window.rb
+    :line: "36"
+    :problem: Don't use class variables. You might want to try a different design.
+  - :file: lib/ui/manual_window.rb
+    :line: "69"
+    :problem: Don't use class variables. You might want to try a different design.
+  - :file: lib/ui/manual_window.rb
+    :line: "73"
+    :problem: Don't use class variables. You might want to try a different design.
+  - :file: lib/ui/manual_window.rb
+    :line: "92"
+    :problem: Don't use class variables. You might want to try a different design.
+  - :file: lib/ui/manual_window.rb
+    :line: "106"
+    :problem: Don't use class variables. You might want to try a different design.
+  - :file: lib/ui/manual_window.rb
+    :line: "135"
+    :problem: Don't use class variables. You might want to try a different design.
+  - :file: lib/ui/manual_window.rb
+    :line: "141"
+    :problem: Don't use class variables. You might want to try a different design.
+  - :file: lib/ui/manual_window.rb
+    :line: "148"
+    :problem: Don't use class variables. You might want to try a different design.
+  - :file: lib/ui/manual_window.rb
+    :line: "149"
+    :problem: Don't use class variables. You might want to try a different design.
+  - :file: lib/ui/manual_window.rb
+    :line: "157"
+    :problem: Don't use class variables. You might want to try a different design.
+  - :file: lib/ui/manual_window.rb
+    :line: "158"
+    :problem: Don't use class variables. You might want to try a different design.
+  - :file: lib/ui/manual_window.rb
+    :line: "165"
+    :problem: Don't use class variables. You might want to try a different design.
+  - :file: lib/ui/manual_window.rb
+    :line: "166"
+    :problem: Don't use class variables. You might want to try a different design.
+  - :file: lib/client.rb
+    :line: "21"
+    :problem: Case statement is missing an else clause.
+  - :file: lib/server.rb
+    :line: "111"
+    :problem: Block cyclomatic complexity is 9.  It should be 4 or less.
+  - :file: lib/players/clever_player.rb
     :line: "28"
-  - :problem: Method "game" has 57 lines.  It should have 20 or less.
-    :file: lib/server.rb
-    :line: "107"
-  - :problem: Method "initialize" has 118 lines.  It should have 20 or less.
-    :file: lib/ui/client_window.rb
+    :problem: Rescue block should not be empty.
+  - :file: lib/server.rb
+    :line: "109"
+    :problem: Method "game" has 73 lines.  It should have 20 or less.
+  - :file: lib/ui/client_window.rb
     :line: "5"
-  - :problem: Method "initialize" has 38 lines.  It should have 20 or less.
-    :file: lib/ui/greed_window.rb
+    :problem: Method "initialize" has 124 lines.  It should have 20 or less.
+  - :file: lib/ui/greed_window.rb
     :line: "5"
-  - :problem: Method "initialize" has 65 lines.  It should have 20 or less.
-    :file: lib/ui/manual_window.rb
+    :problem: Method "initialize" has 38 lines.  It should have 20 or less.
+  - :file: lib/ui/manual_window.rb
     :line: "8"
-  - :problem: Method "roll" has 25 lines.  It should have 20 or less.
-    :file: lib/ui/manual_window.rb
-    :line: "93"
-  - :problem: Method "initialize" has 87 lines.  It should have 20 or less.
-    :file: lib/ui/server_window.rb
+    :problem: Method "initialize" has 75 lines.  It should have 20 or less.
+  - :file: lib/ui/manual_window.rb
+    :line: "102"
+    :problem: Method "roll" has 29 lines.  It should have 20 or less.
+  - :file: lib/ui/server_window.rb
     :line: "8"
+    :problem: Method "initialize" has 87 lines.  It should have 20 or less.
 :saikuro: 
   :methods: 
-  - :lines: 119
-    :complexity: 23
-    :name: UI::ClientWindow#initialize
-  - :lines: 58
-    :complexity: 22
+  - :complexity: 28
+    :lines: 74
     :name: Server#game
-  - :lines: 88
-    :complexity: 18
-    :name: UI::ServerWindow#initialize
-  - :lines: 66
-    :complexity: 16
+  - :complexity: 24
+    :lines: 125
+    :name: UI::ClientWindow#initialize
+  - :complexity: 20
+    :lines: 76
     :name: UI::ManualWindow#initialize
-  - :lines: 39
-    :complexity: 10
+  - :complexity: 18
+    :lines: 88
+    :name: UI::ServerWindow#initialize
+  - :complexity: 10
+    :lines: 39
     :name: UI::GreedWindow#initialize
-  - :lines: 14
-    :complexity: 8
+  - :complexity: 8
+    :lines: 14
     :name: Players::GamblerPlayer#roll
-  - :lines: 14
-    :complexity: 6
-    :name: Server#broadcast
-  - :lines: 13
-    :complexity: 6
-    :name: Client#create_player
-  - :lines: 11
-    :complexity: 5
-    :name: Server#start_game
-  - :lines: 13
-    :complexity: 5
-    :name: Rules#self.apply_rules
-  - :lines: 15
-    :complexity: 5
-    :name: Server#connect
-  - :lines: 26
-    :complexity: 5
+  - :complexity: 6
+    :lines: 30
     :name: UI::ManualWindow#roll
-  - :lines: 14
-    :complexity: 4
+  - :complexity: 6
+    :lines: 14
+    :name: Server#broadcast
+  - :complexity: 6
+    :lines: 13
+    :name: Client#create_player
+  - :complexity: 5
+    :lines: 15
+    :name: Server#connect
+  - :complexity: 5
+    :lines: 11
+    :name: Server#start_game
+  - :complexity: 5
+    :lines: 13
+    :name: Rules#self.apply_rules
+  - :complexity: 4
+    :lines: 14
     :name: Rules::OnesAndFivesRule#apply
-  - :lines: 13
-    :complexity: 4
-    :name: Array#remove!
-  - :lines: 8
-    :complexity: 4
+  - :complexity: 4
+    :lines: 4
+    :name: Throw#save
+  - :complexity: 4
+    :lines: 8
     :name: Rules::ThreeOfAKindRule#apply
-  - :lines: 8
-    :complexity: 4
-    :name: Mutex#try_synchronize
-  - :lines: 14
-    :complexity: 4
+  - :complexity: 4
+    :lines: 14
     :name: Players::ConsolePlayer#roll
-  - :lines: 11
-    :complexity: 3
-    :name: Server#initialize
-  - :lines: 5
-    :complexity: 3
-    :name: Rules#self.rules
-  - :lines: 9
-    :complexity: 3
-    :name: Server#disconnect
-  - :lines: 12
-    :complexity: 3
-    :name: Players::CleverPlayer#position
-  - :lines: 7
-    :complexity: 3
-    :name: UI::ManualWindow#set_dice
-  - :lines: 7
-    :complexity: 3
-    :name: UI::ManualWindow#set_saved
-  - :lines: 8
-    :complexity: 3
+  - :complexity: 4
+    :lines: 8
+    :name: Mutex#try_synchronize
+  - :complexity: 3
+    :lines: 8
     :name: UI::ManualWindow#get_dies
-  - :lines: 7
-    :complexity: 3
+  - :complexity: 3
+    :lines: 12
+    :name: Players::CleverPlayer#position
+  - :complexity: 3
+    :lines: 6
+    :name: Throw#reroll!
+  - :complexity: 3
+    :lines: 9
+    :name: Throw#roll=
+  - :complexity: 3
+    :lines: 7
+    :name: UI::ManualWindow#set_saved
+  - :complexity: 3
+    :lines: 7
+    :name: UI::ManualWindow#set_dice
+  - :complexity: 3
+    :lines: 5
+    :name: Rules#self.rules
+  - :complexity: 3
+    :lines: 7
     :name: UI::ManualWindow#update_scoreboard
-  - :lines: 4
-    :complexity: 2
-    :name: Server#self.start_game
-  - :lines: 3
-    :complexity: 2
-    :name: Client#disconnect
-  - :lines: 6
-    :complexity: 2
-    :name: Rules::ThreeOfAKindRule#points_table
-  - :lines: 4
-    :complexity: 2
-    :name: Greed#spawn_client
-  - :lines: 4
-    :complexity: 2
-    :name: Greed#spawn_server
-  - :lines: 6
-    :complexity: 2
-    :name: Rules::StreetRule#apply
-  - :lines: 2
-    :complexity: 2
-    :name: Players::ConsolePlayer#status_update
-  - :lines: 5
-    :complexity: 2
-    :name: Players::ConsolePlayer#update_scoreboard
-  - :lines: 2
-    :complexity: 2
+  - :complexity: 3
+    :lines: 9
+    :name: Server#disconnect
+  - :complexity: 3
+    :lines: 11
+    :name: Server#initialize
+  - :complexity: 2
+    :lines: 2
     :name: Players::DummyPlayer#name
-  - :lines: 6
-    :complexity: 2
-    :name: Players::CleverPlayer#roll
-  - :lines: 6
-    :complexity: 2
-    :name: Array#freq
-  - :lines: 6
-    :complexity: 2
+  - :complexity: 2
+    :lines: 6
     :name: Array#sum
-  - :lines: 2
-    :complexity: 1
-    :name: UI::ManualWindow#set_current_player
-  - :lines: 2
-    :complexity: 1
-    :name: Rules#self.max_points
-  - :lines: 2
-    :complexity: 1
-    :name: Players::ConsolePlayer#name
-  - :lines: 4
-    :complexity: 1
-    :name: Client#connect
-  - :lines: 4
-    :complexity: 1
-    :name: Players::DummyPlayer#initialize
-  - :lines: 1
-    :complexity: 1
-    :name: Players::DummyPlayer#update_scoreboard
-  - :lines: 1
-    :complexity: 1
-    :name: Players::DummyPlayer#status_update
-  - :lines: 2
-    :complexity: 1
-    :name: Players::DummyPlayer#roll
-  - :lines: 3
-    :complexity: 1
-    :name: Players::DummyPlayer#limits
-  - :lines: 2
-    :complexity: 1
+  - :complexity: 2
+    :lines: 2
     :name: Array#remove_three!
-  - :lines: 2
-    :complexity: 1
-    :name: UI::ManualWindow#limits
-  - :lines: 1
-    :complexity: 1
+  - :complexity: 2
+    :lines: 3
+    :name: Client#disconnect
+  - :complexity: 2
+    :lines: 6
+    :name: Rules::StreetRule#apply
+  - :complexity: 2
+    :lines: 5
+    :name: Array#remove!
+  - :complexity: 2
+    :lines: 4
+    :name: Greed#spawn_server
+  - :complexity: 2
+    :lines: 4
+    :name: Greed#spawn_client
+  - :complexity: 2
+    :lines: 2
+    :name: Players::ConsolePlayer#status_update
+  - :complexity: 2
+    :lines: 5
+    :name: Players::ConsolePlayer#update_scoreboard
+  - :complexity: 2
+    :lines: 4
+    :name: Server#self.start_game
+  - :complexity: 2
+    :lines: 6
+    :name: Players::CleverPlayer#roll
+  - :complexity: 2
+    :lines: 6
+    :name: Rules::ThreeOfAKindRule#points_table
+  - :complexity: 2
+    :lines: 6
+    :name: Array#freq
+  - :complexity: 2
+    :lines: 3
+    :name: Throw#initialize
+  - :complexity: 1
+    :lines: 2
+    :name: Throw#to_s
+  - :complexity: 1
+    :lines: 3
+    :name: Players::DummyPlayer#limits
+  - :complexity: 1
+    :lines: 1
     :name: Players::DummyPlayer#game_over
-  - :lines: 6
-    :complexity: 1
-    :name: UI::ManualWindow#status_update
-  - :lines: 2
-    :complexity: 1
+  - :complexity: 1
+    :lines: 2
+    :name: Throw#clear_saved
+  - :complexity: 1
+    :lines: 2
+    :name: Throw#to_a
+  - :complexity: 1
+    :lines: 2
+    :name: Throw#dice
+  - :complexity: 1
+    :lines: 2
+    :name: Throw#size
+  - :complexity: 1
+    :lines: 2
+    :name: Players::DummyPlayer#roll
+  - :complexity: 1
+    :lines: 1
+    :name: Players::DummyPlayer#status_update
+  - :complexity: 1
+    :lines: 2
+    :name: Rules#self.max_points
+  - :complexity: 1
+    :lines: 2
     :name: Players::CleverPlayer#update_scoreboard
-  - :lines: 3
-    :complexity: 1
+  - :complexity: 1
+    :lines: 3
     :name: Players::ManualPlayer#initialize
-  - :lines: 2
-    :complexity: 1
+  - :complexity: 1
+    :lines: 2
     :name: Players::ManualPlayer#update_scoreboard
-  - :lines: 8
-    :complexity: 1
-    :name: Server#self.launch_server
-  - :lines: 2
-    :complexity: 1
+  - :complexity: 1
+    :lines: 2
+    :name: UI::ManualWindow#set_current_player
+  - :complexity: 1
+    :lines: 2
+    :name: UI::ManualWindow#limits
+  - :complexity: 1
+    :lines: 2
     :name: Players::ManualPlayer#status_update
-  - :lines: 2
-    :complexity: 1
+  - :complexity: 1
+    :lines: 5
+    :name: UI::ManualWindow#status_update
+  - :complexity: 1
+    :lines: 2
     :name: Players::ManualPlayer#roll
-  - :lines: 3
-    :complexity: 1
+  - :complexity: 1
+    :lines: 3
     :name: Players::ManualPlayer#limits
-  - :lines: 2
-    :complexity: 1
+  - :complexity: 1
+    :lines: 1
+    :name: Players::DummyPlayer#update_scoreboard
+  - :complexity: 1
+    :lines: 8
+    :name: Server#self.launch_server
+  - :complexity: 1
+    :lines: 4
+    :name: Players::DummyPlayer#initialize
+  - :complexity: 1
+    :lines: 2
+    :name: Players::ConsolePlayer#name
+  - :complexity: 1
+    :lines: 4
+    :name: Client#connect
+  - :complexity: 1
+    :lines: 2
     :name: Players::CowardPlayer#roll
-  - :lines: 2
-    :complexity: 1
-    :name: Rules::DummyRule#apply
-  - :lines: 2
-    :complexity: 1
-    :name: Server#stop_service
-  - :lines: 2
-    :complexity: 1
-    :name: Server#start_service
-  - :lines: 3
-    :complexity: 1
+  - :complexity: 1
+    :lines: 3
     :name: Players::RandomPlayer#roll
+  - :complexity: 1
+    :lines: 2
+    :name: Server#stop_service
+  - :complexity: 1
+    :lines: 2
+    :name: Server#start_service
+  - :complexity: 1
+    :lines: 2
+    :name: Rules::DummyRule#apply
   :files: 
   - :classes: 
-    - :class_name: ""
-      :methods: []
+    - :methods: []
 
-      :lines: 11
       :complexity: 2
-    - :class_name: Server
-      :methods: 
-      - :lines: 58
-        :complexity: 22
+      :lines: 11
+      :class_name: ""
+    - :methods: 
+      - :complexity: 28
+        :lines: 74
         :name: Server#game
-      - :lines: 14
-        :complexity: 6
+      - :complexity: 6
+        :lines: 14
         :name: Server#broadcast
-      - :lines: 15
-        :complexity: 5
+      - :complexity: 5
+        :lines: 15
         :name: Server#connect
-      - :lines: 11
-        :complexity: 5
+      - :complexity: 5
+        :lines: 11
         :name: Server#start_game
-      - :lines: 11
-        :complexity: 3
+      - :complexity: 3
+        :lines: 11
         :name: Server#initialize
-      - :lines: 9
-        :complexity: 3
+      - :complexity: 3
+        :lines: 9
         :name: Server#disconnect
-      - :lines: 4
-        :complexity: 2
+      - :complexity: 2
+        :lines: 4
         :name: Server#self.start_game
-      - :lines: 8
-        :complexity: 1
+      - :complexity: 1
+        :lines: 8
         :name: Server#self.launch_server
-      - :lines: 2
-        :complexity: 1
+      - :complexity: 1
+        :lines: 2
         :name: Server#start_service
-      - :lines: 2
-        :complexity: 1
+      - :complexity: 1
+        :lines: 2
         :name: Server#stop_service
-      :lines: 170
-      :complexity: 49
+      :complexity: 55
+      :lines: 186
+      :class_name: Server
     :filename: server.rb
   - :classes: 
-    - :class_name: UI
-      :methods: []
+    - :methods: []
 
-      :lines: 2
       :complexity: 0
-    - :class_name: UI::ManualWindow
-      :methods: 
-      - :lines: 66
-        :complexity: 16
+      :lines: 2
+      :class_name: UI
+    - :methods: 
+      - :complexity: 20
+        :lines: 76
         :name: UI::ManualWindow#initialize
-      - :lines: 26
-        :complexity: 5
+      - :complexity: 6
+        :lines: 30
         :name: UI::ManualWindow#roll
-      - :lines: 8
-        :complexity: 3
+      - :complexity: 3
+        :lines: 8
         :name: UI::ManualWindow#get_dies
-      - :lines: 7
-        :complexity: 3
+      - :complexity: 3
+        :lines: 7
         :name: UI::ManualWindow#set_saved
-      - :lines: 7
-        :complexity: 3
+      - :complexity: 3
+        :lines: 7
         :name: UI::ManualWindow#set_dice
-      - :lines: 7
-        :complexity: 3
+      - :complexity: 3
+        :lines: 7
         :name: UI::ManualWindow#update_scoreboard
-      - :lines: 2
-        :complexity: 1
+      - :complexity: 1
+        :lines: 2
         :name: UI::ManualWindow#set_current_player
-      - :lines: 6
-        :complexity: 1
+      - :complexity: 1
+        :lines: 5
         :name: UI::ManualWindow#status_update
-      - :lines: 2
-        :complexity: 1
+      - :complexity: 1
+        :lines: 2
         :name: UI::ManualWindow#limits
-      :lines: 151
-      :complexity: 36
+      :complexity: 41
+      :lines: 164
+      :class_name: UI::ManualWindow
     :filename: manual_window.rb
   - :classes: 
-    - :class_name: UI
-      :methods: []
+    - :methods: []
 
-      :lines: 2
       :complexity: 0
-    - :class_name: UI::ClientWindow
-      :methods: 
-      - :lines: 119
-        :complexity: 23
+      :lines: 2
+      :class_name: UI
+    - :methods: 
+      - :complexity: 24
+        :lines: 125
         :name: UI::ClientWindow#initialize
-      :lines: 121
-      :complexity: 23
+      :complexity: 24
+      :lines: 127
+      :class_name: UI::ClientWindow
     :filename: client_window.rb
   - :classes: 
-    - :class_name: ""
-      :methods: []
+    - :methods: []
 
+      :complexity: 0
       :lines: 1
-      :complexity: 0
-    - :class_name: UI
-      :methods: []
+      :class_name: ""
+    - :methods: []
 
-      :lines: 2
       :complexity: 0
-    - :class_name: UI::ServerWindow
-      :methods: 
-      - :lines: 88
-        :complexity: 18
+      :lines: 2
+      :class_name: UI
+    - :methods: 
+      - :complexity: 18
+        :lines: 88
         :name: UI::ServerWindow#initialize
-      :lines: 90
       :complexity: 18
+      :lines: 90
+      :class_name: UI::ServerWindow
     :filename: server_window.rb
   - :classes: 
-    - :class_name: UI
-      :methods: []
+    - :methods: []
 
-      :lines: 2
       :complexity: 0
-    - :class_name: UI::GreedWindow
-      :methods: 
-      - :lines: 39
-        :complexity: 10
+      :lines: 1
+      :class_name: ""
+    - :methods: 
+      - :complexity: 4
+        :lines: 4
+        :name: Throw#save
+      - :complexity: 3
+        :lines: 6
+        :name: Throw#reroll!
+      - :complexity: 3
+        :lines: 9
+        :name: Throw#roll=
+      - :complexity: 2
+        :lines: 3
+        :name: Throw#initialize
+      - :complexity: 1
+        :lines: 2
+        :name: Throw#clear_saved
+      - :complexity: 1
+        :lines: 2
+        :name: Throw#to_s
+      - :complexity: 1
+        :lines: 2
+        :name: Throw#dice
+      - :complexity: 1
+        :lines: 2
+        :name: Throw#size
+      - :complexity: 1
+        :lines: 2
+        :name: Throw#to_a
+      :complexity: 17
+      :lines: 53
+      :class_name: Throw
+    :filename: throw.rb
+  - :classes: 
+    - :methods: []
+
+      :complexity: 0
+      :lines: 2
+      :class_name: UI
+    - :methods: 
+      - :complexity: 10
+        :lines: 39
         :name: UI::GreedWindow#initialize
-      :lines: 41
       :complexity: 10
+      :lines: 41
+      :class_name: UI::GreedWindow
     :filename: greed_window.rb
   - :classes: 
-    - :class_name: Rules
-      :methods: 
-      - :lines: 13
-        :complexity: 5
+    - :methods: 
+      - :complexity: 5
+        :lines: 13
         :name: Rules#self.apply_rules
-      - :lines: 5
-        :complexity: 3
+      - :complexity: 3
+        :lines: 5
         :name: Rules#self.rules
-      - :lines: 2
-        :complexity: 1
+      - :complexity: 1
+        :lines: 2
         :name: Rules#self.max_points
-      :lines: 29
       :complexity: 9
+      :lines: 29
+      :class_name: Rules
     :filename: rules.rb
   - :classes: 
-    - :class_name: Array
-      :methods: 
-      - :lines: 13
-        :complexity: 4
-        :name: Array#remove!
-      - :lines: 6
-        :complexity: 2
-        :name: Array#freq
-      - :lines: 6
-        :complexity: 2
-        :name: Array#sum
-      - :lines: 2
-        :complexity: 1
-        :name: Array#remove_three!
-      :lines: 36
-      :complexity: 9
-    :filename: array_helper.rb
-  - :classes: 
-    - :class_name: ""
-      :methods: []
+    - :methods: []
 
-      :lines: 18
       :complexity: 4
-    - :class_name: Players
-      :methods: []
+      :lines: 18
+      :class_name: ""
+    - :methods: []
 
-      :lines: 2
       :complexity: 0
-    - :class_name: Players::ConsolePlayer
-      :methods: 
-      - :lines: 14
-        :complexity: 4
+      :lines: 2
+      :class_name: Players
+    - :methods: 
+      - :complexity: 4
+        :lines: 14
         :name: Players::ConsolePlayer#roll
-      - :lines: 5
-        :complexity: 2
+      - :complexity: 2
+        :lines: 5
         :name: Players::ConsolePlayer#update_scoreboard
-      - :lines: 2
-        :complexity: 2
+      - :complexity: 2
+        :lines: 2
         :name: Players::ConsolePlayer#status_update
-      - :lines: 2
-        :complexity: 1
+      - :complexity: 1
+        :lines: 2
         :name: Players::ConsolePlayer#name
-      :lines: 31
       :complexity: 9
+      :lines: 31
+      :class_name: Players::ConsolePlayer
     :filename: console_player.rb
   - :classes: 
-    - :class_name: ""
-      :methods: []
+    - :methods: []
 
-      :lines: 5
       :complexity: 1
-    - :class_name: Client
-      :methods: 
-      - :lines: 13
-        :complexity: 6
+      :lines: 5
+      :class_name: ""
+    - :methods: 
+      - :complexity: 6
+        :lines: 13
         :name: Client#create_player
-      - :lines: 3
-        :complexity: 2
+      - :complexity: 2
+        :lines: 3
         :name: Client#disconnect
-      - :lines: 4
-        :complexity: 1
+      - :complexity: 1
+        :lines: 4
         :name: Client#connect
-      :lines: 34
       :complexity: 9
+      :lines: 34
+      :class_name: Client
     :filename: client.rb
   - :classes: 
-    - :class_name: Players
-      :methods: []
+    - :methods: []
 
-      :lines: 4
       :complexity: 0
-    - :class_name: Players::DummyPlayer
-      :methods: 
-      - :lines: 2
-        :complexity: 2
-        :name: Players::DummyPlayer#name
-      - :lines: 2
-        :complexity: 1
-        :name: Players::DummyPlayer#roll
-      - :lines: 3
-        :complexity: 1
-        :name: Players::DummyPlayer#limits
-      - :lines: 1
-        :complexity: 1
-        :name: Players::DummyPlayer#game_over
-      - :lines: 1
-        :complexity: 1
-        :name: Players::DummyPlayer#status_update
-      - :lines: 1
-        :complexity: 1
-        :name: Players::DummyPlayer#update_scoreboard
-      - :lines: 4
-        :complexity: 1
-        :name: Players::DummyPlayer#initialize
-      :lines: 41
-      :complexity: 8
-    :filename: dummy_player.rb
-  - :classes: 
-    - :class_name: Players
-      :methods: []
-
       :lines: 6
-      :complexity: 0
-    - :class_name: Players::GamblerPlayer
-      :methods: 
-      - :lines: 14
-        :complexity: 8
+      :class_name: Players
+    - :methods: 
+      - :complexity: 8
+        :lines: 14
         :name: Players::GamblerPlayer#roll
-      :lines: 16
       :complexity: 8
+      :lines: 16
+      :class_name: Players::GamblerPlayer
     :filename: gambler_player.rb
   - :classes: 
-    - :class_name: Players
-      :methods: []
-
-      :lines: 6
-      :complexity: 0
-    - :class_name: Players::CleverPlayer
-      :methods: 
-      - :lines: 12
-        :complexity: 3
-        :name: Players::CleverPlayer#position
-      - :lines: 6
-        :complexity: 2
-        :name: Players::CleverPlayer#roll
-      - :lines: 2
-        :complexity: 1
-        :name: Players::CleverPlayer#update_scoreboard
+    - :methods: 
+      - :complexity: 2
+        :lines: 5
+        :name: Array#remove!
+      - :complexity: 2
+        :lines: 2
+        :name: Array#remove_three!
+      - :complexity: 2
+        :lines: 6
+        :name: Array#freq
+      - :complexity: 2
+        :lines: 6
+        :name: Array#sum
+      :complexity: 8
       :lines: 28
-      :complexity: 6
-    :filename: clever_player.rb
+      :class_name: Array
+    :filename: array_helper.rb
   - :classes: 
-    - :class_name: Rules
-      :methods: []
+    - :methods: []
 
-      :lines: 2
       :complexity: 0
-    - :class_name: Rules::ThreeOfAKindRule
-      :methods: 
-      - :lines: 8
-        :complexity: 4
+      :lines: 4
+      :class_name: Players
+    - :methods: 
+      - :complexity: 2
+        :lines: 2
+        :name: Players::DummyPlayer#name
+      - :complexity: 1
+        :lines: 2
+        :name: Players::DummyPlayer#roll
+      - :complexity: 1
+        :lines: 3
+        :name: Players::DummyPlayer#limits
+      - :complexity: 1
+        :lines: 1
+        :name: Players::DummyPlayer#game_over
+      - :complexity: 1
+        :lines: 1
+        :name: Players::DummyPlayer#status_update
+      - :complexity: 1
+        :lines: 1
+        :name: Players::DummyPlayer#update_scoreboard
+      - :complexity: 1
+        :lines: 4
+        :name: Players::DummyPlayer#initialize
+      :complexity: 8
+      :lines: 41
+      :class_name: Players::DummyPlayer
+    :filename: dummy_player.rb
+  - :classes: 
+    - :methods: []
+
+      :complexity: 0
+      :lines: 2
+      :class_name: Rules
+    - :methods: 
+      - :complexity: 4
+        :lines: 8
         :name: Rules::ThreeOfAKindRule#apply
-      - :lines: 6
-        :complexity: 2
+      - :complexity: 2
+        :lines: 6
         :name: Rules::ThreeOfAKindRule#points_table
-      :lines: 19
       :complexity: 6
+      :lines: 19
+      :class_name: Rules::ThreeOfAKindRule
     :filename: three_of_a_kind_rule.rb
   - :classes: 
-    - :class_name: Players
-      :methods: []
+    - :methods: []
 
-      :lines: 8
       :complexity: 0
-    - :class_name: Players::ManualPlayer
-      :methods: 
-      - :lines: 3
-        :complexity: 1
+      :lines: 6
+      :class_name: Players
+    - :methods: 
+      - :complexity: 3
+        :lines: 12
+        :name: Players::CleverPlayer#position
+      - :complexity: 2
+        :lines: 6
+        :name: Players::CleverPlayer#roll
+      - :complexity: 1
+        :lines: 2
+        :name: Players::CleverPlayer#update_scoreboard
+      :complexity: 6
+      :lines: 28
+      :class_name: Players::CleverPlayer
+    :filename: clever_player.rb
+  - :classes: 
+    - :methods: []
+
+      :complexity: 0
+      :lines: 8
+      :class_name: Players
+    - :methods: 
+      - :complexity: 1
+        :lines: 3
         :name: Players::ManualPlayer#limits
-      - :lines: 2
-        :complexity: 1
+      - :complexity: 1
+        :lines: 2
         :name: Players::ManualPlayer#roll
-      - :lines: 2
-        :complexity: 1
+      - :complexity: 1
+        :lines: 2
         :name: Players::ManualPlayer#status_update
-      - :lines: 2
-        :complexity: 1
+      - :complexity: 1
+        :lines: 2
         :name: Players::ManualPlayer#update_scoreboard
-      - :lines: 3
-        :complexity: 1
+      - :complexity: 1
+        :lines: 3
         :name: Players::ManualPlayer#initialize
-      :lines: 31
       :complexity: 5
+      :lines: 31
+      :class_name: Players::ManualPlayer
     :filename: manual_player.rb
   - :classes: 
-    - :class_name: ""
-      :methods: []
+    - :methods: []
 
-      :lines: 4
-      :complexity: 1
-    - :class_name: Greed
-      :methods: 
-      - :lines: 4
-        :complexity: 2
-        :name: Greed#spawn_server
-      - :lines: 4
-        :complexity: 2
-        :name: Greed#spawn_client
-      :lines: 12
-      :complexity: 4
-    :filename: greed.rb
-  - :classes: 
-    - :class_name: Mutex
-      :methods: 
-      - :lines: 8
-        :complexity: 4
-        :name: Mutex#try_synchronize
-      :lines: 10
-      :complexity: 4
-    :filename: mutex_helper.rb
-  - :classes: 
-    - :class_name: Rules
-      :methods: []
-
-      :lines: 2
       :complexity: 0
-    - :class_name: Rules::OnesAndFivesRule
-      :methods: 
-      - :lines: 14
-        :complexity: 4
+      :lines: 2
+      :class_name: Rules
+    - :methods: 
+      - :complexity: 4
+        :lines: 14
         :name: Rules::OnesAndFivesRule#apply
-      :lines: 16
       :complexity: 4
+      :lines: 16
+      :class_name: Rules::OnesAndFivesRule
     :filename: ones_and_fives_rule.rb
   - :classes: 
-    - :class_name: Rules
-      :methods: []
+    - :methods: []
 
-      :lines: 2
+      :complexity: 1
+      :lines: 4
+      :class_name: ""
+    - :methods: 
+      - :complexity: 2
+        :lines: 4
+        :name: Greed#spawn_server
+      - :complexity: 2
+        :lines: 4
+        :name: Greed#spawn_client
+      :complexity: 4
+      :lines: 12
+      :class_name: Greed
+    :filename: greed.rb
+  - :classes: 
+    - :methods: 
+      - :complexity: 4
+        :lines: 8
+        :name: Mutex#try_synchronize
+      :complexity: 4
+      :lines: 10
+      :class_name: Mutex
+    :filename: mutex_helper.rb
+  - :classes: 
+    - :methods: []
+
       :complexity: 0
-    - :class_name: Rules::StreetRule
-      :methods: 
-      - :lines: 6
-        :complexity: 2
+      :lines: 2
+      :class_name: Rules
+    - :methods: 
+      - :complexity: 2
+        :lines: 6
         :name: Rules::StreetRule#apply
-      :lines: 9
       :complexity: 2
+      :lines: 9
+      :class_name: Rules::StreetRule
     :filename: street_rule.rb
   - :classes: 
-    - :class_name: Players
-      :methods: []
+    - :methods: []
 
-      :lines: 2
       :complexity: 0
-    - :class_name: Players::CowardPlayer
-      :methods: 
-      - :lines: 2
-        :complexity: 1
+      :lines: 2
+      :class_name: Players
+    - :methods: 
+      - :complexity: 1
+        :lines: 2
         :name: Players::CowardPlayer#roll
-      :lines: 4
       :complexity: 1
+      :lines: 4
+      :class_name: Players::CowardPlayer
     :filename: coward_player.rb
   - :classes: 
-    - :class_name: Rules
-      :methods: []
+    - :methods: []
 
-      :lines: 2
       :complexity: 0
-    - :class_name: Rules::DummyRule
-      :methods: 
-      - :lines: 2
-        :complexity: 1
-        :name: Rules::DummyRule#apply
-      :lines: 9
-      :complexity: 1
-    :filename: dummy_rule.rb
-  - :classes: 
-    - :class_name: Players
-      :methods: []
-
       :lines: 4
-      :complexity: 0
-    - :class_name: Players::RandomPlayer
-      :methods: 
-      - :lines: 3
-        :complexity: 1
+      :class_name: Players
+    - :methods: 
+      - :complexity: 1
+        :lines: 3
         :name: Players::RandomPlayer#roll
+      :complexity: 1
       :lines: 5
-      :complexity: 1
+      :class_name: Players::RandomPlayer
     :filename: random_player.rb
+  - :classes: 
+    - :methods: []
+
+      :complexity: 0
+      :lines: 2
+      :class_name: Rules
+    - :methods: 
+      - :complexity: 1
+        :lines: 2
+        :name: Rules::DummyRule#apply
+      :complexity: 1
+      :lines: 9
+      :class_name: Rules::DummyRule
+    :filename: dummy_rule.rb
   :classes: 
-  - :lines: 170
-    :complexity: 49
+  - :complexity: 55
+    :lines: 186
     :defs: 
-    - :lines: 11
-      :complexity: 3
+    - :complexity: 3
+      :lines: 11
       :name: Server#initialize
-    - :lines: 2
-      :complexity: 1
+    - :complexity: 1
+      :lines: 2
       :name: Server#start_service
-    - :lines: 2
-      :complexity: 1
+    - :complexity: 1
+      :lines: 2
       :name: Server#stop_service
-    - :lines: 15
-      :complexity: 5
+    - :complexity: 5
+      :lines: 15
       :name: Server#connect
-    - :lines: 9
-      :complexity: 3
+    - :complexity: 3
+      :lines: 9
       :name: Server#disconnect
-    - :lines: 11
-      :complexity: 5
+    - :complexity: 5
+      :lines: 11
       :name: Server#start_game
-    - :lines: 14
-      :complexity: 6
+    - :complexity: 6
+      :lines: 14
       :name: Server#broadcast
-    - :lines: 58
-      :complexity: 22
+    - :complexity: 28
+      :lines: 74
       :name: Server#game
-    - :lines: 8
-      :complexity: 1
+    - :complexity: 1
+      :lines: 8
       :name: Server#self.launch_server
-    - :lines: 4
-      :complexity: 2
+    - :complexity: 2
+      :lines: 4
       :name: Server#self.start_game
     :name: Server
-  - :lines: 151
-    :complexity: 36
+  - :complexity: 41
+    :lines: 164
     :defs: 
-    - :lines: 66
-      :complexity: 16
+    - :complexity: 20
+      :lines: 76
       :name: UI::ManualWindow#initialize
-    - :lines: 7
-      :complexity: 3
+    - :complexity: 3
+      :lines: 7
       :name: UI::ManualWindow#update_scoreboard
-    - :lines: 6
-      :complexity: 1
+    - :complexity: 1
+      :lines: 5
       :name: UI::ManualWindow#status_update
-    - :lines: 26
-      :complexity: 5
+    - :complexity: 6
+      :lines: 30
       :name: UI::ManualWindow#roll
-    - :lines: 2
-      :complexity: 1
+    - :complexity: 1
+      :lines: 2
       :name: UI::ManualWindow#limits
-    - :lines: 2
-      :complexity: 1
+    - :complexity: 1
+      :lines: 2
       :name: UI::ManualWindow#set_current_player
-    - :lines: 7
-      :complexity: 3
+    - :complexity: 3
+      :lines: 7
       :name: UI::ManualWindow#set_dice
-    - :lines: 7
-      :complexity: 3
+    - :complexity: 3
+      :lines: 7
       :name: UI::ManualWindow#set_saved
-    - :lines: 8
-      :complexity: 3
+    - :complexity: 3
+      :lines: 8
       :name: UI::ManualWindow#get_dies
     :name: UI::ManualWindow
-  - :lines: 121
-    :complexity: 23
+  - :complexity: 24
+    :lines: 127
     :defs: 
-    - :lines: 119
-      :complexity: 23
+    - :complexity: 24
+      :lines: 125
       :name: UI::ClientWindow#initialize
     :name: UI::ClientWindow
-  - :lines: 90
-    :complexity: 18
+  - :complexity: 18
+    :lines: 90
     :defs: 
-    - :lines: 88
-      :complexity: 18
+    - :complexity: 18
+      :lines: 88
       :name: UI::ServerWindow#initialize
     :name: UI::ServerWindow
-  - :lines: 41
-    :complexity: 10
+  - :complexity: 17
+    :lines: 53
     :defs: 
-    - :lines: 39
-      :complexity: 10
+    - :complexity: 2
+      :lines: 3
+      :name: Throw#initialize
+    - :complexity: 1
+      :lines: 2
+      :name: Throw#size
+    - :complexity: 1
+      :lines: 2
+      :name: Throw#dice
+    - :complexity: 4
+      :lines: 4
+      :name: Throw#save
+    - :complexity: 1
+      :lines: 2
+      :name: Throw#clear_saved
+    - :complexity: 3
+      :lines: 6
+      :name: Throw#reroll!
+    - :complexity: 3
+      :lines: 9
+      :name: Throw#roll=
+    - :complexity: 1
+      :lines: 2
+      :name: Throw#to_s
+    - :complexity: 1
+      :lines: 2
+      :name: Throw#to_a
+    :name: Throw
+  - :complexity: 10
+    :lines: 41
+    :defs: 
+    - :complexity: 10
+      :lines: 39
       :name: UI::GreedWindow#initialize
     :name: UI::GreedWindow
-  - :lines: 36
-    :complexity: 9
+  - :complexity: 9
+    :lines: 34
     :defs: 
-    - :lines: 6
-      :complexity: 2
-      :name: Array#sum
-    - :lines: 6
-      :complexity: 2
-      :name: Array#freq
-    - :lines: 2
-      :complexity: 1
-      :name: Array#remove_three!
-    - :lines: 13
-      :complexity: 4
-      :name: Array#remove!
-    :name: Array
-  - :lines: 34
-    :complexity: 9
-    :defs: 
-    - :lines: 13
-      :complexity: 6
+    - :complexity: 6
+      :lines: 13
       :name: Client#create_player
-    - :lines: 4
-      :complexity: 1
+    - :complexity: 1
+      :lines: 4
       :name: Client#connect
-    - :lines: 3
-      :complexity: 2
+    - :complexity: 2
+      :lines: 3
       :name: Client#disconnect
     :name: Client
-  - :lines: 29
-    :complexity: 9
+  - :complexity: 9
+    :lines: 29
     :defs: 
-    - :lines: 13
-      :complexity: 5
+    - :complexity: 5
+      :lines: 13
       :name: Rules#self.apply_rules
-    - :lines: 2
-      :complexity: 1
+    - :complexity: 1
+      :lines: 2
       :name: Rules#self.max_points
-    - :lines: 5
-      :complexity: 3
+    - :complexity: 3
+      :lines: 5
       :name: Rules#self.rules
     :name: Rules
-  - :lines: 31
-    :complexity: 9
+  - :complexity: 9
+    :lines: 31
     :defs: 
-    - :lines: 5
-      :complexity: 2
+    - :complexity: 2
+      :lines: 5
       :name: Players::ConsolePlayer#update_scoreboard
-    - :lines: 2
-      :complexity: 2
+    - :complexity: 2
+      :lines: 2
       :name: Players::ConsolePlayer#status_update
-    - :lines: 14
-      :complexity: 4
+    - :complexity: 4
+      :lines: 14
       :name: Players::ConsolePlayer#roll
-    - :lines: 2
-      :complexity: 1
+    - :complexity: 1
+      :lines: 2
       :name: Players::ConsolePlayer#name
     :name: Players::ConsolePlayer
-  - :lines: 16
-    :complexity: 8
+  - :complexity: 8
+    :lines: 16
     :defs: 
-    - :lines: 14
-      :complexity: 8
+    - :complexity: 8
+      :lines: 14
       :name: Players::GamblerPlayer#roll
     :name: Players::GamblerPlayer
-  - :lines: 41
-    :complexity: 8
+  - :complexity: 8
+    :lines: 28
     :defs: 
-    - :lines: 4
-      :complexity: 1
+    - :complexity: 2
+      :lines: 6
+      :name: Array#sum
+    - :complexity: 2
+      :lines: 6
+      :name: Array#freq
+    - :complexity: 2
+      :lines: 2
+      :name: Array#remove_three!
+    - :complexity: 2
+      :lines: 5
+      :name: Array#remove!
+    :name: Array
+  - :complexity: 8
+    :lines: 41
+    :defs: 
+    - :complexity: 1
+      :lines: 4
       :name: Players::DummyPlayer#initialize
-    - :lines: 1
-      :complexity: 1
+    - :complexity: 1
+      :lines: 1
       :name: Players::DummyPlayer#update_scoreboard
-    - :lines: 1
-      :complexity: 1
+    - :complexity: 1
+      :lines: 1
       :name: Players::DummyPlayer#status_update
-    - :lines: 2
-      :complexity: 1
+    - :complexity: 1
+      :lines: 2
       :name: Players::DummyPlayer#roll
-    - :lines: 3
-      :complexity: 1
+    - :complexity: 1
+      :lines: 3
       :name: Players::DummyPlayer#limits
-    - :lines: 1
-      :complexity: 1
+    - :complexity: 1
+      :lines: 1
       :name: Players::DummyPlayer#game_over
-    - :lines: 2
-      :complexity: 2
+    - :complexity: 2
+      :lines: 2
       :name: Players::DummyPlayer#name
     :name: Players::DummyPlayer
-  - :lines: 19
-    :complexity: 6
+  - :complexity: 6
+    :lines: 28
     :defs: 
-    - :lines: 8
-      :complexity: 4
-      :name: Rules::ThreeOfAKindRule#apply
-    - :lines: 6
-      :complexity: 2
-      :name: Rules::ThreeOfAKindRule#points_table
-    :name: Rules::ThreeOfAKindRule
-  - :lines: 28
-    :complexity: 6
-    :defs: 
-    - :lines: 6
-      :complexity: 2
+    - :complexity: 2
+      :lines: 6
       :name: Players::CleverPlayer#roll
-    - :lines: 12
-      :complexity: 3
+    - :complexity: 3
+      :lines: 12
       :name: Players::CleverPlayer#position
-    - :lines: 2
-      :complexity: 1
+    - :complexity: 1
+      :lines: 2
       :name: Players::CleverPlayer#update_scoreboard
     :name: Players::CleverPlayer
-  - :lines: 31
-    :complexity: 5
+  - :complexity: 6
+    :lines: 19
     :defs: 
-    - :lines: 3
-      :complexity: 1
+    - :complexity: 4
+      :lines: 8
+      :name: Rules::ThreeOfAKindRule#apply
+    - :complexity: 2
+      :lines: 6
+      :name: Rules::ThreeOfAKindRule#points_table
+    :name: Rules::ThreeOfAKindRule
+  - :complexity: 5
+    :lines: 31
+    :defs: 
+    - :complexity: 1
+      :lines: 3
       :name: Players::ManualPlayer#initialize
-    - :lines: 2
-      :complexity: 1
+    - :complexity: 1
+      :lines: 2
       :name: Players::ManualPlayer#update_scoreboard
-    - :lines: 2
-      :complexity: 1
+    - :complexity: 1
+      :lines: 2
       :name: Players::ManualPlayer#status_update
-    - :lines: 2
-      :complexity: 1
+    - :complexity: 1
+      :lines: 2
       :name: Players::ManualPlayer#roll
-    - :lines: 3
-      :complexity: 1
+    - :complexity: 1
+      :lines: 3
       :name: Players::ManualPlayer#limits
     :name: Players::ManualPlayer
-  - :lines: 18
-    :complexity: 4
-    :name: ""
-  - :lines: 12
-    :complexity: 4
+  - :complexity: 4
+    :lines: 16
     :defs: 
-    - :lines: 4
-      :complexity: 2
-      :name: Greed#spawn_client
-    - :lines: 4
-      :complexity: 2
-      :name: Greed#spawn_server
-    :name: Greed
-  - :lines: 10
-    :complexity: 4
-    :defs: 
-    - :lines: 8
-      :complexity: 4
-      :name: Mutex#try_synchronize
-    :name: Mutex
-  - :lines: 16
-    :complexity: 4
-    :defs: 
-    - :lines: 14
-      :complexity: 4
+    - :complexity: 4
+      :lines: 14
       :name: Rules::OnesAndFivesRule#apply
     :name: Rules::OnesAndFivesRule
-  - :lines: 9
-    :complexity: 2
+  - :complexity: 4
+    :lines: 10
     :defs: 
-    - :lines: 6
-      :complexity: 2
+    - :complexity: 4
+      :lines: 8
+      :name: Mutex#try_synchronize
+    :name: Mutex
+  - :complexity: 4
+    :lines: 18
+    :name: ""
+  - :complexity: 4
+    :lines: 12
+    :defs: 
+    - :complexity: 2
+      :lines: 4
+      :name: Greed#spawn_client
+    - :complexity: 2
+      :lines: 4
+      :name: Greed#spawn_server
+    :name: Greed
+  - :complexity: 2
+    :lines: 11
+    :name: ""
+  - :complexity: 2
+    :lines: 9
+    :defs: 
+    - :complexity: 2
+      :lines: 6
       :name: Rules::StreetRule#apply
     :name: Rules::StreetRule
-  - :lines: 11
-    :complexity: 2
-    :name: ""
-  - :lines: 5
-    :complexity: 1
+  - :complexity: 1
+    :lines: 4
     :defs: 
-    - :lines: 3
-      :complexity: 1
-      :name: Players::RandomPlayer#roll
-    :name: Players::RandomPlayer
-  - :lines: 9
-    :complexity: 1
-    :defs: 
-    - :lines: 2
-      :complexity: 1
-      :name: Rules::DummyRule#apply
-    :name: Rules::DummyRule
-  - :lines: 4
-    :complexity: 1
-    :defs: 
-    - :lines: 2
-      :complexity: 1
+    - :complexity: 1
+      :lines: 2
       :name: Players::CowardPlayer#roll
     :name: Players::CowardPlayer
-  - :lines: 4
-    :complexity: 1
+  - :complexity: 1
+    :lines: 5
+    :defs: 
+    - :complexity: 1
+      :lines: 3
+      :name: Players::RandomPlayer#roll
+    :name: Players::RandomPlayer
+  - :complexity: 1
+    :lines: 9
+    :defs: 
+    - :complexity: 1
+      :lines: 2
+      :name: Rules::DummyRule#apply
+    :name: Rules::DummyRule
+  - :complexity: 1
+    :lines: 4
     :name: ""
-  - :lines: 5
-    :complexity: 1
+  - :complexity: 1
+    :lines: 5
     :name: ""
-  - :lines: 2
-    :complexity: 0
-    :name: Players
-  - :lines: 2
-    :complexity: 0
-    :name: Players
-  - :lines: 2
-    :complexity: 0
-    :name: Rules
-  - :lines: 2
-    :complexity: 0
-    :name: Rules
-  - :lines: 2
-    :complexity: 0
-    :name: Rules
-  - :lines: 8
-    :complexity: 0
-    :name: Players
-  - :lines: 2
-    :complexity: 0
+  - :complexity: 0
+    :lines: 2
     :name: UI
-  - :lines: 4
-    :complexity: 0
+  - :complexity: 0
+    :lines: 2
     :name: Players
-  - :lines: 2
-    :complexity: 0
-    :name: UI
-  - :lines: 1
-    :complexity: 0
+  - :complexity: 0
+    :lines: 8
+    :name: Players
+  - :complexity: 0
+    :lines: 2
+    :name: Rules
+  - :complexity: 0
+    :lines: 6
+    :name: Players
+  - :complexity: 0
+    :lines: 2
+    :name: Rules
+  - :complexity: 0
+    :lines: 2
+    :name: Players
+  - :complexity: 0
+    :lines: 1
     :name: ""
-  - :lines: 2
-    :complexity: 0
+  - :complexity: 0
+    :lines: 6
+    :name: Players
+  - :complexity: 0
+    :lines: 2
+    :name: UI
+  - :complexity: 0
+    :lines: 1
+    :name: ""
+  - :complexity: 0
+    :lines: 4
+    :name: Players
+  - :complexity: 0
+    :lines: 2
+    :name: UI
+  - :complexity: 0
+    :lines: 2
     :name: Rules
-  - :lines: 2
-    :complexity: 0
+  - :complexity: 0
+    :lines: 2
     :name: UI
-  - :lines: 6
-    :complexity: 0
-    :name: Players
-  - :lines: 2
-    :complexity: 0
-    :name: UI
-  - :lines: 4
-    :complexity: 0
-    :name: Players
-  - :lines: 6
-    :complexity: 0
+  - :complexity: 0
+    :lines: 2
+    :name: Rules
+  - :complexity: 0
+    :lines: 4
     :name: Players
 :churn: 
   :changed_files: 
-  - "---- "
-  - src/tmp/metric_fu/_data/20100412.yml
+  - src/lib/ui/client_window.rb
+  - src/test/test_throw.rb
+  - src/test/test_server.rb
+  - src/lib/throw.rb
+  - src/lib/ui/manual_window.rb
+  - src/test/monkeys/test_array_helper.rb
   - /dev/null
+  - src/lib/server.rb
+  - src/lib/monkeys/array_helper.rb
   :method_churn: []
 
   :changed_classes: []
@@ -3523,69 +3896,77 @@
     :times_changed: 20
   - :file_path: doc/progress/progress.tex
     :times_changed: 19
+  - :file_path: src/lib/server.rb
+    :times_changed: 15
   - :file_path: src/lib/players/dummy_player.rb
     :times_changed: 12
-  - :file_path: src/test/players/is_a_player.rb
-    :times_changed: 10
   - :file_path: src/Rakefile
     :times_changed: 10
-  - :file_path: src/lib/server.rb
-    :times_changed: 9
+  - :file_path: src/test/players/is_a_player.rb
+    :times_changed: 10
   - :file_path: src/test/test_rules.rb
     :times_changed: 7
-  - :file_path: src/lib/rules.rb
-    :times_changed: 6
-  - :file_path: src/tmp/metric_fu/output/churn.html
+  - :file_path: src/tmp/metric_fu/report.yml
     :times_changed: 6
   - :file_path: src/lib/players/console_player.rb
     :times_changed: 6
-  - :file_path: src/tmp/metric_fu/output/index.html
+  - :file_path: src/tmp/metric_fu/output/churn.html
     :times_changed: 6
-  - :file_path: src/tmp/metric_fu/report.yml
-    :times_changed: 6
-  - :file_path: src/tmp/metric_fu/output/saikuro.html
-    :times_changed: 6
-  - :file_path: src/tmp/metric_fu/scratch/rcov/rcov.txt
+  - :file_path: src/tmp/metric_fu/output/roodi.html
     :times_changed: 6
   - :file_path: src/tmp/metric_fu/output/rcov.html
     :times_changed: 6
-  - :file_path: src/tmp/metric_fu/output/roodi.html
+  - :file_path: src/tmp/metric_fu/output/index.html
+    :times_changed: 6
+  - :file_path: src/lib/rules.rb
+    :times_changed: 6
+  - :file_path: src/tmp/metric_fu/output/saikuro.html
     :times_changed: 6
   - :file_path: src/tmp/metric_fu/output/reek.html
     :times_changed: 6
   - :file_path: src/tmp/metric_fu/output/flog.html
     :times_changed: 6
+  - :file_path: src/tmp/metric_fu/scratch/rcov/rcov.txt
+    :times_changed: 6
   - :file_path: src/tmp/metric_fu/output/flay.html
     :times_changed: 6
-  - :file_path: src/tmp/metric_fu/_data/20100408.yml
-    :times_changed: 5
-  - :file_path: src/tmp/metric_fu/output/flog.js
+  - :file_path: src/lib/ui/manual_window.rb
     :times_changed: 5
   - :file_path: src/lib/ui.rb
     :times_changed: 5
-  - :file_path: src/lib/players/clever_player.rb
-    :times_changed: 5
   - :file_path: src/tmp/metric_fu/output/reek.js
     :times_changed: 5
-  - :file_path: src/tmp/metric_fu/scratch/saikuro/index_cyclo.html
-    :times_changed: 4
-  - :file_path: src/tmp/metric_fu/output/rcov.js
-    :times_changed: 4
   - :file_path: src/test/test_server.rb
+    :times_changed: 5
+  - :file_path: src/lib/players/clever_player.rb
+    :times_changed: 5
+  - :file_path: src/tmp/metric_fu/output/flog.js
+    :times_changed: 5
+  - :file_path: src/tmp/metric_fu/_data/20100408.yml
+    :times_changed: 5
+  - :file_path: src/lib/players/random_player.rb
     :times_changed: 4
   - :file_path: src/lib/players/gambler_player.rb
     :times_changed: 4
+  - :file_path: src/tmp/metric_fu/scratch/saikuro/index_cyclo.html
+    :times_changed: 4
   - :file_path: src/test/rules/test_three_of_a_kind_rule.rb
+    :times_changed: 4
+  - :file_path: src/test/monkeys/test_array_helper.rb
+    :times_changed: 4
+  - :file_path: src/lib/monkeys/array_helper.rb
     :times_changed: 4
   - :file_path: src/lib/rules/three_of_a_kind_rule.rb
     :times_changed: 4
-  - :file_path: src/lib/players/random_player.rb
+  - :file_path: src/tmp/metric_fu/output/rcov.js
     :times_changed: 4
-  - :file_path: src/tmp/metric_fu/scratch/flog/lib/players/random_player.txt
+  - :file_path: src/test/rules/test_ones_and_fives_rule.rb
     :times_changed: 3
   - :file_path: src/tmp/metric_fu/scratch/flog/lib/players/console_player.txt
     :times_changed: 3
   - :file_path: src/tmp/metric_fu/output/flay.js
+    :times_changed: 3
+  - :file_path: src/lib/ui/client_window.rb
     :times_changed: 3
   - :file_path: src/test/players/test_coward_player.rb
     :times_changed: 3
@@ -3593,7 +3974,7 @@
     :times_changed: 3
   - :file_path: src/tmp/metric_fu/scratch/saikuro/lib/players/console_player.rb_cyclo.html
     :times_changed: 3
-  - :file_path: src/test/rules/test_ones_and_fives_rule.rb
+  - :file_path: src/tmp/metric_fu/scratch/flog/lib/players/random_player.txt
     :times_changed: 3
   - :file_path: src/tmp/metric_fu/output/roodi.js
     :times_changed: 3
