@@ -65,7 +65,7 @@ class TestServer < Test::Unit::TestCase
       def update_scoreboard(*ignore)
       end
       def roll(dice)
-        @dice = dice
+        @dice = dice.clone if @dice.nil?
         []
       end
     end

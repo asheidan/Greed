@@ -6,6 +6,7 @@ require 'rules/three_of_a_kind_rule'
 require 'rules/street_rule'
 require 'monkeys/mutex_helper'
 require 'monkeys/array_helper'
+require 'throw'
 
 # $SAFE = 1
 
@@ -115,48 +116,52 @@ class Server
             $log.debug('game'){ "---- #{c.name} ----"}
             broadcast(:update_scoreboard, [@score_board])
             round_score = 0
-            saved_dice = throw_dice = []
-            decision = [nil] * 6
-            while decision != [] do
-              rethrow_count = 6 - saved_dice.length
-              throw_dice = decision.collect{|d| rand(6)+1 }.sort[0..(rethrow_count-1)]
-              $log.debug('game: dice') {throw_dice}
-              broadcast(:status_update, [c.name, throw_dice, saved_dice], [c])
-              decision = c.roll(throw_dice)
-              $log.debug('game'){ "decision: #{decision.inspect}" }
-              decision.each{ |d|
-                throw_dice.remove!(d,1)
+            cup = Throw.new
+            reroll_dice = [nil] * 6
+            while reroll_dice != [] do
+              # rethrow_count = 6 - saved_dice.length
+              # throw_dice = decision.collect{|d| rand(6)+1 }.sort[0..(rethrow_count-1)]
+              saved_dice = cup.rolled
+              $log.debug('game: dice') {cup}
+              broadcast(:status_update, [c.name, cup.rolled, cup.saved], [c])
+              reroll_dice = c.roll(cup.rolled)
+              $log.debug('game'){ "reroll: #{reroll_dice.inspect}" }
+              reroll_dice.each{ |d|
+                saved_dice.remove!(d,1)
               }
               # Calculate score for saved dice
-              throw_score,saved_unscoring_dice = Rules.apply_rules( throw_dice )
+              throw_score,saved_unscoring_dice = Rules.apply_rules( saved_dice )
               # This would remove a saved die that doesn't score but would
               # potentially leave player with less than 6 dice
               saved_unscoring_dice.each{ |d|
-                # throw_dice.remove!(d,1)
-                decision.remove!(d,1)
+                saved_dice.remove!(d,1)
+                # decision.remove!(d,1)
               }
-              $log.debug('game'){ "saved: #{saved_dice.inspect}" }
+              saved_dice.each{|d|
+                cup.save d
+              }
+              $log.debug('game'){ "saved: #{cup.saved.inspect}" }
               $log.debug('game'){ "unscored: #{saved_unscoring_dice.inspect}" }
-              $log.debug('game'){ "decision: #{decision.inspect}" }
+              $log.debug('game'){ "reroll: #{reroll_dice.inspect}" }
               if round_score == 0 then
                 if (throw_score >= @bust) then
                   round_score += throw_score
-                  saved_dice += throw_dice
+                  # saved_dice += throw_dice
                 else
                   $log.debug('game'){ "Player: #{c.name} busted" }
-                  decision = []
+                  reroll_dice = []
                 end
               elsif throw_score > 0 then
-                saved_dice += throw_dice
+                # saved_dice += throw_dice
                 round_score += throw_score
-                if saved_dice.length == 6 then
+                if cup.saved.length == 6 then
                   # All dice scored, reroll is allowed
-                  saved_dice = []
+                  cup.clear_saved
                 end
               else
                 $log.debug('game'){ "Player: #{c.name} got no points"}
                 round_score = 0
-                decision = []
+                reroll_dice = []
               end
             end
             @score_board[c.name] += round_score
