@@ -120,12 +120,11 @@ class Server
               rethrow_count = 6 - saved_dice.length
               throw_dice = decision.collect{|d| rand(6)+1 }.sort[0..(rethrow_count-1)]
               $log.debug('game: dice') {throw_dice}
-              broadcast(:status_update, [c.name, throw_dice], [c])
+              broadcast(:status_update, [c.name, throw_dice, saved_dice], [c])
               decision = c.roll(throw_dice)
               decision.each{ |d|
                 throw_dice.remove!(d,1)
               }
-              broadcast(:status_update, [c.name, throw_dice, saved_dice], [c])
               # Calculate score for saved dice
               throw_score = Rules.max_points( throw_dice )
               if round_score == 0 then
