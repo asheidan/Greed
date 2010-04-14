@@ -100,11 +100,6 @@ module UI
     end
     
     def roll(dice, name)
-      set_current_player(name)
-      
-      set_dice(dice)
-      set_saved(@@saved_dice) unless dice.length == 6
-      
       # Wait for user input. Know a better way? Then tell me! 
       # How about a mutex? // een
       $state = :wait
@@ -123,7 +118,10 @@ module UI
       unmarked = get_dies("0")
       marked = get_dies("1")
       
-      if marked.length == 0
+      if marked.length == 6
+        @@saved_dice = []
+        [nil]*6
+      elsif marked.length == 0
         @@saved_dice = []
         []
       else
