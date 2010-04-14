@@ -15,7 +15,7 @@ class TestServer < Test::Unit::TestCase
   end
   
   def test_00_should_have_local_url_with_correct_port
-    assert_equal("druby://localhost:#{PORT}", @server.uri)
+    assert_equal("druby://:#{PORT}", @server.uri)
   end
   
   def test_01_connecting_client_should_receive_limits

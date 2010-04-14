@@ -17,8 +17,6 @@ module UI
       
       $state = :sleep
       
-      @@saved_dice = Array.new
-      
       TkFrame.new(Tk.root) do
         TkLabelFrame.new(self) do
           TkLabel.new(self) do
@@ -42,15 +40,17 @@ module UI
             pack
           end
           TkFrame.new(self) do
-            TkButton.new(self) do
+            @@roll_button = TkButton.new(self) do
               text 'Roll'
+              state :disabled
               command do
                 $state = :roll if $state == :wait
               end
               pack :side => :left
             end
-            TkButton.new(self) do
+            @@stay_button = TkButton.new(self) do
               text 'Stay'
+              state :disabled
               command do
                 $state = :stay if $state == :wait
               end
@@ -100,10 +100,7 @@ module UI
     end
     
     def roll(dice, name)
-      set_current_player(name)
-      
-      set_dice(dice)
-      set_saved(@@saved_dice) unless dice.length == 6
+      set_button_state(:normal)
       
       # Wait for user input. Know a better way? Then tell me! 
       # How about a mutex? // een
@@ -114,6 +111,7 @@ module UI
           return []
         end
       end
+      set_button_state(:disabled)
       if $state == :stay then
         $state = :sleep
         return []
@@ -123,17 +121,21 @@ module UI
       unmarked = get_dies("0")
       marked = get_dies("1")
       
-      if marked.length == 0
-        @@saved_dice = []
+      if marked.length == 6
+        [nil]*6
+      elsif marked.length == 0
         []
       else
-        @@saved_dice = marked
         unmarked
       end
     end
     
     def limits(limit, bust)
       @@limit_var.value = "Win: #{limit} Bust: #{bust}"
+    end
+    
+    def game_over(name, did_win)
+      @@name_var.value = "#{name} won!"
     end
     
     private
@@ -168,6 +170,11 @@ module UI
         end
       end
       result
+    end
+    
+    def set_button_state(state)
+      @@roll_button.state = state
+      @@stay_button.state = state
     end
   end
 end
