@@ -81,6 +81,7 @@ class Server
       }
       $log.debug('start_game'){ @clients }
       winner = game
+      broadcast(:update_scoreboard, [@score_board])
       broadcast(:game_over, [winner])
     end
   end
