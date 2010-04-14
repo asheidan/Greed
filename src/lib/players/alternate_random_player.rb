@@ -2,9 +2,9 @@ require 'players/dummy_player'
 
 module Players
 
-  # RandomPlayer2 saves 50% of times when given a decision. When a save
+  # AlternateRandomPlayer saves 50% of times when given a decision. When a save
   #  doesn't occur it will reroll a random amount of dice
-  class RandomPlayer2 < DummyPlayer
+  class AlternateRandomPlayer < DummyPlayer
     def roll(dice)
       if rand(2) == 0
         []
