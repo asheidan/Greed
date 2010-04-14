@@ -136,6 +136,10 @@ module UI
       @@limit_var.value = "Win: #{limit} Bust: #{bust}"
     end
     
+    def game_over(name, did_win)
+      @@name_var.value = "#{name} won!"
+    end
+    
     private
     
     def set_current_player(name)

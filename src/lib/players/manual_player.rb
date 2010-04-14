@@ -34,6 +34,11 @@ module Players
       @ui.roll(dice, @name)
     end
     
+    # Called by the server with the winning player's name when the game is over
+    def game_over(name)
+      @ui.game_over(name, name.eql?(self.name))
+    end
+    
     # Called by server when a joining a game.
     def limits(limit, bust)
       super(limit, bust)
