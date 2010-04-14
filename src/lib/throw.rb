@@ -22,6 +22,7 @@ class Throw
     $log.debug('save'){ "saving: #{element.inspect}" } unless $log.nil?
     @saved << element if @rolled.include? element
     @rolled.remove!(element)
+    @saved.sort!
   end
 
   def clear_saved

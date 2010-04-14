@@ -136,11 +136,10 @@ class Server
               # potentially leave player with less than 6 dice
               saved_unscoring_dice.each{ |d|
                 saved_dice.remove!(d)
-                # decision.remove!(d,1)
               }
               $log.debug('game'){ "saved: #{saved_dice.inspect}" }
-              saved_dice.each{|d|
-                # puts d.inspect
+              # Don't know why it doesn't iterate fine without the clone
+              saved_dice.clone.each{|d|
                 cup.save d
               }
               $log.debug('cup '){ "saved: #{cup.saved.inspect}" }
@@ -149,13 +148,11 @@ class Server
               if round_score == 0 then
                 if (throw_score >= @bust) then
                   round_score += throw_score
-                  # saved_dice += throw_dice
                 else
                   $log.debug('game'){ "Player: #{c.name} busted" }
                   reroll_dice = []
                 end
               elsif throw_score > 0 then
-                # saved_dice += throw_dice
                 round_score += throw_score
                 if cup.saved.length == 6 then
                   # All dice scored, reroll is allowed
