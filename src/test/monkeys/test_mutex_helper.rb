@@ -21,7 +21,7 @@ class TestMutexHelper < Test::Unit::TestCase
     assert_nothing_raised(ThreadError) {
       @mutex.synchronize {
         @mutex.try_synchronize {
-          a = 0
+          assert(true)
         }
       }
     }

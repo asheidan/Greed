@@ -1,4 +1,7 @@
 module Rules
+  
+  # A class which implements the protocol for Rules. Serves more like an
+  # example than a class that's really used.
   class DummyRule
     
     # All Rule-classes implements this method. The argument is a set of dice
