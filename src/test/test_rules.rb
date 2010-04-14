@@ -49,6 +49,12 @@ class TestRule < Test::Unit::TestCase
     assert_equal(1000, points)
   end
   
+  def test_06_applying_rules_shouldnt_change_array
+    a = [3,2]
+    initial = a.clone
+    Rules.apply_rules a
+    assert_equal(initial, a)
+  end
   def test_temp
     points = Rules.max_points([2, 3, 3, 3, 5, 6])
     assert_equal(350, points)

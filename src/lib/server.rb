@@ -119,8 +119,7 @@ class Server
             cup = Throw.new
             reroll_dice = [nil] * 6
             while reroll_dice != [] do
-              # rethrow_count = 6 - saved_dice.length
-              # throw_dice = decision.collect{|d| rand(6)+1 }.sort[0..(rethrow_count-1)]
+              cup.reroll!
               saved_dice = cup.rolled
               $log.debug('game: dice') {cup}
               broadcast(:status_update, [c.name, cup.rolled, cup.saved], [c])
@@ -139,12 +138,12 @@ class Server
               }
               $log.debug('game'){ "saved: #{saved_dice.inspect}" }
               # Don't know why it doesn't iterate fine without the clone
+              $log.debug('cup '){ "reroll: #{cup.rolled.inspect}" }
               saved_dice.clone.each{|d|
                 cup.save d
               }
               $log.debug('cup '){ "saved: #{cup.saved.inspect}" }
               $log.debug('game'){ "unscored: #{saved_unscoring_dice.inspect}" }
-              $log.debug('game'){ "reroll: #{reroll_dice.inspect}" }
               if round_score == 0 then
                 if (throw_score >= @bust) then
                   round_score += throw_score

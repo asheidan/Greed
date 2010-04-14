@@ -105,7 +105,8 @@ module UI
       set_dice(dice)
       set_saved(@@saved_dice) unless dice.length == 6
       
-      # Wait for user input. Know a better way? Then tell me!
+      # Wait for user input. Know a better way? Then tell me! 
+      # How about a mutex? // een
       $state = :wait
       while $state == :wait do
         if $app_status == :will_quit
