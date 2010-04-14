@@ -3,11 +3,7 @@ class Mutex
     begin
       synchronize { block.call }
     rescue ThreadError => e
-      if e.message =~ /thread [^ ]* tried to join itself/ then
-        yield
-      else
-        raise
-      end
+      yield
     end
   end
 end
