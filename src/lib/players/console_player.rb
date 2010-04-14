@@ -7,8 +7,8 @@ module Players
   class ConsolePlayer < DummyPlayer
     
     def update_scoreboard(scores)
-      scores.keys.sort.each do |k|
-        puts "#{sprintf("%5d",scores[k])} #{k}"
+      scores.keys.sort.each do |key|
+        puts "#{sprintf("%5d",scores[key])} #{key}"
       end
       # $log.debug('scores'){scores}
     end

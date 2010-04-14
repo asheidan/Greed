@@ -10,4 +10,11 @@ module IsARule
     points, dice = @rule.apply( [] )
     assert_equal([], dice)
   end
+  
+  def test_rule_should_not_change_given_array
+    ones = [1,1,1,1,1,1]
+    initial = ones.clone
+    @rule.apply ones
+    assert_equal(initial, ones)
+  end  
 end

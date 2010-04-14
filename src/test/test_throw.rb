@@ -103,4 +103,27 @@ class TestThrow < Test::Unit::TestCase
     assert_equal([1,2,3], @throw.rolled)
     assert_equal([4,5,6], @throw.saved)
   end
+  
+  def test_14_saving_three_of_a_kind
+    Throw.class_eval do
+      attr_writer :rolled
+    end
+    
+    @throw.rolled = [1,1,1,4,5,6]
+    @throw.roll = [4,5,6]
+    assert_equal([4,5,6], @throw.rolled)
+    assert_equal([1,1,1], @throw.saved)
+  end
+  
+  def test_15_changing_returned_rolled_array_shouldnt_change_instance_array
+    returned = @throw.rolled
+    returned.delete_at 0
+    assert_not_equal(returned, @throw.rolled)
+  end
+
+  def test_15_changing_returned_saved_array_shouldnt_change_instance_array
+    returned = @throw.saved
+    returned << "arne"
+    assert_not_equal(returned, @throw.saved)
+  end
 end
