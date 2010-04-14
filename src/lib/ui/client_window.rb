@@ -4,7 +4,7 @@ module UI
   class ClientWindow
     def initialize(client)
       host_var = TkVariable.new("localhost")
-      port_var = TkVariable.new
+      port_var = TkVariable.new("8787")
       type_var = TkVariable.new(:Manual)
       name_var = TkVariable.new
       
