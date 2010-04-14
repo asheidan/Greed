@@ -123,7 +123,7 @@ class Server
               cup.reroll!
               saved_dice = cup.rolled
               $log.debug('game: dice') {cup}
-              broadcast(:status_update, [c.name, cup.rolled, cup.saved], [c])
+              broadcast(:status_update, [c.name, cup.rolled, cup.saved])
               reroll_dice = c.roll(cup.rolled)
               $log.debug('game'){ "reroll: #{reroll_dice.inspect}" }
               reroll_dice.each{ |d|
