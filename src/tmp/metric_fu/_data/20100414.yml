@@ -385,6 +385,37 @@
     - :was_run: true
       :content: "   end"
     :percent_run: 100
+  lib/players/alternate_random_player.rb: 
+    :lines: 
+    - :was_run: true
+      :content: "   require 'players/dummy_player'"
+    - :was_run: true
+      :content: "   module Players"
+    - :was_run: true
+      :content: "     # AlternateRandomPlayer saves 50% of times when given a decision. When a save"
+    - :was_run: true
+      :content: "     #  doesn't occur it will reroll a random amount of dice"
+    - :was_run: true
+      :content: "     class AlternateRandomPlayer < DummyPlayer"
+    - :was_run: true
+      :content: "       def roll(dice)"
+    - :was_run: true
+      :content: "         if rand(2) == 0"
+    - :was_run: true
+      :content: "           []"
+    - :was_run: true
+      :content: "         else"
+    - :was_run: true
+      :content: "           dice.shuffle.first(rand(dice.length)+1)"
+    - :was_run: true
+      :content: "         end"
+    - :was_run: true
+      :content: "       end"
+    - :was_run: true
+      :content: "     end"
+    - :was_run: true
+      :content: "   end"
+    :percent_run: 100
   lib/players/coward_player.rb: 
     :lines: 
     - :was_run: true
@@ -586,37 +617,6 @@
       :content: "         else"
     - :was_run: true
       :content: "           value * 100"
-    - :was_run: true
-      :content: "         end"
-    - :was_run: true
-      :content: "       end"
-    - :was_run: true
-      :content: "     end"
-    - :was_run: true
-      :content: "   end"
-    :percent_run: 100
-  lib/players/random_player_2.rb: 
-    :lines: 
-    - :was_run: true
-      :content: "   require 'players/dummy_player'"
-    - :was_run: true
-      :content: "   module Players"
-    - :was_run: true
-      :content: "     # RandomPlayer2 saves 50% of times when given a decision. When a save"
-    - :was_run: true
-      :content: "     #  doesn't occur it will reroll a random amount of dice"
-    - :was_run: true
-      :content: "     class RandomPlayer2 < DummyPlayer"
-    - :was_run: true
-      :content: "       def roll(dice)"
-    - :was_run: true
-      :content: "         if rand(2) == 0"
-    - :was_run: true
-      :content: "           []"
-    - :was_run: true
-      :content: "         else"
-    - :was_run: true
-      :content: "           dice.shuffle.first(rand(dice.length)+1)"
     - :was_run: true
       :content: "         end"
     - :was_run: true
@@ -1079,8 +1079,8 @@
       :content: "   end"
     :percent_run: 66
 :flog: 
-  :average: 12.8
-  :total: 1188.5
+  :average: 12.6
+  :total: 1201.0
   :pages: 
   - :average_score: 78.1
     :path: /lib/ui/client_window.rb
@@ -1989,6 +1989,55 @@
       :name: Client#none
       :score: 1.2
     :score: 36.9
+  - :average_score: 6.2
+    :path: /lib/players/alternate_random_player.rb
+    :highest_score: 11.4
+    :scanned_methods: 
+    - :operators: 
+      - :operator: rand
+        :score: 3.1
+      - :operator: length
+        :score: 1.9
+      - :operator: +
+        :score: 1.5
+      - :operator: shuffle
+        :score: 1.5
+      - :operator: first
+        :score: 1.3
+      - :operator: branch
+        :score: 1.2
+      - :operator: ==
+        :score: 1.2
+      - :operator: lit_fixnum
+        :score: 0.8
+      :name: AlternateRandomPlayer#roll
+      :score: 11.4
+    - :operators: 
+      - :operator: require
+        :score: 1.1
+      :name: main#none
+      :score: 1.1
+    :score: 12.5
+  - :average_score: 10.8
+    :path: /lib/rules/ones_and_fives_rule.rb
+    :highest_score: 10.8
+    :scanned_methods: 
+    - :operators: 
+      - :operator: assignment
+        :score: 6.3
+      - :operator: branch
+        :score: 3.6
+      - :operator: +
+        :score: 2.9
+      - :operator: ==
+        :score: 2.5
+      - :operator: lit_fixnum
+        :score: 1.6
+      - :operator: select
+        :score: 1.1
+      :name: OnesAndFivesRule#apply
+      :score: 10.8
+    :score: 10.8
   - :average_score: 4.0
     :path: /lib/throw.rb
     :highest_score: 10.8
@@ -2120,26 +2169,6 @@
       :name: main#none
       :score: 1.1
     :score: 55.9
-  - :average_score: 10.8
-    :path: /lib/rules/ones_and_fives_rule.rb
-    :highest_score: 10.8
-    :scanned_methods: 
-    - :operators: 
-      - :operator: assignment
-        :score: 6.3
-      - :operator: branch
-        :score: 3.6
-      - :operator: +
-        :score: 2.9
-      - :operator: ==
-        :score: 2.5
-      - :operator: lit_fixnum
-        :score: 1.6
-      - :operator: select
-        :score: 1.1
-      :name: OnesAndFivesRule#apply
-      :score: 10.8
-    :score: 10.8
   - :average_score: 5.7
     :path: /lib/players/random_player.rb
     :highest_score: 8.1
@@ -2438,6 +2467,9 @@
       :message: has no descriptive comment
       :method: Mutex
     :file_path: lib/monkeys/mutex_helper.rb
+  - :code_smells: []
+
+    :file_path: lib/players/alternate_random_player.rb
   - :code_smells: 
     - :type: Duplication
       :message: calls @scores.values 3 times
@@ -2473,11 +2505,6 @@
       :message: refers to player_types more than self
       :method: Players::RandomPlayer#roll
     :file_path: lib/players/random_player.rb
-  - :code_smells: 
-    - :type: UncommunicativeName
-      :message: has the name 'RandomPlayer2'
-      :method: Players::RandomPlayer2
-    :file_path: lib/players/random_player_2.rb
   - :code_smells: 
     - :type: LongMethod
       :message: has approx 6 statements
@@ -2918,33 +2945,33 @@
   - :lines: 14
     :complexity: 8
     :name: Players::GamblerPlayer#roll
-  - :lines: 13
-    :complexity: 6
-    :name: Client#create_player
   - :lines: 14
     :complexity: 6
     :name: Server#broadcast
+  - :lines: 13
+    :complexity: 6
+    :name: Client#create_player
   - :lines: 29
     :complexity: 6
     :name: UI::ManualWindow#roll
-  - :lines: 15
-    :complexity: 5
-    :name: Server#connect
   - :lines: 13
     :complexity: 5
     :name: Rules#self.apply_rules
   - :lines: 12
     :complexity: 5
     :name: Server#start_game
+  - :lines: 15
+    :complexity: 5
+    :name: Server#connect
+  - :lines: 14
+    :complexity: 4
+    :name: Players::ConsolePlayer#roll
   - :lines: 8
     :complexity: 4
     :name: Rules::ThreeOfAKindRule#apply
   - :lines: 14
     :complexity: 4
     :name: Rules::OnesAndFivesRule#apply
-  - :lines: 14
-    :complexity: 4
-    :name: Players::ConsolePlayer#roll
   - :lines: 7
     :complexity: 3
     :name: UI::ManualWindow#set_dice
@@ -2960,78 +2987,81 @@
   - :lines: 12
     :complexity: 3
     :name: Players::CleverPlayer#position
+  - :lines: 8
+    :complexity: 3
+    :name: UI::ManualWindow#get_dies
   - :lines: 7
     :complexity: 3
     :name: UI::ManualWindow#update_scoreboard
+  - :lines: 5
+    :complexity: 3
+    :name: Rules#self.rules
   - :lines: 6
     :complexity: 3
     :name: Mutex#try_synchronize
   - :lines: 9
     :complexity: 3
     :name: Server#disconnect
-  - :lines: 5
-    :complexity: 3
-    :name: Rules#self.rules
   - :lines: 11
     :complexity: 3
     :name: Server#initialize
-  - :lines: 8
-    :complexity: 3
-    :name: UI::ManualWindow#get_dies
+  - :lines: 6
+    :complexity: 2
+    :name: Players::CleverPlayer#roll
   - :lines: 4
     :complexity: 2
     :name: Throw#save
+  - :lines: 5
+    :complexity: 2
+    :name: Array#remove!
+  - :lines: 2
+    :complexity: 2
+    :name: Array#remove_three!
   - :lines: 6
     :complexity: 2
-    :name: Rules::StreetRule#apply
+    :name: Array#freq
+  - :lines: 6
+    :complexity: 2
+    :name: Array#sum
   - :lines: 6
     :complexity: 2
     :name: Players::RandomPlayer2#roll
-  - :lines: 4
-    :complexity: 2
-    :name: Greed#spawn_server
-  - :lines: 4
-    :complexity: 2
-    :name: Server#self.start_game
-  - :lines: 4
-    :complexity: 2
-    :name: Greed#spawn_client
   - :lines: 3
     :complexity: 2
     :name: Client#disconnect
   - :lines: 6
     :complexity: 2
-    :name: Players::CleverPlayer#roll
-  - :lines: 2
-    :complexity: 2
-    :name: Players::DummyPlayer#name
-  - :lines: 3
-    :complexity: 2
-    :name: Throw#initialize
+    :name: Players::AlternateRandomPlayer#roll
   - :lines: 6
     :complexity: 2
-    :name: Array#sum
+    :name: Rules::StreetRule#apply
+  - :lines: 4
+    :complexity: 2
+    :name: Server#self.start_game
+  - :lines: 4
+    :complexity: 2
+    :name: Greed#spawn_server
   - :lines: 2
     :complexity: 2
     :name: Players::ConsolePlayer#status_update
   - :lines: 5
     :complexity: 2
     :name: Players::ConsolePlayer#update_scoreboard
-  - :lines: 6
+  - :lines: 4
     :complexity: 2
-    :name: Array#freq
+    :name: Greed#spawn_client
   - :lines: 6
     :complexity: 2
     :name: Rules::ThreeOfAKindRule#points_table
   - :lines: 2
     :complexity: 2
-    :name: Array#remove_three!
-  - :lines: 5
+    :name: Players::DummyPlayer#name
+  - :lines: 3
     :complexity: 2
-    :name: Array#remove!
-  - :lines: 1
+    :name: Throw#initialize
+  - :lines: 4
     :complexity: 1
-    :name: Players::DummyPlayer#game_over
+    :name: Players::DummyPlayer#initialize
   - :lines: 2
     :complexity: 1
     :name: Throw#to_a
@@ -3046,7 +3076,7 @@
     :name: Throw#rolled
   - :lines: 2
     :complexity: 1
-    :name: Rules#self.max_points
+    :name: Players::CleverPlayer#update_scoreboard
   - :lines: 3
     :complexity: 1
     :name: Players::ManualPlayer#initialize
@@ -3062,9 +3092,9 @@
   - :lines: 2
     :complexity: 1
     :name: Throw#size
-  - :lines: 2
+  - :lines: 1
     :complexity: 1
-    :name: Players::ConsolePlayer#name
+    :name: Players::DummyPlayer#update_scoreboard
   - :lines: 2
     :complexity: 1
     :name: Players::ManualPlayer#update_scoreboard
@@ -3092,39 +3122,39 @@
   - :lines: 2
     :complexity: 1
     :name: UI::ManualWindow#limits
-  - :lines: 4
+  - :lines: 2
     :complexity: 1
-    :name: Client#connect
+    :name: Rules#self.max_points
   - :lines: 5
     :complexity: 1
     :name: UI::ManualWindow#status_update
-  - :lines: 2
-    :complexity: 1
-    :name: Players::CleverPlayer#update_scoreboard
-  - :lines: 4
-    :complexity: 1
-    :name: Players::DummyPlayer#initialize
   - :lines: 1
     :complexity: 1
-    :name: Players::DummyPlayer#update_scoreboard
-  - :lines: 8
-    :complexity: 1
-    :name: Server#self.launch_server
-  - :lines: 1
-    :complexity: 1
-    :name: Players::DummyPlayer#status_update
-  - :lines: 2
-    :complexity: 1
-    :name: Players::DummyPlayer#roll
+    :name: Players::DummyPlayer#game_over
   - :lines: 3
     :complexity: 1
     :name: Players::DummyPlayer#limits
   - :lines: 2
     :complexity: 1
-    :name: Rules::DummyRule#apply
+    :name: Players::ConsolePlayer#name
+  - :lines: 8
+    :complexity: 1
+    :name: Server#self.launch_server
+  - :lines: 2
+    :complexity: 1
+    :name: Players::DummyPlayer#roll
+  - :lines: 4
+    :complexity: 1
+    :name: Client#connect
+  - :lines: 1
+    :complexity: 1
+    :name: Players::DummyPlayer#status_update
   - :lines: 3
     :complexity: 1
     :name: Players::RandomPlayer#roll
+  - :lines: 2
+    :complexity: 1
+    :name: Rules::DummyRule#apply
   - :lines: 2
     :complexity: 1
     :name: Server#stop_service
@@ -3380,6 +3410,38 @@
   - :classes: 
     - :methods: []
 
+      :lines: 6
+      :class_name: Players
+      :complexity: 0
+    - :methods: 
+      - :lines: 14
+        :complexity: 8
+        :name: Players::GamblerPlayer#roll
+      :lines: 16
+      :class_name: Players::GamblerPlayer
+      :complexity: 8
+    :filename: gambler_player.rb
+  - :classes: 
+    - :methods: 
+      - :lines: 5
+        :complexity: 2
+        :name: Array#remove!
+      - :lines: 2
+        :complexity: 2
+        :name: Array#remove_three!
+      - :lines: 6
+        :complexity: 2
+        :name: Array#freq
+      - :lines: 6
+        :complexity: 2
+        :name: Array#sum
+      :lines: 28
+      :class_name: Array
+      :complexity: 8
+    :filename: array_helper.rb
+  - :classes: 
+    - :methods: []
+
       :lines: 4
       :class_name: Players
       :complexity: 0
@@ -3410,54 +3472,25 @@
       :complexity: 8
     :filename: dummy_player.rb
   - :classes: 
-    - :methods: 
-      - :lines: 5
-        :complexity: 2
-        :name: Array#remove!
-      - :lines: 2
-        :complexity: 2
-        :name: Array#remove_three!
-      - :lines: 6
-        :complexity: 2
-        :name: Array#freq
-      - :lines: 6
-        :complexity: 2
-        :name: Array#sum
-      :lines: 28
-      :class_name: Array
-      :complexity: 8
-    :filename: array_helper.rb
-  - :classes: 
     - :methods: []
 
       :lines: 6
       :class_name: Players
       :complexity: 0
     - :methods: 
-      - :lines: 14
-        :complexity: 8
-        :name: Players::GamblerPlayer#roll
-      :lines: 16
-      :class_name: Players::GamblerPlayer
-      :complexity: 8
-    :filename: gambler_player.rb
-  - :classes: 
-    - :methods: []
-
-      :lines: 3
-      :class_name: Rules
-      :complexity: 0
-    - :methods: 
-      - :lines: 8
-        :complexity: 4
-        :name: Rules::ThreeOfAKindRule#apply
+      - :lines: 12
+        :complexity: 3
+        :name: Players::CleverPlayer#position
       - :lines: 6
         :complexity: 2
-        :name: Rules::ThreeOfAKindRule#points_table
-      :lines: 19
-      :class_name: Rules::ThreeOfAKindRule
+        :name: Players::CleverPlayer#roll
+      - :lines: 2
+        :complexity: 1
+        :name: Players::CleverPlayer#update_scoreboard
+      :lines: 28
+      :class_name: Players::CleverPlayer
       :complexity: 6
-    :filename: three_of_a_kind_rule.rb
+    :filename: clever_player.rb
   - :classes: 
     - :methods: []
 
@@ -3490,23 +3523,20 @@
   - :classes: 
     - :methods: []
 
-      :lines: 6
-      :class_name: Players
+      :lines: 3
+      :class_name: Rules
       :complexity: 0
     - :methods: 
-      - :lines: 12
-        :complexity: 3
-        :name: Players::CleverPlayer#position
+      - :lines: 8
+        :complexity: 4
+        :name: Rules::ThreeOfAKindRule#apply
       - :lines: 6
         :complexity: 2
-        :name: Players::CleverPlayer#roll
-      - :lines: 2
-        :complexity: 1
-        :name: Players::CleverPlayer#update_scoreboard
-      :lines: 28
-      :class_name: Players::CleverPlayer
+        :name: Rules::ThreeOfAKindRule#points_table
+      :lines: 19
+      :class_name: Rules::ThreeOfAKindRule
       :complexity: 6
-    :filename: clever_player.rb
+    :filename: three_of_a_kind_rule.rb
   - :classes: 
     - :methods: []
 
@@ -3550,20 +3580,6 @@
   - :classes: 
     - :methods: []
 
-      :lines: 5
-      :class_name: Players
-      :complexity: 0
-    - :methods: 
-      - :lines: 6
-        :complexity: 2
-        :name: Players::RandomPlayer2#roll
-      :lines: 8
-      :class_name: Players::RandomPlayer2
-      :complexity: 2
-    :filename: random_player_2.rb
-  - :classes: 
-    - :methods: []
-
       :lines: 3
       :class_name: Rules
       :complexity: 0
@@ -3579,16 +3595,30 @@
     - :methods: []
 
       :lines: 5
-      :class_name: Rules
+      :class_name: Players
       :complexity: 0
     - :methods: 
-      - :lines: 2
-        :complexity: 1
-        :name: Rules::DummyRule#apply
-      :lines: 9
-      :class_name: Rules::DummyRule
-      :complexity: 1
-    :filename: dummy_rule.rb
+      - :lines: 6
+        :complexity: 2
+        :name: Players::AlternateRandomPlayer#roll
+      :lines: 8
+      :class_name: Players::AlternateRandomPlayer
+      :complexity: 2
+    :filename: alternate_random_player.rb
+  - :classes: 
+    - :methods: []
+
+      :lines: 5
+      :class_name: Players
+      :complexity: 0
+    - :methods: 
+      - :lines: 6
+        :complexity: 2
+        :name: Players::RandomPlayer2#roll
+      :lines: 8
+      :class_name: Players::RandomPlayer2
+      :complexity: 2
+    :filename: random_player_2.rb
   - :classes: 
     - :methods: []
 
@@ -3603,6 +3633,20 @@
       :class_name: Players::RandomPlayer
       :complexity: 1
     :filename: random_player.rb
+  - :classes: 
+    - :methods: []
+
+      :lines: 5
+      :class_name: Rules
+      :complexity: 0
+    - :methods: 
+      - :lines: 2
+        :complexity: 1
+        :name: Rules::DummyRule#apply
+      :lines: 9
+      :class_name: Rules::DummyRule
+      :complexity: 1
+    :filename: dummy_rule.rb
   - :classes: 
     - :methods: []
 
@@ -3696,6 +3740,13 @@
     - :lines: 125
       :complexity: 24
       :name: UI::ClientWindow#initialize
+  - :lines: 90
+    :complexity: 18
+    :name: UI::ServerWindow
+    :defs: 
+    - :lines: 88
+      :complexity: 18
+      :name: UI::ServerWindow#initialize
   - :lines: 64
     :complexity: 18
     :name: Throw
@@ -3736,13 +3787,6 @@
     - :lines: 2
       :complexity: 1
       :name: Throw#throw_die
-  - :lines: 90
-    :complexity: 18
-    :name: UI::ServerWindow
-    :defs: 
-    - :lines: 88
-      :complexity: 18
-      :name: UI::ServerWindow#initialize
   - :lines: 41
     :complexity: 10
     :name: UI::GreedWindow
@@ -3792,22 +3836,6 @@
     - :lines: 3
       :complexity: 2
       :name: Client#disconnect
-  - :lines: 28
-    :complexity: 8
-    :name: Array
-    :defs: 
-    - :lines: 6
-      :complexity: 2
-      :name: Array#sum
-    - :lines: 6
-      :complexity: 2
-      :name: Array#freq
-    - :lines: 2
-      :complexity: 2
-      :name: Array#remove_three!
-    - :lines: 5
-      :complexity: 2
-      :name: Array#remove!
   - :lines: 41
     :complexity: 8
     :name: Players::DummyPlayer
@@ -3833,6 +3861,22 @@
     - :lines: 2
       :complexity: 2
       :name: Players::DummyPlayer#name
+  - :lines: 28
+    :complexity: 8
+    :name: Array
+    :defs: 
+    - :lines: 6
+      :complexity: 2
+      :name: Array#sum
+    - :lines: 6
+      :complexity: 2
+      :name: Array#freq
+    - :lines: 2
+      :complexity: 2
+      :name: Array#remove_three!
+    - :lines: 5
+      :complexity: 2
+      :name: Array#remove!
   - :lines: 16
     :complexity: 8
     :name: Players::GamblerPlayer
@@ -3840,16 +3884,6 @@
     - :lines: 14
       :complexity: 8
       :name: Players::GamblerPlayer#roll
-  - :lines: 19
-    :complexity: 6
-    :name: Rules::ThreeOfAKindRule
-    :defs: 
-    - :lines: 8
-      :complexity: 4
-      :name: Rules::ThreeOfAKindRule#apply
-    - :lines: 6
-      :complexity: 2
-      :name: Rules::ThreeOfAKindRule#points_table
   - :lines: 36
     :complexity: 6
     :name: Players::ManualPlayer
@@ -3872,6 +3906,16 @@
     - :lines: 3
       :complexity: 1
       :name: Players::ManualPlayer#limits
+  - :lines: 19
+    :complexity: 6
+    :name: Rules::ThreeOfAKindRule
+    :defs: 
+    - :lines: 8
+      :complexity: 4
+      :name: Rules::ThreeOfAKindRule#apply
+    - :lines: 6
+      :complexity: 2
+      :name: Rules::ThreeOfAKindRule#points_table
   - :lines: 28
     :complexity: 6
     :name: Players::CleverPlayer
@@ -3885,6 +3929,16 @@
     - :lines: 2
       :complexity: 1
       :name: Players::CleverPlayer#update_scoreboard
+  - :lines: 16
+    :complexity: 4
+    :name: Rules::OnesAndFivesRule
+    :defs: 
+    - :lines: 14
+      :complexity: 4
+      :name: Rules::OnesAndFivesRule#apply
+  - :lines: 18
+    :complexity: 4
+    :name: ""
   - :lines: 12
     :complexity: 4
     :name: Greed
@@ -3895,16 +3949,6 @@
     - :lines: 4
       :complexity: 2
       :name: Greed#spawn_server
-  - :lines: 18
-    :complexity: 4
-    :name: ""
-  - :lines: 16
-    :complexity: 4
-    :name: Rules::OnesAndFivesRule
-    :defs: 
-    - :lines: 14
-      :complexity: 4
-      :name: Rules::OnesAndFivesRule#apply
   - :lines: 8
     :complexity: 3
     :name: Mutex
@@ -3912,13 +3956,9 @@
     - :lines: 6
       :complexity: 3
       :name: Mutex#try_synchronize
-  - :lines: 8
+  - :lines: 11
     :complexity: 2
-    :name: Players::RandomPlayer2
-    :defs: 
-    - :lines: 6
-      :complexity: 2
-      :name: Players::RandomPlayer2#roll
+    :name: ""
   - :lines: 8
     :complexity: 2
     :name: Rules::StreetRule
@@ -3926,16 +3966,20 @@
     - :lines: 6
       :complexity: 2
       :name: Rules::StreetRule#apply
-  - :lines: 11
+  - :lines: 8
     :complexity: 2
-    :name: ""
-  - :lines: 4
-    :complexity: 1
-    :name: Players::CowardPlayer
+    :name: Players::AlternateRandomPlayer
     :defs: 
-    - :lines: 2
-      :complexity: 1
-      :name: Players::CowardPlayer#roll
+    - :lines: 6
+      :complexity: 2
+      :name: Players::AlternateRandomPlayer#roll
+  - :lines: 8
+    :complexity: 2
+    :name: Players::RandomPlayer2
+    :defs: 
+    - :lines: 6
+      :complexity: 2
+      :name: Players::RandomPlayer2#roll
   - :lines: 5
     :complexity: 1
     :name: Players::RandomPlayer
@@ -3956,58 +4000,68 @@
   - :lines: 5
     :complexity: 1
     :name: ""
-  - :lines: 2
-    :complexity: 0
-    :name: UI
   - :lines: 4
-    :complexity: 0
-    :name: Rules
-  - :lines: 4
-    :complexity: 0
-    :name: Players
-  - :lines: 4
-    :complexity: 0
-    :name: Players
+    :complexity: 1
+    :name: Players::CowardPlayer
+    :defs: 
+    - :lines: 2
+      :complexity: 1
+      :name: Players::CowardPlayer#roll
   - :lines: 5
     :complexity: 0
     :name: Players
   - :lines: 3
     :complexity: 0
     :name: Rules
+  - :lines: 5
+    :complexity: 0
+    :name: Players
+  - :lines: 4
+    :complexity: 0
+    :name: Players
+  - :lines: 4
+    :complexity: 0
+    :name: Players
   - :lines: 6
     :complexity: 0
     :name: Players
-  - :lines: 5
+  - :lines: 3
     :complexity: 0
     :name: Rules
+  - :lines: 2
+    :complexity: 0
+    :name: UI
+  - :lines: 4
+    :complexity: 0
+    :name: Players
   - :lines: 1
     :complexity: 0
     :name: ""
+  - :lines: 6
+    :complexity: 0
+    :name: Players
+  - :lines: 2
+    :complexity: 0
+    :name: UI
+  - :lines: 1
+    :complexity: 0
+    :name: ""
+  - :lines: 5
+    :complexity: 0
+    :name: Rules
+  - :lines: 2
+    :complexity: 0
+    :name: UI
+  - :lines: 4
+    :complexity: 0
+    :name: Rules
+  - :lines: 2
+    :complexity: 0
+    :name: UI
+  - :lines: 5
+    :complexity: 0
+    :name: Players
   - :lines: 8
-    :complexity: 0
-    :name: Players
-  - :lines: 2
-    :complexity: 0
-    :name: UI
-  - :lines: 1
-    :complexity: 0
-    :name: ""
-  - :lines: 4
-    :complexity: 0
-    :name: Players
-  - :lines: 2
-    :complexity: 0
-    :name: UI
-  - :lines: 3
-    :complexity: 0
-    :name: Rules
-  - :lines: 2
-    :complexity: 0
-    :name: UI
-  - :lines: 5
-    :complexity: 0
-    :name: Players
-  - :lines: 6
     :complexity: 0
     :name: Players
 :churn: 
@@ -4044,9 +4098,9 @@
     :times_changed: 19
   - :file_path: src/lib/players/dummy_player.rb
     :times_changed: 12
-  - :file_path: src/Rakefile
-    :times_changed: 10
   - :file_path: src/test/players/is_a_player.rb
+    :times_changed: 10
+  - :file_path: src/Rakefile
     :times_changed: 10
   - :file_path: src/lib/ui/manual_window.rb
     :times_changed: 10
@@ -4056,39 +4110,39 @@
     :times_changed: 8
   - :file_path: src/lib/rules.rb
     :times_changed: 7
-  - :file_path: src/tmp/metric_fu/output/saikuro.html
+  - :file_path: src/tmp/metric_fu/output/flog.html
     :times_changed: 6
-  - :file_path: src/tmp/metric_fu/output/rcov.html
+  - :file_path: src/tmp/metric_fu/output/churn.html
     :times_changed: 6
   - :file_path: src/tmp/metric_fu/report.yml
     :times_changed: 6
   - :file_path: src/test/test_server.rb
     :times_changed: 6
-  - :file_path: src/tmp/metric_fu/output/index.html
+  - :file_path: src/tmp/metric_fu/output/saikuro.html
     :times_changed: 6
   - :file_path: src/tmp/metric_fu/scratch/rcov/rcov.txt
     :times_changed: 6
-  - :file_path: src/tmp/metric_fu/output/churn.html
+  - :file_path: src/tmp/metric_fu/output/index.html
     :times_changed: 6
   - :file_path: src/tmp/metric_fu/output/flay.html
+    :times_changed: 6
+  - :file_path: src/tmp/metric_fu/output/rcov.html
     :times_changed: 6
   - :file_path: src/tmp/metric_fu/output/roodi.html
     :times_changed: 6
   - :file_path: src/tmp/metric_fu/output/reek.html
     :times_changed: 6
-  - :file_path: src/tmp/metric_fu/output/flog.html
-    :times_changed: 6
-  - :file_path: src/lib/players/gambler_player.rb
+  - :file_path: src/lib/players/clever_player.rb
     :times_changed: 5
   - :file_path: src/tmp/metric_fu/_data/20100408.yml
+    :times_changed: 5
+  - :file_path: src/lib/players/gambler_player.rb
     :times_changed: 5
   - :file_path: src/lib/throw.rb
     :times_changed: 5
   - :file_path: src/lib/rules/three_of_a_kind_rule.rb
     :times_changed: 5
   - :file_path: src/lib/monkeys/array_helper.rb
-    :times_changed: 5
-  - :file_path: src/lib/players/clever_player.rb
     :times_changed: 5
   - :file_path: src/tmp/metric_fu/output/flog.js
     :times_changed: 5
@@ -4108,9 +4162,9 @@
     :times_changed: 4
   - :file_path: src/lib/monkeys/mutex_helper.rb
     :times_changed: 4
-  - :file_path: src/lib/players/random_player.rb
-    :times_changed: 4
   - :file_path: src/tmp/metric_fu/output/rcov.js
+    :times_changed: 4
+  - :file_path: src/lib/players/random_player.rb
     :times_changed: 4
   - :file_path: src/test/test_throw.rb
     :times_changed: 4
@@ -4121,6 +4175,8 @@
   - :file_path: src/tmp/metric_fu/output/flay.js
     :times_changed: 3
   - :file_path: src/test/players/test_clever_player.rb
+    :times_changed: 3
+  - :file_path: src/lib/players/random_player_2.rb
     :times_changed: 3
   - :file_path: src/test/players/test_coward_player.rb
     :times_changed: 3
