@@ -17,8 +17,6 @@ module UI
       
       $state = :sleep
       
-      @@saved_dice = Array.new
-      
       TkFrame.new(Tk.root) do
         TkLabelFrame.new(self) do
           TkLabel.new(self) do
@@ -119,13 +117,10 @@ module UI
       marked = get_dies("1")
       
       if marked.length == 6
-        @@saved_dice = []
         [nil]*6
       elsif marked.length == 0
-        @@saved_dice = []
         []
       else
-        @@saved_dice = marked
         unmarked
       end
     end
