@@ -1,4 +1,5 @@
 require 'drb/drb'
+require 'drb/acl'
 require 'logger'
 require 'rules'
 require 'rules/ones_and_fives_rule'
@@ -8,7 +9,7 @@ require 'monkeys/mutex_helper'
 require 'monkeys/array_helper'
 require 'throw'
 
-# $SAFE = 1
+$SAFE = 1
 
 $log = Logger.new(STDERR)
 $log.datetime_format = "%Y-%m-%d %H:%M:%S"
@@ -25,7 +26,7 @@ class Server
     @mutex = Mutex.new
     @clients = []
     @score_board = {}
-    @uri = port.nil? ? nil : "druby://localhost:#{port}"
+    @uri = port.nil? ? nil : "druby://:#{port}"
     
     @game_started = false
     
@@ -34,6 +35,8 @@ class Server
   end
   
   def start_service
+    acl = ACL.new(%w[allow all])
+    DRb.install_acl(acl)
     DRb.start_service(uri,self)
   end
   
