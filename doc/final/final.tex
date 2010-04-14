@@ -146,6 +146,7 @@
 					\item {\tt CowardPlayer} always saves the score.
 					\item {\tt GamblerPlayer} tries to maximize the score for each round taking large risks.
 					\item {\tt RandomPlayer} randomly asks another implementation what it should do. Currently uses {\tt DummyPlayer}, {\tt CowardPlayer} and {\tt GamblerPlayer}.
+					\item {\tt RandomPlayer2} randomly either saves current score or rethrows a random amount of dice.
 					\item {\tt CleverPlayer} adapts playing style according to where it is on the scoreboard. If it's in the lead it plays very safe and when another player is in the lead it takes higher risks in order to get more points.
 				\end{itemize}
 			\item A \emph{special} player (called {\tt UIPlayer} in \figurename{} \ref{fig:uml}) which displays a user interface and lets the user interact with the game. This player can also communicate with a remote server.
@@ -156,6 +157,12 @@
 		If time permits the remaining smart players should also use the dynamic rules instead of using hardcoded logic.
 	
 	\section{Metrics}
+
+    %\begin{figure}[h!]
+    %   \centering
+    %       \ifpdf                                                                                                   %           \includegraphics[width=\textwidth]{time_distribution.png}                                            %       \fi
+    %   \caption{Time distribution between the four major tasks.}
+    %   \label{fig:time distribution}                                                                                %\end{figure}
 	
 	%\begin{figure}[h!]
 	%	\centering
@@ -181,7 +188,156 @@
 	%	There are also a few classes with a possible need for refactorization. A diagram over problems reported by Reek\footnote{Reek, the code smell detector for Ruby. http://wiki.github.com/kevinrutherford/reek/} is available in \figurename{} \ref{fig:reek} on \pagename{} \pageref{fig:reek}.
 		
 	%	Most of the problems with regards to the server will be removed during refactorization after the functionality of the server is completed. Many of the remaining problems are in the code for the prototype of the GUI which will also be rewritten.
-	
+
+		\subsection{Testlist}
+			A list of the tests, shown per class.		
+			\begin{itemize}
+				\item ArrayHelper %03
+				\begin{itemize}
+					\item Method sum should return 45 when given the list [1, 2, 3, 4, 5, 6, 7, 8, 9]
+					\item Method freq should return the hash \{1 $\Rightarrow$ 3, 2 $\Rightarrow$ 1, 4 $\Rightarrow$ 2, 9 $\Rightarrow$ 1\} when given the list [1, 1, 1, 2, 4, 4, 9]
+					\item Method remove! should only remove one object of the given element. remove!(2) on [1, 1, 2, 2] should make it [1, 1, 2]
+				\end{itemize}
+				\item MutexHelper %02
+				\begin{itemize}
+					\item Mutex should throw error when synchronizing in synchronized block
+					\item Trying to synchronize in a synchronized block should work fine
+				\end{itemize}
+				\item IsAPlayer %09
+				\begin{itemize}
+					\item A player should not be nil
+					\item A player should respond to the method update\_scoreboard()
+					\item A player should respond correctly to the method roll(), return an array
+					\item A player should respond to the method status\_update()
+					\item A player should respond to limits (winlimit and bustlimit)
+					\item A player should have a name
+					\item A player should not change the dice list given as argument to the method roll()
+					\item A player should not be dumped
+					\item A player should respond to the method game\_over
+				\end{itemize}
+				\item DummyPlayer %01
+				\begin{itemize}
+					\item DummyPlayer should be an IsAPlayer
+				\end{itemize} 
+				\item CowardPlayer %02
+				\begin{itemize}
+					\item CowardPlayer should be an IsAPlayer
+					\item CowardPlayer should always save
+				\end{itemize}
+				\item RandomPlayer %01/02
+				\begin{itemize}
+					\item RandomPlayer should be an IsAPlayer
+					%TODO might want to delete the following line
+					\item RandomPlayer should act randomly, test for it!
+				\end{itemize}
+				\item RandomPlayer2 %01
+				\begin{itemize}
+					\item RandomPlayer2 should be an IsAPlayer
+				\end{itemize}
+				\item GamblerPlayer %07
+				\begin{itemize}
+					\item GamblerPlayer should be an IsAPlayer
+					\item GamblerPlayer should save a street
+					\item GamblerPlayer should save three of a kind
+					\item GamblerPlayer should save two three of a kind
+					\item GamblerPlayer should not save trailing of a kind. If given four fours it should just keep three fours
+					\item GamblerPlayer should save six of a kind
+					\item GamblerPlayer should save ones and fives
+				\end{itemize}
+				\item CleverPlayer %10
+				\begin{itemize}
+					\item CleverPlayer should be an IsAPlayer
+					\item CleverPlayer should when in a leading position have method position return 1
+					\item CleverPlayer should when in a last position have method position return 0
+					\item CleverPlayer should save if given a street and not in a leading postition
+					\item CleverPlayer should save three of a kind if not in a leading position
+					\item CleverPlayer should save two three of a kind if not in a leading position
+					\item CleverPlayer should not save trailing of a kind if not in a leading position
+					\item CleverPlayer should save six of a kind if not in a leading position
+					\item CleverPlayer should save ones and fives if not in a leading position
+					\item CleverPlayer should save if in a leading position
+				\end{itemize}
+				\item IsARule %02
+				\begin{itemize}
+					\item A rule should respond to the method apply
+					\item A rule should not invent dice when calling apply
+				\end{itemize}
+				\item DummyRule %01
+				\begin{itemize}
+					\item DummyRule should be an IsARule
+				\end{itemize}
+				\item OnesAndFivesRule %07
+				\begin{itemize}
+					\item OnesAndFivesRule should be an IsARule
+					\item OnesAndFivesRule should return 0 points when given []
+					\item OnesAndFivesRule should return 100 points when given [1]
+					\item OnesAndFivesRule should return 200 points when given [1, 1]
+					\item OnesAndFivesRule should return 50 points when given [5]
+					\item OnesAndFivesRule should return 0 points when given [2, 3, 4, 6]
+					\item OnesAndFivesRule should return 150 points when given [1, 2, 3, 4, 5, 6]
+				\end{itemize}
+				\item StreetRule %04
+				\begin{itemize}
+					\item StreetRule should be an IsARule
+					\item StreetRule should return 0 points when given [1, 4, 2, 6, 3, 4]
+					\item StreetRule should return 1000 points when given [1, 2, 3, 4, 5, 6]
+					\item StreetRule should return 1000 points when given [4, 5, 1, 2, 3, 6]
+				\end{itemize}
+				\item ThreeOfAKindRule %08
+				\begin{itemize}
+					\item ThreeOfAKindRule should be an IsARule
+					\item ThreeOfAKindRule should return 1000 points when given [1, 1, 1]
+					\item ThreeOfAKindRule should return 200 points when given [2, 2, 2]
+					\item ThreeOfAKindRule should return 300 points when given [3, 3, 3]
+					\item ThreeOfAKindRule should return 400 points when given [4, 4, 4]
+					\item ThreeOfAKindRule should return 500 points when given [5, 5, 5]
+					\item ThreeOfAKindRule should return 600 points when given [6, 6, 6]
+					\item ThreeOfAKindRule should not change the dice list when calling apply
+				\end{itemize}
+				\item Rules %06
+				\begin{itemize}
+					\item Rules should return 0 points and [] when all rules are applied and given []
+					\item Rules should be able to find all rules
+					\item Rules should return 100 points and [] when all rules are applied and given [1]
+					\item Rules should return 0 points and [2, 3, 4, 2, 3, 4] when no rules are applied and given [2, 3, 4, 2, 3, 4]
+					\item Rules should return 500 points and [3, 6] when all rules are applied and given [1, 2, 6, 4, 4, 4]
+					\item Rules should return a fixnum when calling max\_points. [1, 2, 3, 4, 5, 6] should return 1000
+				\end{itemize}
+				\item Server %07
+				\begin{itemize}
+					\item Server should have local url with correct port
+					\item Clients connecting to server should receive limits
+					\item Connected clients should receive scores when game starts
+					\item Game with one player should receive roll when game starts
+					%\item def test_04_one_player_one_round
+					\item Score board should contain the players that are connected to the game
+					\item Starting a game while it alreasy is in progress shouldn't do anything
+					\item When a game is over the players should be told who won
+				\end{itemize}
+				\item Throw %17
+				\begin{itemize}
+					\item An instance of Throw should not be nil/null
+					\item A new throw should have six dice
+					\item A new throw should convert to an Array with six Fixnum. In other words, a list with numbers
+					\item A throw converted to String should generate a String
+					\item A reroll should really reroll the dice
+					\item A new throw shouldn't have any saved dice
+					\item Saving a die should add it to the saved dice list
+					\item Saving non-existant dice should not affect Throw
+					\item Saving a die should make it survive reroll. Shouldn't disappear in a reroll that is
+					\item Clearing the saved dice should make the list of saved dice empty
+					\item Clearing the throw and then rerolling it should make it contain 6 dice
+					\item A new throw roll should contain six Fixnum(numbers)
+					\item Should be possible to save several elements of the same kind
+					\item Setting roll should update saved 
+					\item Having rolled [1, 1, 1, 4, 5, 6] and then rolling only [4, 5, 6] should cause the three of a kind to be saved
+					\item Changing returned rolled array shouldn't change instance array
+					\item Changing returned saved array shouldn't change instance array
+				\end{itemize}
+			\end{itemize}
+
+			There are as of current 88 testcases in the testlist.
+
 	\section{Earned Value}
 	\begin{table}[t!]
 	\vspace{30mm}	
@@ -192,31 +348,31 @@
 		 \multicolumn{1}{c}{\begin{rotate}{45}\textbf{ACWP}\end{rotate}} &
 		 \multicolumn{1}{c}{\begin{rotate}{45}\textbf{Planned Completion Date}\end{rotate}} &
 		 \multicolumn{1}{c}{\begin{rotate}{45}\textbf{Actual Completion Date}\end{rotate}}  &
-		 \multicolumn{1}{c}{\begin{rotate}{45}\textbf{BCWP (2010-04-09)}\end{rotate}} &
-		 \multicolumn{1}{c}{\begin{rotate}{45}\textbf{BCWS (2010-04-09)}\end{rotate}} \\
-% TODO: Set new values, not touched since progress report.
+		 \multicolumn{1}{c}{\begin{rotate}{45}\textbf{BCWP (2010-04-16)}\end{rotate}} &
+		 \multicolumn{1}{c}{\begin{rotate}{45}\textbf{BCWS (2010-04-16)}\end{rotate}} \\
+% TODO: Currently assuming that everything will be done before the final deadline.
 \hline
 \textbf{Interfaces \& Tests}	 & 06:00	 & 04:30	& 2010-03-30	 & 2010-03-30	& 06:00		& 06:00 \\
 \textbf{Computer Players}        & 18:00	 & 06:20	& 2010-04-06	 & 2010-04-07	& 18:00		& 18:00 \\
-\textbf{Rules}			 & 06:00	 & 06:20	& 2010-04-07	 & 2010-03-31	& 06:00		& 06:00 \\
-\textbf{UI Designed}		 & 10:00	 & 09:05	& 2010-04-07	 & 2010-04-06	& 10:00		& 10:00 \\
-\textbf{Server}			 & 20:00	 & -		& 2010-04-08	 & -		& -		& 20:00 \\
-\textbf{UI Implemented}		 & 20:00	 & -		& 2010-04-13	 & -		& -		& -	\\
-\textbf{Integration}		 & 06:00	 & -		& 2010-04-14	 & -		& -		& -	\\
+\textbf{Rules}			 		 & 06:00	 & 06:20	& 2010-04-07	 & 2010-03-31	& 06:00		& 06:00 \\
+\textbf{UI Designed}		 	 & 10:00	 & 09:05	& 2010-04-07	 & 2010-04-06	& 10:00		& 10:00 \\
+\textbf{Server}			 		 & 20:00	 & -		& 2010-04-08	 & 2010-04-1-	& 20:00		& 20:00 \\
+\textbf{UI Implemented}		 	 & 20:00	 & -		& 2010-04-13	 & 2010-04-1-	& 20:00		& 20:00	\\
+\textbf{Integration}		 	 & 06:00	 & -		& 2010-04-14	 & 2010-04-1-	& 06:00		& 06:00	\\
 \hline
-\textbf{Project plan}		 & 20:00	 & 20:05	& 2010-03-29	 & 2010-03-29	& 20:00		& 20:00 \\
-\textbf{Progress Report}	 & 15:00	 & 26:10	& 2010-04-08	 & 2010-04-08	& 15:00		& 15:00 \\
-\textbf{Final Report}            & 25:00	 & -		& 2010-04-15	 & -		& -		& -	\\
+\textbf{Project plan}		 	 & 20:00	 & 20:05	& 2010-03-29	 & 2010-03-29	& 20:00		& 20:00 \\
+\textbf{Progress Report}	 	 & 15:00	 & 26:10	& 2010-04-08	 & 2010-04-08	& 15:00		& 15:00 \\
+\textbf{Final Report}            & 25:00	 & -		& 2010-04-15	 & 2010-04-1-	& 25:00		& 25:00	\\
 \hline
 \hline
-\textbf{Total}			 & 146:00	 & 72:30	& -		 & -		 & 75:00	& 95:00 \\
+\textbf{Total}			 		 & 146:00	 & 72:30	& -		 		 & -		 	& 146:00	& 146:00 \\
 \hline
 		\hline
 	\end{tabular}
 	\vspace{5mm}
 	\begin{tabular}{*{9}{l}}
-	    EV  & = & BCWP/BAW  & = & 75/146  & = & 0.514 & $\Rightarrow$ & 51\% complete as of 2010-04-09 \\
-	    SPI & = & BCWP/BCWS & = & 75/95   & = & 0.789 & $\Rightarrow$ & 21\% behind schedule \\
+	    EV  & = & BCWP/BAW  & = & 146/146  & = & 1.000 & $\Rightarrow$ & 100\% complete as of 2010-04-16 \\
+	    SPI & = & BCWP/BCWS & = & 146/146   & = & 1.000 & $\Rightarrow$ & Right on schedule \\
 	    CPI & = & BCWP/ACWP & = & 75/72.5  & = & 1.034 & $\Rightarrow$ & Expected total effort = 141h \\
 	\end{tabular}{}
 	\caption{Table of earned value}
@@ -242,19 +398,19 @@
 							& \textbf{Emil} & \textbf{Fredrik}	& \textbf{Marcus} \\
 		\hline
 		\textbf{Interfaces \& Blackbox tests}	& 02:15		& -			& 02:15 \\
-		\textbf{Computer Players}		& 03:10		& 01:00			& 02:10 \\
-		\textbf{Rules}				& 07:30		& -			& - \\
-		\textbf{UI Design}			& 00:20		& 00:20			& 08:25 \\
-		\textbf{Server}				& 12:15		& -			& 03:10 \\
-		\textbf{UI Implemented}			& -		& -			& 10:54 \\
+		\textbf{Computer Players}				& 03:10		& 01:00			& 02:10 \\
+		\textbf{Rules}							& 07:30		& -			& - \\
+		\textbf{UI Design}						& 00:20		& 00:20			& 08:25 \\
+		\textbf{Server}							& 12:15		& -			& 03:10 \\
+		\textbf{UI Implemented}					& -		& -			& 10:54 \\
 		\hline   
-		\textbf{Project plan}			& 07:35		& 05:00			& 07:30 \\
-		\textbf{Progress Report}		& 10:55		& 11:43			& 03:30 \\
+		\textbf{Project plan}					& 07:35		& 05:00			& 07:30 \\
+		\textbf{Progress Report}				& 10:55		& 11:43			& 03:30 \\
 		\hline
 		\textbf{Other (Metrics, Tracking etc.)} & 01:30		& 04:00			& - \\
 		\hline
 		\hline
-		\textbf{Total}				& 45:30		& 22:03			& 38:24 \\
+		\textbf{Total}							& 45:30		& 22:03			& 38:24 \\
 		\hline
 		\hline
 	\end{tabular}
@@ -275,6 +431,6 @@
 
 \clearpage
 \appendix
-\printglossary
+\printnomenclature
 	
 \end{document}

@@ -14,6 +14,7 @@ $SAFE = 1
 $log = Logger.new(STDERR)
 $log.datetime_format = "%Y-%m-%d %H:%M:%S"
 
+# Implements a Greed server
 class Server
   # Makes this class unserializeable (object will not be sent over network)
   include DRbUndumped
@@ -93,14 +94,14 @@ class Server
   # with the given parameters.
   def broadcast(method, parameters, except=[])
     @mutex.try_synchronize {
-      @clients.each do |c|
-        if( !except.include? c ) then
+      @clients.each do |client|
+        if( !except.include? client ) then
           begin
             # $log.debug parameters
-            c.__send__(method,*parameters)
-          rescue DRb::DRbError => e
-            $log.error('broadcast') { "Removing #{c.inspect} #{e.message}" }
-            @clients.delete c
+            client.__send__(method,*parameters)
+          rescue DRb::DRbError => error
+            $log.error('broadcast') { "Removing #{client.inspect} #{error.message}" }
+            @clients.delete client
           end
         end
       end
@@ -115,9 +116,9 @@ class Server
     loop do
       $log.debug('game'){ "--- New round ---"}
       @mutex.synchronize {
-        @clients.each { |c|
+        @clients.each { |client|
           begin
-            $log.debug('game'){ "---- #{c.name} ----"}
+            $log.debug('game'){ "---- #{client.name} ----"}
             broadcast(:update_scoreboard, [@score_board])
             round_score = 0
             cup = Throw.new
@@ -126,25 +127,25 @@ class Server
               cup.reroll!
               saved_dice = cup.rolled
               $log.debug('game: dice') {cup}
-              broadcast(:status_update, [c.name, cup.rolled, cup.saved])
-              reroll_dice = c.roll(cup.rolled)
+              broadcast(:status_update, [client.name, cup.rolled, cup.saved])
+              reroll_dice = client.roll(cup.rolled)
               $log.debug('game'){ "received: #{reroll_dice.inspect}" }
-              reroll_dice.each{ |d|
-                saved_dice.remove!(d)
+              reroll_dice.each{ |die|
+                saved_dice.remove!(die)
               }
               $log.debug('game'){ "saved: #{saved_dice.inspect}" }
               # Calculate score for saved dice
               throw_score,saved_unscoring_dice = Rules.apply_rules( saved_dice )
               # This would remove a saved die that doesn't score but would
               # potentially leave player with less than 6 dice
-              saved_unscoring_dice.each{ |d|
-                saved_dice.remove!(d)
+              saved_unscoring_dice.each{ |die|
+                saved_dice.remove!(die)
               }
               $log.debug('game'){ "saved: #{saved_dice.inspect}" }
               # Don't know why it doesn't iterate fine without the clone
               $log.debug('cup '){ "reroll: #{cup.rolled.inspect}" }
-              saved_dice.clone.each{|d|
-                cup.save d
+              saved_dice.clone.each{|die|
+                cup.save die
               }
               $log.debug('cup '){ "saved: #{cup.saved.inspect}" }
               $log.debug('game'){ "unscored: #{saved_unscoring_dice.inspect}" }
@@ -152,7 +153,7 @@ class Server
                 if (throw_score >= @bust) then
                   round_score += throw_score
                 else
-                  $log.debug('game'){ "Player: #{c.name} busted" }
+                  $log.debug('game'){ "Player: #{client.name} busted" }
                   reroll_dice = []
                 end
               elsif throw_score > 0 then
@@ -162,19 +163,19 @@ class Server
                   cup.clear_saved
                 end
               else
-                $log.debug('game'){ "Player: #{c.name} got no points"}
+                $log.debug('game'){ "Player: #{client.name} got no points"}
                 round_score = 0
                 reroll_dice = []
               end
             end
-            @score_board[c.name] += round_score
-            if @score_board[c.name] >= @limit then
-              $log.info('game'){ "#{c.name} won!"}
-              return c.name
+            @score_board[client.name] += round_score
+            if @score_board[client.name] >= @limit then
+              $log.info('game'){ "#{client.name} won!"}
+              return client.name
             end
           rescue DRb::DRbConnError
             $log.warn('game') { "Client not responding" }
-            @clients.delete c
+            @clients.delete client
           end
         }
       }

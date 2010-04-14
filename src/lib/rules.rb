@@ -14,7 +14,7 @@ module Rules
         other_points, unused = apply_rules(unused)
         [(points+other_points), unused]
       end
-    }.max { |a,b| a.first <=> b.first }
+    }.max { |this,other| this.first <=> other.first }
   end
   
   def self.max_points(dice)
@@ -24,8 +24,8 @@ module Rules
   # Returns a sorted Array with all Classes in this module (no submodules)
   def self.rules
     self.constants.sort.collect do |const_name|
-      c = self.const_get( const_name )
-      c if c.is_a? Class
+      klass = self.const_get( const_name )
+      klass if klass.is_a? Class
     end
   end
 end

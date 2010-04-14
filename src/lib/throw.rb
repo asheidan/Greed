@@ -3,9 +3,8 @@ require 'monkeys/array_helper'
 # Represents a cup of dice and should be renamed
 class Throw
   
-  
   def initialize(size = 6)
-    @rolled = ([nil]*size).collect{ rand(6)+1 }.sort
+    @rolled = ([nil]*size).collect{ throw_die }.sort
     @saved = []
   end
 
@@ -28,9 +27,9 @@ class Throw
   end
 
   def reroll!
-    @rolled = @rolled.collect{ rand(6)+1 }
+    @rolled = @rolled.collect{ throw_die }
     while( size < 6 ) do
-      @rolled << rand(6)+1
+      @rolled << throw_die
     end
     @rolled.sort!
   end
@@ -60,5 +59,10 @@ class Throw
 
   def to_a
     dice
+  end
+  
+  private
+  def throw_die
+    rand(6) + 1
   end
 end

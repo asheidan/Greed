@@ -1,4 +1,6 @@
 module Rules
+  # Implements a rule which gives 100 points for each 1 and
+  # 50 points for each 5.
   class OnesAndFivesRule
     def apply(dice)
       points = 0

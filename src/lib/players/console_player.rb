@@ -4,6 +4,8 @@ require 'rules'
 
 $log = Logger.new(STDERR)
 module Players
+  
+  # Implements a player which is controlled by the user via the console.
   class ConsolePlayer < DummyPlayer
     
     def update_scoreboard(scores)
