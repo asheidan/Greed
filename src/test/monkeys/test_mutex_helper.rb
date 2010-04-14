@@ -16,4 +16,24 @@ class TestMutexHelper < Test::Unit::TestCase
       }
     }
   end
+  
+  def test_01_try_synchronize_in_a_synchronized_block_should_work_fine
+    assert_nothing_raised(ThreadError) {
+      @mutex.synchronize {
+        @mutex.try_synchronize {
+          a = 0
+        }
+      }
+    }
+  end
+  
+  def test_02_try_synchronize_should_mask_errors
+    assert_raise(ThreadError) do
+      @mutex.synchronize {
+        @mutex.try_synchronize {
+          raise ThreadError.new("Nisse är en apa")
+        }
+      }
+    end
+  end
 end

@@ -5,6 +5,8 @@ class Mutex
     rescue ThreadError => e
       if e.message =~ /thread [^ ]* tried to join itself/ then
         yield
+      else
+        raise
       end
     end
   end
