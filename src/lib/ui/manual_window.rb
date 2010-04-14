@@ -40,15 +40,17 @@ module UI
             pack
           end
           TkFrame.new(self) do
-            TkButton.new(self) do
+            @@roll_button = TkButton.new(self) do
               text 'Roll'
+              state :disabled
               command do
                 $state = :roll if $state == :wait
               end
               pack :side => :left
             end
-            TkButton.new(self) do
+            @@stay_button = TkButton.new(self) do
               text 'Stay'
+              state :disabled
               command do
                 $state = :stay if $state == :wait
               end
@@ -98,6 +100,8 @@ module UI
     end
     
     def roll(dice, name)
+      set_button_state(:normal)
+      
       # Wait for user input. Know a better way? Then tell me! 
       # How about a mutex? // een
       $state = :wait
@@ -107,6 +111,7 @@ module UI
           return []
         end
       end
+      set_button_state(:disabled)
       if $state == :stay then
         $state = :sleep
         return []
@@ -165,6 +170,11 @@ module UI
         end
       end
       result
+    end
+    
+    def set_button_state(state)
+      @@roll_button.state = state
+      @@stay_button.state = state
     end
   end
 end
