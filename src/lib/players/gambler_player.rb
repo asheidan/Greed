@@ -12,13 +12,13 @@ module Players
       if dice.sort == [1,2,3,4,5,6] # Street
         dice = []
       elsif dice.count >= 3
-        dice.freq.to_a.collect do |k,v|
-          if v == 6 then
-            [k,k]
-          elsif v >= 3 then
-            k
+        dice.freq.to_a.collect do |key,value|
+          if value == 6 then
+            [key,key]
+          elsif value >= 3 then
+            key
           end
-        end.compact.flatten.each{|k| dice.remove_three!(k) }
+        end.compact.flatten.each{|key| dice.remove_three!(key) }
       end
       dice.reject{|die| die == 1 || die == 5 }
     end

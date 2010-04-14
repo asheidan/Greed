@@ -1,28 +1,28 @@
 class Array
   def sum
     result = 0
-    each do |e|
-      result += e
+    each do |element|
+      result += element.to_i
     end
     result
   end
 
   def freq
-    f = {}
-    each do |e|
-      f[e] = f[e].to_i + 1 
+    freq_hash = {}
+    each do |element|
+      freq_hash[element] = freq_hash[element].to_i + 1 
     end
-    f
+    freq_hash
   end
   
-  def remove_three!(n)
-    3.times { remove!(n) }
+  def remove_three!(element)
+    3.times { remove!(element) }
   end
     
   def remove!(element)
-    i = index(element)
-    unless i.nil? then
-      delete_at i
+    element_index = index(element)
+    unless element_index.nil? then
+      delete_at element_index
     end
   end
   
