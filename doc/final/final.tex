@@ -196,12 +196,14 @@
 				\begin{itemize}
 					\item Method sum should return 45 when given the list [1, 2, 3, 4, 5, 6, 7, 8, 9]
 					\item Method freq should return the hash \{1 $\Rightarrow$ 3, 2 $\Rightarrow$ 1, 4 $\Rightarrow$ 2, 9 $\Rightarrow$ 1\} when given the list [1, 1, 1, 2, 4, 4, 9]
+					\item Method remove! should not affect the array if the element it's trying to remove doesn't exist
 					\item Method remove! should only remove one object of the given element. remove!(2) on [1, 1, 2, 2] should make it [1, 1, 2]
 				\end{itemize}
-				\item MutexHelper %02
+				\item MutexHelper %03
 				\begin{itemize}
 					\item Mutex should throw error when synchronizing in synchronized block
-					\item Trying to synchronize in a synchronized block should work fine
+					\item try\_synchronize in a synchronized block should work fine
+					\item try\_synchronize should mask errors
 				\end{itemize}
 				\item IsAPlayer %09
 				\begin{itemize}
@@ -230,9 +232,10 @@
 					%TODO might want to delete the following line
 					\item RandomPlayer should act randomly, test for it!
 				\end{itemize}
-				\item RandomPlayer2 %01
+				\item AlternateRandomPlayer %02
 				\begin{itemize}
-					\item RandomPlayer2 should be an IsAPlayer
+					\item AlternateRandomPlayer should be an IsAPlayer
+					\item AlternaterandomPlayer should only rethrow dice he was given in the first play
 				\end{itemize}
 				\item GamblerPlayer %07
 				\begin{itemize}
@@ -244,9 +247,10 @@
 					\item GamblerPlayer should save six of a kind
 					\item GamblerPlayer should save ones and fives
 				\end{itemize}
-				\item CleverPlayer %10
+				\item CleverPlayer %11
 				\begin{itemize}
 					\item CleverPlayer should be an IsAPlayer
+					\item CleverPlayer should when in a middle position have method position return between 0 and 1
 					\item CleverPlayer should when in a leading position have method position return 1
 					\item CleverPlayer should when in a last position have method position return 0
 					\item CleverPlayer should save if given a street and not in a leading postition
@@ -257,10 +261,11 @@
 					\item CleverPlayer should save ones and fives if not in a leading position
 					\item CleverPlayer should save if in a leading position
 				\end{itemize}
-				\item IsARule %02
+				\item IsARule %03
 				\begin{itemize}
 					\item A rule should respond to the method apply
 					\item A rule should not invent dice when calling apply
+					\item A rule should not change given array
 				\end{itemize}
 				\item DummyRule %01
 				\begin{itemize}
@@ -336,7 +341,7 @@
 				\end{itemize}
 			\end{itemize}
 
-			There are as of current 88 testcases in the testlist.
+			There are as of current 92 testcases in the testlist.
 
 	\section{Earned Value}
 	\begin{table}[t!]
