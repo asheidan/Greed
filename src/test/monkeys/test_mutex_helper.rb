@@ -30,13 +30,9 @@ class TestMutexHelper < Test::Unit::TestCase
     }
   end
   
-  # def test_02_try_synchronize_should_mask_errors
-  #   assert_raise(ThreadError) do
-  #     @mutex.synchronize {
-  #       @mutex.try_synchronize {
-  #         raise ThreadError.new("We're just another brick in the wall")
-  #       }
-  #     }
-  #   end
-  # end
+  def test_02_try_synchronize_should_lock
+	  @mutex.try_synchronize do
+		  assert(@mutex.locked?)
+	  end
+  end
 end
