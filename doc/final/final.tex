@@ -129,9 +129,9 @@
 		\begin{figure}[t]
 			\centering
 				\ifpdf
-					\includegraphics[angle=90,width=\textwidth]{uml.png}
+					\includegraphics[angle=0,width=\textwidth]{uml.pdf}
 				\else
-					\includegraphics[angle=90,width=\textwidth]{uml.eps}
+					\includegraphics[angle=0,width=\textwidth]{uml.eps}
 				\fi
 			\caption{Class diagram over the software}
 			\label{fig:uml}
@@ -196,12 +196,14 @@
 				\begin{itemize}
 					\item Method sum should return 45 when given the list [1, 2, 3, 4, 5, 6, 7, 8, 9]
 					\item Method freq should return the hash \{1 $\Rightarrow$ 3, 2 $\Rightarrow$ 1, 4 $\Rightarrow$ 2, 9 $\Rightarrow$ 1\} when given the list [1, 1, 1, 2, 4, 4, 9]
+					\item Method remove! should not affect the array if the element it's trying to remove doesn't exist
 					\item Method remove! should only remove one object of the given element. remove!(2) on [1, 1, 2, 2] should make it [1, 1, 2]
 				\end{itemize}
-				\item MutexHelper %02
+				\item MutexHelper %03
 				\begin{itemize}
 					\item Mutex should throw error when synchronizing in synchronized block
-					\item Trying to synchronize in a synchronized block should work fine
+					\item try\_synchronize in a synchronized block should work fine
+					\item try\_synchronize should mask errors
 				\end{itemize}
 				\item IsAPlayer %09
 				\begin{itemize}
@@ -230,9 +232,10 @@
 					%TODO might want to delete the following line
 					\item RandomPlayer should act randomly, test for it!
 				\end{itemize}
-				\item RandomPlayer2 %01
+				\item AlternateRandomPlayer %02
 				\begin{itemize}
-					\item RandomPlayer2 should be an IsAPlayer
+					\item AlternateRandomPlayer should be an IsAPlayer
+					\item AlternaterandomPlayer should only rethrow dice he was given in the first play
 				\end{itemize}
 				\item GamblerPlayer %07
 				\begin{itemize}
@@ -244,9 +247,10 @@
 					\item GamblerPlayer should save six of a kind
 					\item GamblerPlayer should save ones and fives
 				\end{itemize}
-				\item CleverPlayer %10
+				\item CleverPlayer %11
 				\begin{itemize}
 					\item CleverPlayer should be an IsAPlayer
+					\item CleverPlayer should when in a middle position have method position return between 0 and 1
 					\item CleverPlayer should when in a leading position have method position return 1
 					\item CleverPlayer should when in a last position have method position return 0
 					\item CleverPlayer should save if given a street and not in a leading postition
@@ -257,10 +261,11 @@
 					\item CleverPlayer should save ones and fives if not in a leading position
 					\item CleverPlayer should save if in a leading position
 				\end{itemize}
-				\item IsARule %02
+				\item IsARule %03
 				\begin{itemize}
 					\item A rule should respond to the method apply
 					\item A rule should not invent dice when calling apply
+					\item A rule should not change given array
 				\end{itemize}
 				\item DummyRule %01
 				\begin{itemize}
@@ -336,7 +341,7 @@
 				\end{itemize}
 			\end{itemize}
 
-			There are as of current 88 testcases in the testlist.
+			There are as of current 92 testcases in the testlist.
 
 	\section{Earned Value}
 	\begin{table}[t!]
@@ -356,13 +361,13 @@
 \textbf{Computer Players}        & 18:00	 & 06:20	& 2010-04-06	 & 2010-04-07	& 18:00		& 18:00 \\
 \textbf{Rules}			 		 & 06:00	 & 06:20	& 2010-04-07	 & 2010-03-31	& 06:00		& 06:00 \\
 \textbf{UI Designed}		 	 & 10:00	 & 09:05	& 2010-04-07	 & 2010-04-06	& 10:00		& 10:00 \\
-\textbf{Server}			 		 & 20:00	 & -		& 2010-04-08	 & 2010-04-1-	& 20:00		& 20:00 \\
-\textbf{UI Implemented}		 	 & 20:00	 & -		& 2010-04-13	 & 2010-04-1-	& 20:00		& 20:00	\\
-\textbf{Integration}		 	 & 06:00	 & -		& 2010-04-14	 & 2010-04-1-	& 06:00		& 06:00	\\
+\textbf{Server}			 		 & 20:00	 & -		& 2010-04-08	 & 2010-04-15	& 20:00		& 20:00 \\
+\textbf{UI Implemented}		 	 & 20:00	 & -		& 2010-04-13	 & 2010-04-15	& 20:00		& 20:00	\\
+\textbf{Integration}		 	 & 06:00	 & -		& 2010-04-14	 & 2010-04-15	& 06:00		& 06:00	\\
 \hline
 \textbf{Project plan}		 	 & 20:00	 & 20:05	& 2010-03-29	 & 2010-03-29	& 20:00		& 20:00 \\
 \textbf{Progress Report}	 	 & 15:00	 & 26:10	& 2010-04-08	 & 2010-04-08	& 15:00		& 15:00 \\
-\textbf{Final Report}            & 25:00	 & -		& 2010-04-15	 & 2010-04-1-	& 25:00		& 25:00	\\
+\textbf{Final Report}            & 25:00	 & -		& 2010-04-15	 & 2010-04-16	& 25:00		& 25:00	\\
 \hline
 \hline
 \textbf{Total}			 		 & 146:00	 & 72:30	& -		 		 & -		 	& 146:00	& 146:00 \\
@@ -427,10 +432,29 @@
 
 	Another problem was caused by our choice of language. Almost all time spent on programming for Fredrik has gone into learning Ruby and understanding the code written by the other team members. That has forced the other members to be the main programmers in this project.
 	
-	\section{Conclusions}
+	\section{Conclusions and Lessons Learned}
+
+	\section{Distribution of Credits}
+		%TODO discuss the distribution of credits
+		The credits should be distributed as follow:
+		Fredrik gets everything because he's the bestest of all.
+
+
+		x is our project score times 3.
+		x/2 will be divided equally, can't change that.
+		y = x/2. y*0.25 -> Fredrik. y*0.37 -> Marcus. y*0.38 -> Emil
+
+		Example: 
+			4 project score -> x = 4*3 = 12
+			12/2 = 6 divided equally, 2 points each.	
+			12/2 = y = 6. y*0.25 = 1.5 -> Fredrik. y*0.375 = 2.25 -> Marcus. y*0.375 = 2.25 -> Emil
+			Fredrik: 	3.5
+			Markus:		4.25
+			Emil: 		4.25
+		
 
 \clearpage
 \appendix
-\printnomenclature
+% \printnomenclature
 	
 \end{document}

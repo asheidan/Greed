@@ -57,7 +57,7 @@ list_deps:
 view: $(TARGET)
 	$(VIEW)
 
-%.aux %.idx %.lof %.lot %.toc: %.tex | $(INCLUDES) $(filter %.eps,$(FIGURES))
+%.aux %.idx %.lof %.lot %.nlo %.glo %.toc: %.tex | $(INCLUDES) $(filter %.eps,$(FIGURES))
 	latex $<
 
 %.ind: %.idx
