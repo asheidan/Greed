@@ -20,9 +20,12 @@ class TestMutexHelper < Test::Unit::TestCase
   def test_01_try_synchronize_in_a_synchronized_block_should_work_fine
     assert_nothing_raised(ThreadError) {
       @mutex.synchronize {
-        @mutex.try_synchronize {
-          assert(true)
-        }
+        thread = Thread.new do
+          @mutex.try_synchronize {
+            assert(true)
+          }
+		  end
+        thread.join
       }
     }
   end
